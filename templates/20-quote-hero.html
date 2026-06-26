@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>20 · Quote hero com imagem</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Slide 20 — quote hero cinematografico (DARK MODE)
+     Imagem cobre todo o canvas, overlay escuro 50%,
+     citação grande centralizada. Imagem = CENÁRIO, não retrato.
+     ============================================================ */
+
+  .bg-img {
+    position: absolute;
+    inset: 0;
+    background: var(--navy-700);
+    overflow: hidden;
+  }
+  .bg-img::after {
+    /* textura diagonal sutil */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, transparent 0 18px, rgba(255,255,255,0.025) 18px 19px);
+  }
+  .bg-img::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,11,21,0.55) 0%, rgba(0,11,21,0.4) 50%, rgba(0,11,21,0.7) 100%);
+  }
+  .bg-img .label {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: rgba(230,238,243,0.45);
+    z-index: 2;
+  }
+
+  .quote-block {
+    position: absolute;
+    left: 160px;
+    right: 160px;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: left;
+    z-index: 2;
+  }
+  .quote-block .mark {
+    font-family: var(--f-display);
+    font-size: 140px;
+    line-height: 0.6;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: -24px;
+  }
+  .quote-block .q {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--navy-50);
+    max-width: 1200px;
+  }
+  .quote-block .q em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .quote-block .attr {
+    margin-top: 56px;
+    font-family: var(--f-mono);
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    color: var(--navy-100);
+    text-transform: uppercase;
+  }
+  .quote-block .attr b {
+    color: var(--navy-50);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Provocação">
+
+    <div class="bg-img">
+      <div class="label">[ IMAGEM · 1920×1080 ]</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="mark">"</div>
+      <p class="q">
+        O medo da substituição só existe quando a <em>curiosidade</em> para. Nosso trabalho aqui é reacendê-la — e dar ferramenta pra ela virar produto.
+      </p>
+      <div class="attr">— <b>Palestrante</b> · Aula Inaugral · 2026</div>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

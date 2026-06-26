@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>11 · Agenda</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  .ag-row {
+    display:grid; grid-template-columns: 120px 1fr 220px;
+    align-items:baseline; gap:48px; padding:24px 0;
+    border-top:1px solid var(--rule);
+  }
+  .ag-row:last-child { border-bottom:1px solid var(--ink); }
+  .ag-row .n { font-family:var(--f-mono); font-size:13px; letter-spacing:0.2em; color:var(--muted); }
+  .ag-row .t { font-family:var(--f-display); font-size:36px; line-height:1.1; font-weight:500; }
+  .ag-row .d { font-family:var(--f-mono); font-size:13px; text-align:right; color:var(--muted); }
+  .ag-row.current .n { color:var(--accent); }
+  .ag-row.current .t { font-style:italic; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Hoje">
+
+    <div style="position:absolute; left:var(--pad); top:120px; right:var(--pad); display:flex; justify-content:space-between; align-items:flex-end;">
+      <h1 class="h-display" style="font-size:96px; line-height:0.95; letter-spacing:-0.035em;">
+        <span class="italic" style="font-weight:400;">Roteiro</span><br>
+        de hoje.
+      </h1>
+      <div class="eyebrow">Agenda · 90 min</div>
+    </div>
+
+    <div style="position:absolute; left:var(--pad); right:var(--pad); top:360px;">
+      <div class="ag-row">
+        <div class="n">01 · 15 min</div>
+        <div class="t">Por que estamos aqui.</div>
+        <div class="d">Contexto e dados</div>
+      </div>
+      <div class="ag-row current">
+        <div class="n">02 · 25 min</div>
+        <div class="t">A fronteira irregular.</div>
+        <div class="d">Capacidade × Qualidade × Custo</div>
+      </div>
+      <div class="ag-row">
+        <div class="n">03 · 30 min</div>
+        <div class="t">Sua primeira skill.</div>
+        <div class="d">Prática com G4 OS</div>
+      </div>
+      <div class="ag-row">
+        <div class="n">04 · 20 min</div>
+        <div class="t">Q&A e próximos passos.</div>
+        <div class="d">Fechamento</div>
+      </div>
+    </div>
+
+  </article>
+</div>
+<script>
+  // center + scale-to-fit
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

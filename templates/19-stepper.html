@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>19 · Stepper / Etapas</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Slide 19 — stepper horizontal
+     Layout: 4 colunas lado a lado, cada uma com número grande
+     + linha conectora entre colunas (hairline que "puxa" o olho).
+     Diferente do slide 14 (eixos paralelos), aqui é SEQUÊNCIA
+     ordinal (1 → 2 → 3 → 4).
+     ============================================================ */
+
+  .stepper {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 240px;
+    bottom: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    column-gap: 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .step {
+    padding: 36px 24px 28px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .step:not(:first-child) {
+    padding-left: 24px;
+  }
+  .step:not(:last-child)::after {
+    /* hairline vertical entre etapas */
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 16px;
+    bottom: 16px;
+    width: 1px;
+    background: var(--rule);
+  }
+
+  /* número ordinal */
+  .step .ord {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .step .ord b {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* label da etapa (display) */
+  .step .lbl {
+    margin-top: 16px;
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .step .lbl em { font-style: italic; font-weight: 500; }
+
+  /* descrição editorial */
+  .step .txt {
+    margin-top: 16px;
+    font-family: var(--f-body);
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+
+  /* meta inferior (output esperado) */
+  .step .out {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .step .out b { color: var(--ink); font-weight: 500; }
+
+  /* etapa "atual" — destaque mínimo sem cor */
+  .step.current .lbl { font-style: italic; }
+  .step.current::before {
+    /* tick à esquerda da etapa atual */
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    bottom: -1px;
+    width: 2px;
+    background: var(--ink);
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Passo a passo">
+
+    <div style="position:absolute; left:var(--pad); top:120px; right:var(--pad); display:flex; justify-content:space-between; align-items:flex-end;">
+      <h1 class="h-display" style="font-size:56px; line-height:0.95; letter-spacing:-0.03em;">
+        Como <span class="italic" style="font-weight:400;">rodar</span> uma skill.
+      </h1>
+      <div class="eyebrow">Sequência editorial</div>
+    </div>
+
+    <div class="stepper">
+
+      <div class="step">
+        <div class="ord">Passo <b>01</b></div>
+        <div class="lbl">Mapear <em>a dor</em></div>
+        <p class="txt">Listar as 3-5 tarefas mais repetitivas do time. Onde o humano vira "robô de copiar e colar"?</p>
+        <div class="out">Saída · lista priorizada</div>
+      </div>
+
+      <div class="step current">
+        <div class="ord">Passo <b>02</b></div>
+        <div class="lbl">Escrever <em>a skill</em></div>
+        <p class="txt">Transformar a tarefa em instrução clara: input esperado, lógica de decisão, output final, tom.</p>
+        <div class="out">Saída · skill publicada</div>
+      </div>
+
+      <div class="step">
+        <div class="ord">Passo <b>03</b></div>
+        <div class="lbl">Rodar <em>e medir</em></div>
+        <p class="txt">Ativar a skill em produção. Comparar output humano vs skill em 3 dimensões: tempo, qualidade, custo.</p>
+        <div class="out">Saída · baseline + delta</div>
+      </div>
+
+      <div class="step">
+        <div class="ord">Passo <b>04</b></div>
+        <div class="lbl">Iterar <em>ou matar</em></div>
+        <p class="txt">Se a skill rende, virar produto institucional. Se não rende, matar com dignidade e seguir.</p>
+        <div class="out">Saída · decisão go/no-go</div>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

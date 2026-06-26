@@ -1,0 +1,39 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build artifacts
+/build/
+/dist/
+/pdf/
+*.pdf
+!/docs/EXPORT-PDF.md
+
+# Local env
+.env
+.env.local
+
+# Node / Python
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS junk
+Thumbs.db
+ehthumbs.db
+Desktop.ini

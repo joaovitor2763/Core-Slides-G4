@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>05 · Gráfico</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ---------- header band ---------- */
+  .head {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 132px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 64px;
+  }
+  .head h1 {
+    font-size: 88px;
+    line-height: 0.94;
+    letter-spacing: -0.028em;
+    margin-top: 22px;
+  }
+  .head h1 .l1 { display: block; }
+  .head h1 .l2 { display: block; font-style: italic; font-weight: 500; }
+  .head .source {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    text-transform: uppercase;
+    text-align: right;
+    padding-bottom: 14px;
+    white-space: nowrap;
+  }
+
+  /* ---------- chart frame ---------- */
+  .chart-wrap {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 412px;
+    height: 340px;        /* explicit height — bars use pixel heights */
+  }
+
+  /* gridlines */
+  .grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .grid .gl {
+    position: absolute;
+    left: 0; right: 0;
+    border-top: 1px dashed var(--rule);
+  }
+  .grid .gl.gl-100 { top: 0; }
+  .grid .gl.gl-50  { top: 50%; }
+  .grid .yt {
+    position: absolute;
+    left: -56px;
+    transform: translateY(-50%);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+  }
+  .grid .yt-100 { top: 0; }
+  .grid .yt-50  { top: 50%; }
+  .grid .yt-0   { top: 100%; }
+
+  /* axis baseline */
+  .axis {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--ink);
+  }
+
+  /* bars */
+  .bars {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 56px;
+    align-items: end;
+  }
+  .bar {
+    position: relative;
+    height: 100%;
+  }
+  .bar .col {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 0;
+    height: var(--val);
+    background: var(--ink);
+  }
+  .bar.accent .col { background: var(--accent); }
+
+  .bar .val {
+    position: absolute;
+    left: 0;
+    bottom: calc(var(--val) + 14px);
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .bar.accent .val { color: var(--accent); font-size: 40px; }
+
+  .bar .lbl {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -34px;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* annotation arm next to accent */
+  .annot {
+    position: absolute;
+    left: calc(25% - 28px);   /* roughly under col 1 right edge */
+    top: -84px;
+    width: 240px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.5;
+    display: none; /* keep hidden — accent already loud enough */
+  }
+
+  /* ---------- footer caption ---------- */
+  .footnote {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 72px;
+    padding-top: 16px;
+    border-top: 1px solid var(--ink);
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .footnote .key { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Dado">
+
+    <!-- header: eyebrow + hero title + source -->
+    <div class="head">
+      <div>
+        <div class="eyebrow">Adoção por área</div>
+        <h1 class="h-display">
+          <span class="l1">73% dos gestores</span>
+          <span class="l2">já testaram IA em 2026.</span>
+        </h1>
+      </div>
+      <div class="source">Fonte: pesquisa interna · n=1.240</div>
+    </div>
+
+    <!-- chart -->
+    <div class="chart-wrap">
+      <!-- gridlines + y ticks -->
+      <div class="grid">
+        <div class="gl gl-100"></div>
+        <div class="gl gl-50"></div>
+        <span class="yt yt-100">100</span>
+        <span class="yt yt-50">50</span>
+        <span class="yt yt-0">0</span>
+      </div>
+
+      <!-- bars (heights in px relative to 340px chart) -->
+      <!-- 73% = 248px · 41% = 139px · 18% = 61px · 6% = 20px -->
+      <div class="bars">
+        <div class="bar accent" style="--val: 248px;">
+          <div class="val">73%</div>
+          <div class="col"></div>
+          <div class="lbl">Testou</div>
+        </div>
+        <div class="bar" style="--val: 139px;">
+          <div class="val">41%</div>
+          <div class="col"></div>
+          <div class="lbl">Usa semanal</div>
+        </div>
+        <div class="bar" style="--val: 61px;">
+          <div class="val">18%</div>
+          <div class="col"></div>
+          <div class="lbl">Tem skill própria</div>
+        </div>
+        <div class="bar" style="--val: 20px;">
+          <div class="val">6%</div>
+          <div class="col"></div>
+          <div class="lbl">Automatizou fluxo</div>
+        </div>
+      </div>
+
+      <div class="axis"></div>
+    </div>
+
+    <!-- footnote -->
+    <div class="footnote">
+      <span class="key">Pesquisa Harris Poll</span>
+      <span>subset Brasil · Q1 2026</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

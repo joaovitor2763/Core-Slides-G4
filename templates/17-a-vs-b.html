@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>17 · A vs B</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Slide 17 — A vs B
+     Layout: 2 colunas com divisor central hairline.
+     Lado A (esquerda) = "antes" / "comum", lado B (direita) = "depois" / "novo".
+     Hero numérico opcional em B, lista editorial em ambos.
+     ============================================================ */
+
+  .grid-vs {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 280px;
+    bottom: 96px;
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    align-items: stretch;
+  }
+
+  .col {
+    padding: 0 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .col:first-child { padding-left: 0; }
+  .col:last-child  { padding-right: 0; }
+
+  /* divisor vertical hairline */
+  .grid-vs > .sep {
+    background: var(--rule);
+  }
+
+  /* header da coluna (eyebrow + label) */
+  .col .tag {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .col .h {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 72px;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .col .h em { font-style: italic; font-weight: 500; }
+
+  /* hero numérico opcional */
+  .col .hero {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 132px;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  .col .hero .unit {
+    font-size: 52px;
+    color: var(--muted);
+    margin-left: 6px;
+    font-weight: 500;
+  }
+
+  /* descrição */
+  .col .lede {
+    font-family: var(--f-body);
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 480px;
+  }
+
+  /* lista editorial */
+  .col .pts {
+    list-style: none;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .col .pts li {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 12px;
+    align-items: start;
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    padding-top: 12px;
+    border-top: 1px solid var(--rule);
+  }
+  .col .pts li::before {
+    content: attr(data-n);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.18em;
+    padding-top: 2px;
+  }
+
+  /* variante "destaque" pro lado B */
+  .col--accent { color: var(--ink); }
+  .col--accent .h { color: var(--ink); }
+  .col--accent .hero { color: var(--accent); }
+  .col--accent .pts li::before { color: var(--accent); }
+
+  /* footer source */
+  .source {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 56px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Comparação">
+
+    <div class="grid-vs">
+
+      <!-- COLUNA A -->
+      <div class="col">
+        <div class="tag">A · modelo atual</div>
+        <h1 class="h">Manual<br><em>e dependente.</em></h1>
+        <p class="lede">Cada reunião, planilha e decisão começa do zero. O conhecimento mora nas pessoas — e some quando elas saem.</p>
+        <ul class="pts">
+          <li data-n="01">Decisões de RH dependem do "achismo" do gestor.</li>
+          <li data-n="02">Conciliação financeira leva 6h por fechamento.</li>
+          <li data-n="03">Ranking de candidatos é manual e lento.</li>
+        </ul>
+      </div>
+
+      <!-- SEPARADOR hairline -->
+      <div class="sep"></div>
+
+      <!-- COLUNA B -->
+      <div class="col col--accent">
+        <div class="tag">B · com G4 OS</div>
+        <h1 class="h">Skill<br><em>como produto.</em></h1>
+        <div class="hero">22<span class="unit">min</span></div>
+        <p class="lede">Skills viram produto institucional. Rodam 24/7, melhoram com o tempo, e qualquer pessoa do time pode auditar.</p>
+        <ul class="pts">
+          <li data-n="01">Ranking automatizado com 96% de acurácia.</li>
+          <li data-n="02">Conciliação em 22 min, queda de −94% no tempo.</li>
+          <li data-n="03">Decisões registradas e versionadas no G4 OS.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="source">
+      <span>Fonte: casos reais G4 · Q1 2026</span>
+      <span>n = 6 clientes</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

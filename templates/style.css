@@ -1,0 +1,263 @@
+/* ============================================================
+   AULAS G4 — IA · Slide System  (v2 — paleta dourada)
+   16:9 fixed · 1600x900 · scales to fit viewport
+   Theme: paper off-white + ink + 1 accent dourado
+   Tipografia: 3 famílias com papéis distintos
+     · Display (Space Grotesk)  → títulos hero, números grandes
+     · Text    (IBM Plex Sans)  → corpo, parágrafos, citações
+     · Mono    (IBM Plex Mono)  → eyebrows, labels, dados
+   Modo dark disponível via classe .mode-dark no <article class="slide">
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* ---- Paleta crua (sempre disponível, independente do modo) ---- */
+:root {
+  /* Navy scale (frio, neutro, base do dark mode) */
+  --navy-50:  #E6EEF3;
+  --navy-100: #B3CCD9;
+  --navy-200: #80AABF;
+  --navy-300: #4D88A5;
+  --navy-400: #26668A;
+  --navy-500: #001F35;
+  --navy-600: #001A2D;
+  --navy-700: #001525;
+  --navy-800: #00101D;
+  --navy-900: #000B15;
+
+  /* Accent dourado queimado (único) */
+  --gold-300: #D4B189;
+  --gold-500: #B9915B;   /* principal */
+  --gold-700: #8E6F44;
+
+  /* Paper / ink neutros */
+  --paper:    #F5F4F3;
+  --paper-2:  #ECEAE6;
+  --ink:      #0F1419;
+  --ink-2:    #2A2F35;
+  --muted:    #6B7278;
+  --rule:     #D8D6CF;
+  --rule-dark:#2D3B4A;
+
+  /* ---- Tokens semânticos (default: LIGHT) ---- */
+  --bg:           var(--paper);
+  --bg-2:         var(--paper-2);
+  --fg:           var(--ink);
+  --fg-2:         var(--ink-2);
+  --fg-muted:     var(--muted);
+  --hairline:     var(--rule);
+  --accent:       var(--gold-500);
+  --accent-soft:  var(--gold-300);
+  --accent-deep:  var(--gold-700);
+  --on-accent:    var(--paper);
+
+  /* ---- Canvas + espaçamento ---- */
+  --w: 1600px;
+  --h: 900px;
+  --pad: 96px;
+
+  /* ---- Tipografia (3 famílias, papéis distintos) ---- */
+  --f-display: 'Space Grotesk', system-ui, sans-serif;
+  --f-text:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-mono:    'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Ritmo tipográfico */
+  --fs-display-xl: 148px;  /* capa */
+  --fs-display-l:  108px;  /* divisor / hero */
+  --fs-display-m:  72px;   /* título de slide */
+  --fs-display-s:  44px;   /* sub-título / label grande */
+  --fs-text-l:     28px;   /* parágrafo hero */
+  --fs-text-m:     18px;   /* corpo padrão */
+  --fs-text-s:     14px;   /* legenda */
+  --fs-mono:       12px;   /* eyebrow / label mono */
+}
+
+/* ---- Modo dark: ativado por .mode-dark no <article class="slide"> ---- */
+.mode-dark {
+  --bg:           var(--navy-600);   /* #001A2D */
+  --bg-2:         var(--navy-700);   /* #001525 */
+  --fg:           var(--navy-50);    /* #E6EEF3 */
+  --fg-2:         var(--navy-100);   /* #B3CCD9 */
+  --fg-muted:     var(--navy-200);   /* #80AABF */
+  --hairline:     var(--rule-dark);
+  --accent:       var(--gold-500);   /* mesmo dourado */
+  --accent-soft:  var(--gold-300);
+  --accent-deep:  var(--gold-700);
+  --on-accent:    var(--navy-700);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: #e9e7e0;   /* stage externo (sempre neutro) */
+  color: var(--ink);
+  font-family: var(--f-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ------- stage: centers & scales the fixed slide ------- */
+.stage {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #e9e7e0;
+}
+
+.slide {
+  width: var(--w);
+  height: var(--h);
+  background: var(--bg);
+  color: var(--fg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+  margin: 0;
+  font-family: var(--f-text);
+  /* JS scales + centers this to fit */
+}
+
+/* section eyebrow (rendered from data-section attribute — opcional) */
+.slide:not([data-section=""])::before {
+  content: attr(data-section);
+  position: absolute;
+  top: 48px;
+  left: var(--pad);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  z-index: 3;
+}
+.slide[data-section=""]::before { content: none; }
+.mode-dark.slide:not([data-section=""])::before { color: var(--fg-muted); }
+
+/* hairline divider */
+.rule {
+  height: 1px;
+  background: var(--fg);
+  width: 100%;
+}
+.rule--muted  { background: var(--hairline); }
+.rule--accent { background: var(--accent); }
+
+/* ----- helpers compartilhados ----- */
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px; height: 2px;
+  background: var(--accent);
+}
+
+/* Display — títulos hero */
+.h-display {
+  font-family: var(--f-display);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+}
+.h-display em { font-style: italic; font-weight: 500; color: var(--fg); }
+.h-display .accent { color: var(--accent); }
+
+/* helpers semânticas */
+.italic { font-style: italic; font-weight: 500; }
+strong, .b { font-weight: 600; }
+.mono   { font-family: var(--f-mono); }
+.muted  { color: var(--fg-muted); }
+.accent { color: var(--accent); }
+.fg     { color: var(--fg); }
+.fg-2   { color: var(--fg-2); }
+
+a { color: inherit; }
+
+/* ============== ESCALA TIPOGRÁFICA SEMÂNTICA ==============
+   h1–h4 cobrem todos os títulos de slide. Use essas classes
+   em vez de font-size solto, para garantir consistência.      */
+
+.h1 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 88px;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+}
+.h1 em { font-style: italic; font-weight: 500; }
+
+.h2 {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 56px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+.h2 em { font-style: italic; font-weight: 500; }
+
+.h3 {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.h4 {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--fg);
+}
+
+/* Corpo de texto */
+.body {
+  font-family: var(--f-text);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--fg-2);
+}
+.body em { font-style: italic; }
+
+.lede {
+  font-family: var(--f-text);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.45;
+  color: var(--fg);
+}
+
+.caption {
+  font-family: var(--f-text);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--fg-muted);
+}
+
+/* Mono — eyebrows, labels, dados */
+.label-mono {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}

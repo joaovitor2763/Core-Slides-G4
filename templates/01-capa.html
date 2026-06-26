@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>01 · Capa</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Aula 01">
+
+    <!-- number block -->
+    <div style="position:absolute; top:var(--pad); left:var(--pad); display:flex; align-items:flex-start; gap:24px;">
+      <div style="width:8px;height:96px;background:var(--accent);"></div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:24px;">Aula Inaugural</div>
+      </div>
+    </div>
+
+    <!-- main title: left aligned, asymmetric -->
+    <div style="position:absolute; left:var(--pad); bottom:140px; max-width:1200px;">
+      <h1 class="h-display" style="font-size:148px;">
+        A próxima<br>
+        <span style="font-style:italic; font-weight:400;">fronteira</span>
+        <span style="color:var(--accent);">.</span>
+      </h1>
+    </div>
+
+    <!-- meta row -->
+    <div style="position:absolute; left:var(--pad); bottom:48px; right:160px; display:flex; justify-content:space-between; align-items:end; border-top:1px solid var(--ink); padding-top:18px;">
+      <div class="mono" style="font-size:13px;">Palestrante · Nome do Speaker</div>
+      <div class="mono" style="font-size:13px;">14 · JUN · 2026</div>
+      <div class="mono" style="font-size:13px;">G4 Educação</div>
+    </div>
+
+  </article>
+</div>
+<script>
+  // center + scale-to-fit
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>06 · Texto focado</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Tese">
+
+    <div style="position:absolute; left:var(--pad); right:var(--pad); top:50%; transform:translateY(-50%);">
+
+      <div style="display:grid; grid-template-columns: 280px 1fr; gap:80px; align-items:start;">
+
+        <div>
+          <div class="eyebrow" style="margin-bottom:32px;">Tese central</div>
+        </div>
+
+        <div>
+          <h1 class="h-display" style="font-size:96px; line-height:0.98; max-width:900px;">
+            Não estamos falando de <span class="italic">ferramenta</span>.<br>
+            Estamos falando de uma <span style="color:var(--accent);">fronteira operacional</span>.
+          </h1>
+          <p style="font-size:22px; line-height:1.55; max-width:780px; margin-top:48px; color:var(--ink-2);">
+            A IA muda <span class="b">o que</span> um gestor consegue fazer, não apenas <span class="b">como</span> faz. Quem aprende a navegar essa fronteira ganha capacidade real — quem ignora, acumula distância.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  // center + scale-to-fit
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

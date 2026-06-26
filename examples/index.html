@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Aulas G4 · Passador de Slides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* paleta navy + gold (mesma do style.css) */
+    --navy-50:  #E6EEF3;
+    --navy-100: #B3CCD9;
+    --navy-200: #80AABF;
+    --navy-300: #4D88A5;
+    --navy-400: #26668A;
+    --navy-500: #001F35;
+    --navy-600: #001A2D;
+    --navy-700: #001525;
+    --navy-800: #00101D;
+    --navy-900: #000B15;
+    --gold-300: #D4B189;
+    --gold-500: #B9915B;
+    --gold-700: #8E6F44;
+    --paper:    #F5F4F3;
+    --ink:      #0F1419;
+    --ink-2:    #2A2F35;
+    --muted:    #6B7278;
+    --rule:     #2D3B4A;
+
+    --f-display: 'Space Grotesk', system-ui, sans-serif;
+    --f-text:    'IBM Plex Sans', system-ui, sans-serif;
+    --f-mono:    'IBM Plex Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--navy-700);
+    color: var(--navy-50);
+    font-family: var(--f-text);
+    -webkit-font-smoothing: antialiased;
+  }
+  .deck {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 80px 64px 160px;
+  }
+  .deck-head {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 32px; margin-bottom: 64px;
+  }
+  .deck-head h1 {
+    font-family: var(--f-display);
+    color: var(--navy-50); font-size: 56px; line-height: 1; font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .deck-head h1 em { color: var(--gold-500); font-style: italic; font-weight: 400; }
+  .deck-head .meta {
+    color: var(--navy-200);
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+  }
+  .card {
+    position: relative;
+    background: var(--navy-600);
+    border: 1px solid var(--rule);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .2s, transform .2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .card:hover { border-color: var(--gold-500); transform: translateY(-2px); }
+  .card .frame {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    position: relative;
+    background: var(--paper);
+  }
+  .card .frame iframe {
+    width: 1600px;
+    height: 900px;
+    border: 0;
+    transform-origin: top left;
+    pointer-events: none;
+  }
+  .card .info {
+    padding: 20px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--navy-50);
+    font-family: var(--f-mono);
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .card .info .num   { color: var(--gold-500); }
+  .card .info .name  { color: var(--navy-100); }
+  .card .info .open  { color: var(--navy-50); }
+
+  .present-btn {
+    position: fixed; right: 32px; bottom: 32px;
+    background: var(--gold-500); color: var(--navy-700);
+    border: 0; padding: 18px 28px;
+    font-family: var(--f-display); font-size: 16px; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer;
+    z-index: 100;
+  }
+  .present-btn:hover { background: var(--gold-300); }
+
+  /* ---- Presentation mode ---- */
+  .present {
+    position: fixed; inset: 0; background: #0a0a0a;
+    display: none; z-index: 200;
+  }
+  body.presenting .present { display: block; }
+  body.presenting { overflow: hidden; }
+  .present .frame-wrap {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+  }
+  .present iframe {
+    width: 1600px; height: 900px;
+    border: 0;
+    flex-shrink: 0;
+  }
+
+  .hud {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    height: 64px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
+    padding: 0 24px 14px;
+    display: none;
+    gap: 12px; align-items: flex-end; justify-content: center;
+    z-index: 201;
+    opacity: 0; transition: opacity .25s;
+  }
+  body.presenting .hud { display: flex; }
+  body.presenting .hud:hover,
+  body.presenting .hud:focus-within { opacity: 1; }
+  @media (hover: none) { .hud { opacity: 1; } }
+  .hud button {
+    background: rgba(0,16,29,0.85); border: 1px solid var(--rule); color: var(--navy-50);
+    padding: 10px 18px; font-family: var(--f-mono); font-size: 12px;
+    letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
+    backdrop-filter: blur(8px);
+  }
+  .hud button:hover { border-color: var(--gold-500); color: var(--gold-500); }
+  .hud .counter {
+    color: var(--navy-50); font-family: var(--f-mono); font-size: 12px;
+    letter-spacing: 0.2em; text-transform: uppercase; align-self: center;
+    background: rgba(0,16,29,0.85); padding: 10px 16px; border: 1px solid var(--rule);
+  }
+  .hud .counter b { color: var(--gold-500); }
+  .hud .spacer { width: 1px; }
+</style>
+</head>
+<body>
+
+<div class="deck">
+  <div class="deck-head">
+    <h1>Aulas G4 <em>·</em> IA</h1>
+    <div class="meta">20 templates · 16:9 · Paper + Navy + Gold</div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<button class="present-btn" id="presentBtn">▶ Apresentar do 1º</button>
+
+<div class="present" id="present">
+  <div class="frame-wrap">
+    <iframe id="presentFrame" src=""></iframe>
+  </div>
+</div>
+
+<nav class="hud" id="hud" aria-label="Controles de apresentação">
+  <button id="prevBtn" type="button">← Anterior</button>
+  <span class="counter" id="counter"><b>01</b> / 20</span>
+  <button id="nextBtn" type="button">Próximo →</button>
+  <span class="spacer"></span>
+  <button id="closeBtn" type="button">Fechar (Esc)</button>
+</nav>
+
+<script>
+  const slides = [
+    { n: 1,  file: '01-capa.html',              name: 'Capa' },
+    { n: 2,  file: '02-palestrante.html',       name: 'Palestrante' },
+    { n: 3,  file: '03-quote-com-imagem.html',  name: 'Quote com imagem' },
+    { n: 4,  file: '04-quote-sem-imagem.html',  name: 'Quote sem imagem' },
+    { n: 5,  file: '05-grafico.html',           name: 'Gráfico (barras horizontais)' },
+    { n: 6,  file: '06-texto-focado.html',      name: 'Texto focado' },
+    { n: 7,  file: '07-timeline.html',          name: 'Timeline' },
+    { n: 8,  file: '08-divisor.html',           name: 'Divisor de bloco · dark' },
+    { n: 9,  file: '09-comparacao.html',        name: 'Comparação antes × depois' },
+    { n: 10, file: '10-stats.html',             name: 'Stats / Métricas (4 colunas)' },
+    { n: 11, file: '11-agenda.html',            name: 'Agenda' },
+    { n: 12, file: '12-imagem-legenda.html',    name: 'Imagem + legenda lateral' },
+    { n: 13, file: '13-lista.html',             name: 'Lista numerada' },
+    { n: 14, file: '14-tres-pilares.html',      name: 'Três pilares / manifesto' },
+    { n: 15, file: '15-encerramento.html',      name: 'Encerramento' },
+    { n: 16, file: '16-grafico-vertical.html',  name: 'Gráfico vertical + nota' },
+    { n: 17, file: '17-a-vs-b.html',            name: 'A vs B (split 50/50)' },
+    { n: 18, file: '18-bento.html',             name: 'Bento mosaic (5 células)' },
+    { n: 19, file: '19-stepper.html',           name: 'Stepper / 4 etapas' },
+    { n: 20, file: '20-quote-hero.html',        name: 'Quote hero · dark' },
+  ];
+
+  const grid = document.getElementById('grid');
+  slides.forEach(s => {
+    const a = document.createElement('a');
+    a.className = 'card';
+    a.href = s.file;
+    a.innerHTML = `
+      <div class="frame">
+        <iframe src="${s.file}" scrolling="no"></iframe>
+      </div>
+      <div class="info">
+        <span class="num">${String(s.n).padStart(2,'0')}</span>
+        <span class="name">${s.name}</span>
+        <span class="open">Abrir ↗</span>
+      </div>`;
+    grid.appendChild(a);
+  });
+
+  document.querySelectorAll('.card iframe').forEach(ifr => {
+    ifr.addEventListener('load', () => {
+      const w = ifr.clientWidth, h = ifr.clientHeight;
+      const s = Math.min(w / 1600, h / 900);
+      ifr.style.transform = `scale(${s})`;
+    });
+  });
+
+  // ---- Presentation mode ----
+  const present = document.getElementById('present');
+  const frame = document.getElementById('presentFrame');
+  const counter = document.getElementById('counter');
+  const hud = document.getElementById('hud');
+  let idx = 0;
+
+  function fitPresent(){
+    const s = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+    frame.style.transform = `scale(${s})`;
+  }
+  function load(i){
+    idx = (i + slides.length) % slides.length;
+    frame.src = slides[idx].file;
+    counter.innerHTML = `<b>${String(idx+1).padStart(2,'0')}</b> / ${slides.length}`;
+  }
+  window.addEventListener('resize', fitPresent);
+  frame.addEventListener('load', fitPresent);
+
+  document.getElementById('presentBtn').onclick = () => { load(0); document.body.classList.add('presenting'); fitPresent(); };
+  document.getElementById('nextBtn').onclick = () => load(idx+1);
+  document.getElementById('prevBtn').onclick = () => load(idx-1);
+  document.getElementById('closeBtn').onclick = () => { document.body.classList.remove('presenting'); frame.src=''; };
+
+  present.addEventListener('click', (e) => {
+    if (e.target.closest('.hud')) return;
+    load(idx+1);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!document.body.classList.contains('presenting')) return;
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown' || e.key === 'Enter') { e.preventDefault(); load(idx+1); }
+    if (e.key === 'ArrowLeft'  || e.key === 'PageUp' || e.key === 'Backspace')              { e.preventDefault(); load(idx-1); }
+    if (e.key === 'Escape')    { document.body.classList.remove('presenting'); frame.src=''; }
+    if (e.key === 'Home')      load(0);
+    if (e.key === 'End')       load(slides.length-1);
+    if (e.key === 'h' || e.key === 'H') { hud.style.opacity = (hud.style.opacity === '1' ? '0' : '1'); }
+  });
+</script>
+</body>
+</html>

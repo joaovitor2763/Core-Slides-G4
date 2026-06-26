@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>08 · Divisor de seção</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Slide 08 — divisor de bloco (DARK MODE)
+     Fundo navy 600, texto navy 50, accent dourado.
+     Número gigante + título italic à direita.
+     ============================================================ */
+
+  .block-num {
+    position: absolute;
+    top: 140px;
+    left: var(--pad);
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+  }
+  .block-num::before {
+    /* faixa vertical accent */
+    content: "";
+    position: absolute;
+    left: 0; top: 0;
+    width: 8px; height: 120px;
+    background: var(--accent);
+  }
+  .block-num .num-wrap {
+    padding-left: 32px;
+  }
+  .block-num .kicker {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 8px;
+  }
+  .block-num .num {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 148px;
+    line-height: 0.85;
+    color: var(--fg);
+  }
+
+  .block-title {
+    position: absolute;
+    right: var(--pad);
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 780px;
+    text-align: left;
+  }
+  .block-title h1 {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 108px;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+  }
+  .block-title h1 em { font-style: italic; font-weight: 400; }
+  .block-title .hairline {
+    width: 80px;
+    height: 1px;
+    background: var(--accent);
+    margin: 40px 0;
+  }
+  .block-title p {
+    font-family: var(--f-text);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--fg-2);
+    max-width: 620px;
+  }
+  .block-title p em { font-style: italic; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="">
+
+    <div class="block-num">
+      <div class="num-wrap">
+        <div class="kicker">Bloco</div>
+        <div class="num">02</div>
+      </div>
+    </div>
+
+    <div class="block-title">
+      <h1>A prática<br><em>começa agora.</em></h1>
+      <div class="hairline"></div>
+      <p>Próximo bloco: como construir sua primeira <em>skill</em> no G4 OS — do zero à execução.</p>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

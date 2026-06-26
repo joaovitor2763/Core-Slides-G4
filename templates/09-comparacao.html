@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>09 · Comparação</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ---- slide-local layout ---- */
+  .cmp-head {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 132px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .cmp-head .eyebrow { /* override default eyebrow size for this slide header */ }
+  .cmp-tagline {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    max-width: 320px;
+    text-align: right;
+    line-height: 1.45;
+  }
+  .cmp-tagline em {
+    font-style: italic;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* central divider */
+  .cmp-divider {
+    position: absolute;
+    left: 50%;
+    top: 220px;
+    bottom: 120px;
+    width: 1px;
+    background: var(--ink);
+    transform: translateX(-0.5px);
+  }
+  .cmp-divider-tick {
+    position: absolute;
+    left: 50%;
+    top: 462px;                 /* aligns roughly with hero number midline */
+    width: 56px;
+    height: 1px;
+    background: var(--ink);
+    transform: translate(-50%, 0);
+  }
+
+  /* columns */
+  .col {
+    position: absolute;
+    top: 220px;
+    width: calc(50% - var(--pad) - 56px);
+  }
+  .col--left  { left: var(--pad); }
+  .col--right { right: var(--pad); }
+
+  .col-label {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: inline-block;
+  }
+  .col-label--accent { color: var(--accent); }
+
+  .col-title {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-top: 14px;
+  }
+  .col-title .italic { font-style: italic; font-weight: 500; }
+
+  /* HERO number */
+  .hero-num {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 232px;
+    line-height: 0.9;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+    margin-top: 36px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .hero-num .unit {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 232px;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  .hero-suffix {
+    font-family: var(--f-mono);
+    font-size: 15px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 14px;
+  }
+
+  /* the only second accent use: a short bar under the "22min" hero */
+  .hero-accent-bar {
+    width: 96px;
+    height: 4px;
+    background: var(--accent);
+    margin-top: 18px;
+  }
+
+  /* steps */
+  .steps {
+    margin-top: 42px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    align-items: baseline;
+    column-gap: 16px;
+  }
+  .step-num {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+  }
+  .step-txt {
+    font-family: var(--f-body);
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 400;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Antes × Depois">
+
+    <!-- header strip -->
+    <header class="cmp-head">
+      <span class="eyebrow">Comparação</span>
+      <p class="cmp-tagline">
+        Mesmo processo, mesmo tempo — <em>resultado oposto.</em>
+      </p>
+    </header>
+
+    <!-- central divider + small midline tick -->
+    <div class="cmp-divider"></div>
+    <div class="cmp-divider-tick"></div>
+
+    <!-- LEFT · Sem IA -->
+    <section class="col col--left">
+      <span class="col-label">Antes · manual</span>
+      <h2 class="col-title">Sem IA.</h2>
+
+      <div class="hero-num">
+        <span>6</span><span class="unit">h</span>
+      </div>
+      <div class="hero-suffix">/ por relatório</div>
+
+      <ol class="steps">
+        <li class="step"><span class="step-num">01</span><span class="step-txt">Coleta manual em 4 abas do Excel.</span></li>
+        <li class="step"><span class="step-num">02</span><span class="step-txt">Copia-cola de e-mails para a planilha.</span></li>
+        <li class="step"><span class="step-num">03</span><span class="step-txt">Validação ponto a ponto com a equipe.</span></li>
+        <li class="step"><span class="step-num">04</span><span class="step-txt">PowerPoint formatado à mão.</span></li>
+      </ol>
+    </section>
+
+    <!-- RIGHT · Com IA -->
+    <section class="col col--right">
+      <span class="col-label col-label--accent">Depois · com skill</span>
+      <h2 class="col-title">Com IA.</h2>
+
+      <div class="hero-num">
+        <span>22</span><span class="unit">min</span>
+      </div>
+      <div class="hero-accent-bar"></div>
+      <div class="hero-suffix">/ por relatório</div>
+
+      <ol class="steps">
+        <li class="step"><span class="step-num">01</span><span class="step-txt">Skill puxa dados direto das fontes.</span></li>
+        <li class="step"><span class="step-num">02</span><span class="step-txt">Resumo executivo gerado automaticamente.</span></li>
+        <li class="step"><span class="step-num">03</span><span class="step-txt">Humano revisa exceções em 5 min.</span></li>
+        <li class="step"><span class="step-num">04</span><span class="step-txt">Slides prontos — só validar tom.</span></li>
+      </ol>
+    </section>
+
+  </article>
+</div>
+<script>
+  // center + scale-to-fit
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>
