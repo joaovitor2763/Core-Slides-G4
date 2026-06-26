@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>03 · Quote com imagem</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  .frame {
+    position:absolute; top:140px; left:var(--pad);
+    width:340px; height:420px; background:#1a1a1a; overflow:hidden;
+  }
+  .frame::after{
+    content:""; position:absolute; inset:0;
+    background: repeating-linear-gradient(-45deg, transparent 0 12px, rgba(255,255,255,0.05) 12px 13px);
+  }
+  .frame .cap{
+    position:absolute; bottom:14px; left:14px;
+    font-family:var(--f-mono); font-size:10px; letter-spacing:0.2em; color:rgba(255,255,255,0.55);
+  }
+  .frame .svg{ position:absolute; inset:0; margin:auto; opacity:0.3;}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Provocação">
+
+    <div class="frame">
+      <svg class="svg" viewBox="0 0 100 100" width="160" height="160">
+        <rect x="20" y="20" width="60" height="60" fill="none" stroke="white" stroke-width="2"/>
+        <line x1="20" y1="20" x2="80" y2="80" stroke="white" stroke-width="2"/>
+      </svg>
+      <div class="cap">[ RETRATO · 600×800 ]</div>
+    </div>
+
+    <div style="position:absolute; left:520px; right:var(--pad); top:50%; transform:translateY(-50%);">
+      <div class="eyebrow" style="margin-bottom:56px;">Citação</div>
+      <div style="position:relative; padding-left:32px;">
+        <div style="position:absolute; left:-8px; top:-20px; width:8px; height:180px; background:var(--accent);"></div>
+        <p class="h-display" style="font-size:64px; line-height:1.05; font-weight:500;">
+          "A IA não substitui o gestor. <span class="italic">Substitui o gestor que não usa IA.</span>"
+        </p>
+      </div>
+      <div style="margin-top:56px; display:flex; gap:24px; align-items:center;">
+        <div class="rule--muted" style="width:64px; height:1px; background:var(--ink);"></div>
+        <div class="mono" style="font-size:14px;">— Autor da frase, cargo</div>
+      </div>
+    </div>
+
+  </article>
+</div>
+<script>
+  // center + scale-to-fit
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

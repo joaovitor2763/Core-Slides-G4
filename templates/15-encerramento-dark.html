@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>15 · Encerramento</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* slide-15 local layout
+     grid columns: hero (1080) | gutter (48) | rail (280)
+     left edge x=96, hero ends at 1176, rail at 1224-1504, right pad 96 */
+  .s15-hero {
+    position: absolute;
+    left: var(--pad);
+    top: 260px;
+    width: 1080px;
+  }
+  .s15-hero .eyebrow { margin-bottom: 56px; }
+  .s15-hero h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 184px;
+    line-height: 0.88;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+  }
+  .s15-hero h1 .italic {
+    font-style: italic;
+    font-weight: 500;
+  }
+  .s15-hero h1 .arrow {
+    font-family: var(--f-display);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 56px;
+    color: var(--accent);
+    vertical-align: 32px;       /* sit it near the cap line, not the baseline */
+    margin-left: 14px;
+    letter-spacing: 0;
+  }
+  .s15-hero .kicker {
+    margin-top: 44px;
+    font-family: var(--f-body);
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--muted);
+    max-width: 540px;
+  }
+
+  /* contact rail — right column */
+  .s15-rail {
+    position: absolute;
+    right: var(--pad);
+    top: 340px;
+    width: 280px;
+    padding-top: 24px;
+    border-top: 1px solid var(--ink);
+  }
+  .s15-rail .label {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .s15-rail .item {
+    font-family: var(--f-body);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .s15-rail .item--sm {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .s15-rail .group + .group { margin-top: 36px; }
+  .s15-rail .hairline {
+    height: 1px;
+    background: var(--rule);
+    margin: 28px 0;
+  }
+
+  /* footer */
+  .s15-foot {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .s15-foot .left { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Encerramento">
+
+    <!-- HERO -->
+    <section class="s15-hero">
+      <div class="eyebrow">Encerramento</div>
+      <h1>
+        Vamos<br>
+        <span class="italic">construir</span>.<span class="arrow">→</span>
+      </h1>
+    </section>
+
+    <!-- CONTACT RAIL -->
+    <aside class="s15-rail">
+      <div class="group">
+        <div class="label">Contato</div>
+        <div class="item">email@dominio.com</div>
+        <div class="item">@handle</div>
+      </div>
+
+      <div class="hairline"></div>
+
+      <div class="group">
+        <div class="label">Material</div>
+        <div class="item item--sm">g4edu.com/aula-01</div>
+      </div>
+    </aside>
+
+    <!-- footer -->
+    <footer class="s15-foot">
+      <div class="left">G4 Educação · 2026</div>
+    </footer>
+
+  </article>
+</div>
+<script>
+  // center + scale-to-fit
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

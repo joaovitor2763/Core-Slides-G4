@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>02 · Palestrante</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  .portrait {
+    position: absolute; top:0; right:0; bottom:0; width:38%;
+    background:#1a1a1a;
+    overflow:hidden;
+  }
+  .portrait .placeholder {
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(45deg, transparent 0 14px, rgba(255,255,255,0.04) 14px 15px);
+  }
+  .portrait .label {
+    position:absolute; bottom:32px; left:32px;
+    font-family:var(--f-mono); font-size:11px; letter-spacing:0.2em; color:rgba(255,255,255,0.5);
+  }
+  .portrait svg { position:absolute; inset:0; margin:auto; opacity:0.25; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Quem fala">
+
+    <div class="portrait">
+      <div class="placeholder"></div>
+      <!-- silhouette placeholder -->
+      <svg viewBox="0 0 200 200" width="220" height="220">
+        <circle cx="100" cy="70" r="34" fill="white"/>
+        <path d="M30 200 C 30 140, 170 140, 170 200 Z" fill="white"/>
+      </svg>
+      <div class="label">[ FOTO · 1080×1920 ]</div>
+    </div>
+
+    <!-- left content -->
+    <div style="position:absolute; left:var(--pad); top:50%; transform:translateY(-50%); width:55%;">
+      <div class="eyebrow" style="margin-bottom:48px;">Palestrante</div>
+      <h1 class="h-display" style="font-size:108px; line-height:0.9;">
+        Nome<br>
+        <span style="font-style:italic; font-weight:400;">do Speaker</span>
+      </h1>
+      <div class="rule" style="margin:48px 0 32px;"></div>
+      <p style="font-size:22px; line-height:1.4; max-width:620px; color:var(--ink-2);">
+        Cargo · Função na empresa. Especialista em <span class="italic">inteligência artificial aplicada</span> e transformação operacional.
+      </p>
+      <div class="mono muted" style="margin-top:48px; font-size:13px;">
+        São Paulo · 12 anos de mercado · ex-[empresa]
+      </div>
+    </div>
+
+  </article>
+</div>
+<script>
+  // center + scale-to-fit
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

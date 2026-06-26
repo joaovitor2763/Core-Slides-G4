@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>10 · Stats / Métricas</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* --- slide-local layout (inherits from style.css) --- */
+
+  .title-block {
+    position: absolute;
+    left: var(--pad);
+    top: 240px;
+    right: var(--pad);
+  }
+  .title-block .h-display {
+    font-size: 132px;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+  }
+  .title-block .l1 { display: block; }
+  .title-block .l2 {
+    display: block;
+    margin-left: 96px;       /* asymmetric indent */
+    font-style: italic;
+    font-weight: 500;
+  }
+  .title-block .l2 .dot { font-style: normal; }
+
+  /* metrics grid */
+  .grid-stats {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 600px;
+    bottom: 140px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 56px;
+  }
+  .stat {
+    position: relative;
+    padding-top: 28px;
+  }
+  .stat::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--ink);
+  }
+  .stat .idx {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .stat .v {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 100px;
+    line-height: 1.0;
+    letter-spacing: -0.045em;
+    margin-top: 14px;
+    white-space: nowrap;
+  }
+  .stat .v .small {
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-left: 2px;
+  }
+  .stat .u {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+  .stat .l {
+    font-family: var(--f-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--muted);
+    margin-top: 14px;
+    max-width: 280px;
+  }
+  .stat--accent .v { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Impacto">
+
+    <div class="title-block">
+      <h1 class="h-display">
+        <span class="l1">Três efeitos</span>
+        <span class="l2">mensuráveis<span class="dot">.</span></span>
+      </h1>
+    </div>
+
+    <div class="grid-stats">
+
+      <div class="stat stat--accent">
+        <div class="idx">01 — Velocidade</div>
+        <div class="v">16<span class="small">×</span></div>
+        <div class="u">mais rápido</div>
+        <div class="l">Tempo médio de uma conciliação financeira.</div>
+      </div>
+
+      <div class="stat">
+        <div class="idx">02 — Custo</div>
+        <div class="v">−42<span class="small">%</span></div>
+        <div class="u">de custo</div>
+        <div class="l">Operações de back-office automatizadas.</div>
+      </div>
+
+      <div class="stat">
+        <div class="idx">03 — Acurácia</div>
+        <div class="v">+98<span class="small">%</span></div>
+        <div class="u">de acurácia</div>
+        <div class="l">Em rankings de recrutamento automatizados.</div>
+      </div>
+
+      <div class="stat">
+        <div class="idx">04 — Setup</div>
+        <div class="v">5<span class="small">min</span></div>
+        <div class="u">de setup</div>
+        <div class="l">Tempo até a primeira skill rodando no G4 OS.</div>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  // center + scale-to-fit
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

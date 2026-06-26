@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>14 · 3 pilares</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Slide 14 — três eixos (refeito do zero, v3)
+     Regra: header termina em y=300, axes ocupam y=300 a y=860
+     (560px ÷ 3 = 186px por linha, sem vácuo). Sem hairline
+     vertical decorativa. Exemplos em texto natural, sem mono.
+     ============================================================ */
+
+  /* ---- header ---- */
+  .hdr {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 140px;
+  }
+  .hdr .eyebrow {
+    margin-bottom: 28px;
+  }
+  .hdr h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 80px;
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    max-width: 1000px;
+  }
+  .hdr h1 em { font-style: italic; font-weight: 500; }
+
+  /* ---- axes ---- */
+  .axes {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 300px;
+    bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--ink);
+  }
+
+  .axis {
+    flex: 1;
+    display: grid;
+    /* numeral | label | descrição | exemplo */
+    grid-template-columns: 180px 280px 1fr 280px;
+    column-gap: 48px;
+    align-items: center;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .axis:last-child { border-bottom: 1px solid var(--ink); }
+
+  /* numeral — menor, sem peso excessivo */
+  .axis .n {
+    font-family: var(--f-mono);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    justify-self: start;
+  }
+
+  /* label do eixo (Capacidade / Qualidade / Custo) — agora display italic */
+  .axis .lbl {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 44px;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    justify-self: start;
+  }
+
+  /* descrição editorial */
+  .axis .txt {
+    font-family: var(--f-body);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 520px;
+  }
+
+  /* exemplo ancorado à direita — texto natural, não mono */
+  .axis .ex {
+    font-family: var(--f-body);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--ink);
+    text-align: right;
+  }
+  .axis .ex .k {
+    display: block;
+    font-family: var(--f-mono);
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Os três pilares">
+
+    <div class="hdr">
+      <div class="eyebrow">Três eixos · manifesto</div>
+      <h1>Como <em>medir</em> valor de IA.</h1>
+    </div>
+
+    <section class="axes" aria-label="Três eixos para medir valor de IA">
+
+      <div class="axis">
+        <div class="n">01</div>
+        <div class="lbl">Capacidade</div>
+        <div class="txt">O que conseguimos fazer agora que antes era impossível ou inviável. Horizonte de tarefas.</div>
+        <div class="ex"><span class="k">Exemplo</span>antes 8h → agora 22min</div>
+      </div>
+
+      <div class="axis">
+        <div class="n">02</div>
+        <div class="lbl">Qualidade</div>
+        <div class="txt">Acurácia, consistência e cobertura. Benchmarks contra a execução humana anterior.</div>
+        <div class="ex"><span class="k">Exemplo</span>ranking 96% de match</div>
+      </div>
+
+      <div class="axis">
+        <div class="n">03</div>
+        <div class="lbl">Custo</div>
+        <div class="txt">Redução de horas operacionais e retrabalho. O ROI que convence o CFO.</div>
+        <div class="ex"><span class="k">Exemplo</span>−42% back-office</div>
+      </div>
+
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

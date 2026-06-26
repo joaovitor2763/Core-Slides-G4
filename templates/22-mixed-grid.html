@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>22 · Mixed grid (light)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* Slide 22 — Matriz 2×2 + exemplo do vendedor (cruza com slide 15) */
+
+  .head { position:absolute; left:var(--pad); right:var(--pad); top:104px; }
+  .head .eyebrow { margin-bottom: 18px; }
+  .head h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 50px;
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    max-width: 1300px;
+    color: var(--ink);
+  }
+  .head h1 em { font-style: italic; font-weight: 500; color: var(--accent); }
+
+  /* EIXOS */
+  .y-axis {
+    position: absolute;
+    left: 96px;
+    top: 320px;
+    width: 36px;
+    height: 440px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .y-axis span {
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* MATRIZ 2×2 */
+  .matrix {
+    position: absolute;
+    left: 158px;
+    top: 320px;
+    width: 540px;
+    height: 440px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1px;
+    background: var(--ink);
+    border: 1px solid var(--ink);
+  }
+  .q {
+    background: var(--paper);
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .q .tag {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .q .ttl {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .q .ttl em { font-style: italic; font-weight: 500; }
+  .q .note {
+    font-family: var(--f-text);
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--ink-2);
+  }
+
+  .q--accent { background: var(--accent); }
+  .q--accent .tag { color: rgba(15, 20, 25, 0.75); }
+  .q--accent .ttl { color: var(--ink); }
+  .q--accent .note { color: rgba(15, 20, 25, 0.85); }
+
+  .q--ink { background: var(--navy-600); }
+  .q--ink .tag { color: var(--gold-300); }
+  .q--ink .ttl { color: var(--paper); }
+  .q--ink .note { color: rgba(245, 244, 243, 0.85); }
+
+  /* EIXO X */
+  .x-axis {
+    position: absolute;
+    left: 158px;
+    top: 776px;
+    width: 540px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .x-axis .mid { color: var(--ink); font-weight: 500; }
+
+  /* COLUNA DIREITA — exemplo do vendedor */
+  .side {
+    position: absolute;
+    left: 760px;
+    top: 320px;
+    right: var(--pad);
+    height: 470px;
+  }
+
+  .side .k {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+  .side h2 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 22px;
+  }
+  .side h2 em { font-style: italic; font-weight: 500; color: var(--accent); }
+
+  .tasks {
+    display: flex;
+    flex-direction: column;
+  }
+  .t {
+    display: grid;
+    grid-template-columns: 40px 1fr 110px;
+    column-gap: 14px;
+    align-items: baseline;
+    padding: 12px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .t:last-child { border-bottom: 1px solid var(--ink); }
+  .t .n {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+  }
+  .t .name {
+    font-family: var(--f-display);
+    font-size: 19px;
+    line-height: 1.15;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .t .name em { font-style: italic; font-weight: 600; }
+  .t .action {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-align: right;
+    font-weight: 500;
+  }
+  .t--auto   .action { color: var(--accent); font-weight: 600; }
+  .t--ampli  .action { color: var(--navy-600); font-weight: 600; }
+  .t--manter .action { color: var(--muted); }
+
+  .pull {
+    margin-top: 22px;
+    font-family: var(--f-text);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .pull b { color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Exemplo · Vendedor">
+
+    <div class="head">
+      <div class="eyebrow">Exemplo · Vendedor</div>
+      <h1>Cada tarefa de uma profissão precisa ser <em>posicionada</em> numa matriz de adoção.</h1>
+    </div>
+
+    <!-- Eixo Y -->
+    <div class="y-axis"><span>O time gosta da tarefa →</span></div>
+
+    <!-- Matriz 2×2 -->
+    <div class="matrix">
+      <div class="q">
+        <div class="tag">Gosta · IA baixa</div>
+        <div class="ttl">Mantenha <em>humano</em></div>
+        <div class="note">Deixe com o time. É o que dá orgulho — a IA ainda não faz bem.</div>
+      </div>
+      <div class="q q--ink">
+        <div class="tag">Gosta · IA alta</div>
+        <div class="ttl"><em>Copiloto</em></div>
+        <div class="note">IA aumenta, humano no comando. Modo cyborg.</div>
+      </div>
+      <div class="q">
+        <div class="tag">Não gosta · IA baixa</div>
+        <div class="ttl"><em>Simplifique</em></div>
+        <div class="note">Reduza, padronize ou elimine. Ainda não vale automatizar.</div>
+      </div>
+      <div class="q q--accent">
+        <div class="tag">Não gosta · IA alta</div>
+        <div class="ttl">Automatize</div>
+        <div class="note">Delegue à IA. Liberdade de custo e de tempo.</div>
+      </div>
+    </div>
+
+    <!-- Eixo X -->
+    <div class="x-axis">
+      <span>Baixa</span>
+      <span class="mid">Capacidade da IA</span>
+      <span>Alta</span>
+    </div>
+
+    <!-- Coluna direita: 5 tarefas do vendedor com ação -->
+    <div class="side">
+      <div class="k">Vendedor · 5 tarefas</div>
+      <h2>Onde cada uma <em>cai</em> na matriz.</h2>
+
+      <div class="tasks">
+        <div class="t t--auto">
+          <span class="n">01</span>
+          <span class="name">Preencher <em>CRM</em></span>
+          <span class="action">Automatize</span>
+        </div>
+        <div class="t t--ampli">
+          <span class="n">02</span>
+          <span class="name">Fazer <em>follow-up</em></span>
+          <span class="action">Copiloto</span>
+        </div>
+        <div class="t t--ampli">
+          <span class="n">03</span>
+          <span class="name">Estudar <em>o lead</em></span>
+          <span class="action">Copiloto</span>
+        </div>
+        <div class="t t--ampli">
+          <span class="n">04</span>
+          <span class="name">Preparar <em>a proposta</em></span>
+          <span class="action">Copiloto</span>
+        </div>
+        <div class="t t--manter">
+          <span class="n">05</span>
+          <span class="name"><em>Negociar</em> condições</span>
+          <span class="action">Humano</span>
+        </div>
+      </div>
+
+      <p class="pull">A maioria das tarefas do vendedor é <b>copiloto</b> — não automatizável, mas amplificável. A exceção fica nas pontas: rotina pura vai pra IA, decisão final fica com humano.</p>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

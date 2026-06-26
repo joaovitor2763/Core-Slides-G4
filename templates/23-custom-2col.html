@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>23 · Custom 2-col (light)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* Slide 11 — Dois mundos: gestor vs executor */
+  /* Layout: headline grande à esquerda + 2 cards empilhados à direita */
+
+  .eyebrow-row {
+    position: absolute;
+    top: 96px;
+    left: var(--pad);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .eyebrow-row .num {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+  }
+  .eyebrow-row .line {
+    width: 56px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .eyebrow-row .lbl {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* HEADLINE — coluna esquerda, ocupa toda a altura */
+  .headline {
+    position: absolute;
+    left: var(--pad);
+    top: 220px;
+    width: 760px;
+    bottom: 96px;
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 72px;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .headline .accent-b {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .headline em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  /* COLUNA DIREITA — 2 cards empilhados */
+  .twocols {
+    position: absolute;
+    right: var(--pad);
+    top: 180px;
+    bottom: 96px;
+    width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .card {
+    flex: 1;
+    border: 1px solid var(--ink);
+    padding: 32px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .card--pro {
+    background: var(--navy-600);
+    border-color: var(--navy-600);
+  }
+  .card--pro .card-tag { color: var(--accent) !important; }
+  .card--pro .card-line { background: var(--accent) !important; }
+  .card--pro .card-q { color: var(--paper) !important; }
+  .card--pro .card-sub { color: var(--paper-2) !important; }
+
+  .card .card-tag {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .card .card-line {
+    width: 32px;
+    height: 1px;
+    background: var(--ink);
+  }
+  .card .card-q {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .card .card-q em { font-style: italic; font-weight: 500; }
+  .card .card-sub {
+    font-family: var(--f-text);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  .card .card-sub em { font-style: italic; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="">
+
+    <div class="eyebrow-row">
+      <span class="lbl">Dois mundos · mesma pergunta</span>
+    </div>
+
+    <h1 class="headline">
+      <span class="accent-b">Você</span> tem uma <em>experiência</em> com o impacto da IA.<br>
+      Seu <span class="accent-b">atendente de suporte</span> tem <em>outra</em>.
+    </h1>
+
+    <div class="twocols">
+
+      <!-- GESTOR -->
+      <div class="card">
+        <div class="card-tag"><span class="card-line"></span> Gestor · você</div>
+        <p class="card-q">"Quanto tempo você <em>economiza</em> com IA?"</p>
+        <p class="card-sub">Provavelmente algumas horas — ou mesmo <em>dias</em> por semana.</p>
+      </div>
+
+      <!-- EXECUTOR -->
+      <div class="card card--pro">
+        <div class="card-tag"><span class="card-line"></span> Executor · o time</div>
+        <p class="card-q">"E o seu <em>atendente</em> de suporte? E o <em>analista</em> de contas a pagar?"</p>
+        <p class="card-sub">Provavelmente a resposta é <em>zero</em> — e agora ele ainda está com <em>medo de ser substituído</em>.</p>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

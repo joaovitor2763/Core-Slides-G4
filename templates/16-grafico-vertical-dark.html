@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>16 · Gráfico vertical + nota</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Slide 16 — bar chart vertical + nota editorial
+     Regras: chart-wrap ocupa ~58% à esquerda, "nota" editorial
+     ocupa ~38% à direita, divisor hairline no centro.
+     Cada barra tem seu número ACIMA dela (não no topo do chart).
+     ============================================================ */
+
+  .grid-16 {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 280px;
+    bottom: 96px;
+    display: grid;
+    grid-template-columns: 1fr 56px 1fr;
+    column-gap: 0;
+    align-items: stretch;
+  }
+
+  /* === coluna do gráfico (esquerda) === */
+  .col-chart {
+    padding-right: 56px;
+    display: flex;
+    flex-direction: column;
+  }
+  .col-chart .title {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .col-chart .title em { font-style: italic; font-weight: 500; }
+
+  /* chart frame: altura fixa, contém barras ancoradas na base */
+  .chart-v {
+    margin-top: 48px;
+    height: 380px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;     /* barras ancoradas na base */
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .chart-v::before {
+    /* baseline */
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: var(--ink);
+  }
+
+  /* cada barra: position relative, flex:1 só na LARGURA.
+     O .bar-v alinha o .stem na base via flex-end. */
+  .bar-v {
+    flex: 1;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+  }
+  .bar-v .stem {
+    width: 100%;
+    max-width: 96px;
+    margin: 0 auto;
+    background: var(--ink);
+    position: relative;       /* referência para o .val e .lbl */
+  }
+  /* número em cima da barra: absolute, ancorado no STEM */
+  .bar-v .val {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(100% + 14px);   /* 14px acima do topo do stem */
+    font-family: var(--f-mono);
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  /* label embaixo da barra: absolute, ancorado no STEM */
+  .bar-v .lbl {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(100% + 14px);      /* 14px abaixo da base do stem */
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .bar-v--accent .stem { background: var(--accent); }
+  .bar-v--accent .val  { color: var(--accent); font-weight: 600; }
+
+  /* === divisor vertical hairline === */
+  .divider {
+    width: 1px;
+    background: var(--rule);
+    align-self: stretch;
+  }
+
+  /* === coluna da nota (direita) === */
+  .col-note {
+    padding-left: 56px;
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  .col-note .kicker {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+  .col-note h2 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .col-note h2 em { font-style: italic; font-weight: 500; }
+  .col-note p {
+    font-family: var(--f-body);
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin-top: 28px;
+    max-width: 480px;
+  }
+  .col-note .pull {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .col-note .pull b {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* footer source line */
+  .source {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 56px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Volume por área">
+
+    <div class="grid-16">
+
+      <!-- COLUNA ESQUERDA: chart -->
+      <div class="col-chart">
+        <div class="title">Volume <em>por área</em></div>
+
+        <div class="chart-v">
+
+          <div class="bar-v bar-v--accent">
+            <div class="stem" style="height: 100%;">
+              <div class="val">47</div>
+            </div>
+            <div class="lbl">RH</div>
+          </div>
+
+          <div class="bar-v">
+            <div class="stem" style="height: 49%;">
+              <div class="val">23</div>
+            </div>
+            <div class="lbl">Fin</div>
+          </div>
+
+          <div class="bar-v">
+            <div class="stem" style="height: 38%;">
+              <div class="val">18</div>
+            </div>
+            <div class="lbl">Mkt</div>
+          </div>
+
+          <div class="bar-v">
+            <div class="stem" style="height: 26%;">
+              <div class="val">12</div>
+            </div>
+            <div class="lbl">Ops</div>
+          </div>
+
+          <div class="bar-v">
+            <div class="stem" style="height: 17%;">
+              <div class="val">8</div>
+            </div>
+            <div class="lbl">Jur</div>
+          </div>
+
+          <div class="bar-v">
+            <div class="stem" style="height: 11%;">
+              <div class="val">5</div>
+            </div>
+            <div class="lbl">Com</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- DIVISOR vertical hairline -->
+      <div class="divider"></div>
+
+      <!-- COLUNA DIREITA: nota editorial -->
+      <div class="col-note">
+        <div class="kicker">Insight</div>
+        <h2>RH concentra <em>43%</em><br>do volume total.</h2>
+        <p>Recrutamento e seleção foi a primeira área a ganhar skills no G4 OS, e o efeito se propagou. As outras cinco áreas somam 66 demandas — mas a maioria ainda é exploratória.</p>
+        <div class="pull">Próximo passo: <b>replicar a skill de ranking</b> para a área Jurídica (próxima maior oportunidade).</div>
+      </div>
+
+    </div>
+
+    <div class="source">
+      <span>Fonte: G4 OS · dashboard interno · Q1 2026</span>
+      <span>n = 113 skills ativas</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

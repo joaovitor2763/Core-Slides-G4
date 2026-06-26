@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>24 · Pergunta CTA (light)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ---- slide-local styles ---- */
+  .quote-stage{
+    position:absolute;
+    inset:0;
+    padding: 140px var(--pad) 96px;
+  }
+
+  /* small mono label, replaces .eyebrow so we don't double-up the accent dash */
+  .label{
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* decorative watermark quote mark — soft, on the page, never competing */
+  .watermark{
+    position:absolute;
+    top: 70px;
+    left: 84px;
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 320px;
+    line-height: 1;
+    color: var(--ink);
+    opacity: 0.06;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* hero composition */
+  .hero{
+    position:absolute;
+    top: 240px;
+    left: var(--pad);
+    right: var(--pad);
+    display: grid;
+    grid-template-columns: 8px 1fr;
+    column-gap: 56px;
+    align-items: start;
+  }
+
+  /* the single accent: a vertical bar to the left of the quote */
+  .bar{
+    width: 8px;
+    align-self: stretch;
+    background: var(--accent);
+    min-height: 360px;
+  }
+
+  .quote{
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 78px;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 1180px;
+  }
+  .quote .italic{ font-style: italic; font-weight: 500; }
+
+  .attr{
+    margin-top: 56px;
+    font-family: var(--f-mono);
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* footer line */
+  .foot{
+    position:absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 96px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--rule);
+    padding-top: 18px;
+    font-family: var(--f-mono);
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.16em;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Provocação">
+
+    <div class="quote-stage">
+
+      <!-- decorative watermark quote (low-contrast, pure ink, no accent) -->
+      <div class="watermark" aria-hidden="true">&ldquo;</div>
+
+      <!-- top label -->
+      <div class="label" style="position:absolute; top:120px; left:var(--pad);">Citação central</div>
+
+      <!-- hero quote with accent vertical bar -->
+      <div class="hero">
+        <div class="bar" aria-hidden="true"></div>
+        <div>
+          <p class="quote">
+            O medo da substituição só existe quando a <span class="italic">curiosidade</span> para. Nosso trabalho aqui é reacendê-la.
+          </p>
+          <div class="attr">— Palestrante</div>
+        </div>
+      </div>
+
+      <!-- footer -->
+      <div class="foot">
+        <span>Aula 01</span>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  // center + scale-to-fit
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>21 · 2-boxes (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  /* Slide 18 — Pergunta de transição (modo dark, serif) */
+  .big-q {
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    font-weight: 500;
+    font-size: 132px;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+  }
+  .big-q em { font-style: italic; font-weight: 500; color: var(--accent); }
+  .big-q .b { font-weight: 600; font-style: normal; }
+
+  .sub-q {
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.45;
+    color: var(--fg-2);
+  }
+  .sub-q em { color: var(--accent); font-style: italic; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Quem lidera">
+
+    <div style="position:absolute; left:var(--pad); right:var(--pad); top:50%; transform:translateY(-50%);">
+
+      <div style="display:grid; grid-template-columns: 240px 1fr; gap:80px; align-items:start;">
+
+        <div>
+          <div class="eyebrow" style="margin-bottom:32px;">Próxima pergunta</div>
+        </div>
+
+        <div>
+          <h1 class="big-q" style="max-width:1100px;">
+            E quem deve<br>liderar isso<br>no <em>negócio</em>?
+          </h1>
+
+          <div style="margin-top:56px; padding-top:32px; border-top:1px solid var(--fg-muted); max-width:1000px;">
+            <p class="sub-q">
+              Spoiler: não é um único cargo — e <em>não é</em> o que a maioria das empresas está fazendo.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

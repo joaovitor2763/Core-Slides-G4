@@ -33,28 +33,56 @@ Core-Slides-G4/
 ├── LICENSE                    ← MIT
 ├── .gitignore                 ← ignora .DS_Store, node_modules, etc
 │
-├── templates/                 ← 20 templates canônicos + style.css compartilhado
+├── templates/                 ← 25 templates canônicos × 2 modos (light + dark) + style.css
 │   ├── style.css              ← design tokens + classes semânticas
 │   ├── 01-capa.html           ← abertura dark
+│   ├── 01-capa-dark.html      ← variante dark
 │   ├── 02-palestrante.html    ← bio + retrato
+│   ├── 02-palestrante-dark.html
 │   ├── 03-quote-com-imagem.html
+│   ├── 03-quote-com-imagem-dark.html
 │   ├── 04-quote-sem-imagem.html
+│   ├── 04-quote-sem-imagem-dark.html
 │   ├── 05-grafico.html
+│   ├── 05-grafico-dark.html
 │   ├── 06-texto-focado.html
+│   ├── 06-texto-focado-dark.html
 │   ├── 07-timeline.html
+│   ├── 07-timeline-dark.html
 │   ├── 08-divisor.html        ← dark
 │   ├── 09-comparacao.html
+│   ├── 09-comparacao-dark.html
 │   ├── 10-stats.html
+│   ├── 10-stats-dark.html
 │   ├── 11-agenda.html
+│   ├── 11-agenda-dark.html
 │   ├── 12-imagem-legenda.html
+│   ├── 12-imagem-legenda-dark.html
 │   ├── 13-lista.html
+│   ├── 13-lista-dark.html
 │   ├── 14-tres-pilares.html
+│   ├── 14-tres-pilares-dark.html
 │   ├── 15-encerramento.html
+│   ├── 15-encerramento-dark.html
 │   ├── 16-grafico-vertical.html
+│   ├── 16-grafico-vertical-dark.html
 │   ├── 17-a-vs-b.html
+│   ├── 17-a-vs-b-dark.html
 │   ├── 18-bento.html
+│   ├── 18-bento-dark.html
 │   ├── 19-stepper.html
-│   └── 20-quote-hero.html     ← dark
+│   ├── 19-stepper-dark.html
+│   ├── 20-quote-hero.html     ← dark
+│   ├── 21-2-boxes.html        ← custom (provocação "Por esporte" vs "Como profissional")
+│   ├── 21-2-boxes-dark.html
+│   ├── 22-mixed-grid.html     ← custom (matriz + lista + cards)
+│   ├── 22-mixed-grid-dark.html
+│   ├── 23-custom-2col.html    ← custom (headline + corpo)
+│   ├── 23-custom-2col-dark.html
+│   ├── 24-pergunta-cta.html   ← custom (pergunta de transição)
+│   ├── 24-pergunta-cta-dark.html
+│   ├── 25-hero-logo-g4.html    ← custom (capa com logo G4)
+│   └── 25-hero-logo-g4-dark.html
 │
 ├── examples/
 │   ├── index.html             ← passador de slides (grid 2 col + modo apresentação)
@@ -98,6 +126,13 @@ Core-Slides-G4/
 | 18 | Bento mosaic | light | 4-6 blocos com proporções variadas |
 | 19 | Stepper | light | 4-5 etapas sequenciais com output |
 | 20 | Quote hero | dark | Citação grande em dark mode |
+| 21 | 2-boxes | light/dark | 2 cards grandes (provocação "Por esporte vs Como profissional") |
+| 22 | Mixed grid | light/dark | 4 quadrantes com tipos diferentes (matriz + lista + cards) |
+| 23 | Custom 2-col | light/dark | Headline + sub à esquerda, corpo à direita |
+| 24 | Pergunta CTA | light/dark | Eyebrow + h1 + sub + seta (pergunta de transição dark) |
+| 25 | Hero com logo G4 | light/dark | Header com logo G4 + hairline + tag + barra dourada |
+
+**Cada template 01-25 tem versão `-dark.html`** (ex: `01-capa-dark.html`, `02-palestrante-dark.html`). Total: **48 arquivos de template** no repo (40 canônicos light+dark + 10 custom light+dark).
 
 **Detalhes completos de cada template** (snippet, anatomia, quando NÃO usar) estão em `playbook.md` §5.
 

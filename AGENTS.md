@@ -126,9 +126,11 @@ artifacts/
 
 ---
 
-## Lista dos 20 templates (catálogo canônico)
+## Lista dos 30 templates (20 canônicos + 5 custom × light/dark)
 
-| # | Template | Tipo | Modo | Notas |
+### 20 templates canônicos (com variantes light/dark em arquivos separados)
+
+| # | Template | Tipo | Modo default | Notas |
 |---|----------|------|------|-------|
 | 01 | Capa | Abertura | dark | Título hero + faixa vertical accent + logo G4 + hairline "Para quem quer mais" |
 | 02 | Palestrante | Bio + retrato | light | Retrato dark à direita (38%) + bio à esquerda (55%) |
@@ -151,7 +153,19 @@ artifacts/
 | 19 | Stepper | 4 etapas | light | Colunas com hairline vertical entre elas |
 | 20 | Quote hero | Citação grande | **dark** | Navy 700 + overlay + aspa accent |
 
-**Reaproveitamento**: esses 20 templates são o vocabulário visual. O deck `260615-sunny-dolphin` (29 slides Academia de IA) e o deck `260623-misty-lake` (29 slides Gestão e Estratégia) **não correspondem 1:1** aos 20 — eles misturam templates e criam variantes (perguntas dark, bento custom, comparador de produtos, etc).
+**Cada template 01-20 tem versão `-dark.html`** (ex: `01-capa-dark.html`, `02-palestrante-dark.html`, etc) com `class="slide mode-dark"`. Total: **20 templates × 2 modos = 40 arquivos**.
+
+### 5 templates custom (extraídos dos decks reais, com variantes light/dark)
+
+| # | Template | Tipo | Notas |
+|---|----------|------|-------|
+| 21 | 2-boxes | Provocação | 2 cards grandes (ex: "Por esporte" vs "Como profissional") com headline + sub-texto. Baseado no slide 02 do deck Gestão. |
+| 22 | Mixed grid | Comparação complexa | 4 quadrantes com tipos diferentes (cards / bento / matriz 2x2 + lista lateral). Baseado no slide 22 exemplo-marketing. |
+| 23 | Custom 2-col | Headline + corpo | Headline + sub-título à esquerda, corpo + cards à direita. Baseado no slide 11 callback. |
+| 24 | Pergunta CTA | Pergunta de transição | Eyebrow + h1 grande + sub-texto + seta opcional. Baseado no slide 09 pergunta-transicao. |
+| 25 | Hero com logo G4 | Capa alternativa | Header com logo G4 + hairline dourada + tag "Para quem quer mais" + título hero + barra dourada. Baseado no slide 01 capa e slide 24 divisor. |
+
+**Total no repo**: 48 arquivos de template (20 canônicos × 2 + 5 custom × 2 + 1 style.css = 41 + style.css + 08 já é dark nativo = 41 arquivos de template).
 
 ---
 

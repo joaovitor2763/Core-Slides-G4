@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>21 · 2-boxes (light)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* Slide 02 — Pergunta provocativa: "Por esporte" vs "Como profissional" */
+
+  .q-title {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 200px;
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 72px;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .q-title em { font-style: italic; font-weight: 500; color: var(--accent); }
+  .q-title .vs {
+    color: var(--muted);
+    font-weight: 400;
+    font-style: italic;
+    margin: 0 14px;
+  }
+
+  /* DUAS BOXES embaixo */
+  .q-cols {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 480px;
+    bottom: 96px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .q-box {
+    border: 1px solid var(--ink);
+    padding: 56px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    justify-content: center;
+  }
+
+  /* BOX PRO — fundo navy explícito (não preto) */
+  .q-box--pro {
+    background: var(--navy-600);
+    border-color: var(--navy-600);
+  }
+  .q-box--pro .q-tag { color: var(--accent) !important; }
+  .q-box--pro .q-line { background: var(--accent) !important; }
+  .q-box--pro .q-headline { color: var(--paper) !important; }
+
+  .q-box .q-tag {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .q-box .q-line {
+    width: 36px;
+    height: 1px;
+    background: var(--ink);
+  }
+
+  .q-box .q-headline {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .q-box .q-headline em { font-style: italic; font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="A pergunta">
+
+    <h1 class="q-title">
+      De qual forma você usa IA?<br>
+      <em>Por esporte</em> <span class="vs">ou</span> <em>como profissional</em> ?
+    </h1>
+
+    <div class="q-cols">
+
+      <div class="q-box">
+        <div class="q-tag"><span class="q-line"></span> Por esporte</div>
+        <h2 class="q-headline"><em>Brincar</em>, <em>testar</em>, <em>curiosidade</em>.</h2>
+      </div>
+
+      <div class="q-box q-box--pro">
+        <div class="q-tag"><span class="q-line"></span> Como profissional</div>
+        <h2 class="q-headline"><em>Entregar</em> resultado que <em>conta</em>.</h2>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>
