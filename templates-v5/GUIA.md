@@ -196,6 +196,7 @@ Formato: **quando usar · o que editar · nota técnica**.
 | 48 | Planos | Pricing 3 tiers; o do meio gold, elevado, com `.cta` cheio; laterais com pill outline. |
 | 49 | Equipe | 4 mentores (avatar iniciais; fundador com avatar gold) + chip de credencial. |
 | 50 | Prova social | 3 depoimentos com resultado medido em chip--green; central gold. |
+| 51 | Conceito + imagem | Ensinar um conceito em camadas: 3 blocos (kicker mono + body) com o último em destaque (régua 2px + fundo gold-dim) e ilustração vertical 3:4 à direita (placeholder → troque por imagem real, ver comentário no arquivo). |
 
 ## 6. Checklist de QA (rode antes de entregar qualquer slide)
 

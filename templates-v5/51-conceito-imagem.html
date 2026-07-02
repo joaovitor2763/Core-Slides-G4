@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>51 · Conceito + imagem</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Conceito ensinado em camadas + ilustração vertical à direita.
+     Esquerda (96..936, 840px): eyebrow, título serif com em gold e
+     3 blocos de leitura (kicker mono + body), o último em destaque.
+     Direita: card de imagem 3:4 (472×630) em .surface radius 26.
+     Somas: 96+840+64+472 = 1472 ≤ 1504 ✓ · imagem 135+630=765 < 804 ✓ */
+
+  .head{position:absolute;left:96px;top:118px;width:860px}
+  .head .eyebrow{margin-bottom:24px}
+  .head h1{font-size:64px}
+
+  .blocks{position:absolute;left:96px;top:378px;width:840px}
+  .block{padding:26px 0 28px;border-top:1px solid var(--border-2)}
+  .block .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
+  .block .body strong{color:var(--text-1);font-weight:600}
+
+  /* bloco de destaque: painel gold-dim contido, filete gold à esquerda */
+  .block--destaque{border-top:none;margin-top:10px;padding:24px 28px 26px;
+    background:var(--gold-dim);border:1px solid var(--gold-border);
+    border-left:3px solid var(--gold);border-radius:16px}
+  .block--destaque .kicker{color:var(--gold)}
+  .block--destaque .lead{font-family:var(--num);font-weight:600;font-size:19px;
+    color:var(--text-1);margin-bottom:6px}
+
+  /* card de imagem 3:4 — troque o placeholder por foto real (ver comentário) */
+  .figure{position:absolute;left:1032px;top:135px;width:472px;height:630px;
+    overflow:hidden;border-radius:26px;padding:0}
+  .figure .canvas{position:absolute;inset:0;
+    background:radial-gradient(120% 90% at 70% 20%,#0E2A40 0%,var(--navy-700) 58%,#000E1A 100%)}
+  .figure .canvas::before{content:'';position:absolute;inset:0;
+    background:repeating-linear-gradient(45deg,transparent 0 14px,rgba(255,255,255,.035) 14px 15px)}
+  .figure .tag{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:rgba(230,238,243,.45);white-space:nowrap}
+  .figure .cap{position:absolute;left:24px;right:24px;bottom:20px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(230,238,243,.55)}
+  /* Para usar imagem real: dentro de .figure, substitua .canvas + .tag por
+     <img src="assets/minha-ilustracao.png" style="position:absolute;inset:0;
+       width:100%;height:100%;object-fit:cover"> e mantenha .cap se quiser legenda. */
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Conceito">
+
+    <header class="head">
+      <div class="eyebrow">Finalizando · o ponto que todo mundo ignora</div>
+      <h1 class="h-serif">Few-shot learner. Ensine com <em>bons e ruins.</em></h1>
+    </header>
+
+    <div class="blocks">
+      <div class="block">
+        <div class="kicker">Como treinar a IA</div>
+        <p class="body">A maioria escreve o prompt com 3 posts bons e zero contraste. A IA imita os 3 — e ignora o resto do que você faz.</p>
+      </div>
+      <div class="block">
+        <div class="kicker">O que funciona</div>
+        <p class="body"><strong>Prompt base + 10 bons + 10 ruins</strong> + acesso aos exemplos para auto-conferir antes de entregar.</p>
+      </div>
+      <div class="block block--destaque">
+        <div class="kicker">Tribe V2</div>
+        <div class="lead">A cereja do bolo, não o atalho.</div>
+        <p class="body">Simulação de ativação cerebral por frame. Só faz sentido depois de ter volume próprio — quando você já posta todo dia e quer o último 1%. Antes disso, é placebo caro.</p>
+      </div>
+    </div>
+
+    <figure class="figure surface" aria-label="Ilustração">
+      <div class="canvas" aria-hidden="true"></div>
+      <span class="tag">[ Ilustração · 3:4 ]</span>
+      <span class="cap">Ativação neural · gerada para a aula</span>
+    </figure>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>
