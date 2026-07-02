@@ -1,6 +1,24 @@
 # Core Slides G4
 
-> **20 templates HTML canônicos + design system + playbook** pra construir slides de aula no padrão visual G4 (navy + gold + paper, 1600×900, accent único).
+> Biblioteca de slides HTML da G4 Educação (canvas 1600×900, paleta paper + navy + gold), em duas gerações:
+>
+> - **`templates-v5/` — v5 "Órbita" (ATUAL)**: 50 slides na linguagem editorial-orgânica (serif Playfair, superfícies com radius/sombra, chips, gravura da esfera armilar). Comece por **[templates-v5/GUIA.md](templates-v5/GUIA.md)** e navegue com `templates-v5/index.html`.
+> - **`templates/` — v4 (acervo)**: 48 templates no estilo hairline minimalista, mantidos como referência e para decks antigos.
+
+## v5 em 30 segundos
+
+```bash
+open templates-v5/index.html    # grid de preview + modo apresentação
+cp templates-v5/06-grafico-barras.html meu-slide.html   # copie o mais próximo e edite
+```
+
+Regras, tokens, padrões de código e o catálogo slide a slide: [templates-v5/GUIA.md](templates-v5/GUIA.md).
+
+---
+
+## v4 (acervo)
+
+> **48 templates HTML canônicos + design system + playbook** pra construir slides de aula no padrão visual G4 (navy + gold + paper, 1600×900, accent único).
 
 Catálogo base usado nas aulas da **Imersão em IA G4** (projeto `Aulas G4 - IA`) e nos decks de produtos do G4 OS. Foi refinado em **4 sessões** com aprendizados de bugs comuns e publicados em **2 decks de 29 slides** (`G4 Academia de IA` e `G4 Gestão e Estratégia`).
 
@@ -14,7 +32,8 @@ cp templates/05-grafico.html meu-slide.html
 
 # 2. Edita copy + dados + CSS local
 
-# 3. Valida visualmente (abre examples/index.html no navegador, vai no card)
+# 3. Valida visualmente (catálogo completo: python3 -m http.server na raiz
+#    e abre http://localhost:8000/examples/catalog.html — filtro por categoria + light/dark)
 
 # 4. Publica (opcional)
 #   - PDF local: usa a técnica do docs/EXPORT-PDF.md (Chrome headless 1 slide por vez)
@@ -33,76 +52,38 @@ Core-Slides-G4/
 ├── LICENSE                    ← MIT
 ├── .gitignore                 ← ignora .DS_Store, node_modules, etc
 │
-├── templates/                 ← 25 templates canônicos × 2 modos (light + dark) + style.css
-│   ├── style.css              ← design tokens + classes semânticas
-│   ├── 01-capa.html           ← abertura dark
-│   ├── 01-capa-dark.html      ← variante dark
-│   ├── 02-palestrante.html    ← bio + retrato
-│   ├── 02-palestrante-dark.html
-│   ├── 03-quote-com-imagem.html
-│   ├── 03-quote-com-imagem-dark.html
-│   ├── 04-quote-sem-imagem.html
-│   ├── 04-quote-sem-imagem-dark.html
-│   ├── 05-grafico.html
-│   ├── 05-grafico-dark.html
-│   ├── 06-texto-focado.html
-│   ├── 06-texto-focado-dark.html
-│   ├── 07-timeline.html
-│   ├── 07-timeline-dark.html
-│   ├── 08-divisor.html        ← dark
-│   ├── 09-comparacao.html
-│   ├── 09-comparacao-dark.html
-│   ├── 10-stats.html
-│   ├── 10-stats-dark.html
-│   ├── 11-agenda.html
-│   ├── 11-agenda-dark.html
-│   ├── 12-imagem-legenda.html
-│   ├── 12-imagem-legenda-dark.html
-│   ├── 13-lista.html
-│   ├── 13-lista-dark.html
-│   ├── 14-tres-pilares.html
-│   ├── 14-tres-pilares-dark.html
-│   ├── 15-encerramento.html
-│   ├── 15-encerramento-dark.html
-│   ├── 16-grafico-vertical.html
-│   ├── 16-grafico-vertical-dark.html
-│   ├── 17-a-vs-b.html
-│   ├── 17-a-vs-b-dark.html
-│   ├── 18-bento.html
-│   ├── 18-bento-dark.html
-│   ├── 19-stepper.html
-│   ├── 19-stepper-dark.html
-│   ├── 20-quote-hero.html     ← dark
-│   ├── 21-2-boxes.html        ← custom (provocação "Por esporte" vs "Como profissional")
-│   ├── 21-2-boxes-dark.html
-│   ├── 22-mixed-grid.html     ← custom (matriz + lista + cards)
-│   ├── 22-mixed-grid-dark.html
-│   ├── 23-custom-2col.html    ← custom (headline + corpo)
-│   ├── 23-custom-2col-dark.html
-│   ├── 24-pergunta-cta.html   ← custom (pergunta de transição)
-│   ├── 24-pergunta-cta-dark.html
-│   ├── 25-hero-logo-g4.html    ← custom (capa com logo G4)
-│   └── 25-hero-logo-g4-dark.html
+├── build-deck-inlined.py      ← builda um deck HTML único (≤5MB) pra publicar
+│
+├── templates/                 ← 48 templates × 2 modos (light + dark) + style.css = 91 arquivos .html
+│   ├── style.css              ← design tokens + classes semânticas (compartilhado)
+│   ├── 01-capa.html           ← cada template light tem par NN-nome-dark.html,
+│   ├── 01-capa-dark.html         exceto os dark-únicos: 08, 20, 33, 34, 39
+│   ├── ...
+│   ├── 05-grafico.html        ← gráficos: 05, 16, 35 (linha), 36 (donut),
+│   ├── ...                       37 (barras duplas), 38 (progresso), 46 (funil)
+│   ├── 39-imagem-full-overlay.html   ← imagens: 12, 26, 39, 40 (hero lateral), 41 (galeria)
+│   ├── 42-quote-tweet.html    ← quotes: 03, 04, 20, 26, 34, 42, 43 (dupla)
+│   └── 48-numero-hero.html    ← lista completa com descrições: AGENTS.md e playbook.md §5
 │
 ├── examples/
-│   ├── index.html             ← passador de slides (grid 2 col + modo apresentação)
-│   └── deck-inlined.html      ← exemplo de deck pronto pra g4os-pages
+│   ├── index.html             ← passador de slides (grid 2 col + modo apresentação, base do build)
+│   └── catalog.html           ← catálogo navegável dos 48 templates (filtro por categoria + light/dark)
 │
 ├── assets/                    ← logos, padrões, imagens exemplo
 │   ├── logos/                 ← g4-logo-branca.svg
-│   ├── patterns/              ← pattern-shield.png, pattern-symbol.png (low-opacity)
+│   ├── patterns/              ← pattern-shield.png, pattern-symbol.png, overlay-raios.png
 │   └── images/                ← imagens exemplo (Ethan, João, Satya, etc)
 │
 └── docs/                      ← como publicar + exportar + customizar
     ├── EXPORT-PDF.md          ← Chrome headless, 1 slide por vez, sem mesclar
     ├── PUBLISH.md             ← g4os-pages, deck-inlined, ≤5MB
-    ├── CUSTOMIZE.md           ← como criar variantes dos 20 templates
+    ├── CUSTOMIZE.md           ← como criar variantes dos templates
     └── CHANGELOG.md           ← v1 → v2 → v3 (resumo das iterações)
 ```
 
 ---
 
-## Os 20 templates (vocabulário visual)
+## Os 48 templates (vocabulário visual)
 
 | # | Template | Modo | Quando usar |
 |---|----------|------|-------------|
@@ -131,10 +112,33 @@ Core-Slides-G4/
 | 23 | Custom 2-col | light/dark | Headline + sub à esquerda, corpo à direita |
 | 24 | Pergunta CTA | light/dark | Eyebrow + h1 + sub + seta (pergunta de transição dark) |
 | 25 | Hero com logo G4 | light/dark | Header com logo G4 + hairline + tag + barra dourada |
+| 26 | Quote galeria split | light/dark | Citação serif + imagem 50% em moldura "mat de galeria" |
+| 27 | Mentor hero | light/dark | Bio com nome gigante (140px) + retrato 38% |
+| 28 | Transição aceleradores | light/dark | "O que vem a seguir" + fileira de 4 itens numerados |
+| 29 | Bento comparativo | light/dark | Dois mosaicos lado a lado (A vs B) |
+| 30 | Grid de ferramentas | light/dark | 4 colunas descritivas + faixa gold de takeaway |
+| 31 | Narrativa numérica | light/dark | 3 conceitos ensinados com um dado-hero cada |
+| 32 | Bento de métricas | light/dark | Mosaico 3×3 assimétrico com bignums |
+| 33 | Três pilares percentuais | dark | Regra de alocação (ex: 70/20/10) com % gigante |
+| 34 | Encerramento quote | dark | Fechamento com citação serif + CTA entre hairlines |
+| 35 | Gráfico de linha | light/dark | Tendência/evolução no tempo (SVG inline) |
+| 36 | Gráfico donut | light/dark | Composição/share de um todo (conic-gradient) |
+| 37 | Barras duplas | light/dark | 2 séries × 4 categorias (antes vs depois) |
+| 38 | Barras de progresso | light/dark | % de adoção/share por item, 1 linha em accent |
+| 39 | Imagem full + overlay | dark | Foto full-bleed + gradiente + título na base |
+| 40 | Imagem hero lateral | light/dark | Tese + imagem full-bleed 38% com edge-blend |
+| 41 | Galeria duo | light/dark | Duas imagens em moldura mat com legendas |
+| 42 | Quote de post/tweet | light/dark | Post de LinkedIn/X reproduzido + contexto editorial |
+| 43 | Quote dupla | light/dark | Duas visões em contraste com vrule central |
+| 44 | Tabela comparativa | light/dark | Matriz critérios × opções, coluna recomendada em accent |
+| 45 | Checklist | light/dark | O que funciona (+) vs o que evitar (—) |
+| 46 | Funil | light/dark | Conversão em 4 estágios decrescentes |
+| 47 | Exercício em passos | light/dark | Dinâmica com 6 passos + tempo por etapa |
+| 48 | Número hero | light/dark | Um dado gigante como takeaway |
 
-**Cada template 01-25 tem versão `-dark.html`** (ex: `01-capa-dark.html`, `02-palestrante-dark.html`). Total: **48 arquivos de template** no repo (40 canônicos light+dark + 10 custom light+dark).
+**Cada template tem versão `-dark.html`**, exceto os dark-únicos (08, 20, 33, 34, 39 — o modo é o design). Total: **91 arquivos `.html`** no repo.
 
-**Detalhes completos de cada template** (snippet, anatomia, quando NÃO usar) estão em `playbook.md` §5.
+**Detalhes completos de cada template** (snippet, anatomia, quando NÃO usar) estão em `playbook.md` §5 e `AGENTS.md`.
 
 ---
 
@@ -215,8 +219,9 @@ Hierarquia por **italic + weight**, NUNCA por troca de fonte.
 
 - **Regras firmes** (canvas, paleta, tipografia, restrições) → `AGENTS.md`
 - **Prosa, exemplos, fluxo, padrões de bug** → `playbook.md`
-- **20 templates limpos** → `templates/`
+- **48 templates limpos** → `templates/`
 - **style.css compartilhado** → `templates/style.css`
+- **Catálogo navegável** → `examples/catalog.html` (via `python3 -m http.server`)
 - **Passador de exemplo** → `examples/index.html`
 - **Assets base** (logos, padrões, imagens) → `assets/`
 - **Como exportar PDF** → `docs/EXPORT-PDF.md`
@@ -237,6 +242,8 @@ Sessões-chave que produziram este repo:
 | `260615-sunny-dolphin` | 1ª aula (G4 Academia de IA) — 29 slides |
 | `260615-awake-creek` | Técnica de export PDF (Chrome headless 1 slide por vez) |
 | `260623-misty-lake` | 2ª aula (G4 Gestão e Estratégia) + 5 templates novos (16-20) + publicação g4os-pages |
+| deck `founder-ia-conteudo` | Templates 26-34 + padrões de imagem (moldura mat, hero lateral, overlay-raios) |
+| expansão v4 (2026-07) | Templates 35-48 (gráficos linha/donut/duplas/progresso/funil, imagens overlay/hero/galeria, quotes tweet/dupla, tabela, checklist, exercício, número hero) + darks 27-32 + catálogo navegável |
 
 **Projeto**: `Aulas G4 - IA` (id: `project_c1402fb9-6848-4cea-9fef-489da1fbf7fe`)
 

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>48 · Número hero</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 48 — Número hero (um único dado como protagonista).
+     Layout assimétrico: número display 240px (Space Grotesk) na
+     metade esquerda, em var(--fg) com APENAS o sufixo/unidade em
+     var(--accent); à direita, coluna com 2-3 parágrafos curtos
+     de contexto separados por hairlines + fonte do dado em mono.
+     Bom pra takeaways tipo "3,4× ROI médio".
+     Accent: barra do eyebrow + sufixo do número. (2 unidades)
+     ============================================================ */
+
+  .num-block {
+    position: absolute;
+    left: var(--pad);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 760px;
+  }
+  .num-block .eyebrow { margin-bottom: 48px; }
+
+  .num-block .bignum {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 240px;
+    line-height: 0.88;
+    letter-spacing: -0.05em;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+  .num-block .bignum .suffix {
+    color: var(--accent);       /* único accent do slide */
+    font-size: 150px;
+    letter-spacing: -0.02em;
+  }
+
+  .num-block .caption {
+    margin-top: 36px;
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 34px;
+    letter-spacing: -0.015em;
+    color: var(--fg);
+  }
+
+  /* ---- coluna direita de contexto ---- */
+  .context {
+    position: absolute;
+    right: var(--pad);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+  }
+  .context p {
+    font-family: var(--f-text);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--fg-2);
+    padding: 24px 0;
+    border-top: 1px solid var(--hairline);
+    margin: 0;
+  }
+  .context p:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+  .context p strong { font-weight: 600; color: var(--fg); }
+  .context p em { font-style: italic; font-weight: 500; }
+
+  .context .src {
+    padding-top: 20px;
+    border-top: 1px solid var(--hairline);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Takeaway">
+
+    <div class="num-block">
+      <div class="eyebrow">O número que importa</div>
+      <div class="bignum">3,4<span class="suffix">×</span></div>
+      <div class="caption">ROI médio por real investido em IA.</div>
+    </div>
+
+    <div class="context">
+      <p><strong>Não é mediana de unicórnio.</strong> É a média das empresas que saíram do piloto e colocaram IA em pelo menos um processo de rotina.</p>
+      <p>O retorno não vem do modelo — vem do <em>redesenho do processo</em>. Quem só troca a ferramenta fica abaixo de 1×.</p>
+      <p>O prazo médio até o break-even foi de <strong>7 meses</strong>, puxado por back-office e atendimento.</p>
+      <div class="src">Fonte · IDC / Microsoft, 2025 · n = 2.100</div>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

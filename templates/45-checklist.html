@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>45 · Checklist</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Slide 45 — Checklist "Fazer vs Evitar"
+     Duas colunas com header hairline-top: à esquerda o que
+     funciona (marcador "+" mono), à direita o que evitar
+     (marcador "—" mono muted, texto levemente muted).
+     Único accent: barra 28×2px no header da coluna positiva.
+     ============================================================ */
+
+  .header {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 116px;
+  }
+  .header .eyebrow { margin-bottom: 24px; }
+  .header h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--fg);
+    max-width: 1180px;
+  }
+  .header h1 em { font-style: italic; font-weight: 500; }
+
+  .cols {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 330px;
+    bottom: 96px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 96px;
+  }
+
+  .col-head {
+    border-top: 1px solid var(--fg);
+    padding-top: 20px;
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--f-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--fg);
+  }
+  /* único accent do slide: barra estilo eyebrow no header positivo */
+  .col--do .col-head::before {
+    content: "";
+    width: 28px; height: 2px;
+    background: var(--accent);
+  }
+  .col--avoid .col-head { color: var(--fg-muted); border-top-color: var(--hairline); }
+
+  .items { margin-top: 8px; }
+
+  .item {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    column-gap: 16px;
+    align-items: baseline;
+    padding: 21px 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .item:first-child { border-top: none; }
+
+  .item .mk {
+    font-family: var(--f-mono);
+    font-size: 17px;
+    color: var(--fg);
+  }
+  .item .tx {
+    font-family: var(--f-text);
+    font-size: 19px;
+    line-height: 1.45;
+    color: var(--fg);
+  }
+  .item .tx em { font-style: italic; font-weight: 500; }
+
+  /* lado "evitar" — levemente muted */
+  .col--avoid .item .mk { color: var(--fg-muted); }
+  .col--avoid .item .tx { color: var(--fg-muted); }
+  .col--avoid .item .tx em { color: var(--fg-2); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Prática">
+
+    <header class="header">
+      <div class="eyebrow">Checklist de implantação</div>
+      <h1>IA no time comercial: <em>o que separa</em> quem escala de quem desiste.</h1>
+    </header>
+
+    <div class="cols">
+
+      <!-- O QUE FUNCIONA -->
+      <section class="col col--do">
+        <div class="col-head">O que funciona</div>
+        <div class="items">
+          <div class="item"><span class="mk">+</span><span class="tx">Começar por <em>um</em> processo repetitivo e medir o antes/depois.</span></div>
+          <div class="item"><span class="mk">+</span><span class="tx">Nomear um dono da skill — com meta no OKR do trimestre.</span></div>
+          <div class="item"><span class="mk">+</span><span class="tx">Escrever o processo antes de escrever o prompt.</span></div>
+          <div class="item"><span class="mk">+</span><span class="tx">Revisar exceções toda semana e devolver pro sistema.</span></div>
+          <div class="item"><span class="mk">+</span><span class="tx">Publicar o ganho de tempo pra empresa inteira ver.</span></div>
+        </div>
+      </section>
+
+      <!-- O QUE EVITAR -->
+      <section class="col col--avoid">
+        <div class="col-head">O que evitar</div>
+        <div class="items">
+          <div class="item"><span class="mk">&mdash;</span><span class="tx">Lançar 10 pilotos ao mesmo tempo sem dono claro.</span></div>
+          <div class="item"><span class="mk">&mdash;</span><span class="tx">Treinar prompt antes de arrumar o processo.</span></div>
+          <div class="item"><span class="mk">&mdash;</span><span class="tx">Deixar cada vendedor com sua conta e seu jeito.</span></div>
+          <div class="item"><span class="mk">&mdash;</span><span class="tx">Medir sucesso por "uso da ferramenta", não por resultado.</span></div>
+          <div class="item"><span class="mk">&mdash;</span><span class="tx">Esperar a política de IA perfeita pra começar.</span></div>
+        </div>
+      </section>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  // center + scale-to-fit
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

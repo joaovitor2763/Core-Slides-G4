@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>27 · Mentor hero</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 27 — Mentor hero (retrato 38% + nome gigante + bio
+     em blocos). Diferente do 02-palestrante (nome 108px, 1
+     parágrafo corrido): aqui o nome é maior (140px), a bio vem
+     em blocos separados por hairline e termina com um signoff
+     mono. Serve tanto pra apresentar uma pessoa quanto um
+     conceito com "retrato" (ex: ferramenta, produto).
+     Accent: barra do eyebrow + <em> no H1. (2 unidades)
+     ============================================================ */
+
+  .slide { padding: 0; }
+
+  .hero-image {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 38%;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+  .hero-image .placeholder { position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent 0 14px, rgba(255,255,255,0.04) 14px 15px); }
+  .hero-image svg { position: absolute; inset: 0; margin: auto; opacity: 0.25; }
+  .hero-image .label { position: absolute; bottom: 32px; left: 32px; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.2em; color: rgba(255,255,255,0.5); }
+
+  .text {
+    position: absolute;
+    left: var(--pad);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55%;
+  }
+  .text .eyebrow { margin-bottom: 56px; }
+
+  .text h1.h-display {
+    font-family: var(--f-display);
+    font-size: 140px;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+    color: var(--fg);
+  }
+  .text h1.h-display .first { display: block; font-weight: 600; }
+  .text h1.h-display em { display: block; font-style: italic; font-weight: 500; color: var(--accent); }
+
+  .text .name-rule { height: 1px; background: var(--fg); width: 100%; max-width: 720px; margin: 44px 0 32px; }
+
+  .text .bio { font-family: var(--f-text); font-size: 22px; line-height: 1.5; color: var(--fg); max-width: 720px; font-weight: 400; }
+  .text .bio strong { font-weight: 600; color: var(--fg); }
+  .text .bio em { font-style: italic; }
+  .text .bio + .bio { margin-top: 28px; }
+
+  .text .signoff { margin-top: 32px; max-width: 720px; }
+  .text .signoff .hairline { height: 1px; background: var(--hairline); width: 100%; margin-bottom: 18px; }
+  .text .signoff .label-mono { font-family: var(--f-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Quem guia a conversa">
+
+    <aside class="hero-image">
+      <div class="placeholder"></div>
+      <svg viewBox="0 0 200 200" width="220" height="220">
+        <circle cx="100" cy="70" r="34" fill="white"/>
+        <path d="M30 200 C 30 140, 170 140, 170 200 Z" fill="white"/>
+      </svg>
+      <div class="label">[ RETRATO · 1080×1920 ]</div>
+    </aside>
+
+    <section class="text">
+      <div class="eyebrow">Mentor</div>
+
+      <h1 class="h-display">
+        <span class="first">Nome</span>
+        <em>Sobrenome</em>
+      </h1>
+
+      <div class="name-rule"></div>
+
+      <p class="bio"><strong>Cargo, função na empresa.</strong> Uma linha curta de credencial forte — prêmio, título ou marco reconhecível.</p>
+
+      <p class="bio">Especialista em <strong>área principal</strong> e <strong>segunda área.</strong> Uma frase complementar de posicionamento.</p>
+
+      <div class="signoff">
+        <div class="hairline"></div>
+        <span class="label-mono">Cidade · Empresa · Ano</span>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

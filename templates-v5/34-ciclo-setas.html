@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>34 · Ciclo de setas</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Ciclo de 4 arcos perseguindo-se (sentido horário): anel Ø460 em SVG,
+     stroke 34, cada arco ~70° com gap de 30° onde vive a ponta de seta.
+     Centro com claim em 3 linhas. Callouts nas diagonais conectados por
+     linha fina + dots (padrão do 23-ciclo).
+
+     Geometria do anel: centro (800,462) · raio do traço r = (460−34)/2 = 213
+     Raio externo 213+17 = 230 → anel ocupa x 570–1030 · y 232–692 < 804 ✓
+     Ponto no círculo (φ horário a partir das 12h):
+       x = 800 + 213·sin φ · y = 462 − 213·cos φ
+       φ= 10° (837,252) · φ= 80° (1010,425)
+       φ=100° (1010,499) · φ=170° (837,672)
+       φ=190° (763,672) · φ=260° (590,499)
+       φ=280° (590,425) · φ=350° (763,252)
+     Arcos (sweep=1, large-arc=0): 10→80 · 100→170 · 190→260 · 280→350
+     Seta no FIM de cada arco: triângulo translate(fim) rotate(φ_fim)
+     (tangente horária em φ = direção (cos φ, sin φ) → rotate(φ)).
+
+     Âncoras dos conectores no raio externo r230 (dentro de cada arco):
+       φ= 45° (963,299) · φ=135° (963,625) · φ=225° (637,625) · φ=315° (637,299) */
+
+  .arcs{position:absolute;inset:0;pointer-events:none}
+  .arcs path{fill:none;stroke-width:34}
+  .a1{stroke:var(--gold)}
+  .a2{stroke:rgba(230,238,243,.25)}
+  .a3{stroke:var(--gold-300)}
+  .a4{stroke:rgba(230,238,243,.4)}
+  .h1{fill:var(--gold)}
+  .h2{fill:rgba(230,238,243,.25)}
+  .h3{fill:var(--gold-300)}
+  .h4{fill:rgba(230,238,243,.4)}
+
+  .core{position:absolute;left:650px;top:362px;width:300px;height:200px;
+    display:grid;place-items:center;text-align:center}
+  .core .claim{font-family:var(--num);font-weight:600;font-size:24px;
+    line-height:1.3;letter-spacing:-.01em;color:var(--text-1)}
+  .core .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--text-3);margin-top:12px}
+
+  /* conectores callout → arco: linha fina + dot nas duas pontas */
+  .links{position:absolute;inset:0;pointer-events:none}
+  .links line{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .links .dot-ring{fill:var(--text-3)}
+  .links .dot-co{fill:var(--text-3);opacity:.7}
+
+  .co{position:absolute;width:300px}
+  .co .idx{font-family:var(--mono);font-size:12px;font-weight:500;
+    letter-spacing:.16em;color:var(--text-3);display:block;margin-bottom:8px}
+  .co h3{font-family:var(--num);font-weight:600;font-size:20px;
+    letter-spacing:-.01em;color:var(--text-1);margin-bottom:6px}
+  .co--r{text-align:right}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Execução">
+
+    <svg class="arcs" viewBox="0 0 1600 900" aria-hidden="true">
+      <!-- arco 01 · 10°→80° · gold -->
+      <path class="a1" d="M 837 252 A 213 213 0 0 1 1010 425"/>
+      <polygon class="h1" points="-4,-27 44,0 -4,27" transform="translate(1010,425) rotate(80)"/>
+      <!-- arco 02 · 100°→170° · ice .25 -->
+      <path class="a2" d="M 1010 499 A 213 213 0 0 1 837 672"/>
+      <polygon class="h2" points="-4,-27 44,0 -4,27" transform="translate(837,672) rotate(170)"/>
+      <!-- arco 03 · 190°→260° · gold-300 -->
+      <path class="a3" d="M 763 672 A 213 213 0 0 1 590 499"/>
+      <polygon class="h3" points="-4,-27 44,0 -4,27" transform="translate(590,499) rotate(260)"/>
+      <!-- arco 04 · 280°→350° · ice .4 -->
+      <path class="a4" d="M 590 425 A 213 213 0 0 1 763 252"/>
+      <polygon class="h4" points="-4,-27 44,0 -4,27" transform="translate(763,252) rotate(350)"/>
+    </svg>
+
+    <div class="core">
+      <div>
+        <div class="claim">Comece<br>a rodar IA<br>na operação</div>
+        <div class="sub">Uma volta por sprint</div>
+      </div>
+    </div>
+
+    <!-- conectores: âncoras no raio externo r230 · dots r5 (arco) e r3 (callout) -->
+    <svg class="links" viewBox="0 0 1600 900" aria-hidden="true">
+      <line x1="1188" y1="200" x2="963" y2="299"/>
+      <circle class="dot-co"   cx="1188" cy="200" r="3"/>
+      <circle class="dot-ring" cx="963"  cy="299" r="5"/>
+
+      <line x1="1188" y1="724" x2="963" y2="625"/>
+      <circle class="dot-co"   cx="1188" cy="724" r="3"/>
+      <circle class="dot-ring" cx="963"  cy="625" r="5"/>
+
+      <line x1="412" y1="724" x2="637" y2="625"/>
+      <circle class="dot-co"   cx="412" cy="724" r="3"/>
+      <circle class="dot-ring" cx="637" cy="625" r="5"/>
+
+      <line x1="412" y1="200" x2="637" y2="299"/>
+      <circle class="dot-co"   cx="412" cy="200" r="3"/>
+      <circle class="dot-ring" cx="637" cy="299" r="5"/>
+    </svg>
+
+    <!-- 01 · topo-direita (arco gold) -->
+    <div class="co" style="left:1204px;top:118px">
+      <span class="idx">01</span>
+      <h3>Escolha a dor</h3>
+      <p class="small">Um processo que consome horas do time toda semana — não o mais glamoroso.</p>
+    </div>
+
+    <!-- 02 · baixo-direita -->
+    <div class="co" style="left:1204px;top:664px">
+      <span class="idx">02</span>
+      <h3>Monte o fluxo</h3>
+      <p class="small">Prompt, contexto e exemplos reais viram uma skill com dono nomeado.</p>
+    </div>
+
+    <!-- 03 · baixo-esquerda -->
+    <div class="co co--r" style="left:96px;top:664px">
+      <span class="idx">03</span>
+      <h3>Rode com gate</h3>
+      <p class="small">Nada toca o cliente sem um humano aprovar a saída do lote.</p>
+    </div>
+
+    <!-- 04 · topo-esquerda -->
+    <div class="co co--r" style="left:96px;top:118px">
+      <span class="idx">04</span>
+      <h3>Meça e refine</h3>
+      <p class="small">Horas poupadas e taxa de erro alimentam a próxima volta do ciclo.</p>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

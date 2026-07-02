@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>35 · Gráfico de linha (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Slide 35 — gráfico de linha / tendência + coluna de insight
+     Título + lede no topo esquerdo; chart SVG ocupa ~65% da
+     largura; coluna editorial à direita (padrão do template 16).
+     Série base em var(--fg); ÚNICO accent = último segmento +
+     ponto final da linha (a tendência que importa).
+     ============================================================ */
+
+  /* ---------- header ---------- */
+  .head {
+    position: absolute;
+    left: var(--pad);
+    top: 120px;
+    width: 900px;
+  }
+  .head h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    color: var(--fg);
+    margin-top: 22px;
+  }
+  .head h1 em { font-style: italic; font-weight: 500; }
+  .head .lede {
+    margin-top: 20px;
+    font-size: 20px;
+    line-height: 1.45;
+    color: var(--fg-2);
+    max-width: 760px;
+  }
+
+  /* ---------- chart (esquerda, ~65%) ---------- */
+  .chart {
+    position: absolute;
+    left: var(--pad);
+    top: 396px;
+    width: 900px;
+    height: 384px;
+  }
+  .chart svg { display: block; width: 900px; height: 384px; }
+
+  .gl        { stroke: var(--hairline); stroke-width: 1; stroke-dasharray: 4 5; }
+  .baseline  { stroke: var(--fg); stroke-width: 1; }
+  .serie     { stroke: var(--fg); stroke-width: 2.5; fill: none;
+               stroke-linejoin: round; stroke-linecap: round; }
+  .serie--accent { stroke: var(--accent); }
+  .dot       { fill: var(--bg); stroke: var(--fg); stroke-width: 2; }
+  .dot--accent { fill: var(--accent); stroke: var(--accent); }
+  .area stop.a0 { stop-color: var(--fg); stop-opacity: 0.07; }
+  .area stop.a1 { stop-color: var(--fg); stop-opacity: 0; }
+
+  .tick-y {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    fill: var(--fg-muted);
+  }
+  .tick-x {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    fill: var(--fg-muted);
+    text-anchor: middle;
+  }
+  .vlabel {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    fill: var(--fg);
+  }
+  .vlabel--accent { fill: var(--accent); font-size: 30px; }
+
+  /* ---------- divisor vertical ---------- */
+  .divider {
+    position: absolute;
+    left: 1052px;
+    top: 396px;
+    bottom: 120px;
+    width: 1px;
+    background: var(--hairline);
+  }
+
+  /* ---------- coluna de insight (direita) ---------- */
+  .col-note {
+    position: absolute;
+    left: 1108px;
+    right: var(--pad);
+    top: 396px;
+  }
+  .col-note .kicker {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 28px;
+  }
+  .col-note h2 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+  }
+  .col-note h2 em { font-style: italic; font-weight: 500; }
+  .col-note p {
+    font-family: var(--f-text);
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--fg-2);
+    margin-top: 24px;
+  }
+  .col-note .pull {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--hairline);
+    font-family: var(--f-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    color: var(--fg);
+  }
+
+  /* ---------- fonte ---------- */
+  .source {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 56px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Tendência">
+
+    <!-- header: eyebrow + título + lede -->
+    <div class="head">
+      <div class="eyebrow">Curva de adoção</div>
+      <h1>Uso semanal de IA <em>dobrou</em> em três trimestres.</h1>
+      <div class="lede">Percentual de gestores da base G4 que usam IA em fluxo real de trabalho, pelo menos uma vez por semana.</div>
+    </div>
+
+    <!-- chart SVG · viewBox 900×384 · plot: x 40→880 (passo 168), baseline y=320
+         escala Y: 100% = 300px → y = 320 − valor×3
+         Q1/24: 12% → y=284 · Q2/24: 19% → y=263 · Q3/24: 27% → y=239
+         Q4/24: 38% → y=206 · Q1/25: 52% → y=164 · Q2/25: 68% → y=116 -->
+    <div class="chart">
+      <svg viewBox="0 0 900 384" aria-label="Linha de adoção de IA por trimestre">
+        <defs>
+          <linearGradient id="fade" class="area" x1="0" y1="0" x2="0" y2="1">
+            <stop class="a0" offset="0" />
+            <stop class="a1" offset="1" />
+          </linearGradient>
+        </defs>
+
+        <!-- gridlines (25 / 50 / 75%) -->
+        <line class="gl" x1="40" y1="245" x2="880" y2="245" />
+        <line class="gl" x1="40" y1="170" x2="880" y2="170" />
+        <line class="gl" x1="40" y1="95"  x2="880" y2="95" />
+        <text class="tick-y" x="0" y="324">0</text>
+        <text class="tick-y" x="0" y="249">25</text>
+        <text class="tick-y" x="0" y="174">50</text>
+        <text class="tick-y" x="0" y="99">75</text>
+
+        <!-- área sob a linha (gradiente sutil) -->
+        <polygon fill="url(#fade)" points="40,284 208,263 376,239 544,206 712,164 880,116 880,320 40,320" />
+
+        <!-- série base (Q1/24 → Q1/25) -->
+        <polyline class="serie" points="40,284 208,263 376,239 544,206 712,164" />
+        <!-- segmento de destaque (Q1/25 → Q2/25) — único accent do slide -->
+        <polyline class="serie serie--accent" points="712,164 880,116" />
+
+        <!-- baseline -->
+        <line class="baseline" x1="40" y1="320" x2="880" y2="320" />
+
+        <!-- dots -->
+        <circle class="dot" cx="40"  cy="284" r="5" />
+        <circle class="dot" cx="208" cy="263" r="5" />
+        <circle class="dot" cx="376" cy="239" r="5" />
+        <circle class="dot" cx="544" cy="206" r="5" />
+        <circle class="dot" cx="712" cy="164" r="5" />
+        <circle class="dot dot--accent" cx="880" cy="116" r="6" />
+
+        <!-- valores nas pontas -->
+        <text class="vlabel" x="28" y="262">12%</text>
+        <text class="vlabel vlabel--accent" x="810" y="94">68%</text>
+
+        <!-- eixo X (trimestres) -->
+        <text class="tick-x" x="40"  y="352">Q1/24</text>
+        <text class="tick-x" x="208" y="352">Q2/24</text>
+        <text class="tick-x" x="376" y="352">Q3/24</text>
+        <text class="tick-x" x="544" y="352">Q4/24</text>
+        <text class="tick-x" x="712" y="352">Q1/25</text>
+        <text class="tick-x" x="866" y="352">Q2/25</text>
+      </svg>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- coluna de insight -->
+    <div class="col-note">
+      <div class="kicker">Insight</div>
+      <h2>A inflexão veio com <em>skills prontas</em>.</h2>
+      <p>O salto de 38% para 68% coincide com a publicação das primeiras skills compartilhadas no G4 OS — o gestor não aprendeu a ferramenta, só passou a usá-la.</p>
+      <div class="pull">Distribuir fluxos prontos acelera mais que ensinar prompts.</div>
+    </div>
+
+    <div class="source">
+      <span>Fonte: G4 OS · painel de uso agregado</span>
+      <span>n = 1.240 gestores · 2024–2025</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>36 · Árvore</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Árvore / Balanced Scorecard: nó raiz em pill no topo-centro,
+     trave horizontal + 5 pernas em linhas finas (SVG, cantos exatos),
+     5 cards filhos com "ícone" tipográfico serif (sem emoji).
+     Título compacto no topo esquerdo; a árvore ocupa o centro.
+
+     Geometria:
+       cards: 5 × 240px + 4 × 52px gap = 1200 + 208 = 1408 = 1600 − 2·96 ✓
+       x dos cards: 96 · 388 · 680 · 972 · 1264 → centros 216 · 508 · 800 · 1092 · 1384
+       raiz: pill h62 centrada em x=800, top 262 → base y=324
+       árvore: tronco (800,324)→(800,430) · trave y=430 de x216 a x1384 ·
+       pernas y 430→500 nos 5 centros · cards top 500, h 216 → base 716 < 804 ✓
+       Cantos da trave = extremos das pernas 216 e 1384 (path único, sem folga). */
+
+  .head{position:absolute;left:var(--pad);top:84px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:42px}
+
+  .root{position:absolute;left:800px;top:262px;transform:translateX(-50%);
+    height:62px;display:inline-flex;align-items:center;gap:14px;
+    padding:0 34px;border-radius:var(--r-pill);white-space:nowrap}
+  .root .name{font-family:var(--num);font-weight:600;font-size:22px;
+    letter-spacing:-.01em;color:var(--text-1)}
+  .root .dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+
+  .tree{position:absolute;inset:0;pointer-events:none}
+  .tree path{fill:none;stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+
+  .kid{position:absolute;top:500px;width:240px;height:216px;
+    padding:26px 24px;display:flex;flex-direction:column;text-align:center;align-items:center}
+  .kid .glyph{font-family:var(--serif);font-weight:500;font-size:40px;
+    line-height:1;color:var(--text-2);height:48px;display:flex;align-items:center}
+  .kid .glyph--amp{font-style:italic}
+  .kid h3{font-family:var(--num);font-weight:600;font-size:17px;
+    letter-spacing:-.01em;color:var(--text-1);margin:14px 0 8px}
+  .kid .small{font-size:13px}
+  .kid--gold .glyph{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Gestão">
+
+    <header class="head">
+      <div class="eyebrow">Governança · G4 OS</div>
+      <h1 class="h-serif">A estratégia <em>desce ao chão.</em></h1>
+    </header>
+
+    <div class="root surface">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="name">G4 OS · Balanced Scorecard</span>
+    </div>
+
+    <!-- tronco 800,324→430 · trave y430 x216→1384 · pernas →500
+         path único: os cantos 216/1384 são o mesmo ponto da trave e da perna -->
+    <svg class="tree" viewBox="0 0 1600 900" aria-hidden="true">
+      <path d="M 800 324 L 800 430"/>
+      <path d="M 216 500 L 216 430 L 1384 430 L 1384 500"/>
+      <path d="M 508 430 L 508 500"/>
+      <path d="M 800 430 L 800 500"/>
+      <path d="M 1092 430 L 1092 500"/>
+    </svg>
+
+    <div class="kid surface surface--flat" style="left:96px">
+      <span class="glyph" aria-hidden="true">R$</span>
+      <h3>Financeiro</h3>
+      <p class="small">Margem por fluxo automatizado, não só receita.</p>
+    </div>
+
+    <div class="kid surface surface--flat" style="left:388px">
+      <span class="glyph" aria-hidden="true">◔</span>
+      <h3>Clientes</h3>
+      <p class="small">NPS e tempo de resposta medidos por semana.</p>
+    </div>
+
+    <div class="kid surface surface--gold kid--gold" style="left:680px">
+      <span class="glyph" aria-hidden="true">✦</span>
+      <h3>IA na operação</h3>
+      <p class="small">Skills rodando em produção, com gate humano.</p>
+    </div>
+
+    <div class="kid surface surface--flat" style="left:972px">
+      <span class="glyph" aria-hidden="true">⬒</span>
+      <h3>Processos</h3>
+      <p class="small">Ciclos padronizados, retrabalho caindo por lote.</p>
+    </div>
+
+    <div class="kid surface surface--flat" style="left:1264px">
+      <span class="glyph glyph--amp" aria-hidden="true">&amp;</span>
+      <h3>Pessoas</h3>
+      <p class="small">Time treinado para operar — não só assistir.</p>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

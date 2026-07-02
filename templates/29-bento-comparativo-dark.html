@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>29 · Bento comparativo (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 29 — Bento comparativo (2 grupos lado a lado).
+     Diferente do 18-bento (1 mosaico só): aqui são DOIS bentos
+     internos (1 hero + 2 células menores cada) comparando "lado
+     A" vs "lado B" — ex: "onde não resolve" vs "onde resolve",
+     "antes" vs "depois", "time A" vs "time B".
+     Accent: barra do eyebrow + <em> no H1 + <em> no hero do
+     grupo direito. (3 unidades — aceito porque o <em> do hero
+     direito é a exceção documentada pra hero headlines.)
+     ============================================================ */
+
+  .slide { padding: 0; }
+
+  .head { position: absolute; left: var(--pad); top: 96px; right: var(--pad); }
+  .head .eyebrow { margin-bottom: 22px; }
+  .head h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 54px;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--fg);
+    max-width: 1180px;
+  }
+  .head h1 em { font-style: italic; font-weight: 500; color: var(--accent); }
+
+  .bento-groups {
+    position: absolute;
+    left: var(--pad); right: var(--pad);
+    top: 300px; bottom: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  .group-label { font-family: var(--f-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 18px; line-height: 1; }
+  .group-label.muted-label { color: var(--fg-muted); }
+  .group-label.accent-label { color: var(--accent); }
+
+  .bento { display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: 1.15fr 1fr; gap: 1px; background: var(--hairline); border: 1px solid var(--fg); height: calc(100% - 32px); }
+
+  .cell { background: var(--bg); padding: 28px 30px; display: flex; flex-direction: column; overflow: hidden; }
+  .kicker { font-family: var(--f-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-muted); line-height: 1; margin-bottom: 18px; }
+
+  .cell-hero { grid-column: 1; grid-row: 1 / span 2; justify-content: space-between; }
+  .cell-hero .hero-headline { font-family: var(--f-display); font-weight: 600; font-size: 40px; line-height: 1.06; letter-spacing: -0.02em; color: var(--fg); margin: 0; }
+  .cell-hero .hero-headline em { font-style: italic; font-weight: 500; color: var(--fg); }
+  .bento-right .cell-hero .hero-headline em { color: var(--accent); }
+
+  .cell-sm { padding: 24px 28px; justify-content: space-between; }
+  .cell-sm.sm-top { grid-column: 2; grid-row: 1; }
+  .cell-sm.sm-bot { grid-column: 2; grid-row: 2; }
+  .cell-sm .sm-headline { font-family: var(--f-display); font-weight: 600; font-size: 24px; line-height: 1.08; letter-spacing: -0.015em; color: var(--fg); margin: 0 0 12px; }
+  .cell-sm .sm-sub { font-family: var(--f-text); font-size: 15px; line-height: 1.4; color: var(--fg-muted); margin: 0; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Comparação">
+
+    <div class="head">
+      <div class="eyebrow">Lado A · Lado B</div>
+      <h1>Não faz tudo. <em>Faz quatro coisas</em> muito bem.</h1>
+    </div>
+
+    <div class="bento-groups">
+
+      <div class="bento-group bento-left">
+        <div class="group-label muted-label">LADO A</div>
+        <div class="bento">
+          <div class="cell cell-hero">
+            <div class="kicker">01 · FUNDAMENTAL</div>
+            <div class="hero-headline">Headline hero <em>do lado A</em>.</div>
+            <div></div>
+          </div>
+          <div class="cell cell-sm sm-top">
+            <div class="kicker">02 · ITEM</div>
+            <div class="sm-headline">Item secundário</div>
+            <div class="sm-sub">Descrição curta do item secundário.</div>
+          </div>
+          <div class="cell cell-sm sm-bot">
+            <div class="kicker">03 · ITEM</div>
+            <div class="sm-headline">Outro item</div>
+            <div class="sm-sub">Descrição curta do outro item.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-group bento-right">
+        <div class="group-label accent-label">LADO B</div>
+        <div class="bento">
+          <div class="cell cell-hero">
+            <div class="kicker">01 · MAIOR ALAVANCA</div>
+            <div class="hero-headline">Headline hero <em>do lado B</em>.</div>
+            <div></div>
+          </div>
+          <div class="cell cell-sm sm-top">
+            <div class="kicker">02 · ITEM</div>
+            <div class="sm-headline">Item secundário</div>
+            <div class="sm-sub">Descrição curta do item secundário.</div>
+          </div>
+          <div class="cell cell-sm sm-bot">
+            <div class="kicker">03 · ITEM</div>
+            <div class="sm-headline">Outro item</div>
+            <div class="sm-sub">Descrição curta do outro item.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

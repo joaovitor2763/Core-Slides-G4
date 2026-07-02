@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>32 · Bento de métricas (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 32 — Bento 3×3 assimétrico com números grandes.
+     Diferente do 22-mixed-grid (matriz 2×2 + painel lateral):
+     aqui são 6 células de tamanhos variados numa grade 3×3,
+     cada uma com kicker + headline + sub + 1 número grande
+     (bignum). Bom pra "o que você leva" / breakdown 70-20-10 /
+     entregáveis de um exercício.
+     Accent: barra do eyebrow + <em> no H1 + 1 bignum em gold
+     (a célula-âncora, ex: célula 01). As demais bignums ficam em
+     ink — hierarquia por tipografia, não por cor.
+     ============================================================ */
+
+  .slide { padding: 0; }
+
+  .head { position: absolute; left: var(--pad); top: 96px; right: var(--pad); }
+  .head .eyebrow { margin-bottom: 22px; }
+  .head h1 { font-family: var(--f-display); font-weight: 600; font-size: 52px; line-height: 1.02; letter-spacing: -0.025em; color: var(--fg); max-width: 1180px; }
+  .head h1 em { font-style: italic; font-weight: 500; color: var(--accent); }
+
+  .bento {
+    position: absolute; left: var(--pad); right: var(--pad); top: 292px; bottom: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    grid-template-rows: 1fr 1fr 0.8fr;
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--fg);
+  }
+  .cell { background: var(--bg); padding: 28px 32px; display: flex; flex-direction: column; overflow: hidden; }
+  .kicker { font-family: var(--f-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-muted); line-height: 1; margin-bottom: 18px; }
+  .kicker .num { color: var(--fg); }
+  .headline { font-family: var(--f-display); font-weight: 600; font-size: 26px; line-height: 1.08; letter-spacing: -0.02em; color: var(--fg); margin: 0 0 12px; }
+  .sub { font-family: var(--f-text); font-size: 15px; line-height: 1.45; color: var(--fg-muted); margin: 0; }
+
+  .c-a { grid-column: 1 / span 2; grid-row: 1; justify-content: space-between; }
+  .c-a .top { display: flex; align-items: flex-start; justify-content: space-between; }
+  .c-a .bignum { font-family: var(--f-display); font-weight: 600; font-size: 88px; line-height: 0.85; letter-spacing: -0.04em; color: var(--accent); }
+  .c-a .headline { font-size: 34px; max-width: 720px; }
+
+  .c-b { grid-column: 3; grid-row: 1 / span 2; justify-content: space-between; }
+  .c-b .headline { font-size: 28px; max-width: 340px; }
+  .c-b .stack { margin-top: auto; }
+  .c-b .bignum { font-family: var(--f-display); font-weight: 600; font-size: 88px; line-height: 0.85; letter-spacing: -0.04em; color: var(--fg); white-space: nowrap; }
+
+  .c-c { grid-column: 1 / span 2; grid-row: 2; justify-content: space-between; flex-direction: row; align-items: flex-end; gap: 56px; padding: 30px 38px; }
+  .c-c .left { display: flex; flex-direction: column; flex: 1; }
+  .c-c .headline { font-size: 32px; max-width: 680px; }
+  .c-c .v { font-family: var(--f-display); font-weight: 600; font-size: 80px; line-height: 0.9; letter-spacing: -0.04em; color: var(--fg); white-space: nowrap; }
+
+  .c-sm { justify-content: space-between; flex-direction: row; align-items: flex-end; gap: 18px; padding: 26px 30px; grid-row: 3; }
+  .c-sm .body { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .c-sm .headline { font-size: 22px; margin-bottom: 10px; }
+  .c-sm .sub { font-size: 13px; line-height: 1.4; }
+  .c-sm .bignum { font-family: var(--f-display); font-weight: 600; font-size: 64px; line-height: 0.82; letter-spacing: -0.04em; color: var(--fg); white-space: nowrap; }
+  .c-d { grid-column: 1; }
+  .c-e { grid-column: 2; }
+  .c-f { grid-column: 3; padding: 26px 32px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Entregáveis">
+
+    <div class="head">
+      <div class="eyebrow">O que você leva</div>
+      <h1>Título do resumo. Como rodar na <em>rotina</em>?</h1>
+    </div>
+
+    <div class="bento">
+
+      <div class="cell c-a">
+        <div class="kicker"><span class="num">01</span> · CATEGORIA A</div>
+        <div class="top">
+          <div>
+            <div class="headline">Headline curta da célula principal</div>
+            <div class="sub">Descrição breve do que essa célula representa.</div>
+          </div>
+          <div class="bignum">01</div>
+        </div>
+      </div>
+
+      <div class="cell c-b">
+        <div>
+          <div class="kicker"><span class="num">02</span> · CATEGORIA B</div>
+          <div class="headline">Headline curta da célula alta</div>
+          <div class="sub">Descrição breve do que essa célula representa.</div>
+        </div>
+        <div class="stack"><div class="bignum">3–5×</div></div>
+      </div>
+
+      <div class="cell c-c">
+        <div class="left">
+          <div class="kicker"><span class="num">03</span> · CATEGORIA C</div>
+          <div class="headline">Headline curta da célula larga</div>
+          <div class="sub">Descrição breve do que essa célula representa.</div>
+        </div>
+        <div class="v">10×</div>
+      </div>
+
+      <div class="cell c-sm c-d">
+        <div class="body">
+          <div class="kicker"><span class="num">04</span> · FATIA 1</div>
+          <div class="headline">Rótulo curto</div>
+          <div class="sub">Descrição breve.</div>
+        </div>
+        <div class="bignum">70%</div>
+      </div>
+
+      <div class="cell c-sm c-e">
+        <div class="body">
+          <div class="kicker"><span class="num">05</span> · FATIA 2</div>
+          <div class="headline">Rótulo curto</div>
+          <div class="sub">Descrição breve.</div>
+        </div>
+        <div class="bignum">20%</div>
+      </div>
+
+      <div class="cell c-sm c-f">
+        <div class="body">
+          <div class="kicker"><span class="num">06</span> · FATIA 3</div>
+          <div class="headline">Rótulo curto</div>
+          <div class="sub">Descrição breve.</div>
+        </div>
+        <div class="bignum">10%</div>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

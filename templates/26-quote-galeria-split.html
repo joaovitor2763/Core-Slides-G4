@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>26 · Quote galeria split</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 26 — Quote com moldura de galeria (split 50/50)
+     Diferente do 03 (retrato pequeno + citação ao lado): aqui a
+     imagem é uma moldura tipo "mat de galeria" ocupando 50% do
+     canvas, com keyline dourada fina. Citação em serif grande
+     ocupa a outra metade. Baseado no deck founder-ia-conteudo.
+     Accent: barra do eyebrow + <em> na citação (2 unidades).
+     ============================================================ */
+
+  .split-stage {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+
+  /* ---- coluna esquerda: imagem com moldura "mat de galeria" ---- */
+  .split-image {
+    position: relative;
+    padding: 96px 16px 96px 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .split-image .frame {
+    position: relative;
+    width: 520px;
+    max-width: 100%;
+    aspect-ratio: 3 / 4;
+    padding: 22px;
+    background: linear-gradient(158deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(245, 244, 243, 0.9) 50%,
+      rgba(216, 214, 207, 0.85) 100%);
+    border: 1px solid rgba(15, 20, 25, 0.09);
+    border-radius: 22px;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      inset 0 0 0 1px rgba(15, 20, 25, 0.04),
+      0 34px 80px -28px rgba(15, 20, 25, 0.4),
+      0 10px 26px -16px rgba(15, 20, 25, 0.22);
+  }
+  .split-image .img-clip {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    /* keyline dourada fina emoldurando a imagem */
+    box-shadow:
+      0 0 0 1px rgba(185, 145, 91, 0.5),
+      0 2px 12px -4px rgba(15, 20, 25, 0.25);
+  }
+  .split-image .img-clip svg { opacity: 0.28; }
+  .split-image .img-clip .cap {
+    position: absolute;
+    bottom: 34px;
+    left: 34px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* ---- coluna direita: texto ---- */
+  .split-text {
+    position: relative;
+    padding: 96px 96px 96px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .split-text .eyebrow { margin-bottom: 36px; }
+
+  .split-quote {
+    font-family: 'Cormorant Garamond', 'Garamond', serif;
+    font-weight: 500;
+    font-size: 60px;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    max-width: 680px;
+  }
+  .split-quote em { color: var(--accent); font-style: italic; font-weight: 500; }
+
+  .split-attr {
+    margin-top: 36px;
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Provocação">
+
+    <div class="split-stage">
+
+      <div class="split-image">
+        <div class="frame">
+          <div class="img-clip">
+            <svg viewBox="0 0 100 100" width="140" height="140">
+              <rect x="20" y="20" width="60" height="60" fill="none" stroke="white" stroke-width="2"/>
+              <line x1="20" y1="20" x2="80" y2="80" stroke="white" stroke-width="2"/>
+            </svg>
+            <div class="cap">[ IMAGEM · 3:4 ]</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-text">
+        <div class="eyebrow">Princípio</div>
+        <div class="split-quote">
+          Redes sociais são <em>psicologia</em>.<br>
+          Psicologia é <em>padrão</em>.
+        </div>
+        <div class="split-attr">— Autor da frase</div>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

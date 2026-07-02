@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>28 · Transição com aceleradores (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 28 — Transição com rail + 4 aceleradores.
+     Diferente do 06-texto-focado (2 colunas simples): aqui a
+     coluna esquerda é um rail estreito (eyebrow + label-sub) e
+     a direita tem H1 + body + uma fileira de 4 itens numerados
+     com hairline no topo — bom pra "o que vem a seguir" ou
+     "essas 4 coisas mudam o jogo".
+     Accent: barra do eyebrow + <em> no H1. (2 unidades)
+     ============================================================ */
+
+  .wrap { position: absolute; left: var(--pad); right: var(--pad); top: 50%; transform: translateY(-50%); }
+  .grid { display: grid; grid-template-columns: 280px 1fr; gap: 80px; align-items: start; }
+
+  .left .label-sub {
+    margin-top: 20px;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    line-height: 1.4;
+  }
+
+  .h1-block {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 88px;
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+    max-width: 1000px;
+  }
+  .h1-block em { font-style: italic; font-weight: 500; color: var(--accent); }
+
+  .body-block {
+    font-family: var(--f-text);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.55;
+    max-width: 780px;
+    margin-top: 48px;
+    color: var(--fg-2);
+  }
+  .body-block em { font-style: italic; font-weight: 500; color: var(--accent); }
+
+  .accel {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    border-top: 1px solid var(--hairline);
+    padding-top: 26px;
+    max-width: 980px;
+  }
+  .accel .item .n { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.2em; color: var(--accent); }
+  .accel .item .t { margin-top: 12px; font-family: var(--f-display); font-weight: 600; font-size: 24px; letter-spacing: -0.01em; color: var(--fg); }
+  .accel .item .d { margin-top: 8px; font-family: var(--f-text); font-size: 13px; line-height: 1.45; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Transição">
+
+    <div class="wrap">
+      <div class="grid">
+
+        <div class="left">
+          <div class="eyebrow">Eyebrow curto</div>
+          <div class="label-sub">complemento do que vem a seguir</div>
+        </div>
+
+        <div class="right">
+          <h1 class="h1-block">Título de transição <em>com ênfase</em>.</h1>
+          <p class="body-block">Um parágrafo de apoio explicando o que muda a partir daqui. O que continua sendo <em>seu</em> não muda.</p>
+
+          <div class="accel">
+            <div class="item">
+              <div class="n">01</div>
+              <div class="t">Item um</div>
+              <div class="d">Descrição curta do primeiro item.</div>
+            </div>
+            <div class="item">
+              <div class="n">02</div>
+              <div class="t">Item dois</div>
+              <div class="d">Descrição curta do segundo item.</div>
+            </div>
+            <div class="item">
+              <div class="n">03</div>
+              <div class="t">Item três</div>
+              <div class="d">Descrição curta do terceiro item.</div>
+            </div>
+            <div class="item">
+              <div class="n">04</div>
+              <div class="t">Item quatro</div>
+              <div class="d">Descrição curta do quarto item.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

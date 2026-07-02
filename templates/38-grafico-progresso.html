@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>38 · Gráfico de progresso</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Slide 38 — barras horizontais de progresso / percentual
+     5 linhas: label mono à esquerda, track em var(--bg-2),
+     fill com largura px pré-calculada + valor no fim do fill.
+     APENAS UMA linha em accent (a mais importante); demais em
+     var(--fg). Nota de leitura (caption) no rodapé.
+     ============================================================ */
+
+  /* ---------- header ---------- */
+  .head {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 120px;
+  }
+  .head h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    color: var(--fg);
+    margin-top: 22px;
+    max-width: 1100px;
+  }
+  .head h1 em { font-style: italic; font-weight: 500; }
+
+  /* ---------- linhas de progresso ---------- */
+  .rows {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 392px;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    height: 66px;
+    border-top: 1px solid var(--hairline);
+  }
+  .row:last-child { border-bottom: 1px solid var(--hairline); }
+
+  .row .lbl {
+    width: 300px;
+    flex: none;
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg);
+  }
+  .row .lbl small {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+    margin-top: 4px;
+    text-transform: none;
+  }
+
+  /* track fixo de 1000px — fills pré-calculados sobre essa base */
+  .row .track {
+    position: relative;
+    width: 1000px;
+    height: 14px;
+    background: var(--bg-2);
+  }
+  .row .fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--fg);
+  }
+  .row .val {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(var(--w-fill) + 16px);   /* logo após o fim do fill */
+    font-family: var(--f-mono);
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+  .row--accent .fill { background: var(--accent); }
+  .row--accent .val  { color: var(--accent); font-weight: 500; }
+  .row--accent .lbl  { font-weight: 500; }
+
+  /* ---------- nota de leitura ---------- */
+  .reading {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 104px;
+    padding-top: 18px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    gap: 48px;
+    align-items: baseline;
+  }
+  .reading .k {
+    flex: none;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .reading .caption {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--fg-2);
+    max-width: 980px;
+  }
+
+  /* ---------- fonte ---------- */
+  .source {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 56px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Adoção">
+
+    <div class="head">
+      <div class="eyebrow">Adoção por área</div>
+      <h1>Quem já colocou IA <em>em produção</em>, por área.</h1>
+    </div>
+
+    <!-- fills pré-calculados sobre track de 1000px:
+         Marketing 82% = 820px (accent — maior adoção)
+         Vendas 64% = 640px · Financeiro 47% = 470px
+         RH 41% = 410px · Jurídico 23% = 230px -->
+    <div class="rows">
+
+      <div class="row row--accent">
+        <div class="lbl">Marketing<small>conteúdo e campanhas</small></div>
+        <div class="track" style="--w-fill: 820px;">
+          <div class="fill" style="width: 820px;"></div>
+          <div class="val">82%</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="lbl">Vendas<small>propostas e follow-up</small></div>
+        <div class="track" style="--w-fill: 640px;">
+          <div class="fill" style="width: 640px;"></div>
+          <div class="val">64%</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="lbl">Financeiro<small>conciliação e relatórios</small></div>
+        <div class="track" style="--w-fill: 470px;">
+          <div class="fill" style="width: 470px;"></div>
+          <div class="val">47%</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="lbl">RH<small>triagem e onboarding</small></div>
+        <div class="track" style="--w-fill: 410px;">
+          <div class="fill" style="width: 410px;"></div>
+          <div class="val">41%</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="lbl">Jurídico<small>revisão de contratos</small></div>
+        <div class="track" style="--w-fill: 230px;">
+          <div class="fill" style="width: 230px;"></div>
+          <div class="val">23%</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- nota de leitura -->
+    <div class="reading">
+      <span class="k">Como ler</span>
+      <span class="caption">Percentual de times de cada área com ao menos um fluxo de IA rodando semanalmente. Marketing lidera porque o output é texto; Jurídico é a próxima fronteira — alto volume, baixa adoção.</span>
+    </div>
+
+    <div class="source">
+      <span>Fonte: censo interno de automação · mar 2026</span>
+      <span>n = 148 times · 5 áreas</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

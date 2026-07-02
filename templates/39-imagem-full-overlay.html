@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>39 · Imagem full + overlay</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 39 — Imagem full-bleed + overlay de gradiente
+     A foto cobre o canvas inteiro (1600×900); um gradiente navy
+     escurece a base e o conteúdo (eyebrow + título display +
+     caption) fica ancorado na base esquerda. É o template para
+     "foto impactante + título por cima".
+
+     Dark por natureza: usa .mode-dark e NÃO tem variante light
+     (texto claro sobre foto exige overlay escuro).
+
+     COMO TROCAR O PLACEHOLDER POR FOTO REAL
+     ----------------------------------------
+     Opção A (background-image): no .full-image, remova o
+     conteúdo interno (.hatch, .ph, .label) e adicione:
+       background: url('assets/minha-foto.jpg') center / cover no-repeat;
+     Opção B (<img> absoluto): dentro de .full-image, troque o
+     placeholder por
+       <img src="assets/minha-foto.jpg" alt=""
+            style="position:absolute; inset:0; width:100%; height:100%;
+                   object-fit:cover; object-position:center 35%;">
+     Em ambas, o .full-overlay (gradiente) fica POR CIMA da foto e
+     o .content por cima do overlay — não mexa nos z-index.
+     Ajuste object-position / background-position se o ponto de
+     interesse da foto não estiver no centro.
+
+     Accent: barra do eyebrow + <em> de 1 palavra no título
+     (2 unidades — padrão aceito na lib, ver templates 26/27).
+     ============================================================ */
+
+  .slide { padding: 0; }
+
+  /* ---- camada 1: imagem (placeholder) ---- */
+  .full-image {
+    position: absolute;
+    inset: 0;
+    background: #1a1a1a;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .full-image .hatch {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, transparent 0 14px, rgba(255,255,255,0.04) 14px 15px);
+  }
+  .full-image .ph {
+    position: absolute;
+    inset: 0 0 220px 0;               /* sobe o pictograma pra não colidir com o texto da base */
+    display: grid;
+    place-items: center;
+    opacity: 0.22;
+  }
+  .full-image .label {
+    position: absolute;
+    top: 48px;
+    right: var(--pad);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ---- camada 2: overlay de gradiente (navy-900 na base) ---- */
+  .full-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(to top,
+      rgba(0,11,21,0.92) 0%,
+      rgba(0,11,21,0.35) 55%,
+      rgba(0,11,21,0.15) 100%);
+    pointer-events: none;
+  }
+
+  /* ---- camada 3: conteúdo ancorado na base esquerda ---- */
+  .content {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: var(--pad);
+    z-index: 3;
+  }
+  .content .eyebrow { margin-bottom: 32px; color: var(--fg); }
+
+  .content h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 112px;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+    max-width: 1180px;
+  }
+  .content h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);           /* única pinta de accent além da barra do eyebrow */
+  }
+
+  .content .cap {
+    margin-top: 28px;
+    font-family: var(--f-text);
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--fg-2);
+    max-width: 640px;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Caso real">
+
+    <!-- camada 1: foto full-bleed (placeholder) -->
+    <div class="full-image">
+      <div class="hatch"></div>
+      <div class="ph">
+        <svg viewBox="0 0 100 100" width="160" height="160">
+          <rect x="8" y="18" width="84" height="64" fill="none" stroke="white" stroke-width="1.5"/>
+          <circle cx="32" cy="40" r="8" fill="white"/>
+          <path d="M18 72 L40 50 L60 66 L80 44 L92 56 L92 82 L8 82 Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="label">[ IMAGEM DE FUNDO · 1600×900 ]</div>
+    </div>
+
+    <!-- camada 2: overlay -->
+    <div class="full-overlay"></div>
+
+    <!-- camada 3: conteúdo -->
+    <div class="content">
+      <div class="eyebrow">Operação · Unidade Extrema</div>
+      <h1>O chão de fábrica<br>virou <em>laboratório</em>.</h1>
+      <p class="cap">Primeira operação do grupo a rodar 100% dos rituais de gestão com apoio de IA — do daily de produção à revisão mensal de metas.</p>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

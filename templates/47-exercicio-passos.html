@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>47 · Exercício em passos</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 47 — Exercício prático em passos cronometrados.
+     Stepper de 6 passos em colunas com tag de TEMPO em mono
+     ("5 min", "10 min"). Diferente do 19-stepper (4 etapas com
+     saída esperada): aqui o foco é execução em sala — cada passo
+     tem numeral display 40px + nome + descrição curta + tempo.
+     Fecha com faixa de rodapé resumindo duração e entrega.
+     Accent: barra do eyebrow + numeral do passo atual. (2 un.)
+     ============================================================ */
+
+  .head-eyebrow { position: absolute; left: var(--pad); top: 96px; }
+  .head-title {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 144px;
+  }
+  .head-title h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 58px;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+    max-width: 1300px;
+  }
+  .head-title h1 em { font-style: italic; font-weight: 500; }
+
+  .stepper {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 272px;
+    bottom: 150px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-top: 1px solid var(--fg);
+    border-bottom: 1px solid var(--fg);
+  }
+
+  .step {
+    padding: 30px 22px;
+    display: flex;
+    flex-direction: column;
+  }
+  .step:first-child { padding-left: 0; }
+  .step:last-child  { padding-right: 0; }
+  /* divisória vertical hairline entre passos */
+  .step + .step { border-left: 1px solid var(--hairline); }
+
+  .step .ord {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+  }
+  .step.current .ord { color: var(--accent); }
+
+  .step .time {
+    margin-top: 10px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
+  .step .lbl {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--hairline);
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+  }
+
+  .step .txt {
+    margin-top: 12px;
+    font-family: var(--f-text);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--fg-2);
+  }
+
+  /* faixa de rodapé — resumo do exercício */
+  .foot {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 84px;
+    padding-top: 20px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .foot .right { color: var(--fg); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Exercício prático">
+
+    <div class="head-eyebrow">
+      <div class="eyebrow">Mão na massa</div>
+    </div>
+
+    <div class="head-title">
+      <h1>Do problema mapeado à primeira skill <em>rodando</em>.</h1>
+    </div>
+
+    <div class="stepper">
+
+      <div class="step current">
+        <div class="ord">01</div>
+        <div class="time">5 min</div>
+        <div class="lbl">Escolher o processo</div>
+        <p class="txt">A tarefa mais repetitiva da sua semana. Se você faz 3× ou mais, ela entra na lista.</p>
+      </div>
+
+      <div class="step">
+        <div class="ord">02</div>
+        <div class="time">5 min</div>
+        <div class="lbl">Descrever o fluxo</div>
+        <p class="txt">Input, decisões no meio do caminho e output final — em linguagem natural, sem jargão.</p>
+      </div>
+
+      <div class="step">
+        <div class="ord">03</div>
+        <div class="time">10 min</div>
+        <div class="lbl">Escrever o prompt</div>
+        <p class="txt">Transformar o fluxo em instrução: contexto, formato de saída e 1 exemplo real anexado.</p>
+      </div>
+
+      <div class="step">
+        <div class="ord">04</div>
+        <div class="time">10 min</div>
+        <div class="lbl">Rodar e comparar</div>
+        <p class="txt">Executar com um caso de verdade. Colocar lado a lado com o que você faria à mão.</p>
+      </div>
+
+      <div class="step">
+        <div class="ord">05</div>
+        <div class="time">10 min</div>
+        <div class="lbl">Ajustar o tom</div>
+        <p class="txt">Corrigir o que saiu genérico: vocabulário da empresa, exceções, regras de negócio.</p>
+      </div>
+
+      <div class="step">
+        <div class="ord">06</div>
+        <div class="time">5 min</div>
+        <div class="lbl">Salvar como skill</div>
+        <p class="txt">Publicar no G4 OS com nome claro. Amanhã o time inteiro roda em um clique.</p>
+      </div>
+
+    </div>
+
+    <div class="foot">
+      <div class="left">6 passos · 45 min</div>
+      <div class="right">Entrega → 1 skill publicada no G4 OS</div>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

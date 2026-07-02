@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>31 · Narrativa numérica (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 31 — Narrativa numérica (3 colunas editoriais).
+     Diferente do 10-stats (métrica + label curto): aqui cada
+     coluna tem um "hero-num" (dado, símbolo ou métrica) seguido
+     de headline + parágrafo explicativo — pensado pra ensinar um
+     conceito em 3 passos, não só mostrar KPIs. Fecha com uma
+     linha de takeaway centralizada.
+     Accent: barra do eyebrow + hero-num da coluna .lead em gold
+     (única unidade de accent do corpo). Os demais números ficam
+     em --fg; os <em> das headlines são só italic.
+     ============================================================ */
+
+  .head { position: absolute; left: var(--pad); right: var(--pad); top: 96px; }
+  .head .eyebrow { margin-bottom: 24px; }
+  .head h1 { font-family: var(--f-display); font-weight: 600; font-size: 68px; line-height: 1.02; letter-spacing: -0.028em; color: var(--fg); max-width: 1180px; }
+  .head h1 em { font-style: italic; font-weight: 500; color: var(--accent); }
+
+  .cols { position: absolute; left: var(--pad); right: var(--pad); top: 372px; display: grid; grid-template-columns: 1fr 1fr 1fr; }
+  .col { padding-right: 56px; }
+  .col + .col { padding-left: 56px; padding-right: 56px; border-left: 1px solid var(--hairline); }
+  .col:last-child { padding-right: 0; }
+
+  .kicker { font-family: var(--f-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: 16px; }
+  .hero-num { font-family: var(--f-display); font-weight: 600; font-size: 96px; line-height: 1.0; letter-spacing: -0.04em; color: var(--fg); margin-bottom: 20px; }
+  .col-headline { font-family: var(--f-display); font-weight: 600; font-size: 26px; line-height: 1.18; letter-spacing: -0.015em; color: var(--fg); margin-bottom: 16px; }
+  .col-headline em { font-style: italic; font-weight: 500; }
+  .col.lead .hero-num { color: var(--accent); }
+  .col-body { font-family: var(--f-text); font-weight: 400; font-size: 17px; line-height: 1.55; color: var(--fg-2); max-width: 400px; }
+  .col-body strong { color: var(--fg); font-weight: 600; }
+
+  .rodape { position: absolute; left: var(--pad); right: var(--pad); bottom: 72px; padding-top: 20px; border-top: 1px solid var(--hairline); font-family: var(--f-mono); font-size: 13px; font-weight: 400; letter-spacing: 0.05em; color: var(--fg-muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Narrativa numérica">
+
+    <div class="head">
+      <div class="eyebrow">O que olhar</div>
+      <h1>O que separa um resultado bom de um <em>médio</em>.</h1>
+    </div>
+
+    <div class="cols">
+      <div class="col lead">
+        <div class="kicker">01 · Tempo recuperado</div>
+        <div class="hero-num">9h</div>
+        <div class="col-headline">Nove horas voltam <em>por semana</em>.</div>
+        <p class="col-body">É o tempo médio que a automação devolve a um gestor — mais de um dia útil inteiro, toda semana.</p>
+      </div>
+      <div class="col">
+        <div class="kicker">02 · Reinvestimento</div>
+        <div class="hero-num">62%</div>
+        <div class="col-headline">Só 62% <em>reinvestem</em> esse tempo.</div>
+        <p class="col-body"><strong>O ganho não é automático.</strong> Sem decidir onde as horas vão, elas evaporam em reunião e caixa de entrada.</p>
+      </div>
+      <div class="col">
+        <div class="kicker">03 · Efeito composto</div>
+        <div class="hero-num">2,4×</div>
+        <div class="col-headline">Quem realoca cresce <em>2,4× mais</em>.</div>
+        <p class="col-body">Diferença de crescimento em 12 meses entre quem move o tempo pra cliente e estratégia — e quem não mede.</p>
+      </div>
+    </div>
+
+    <div class="rodape">Automatizar libera o tempo. Realocar o tempo é o que muda o resultado.</div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>50 · Provas</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Prova social (light): 3 mini-quotes lado a lado em surfaces, cada uma
+     com aspa serif no topo, autor com avatar de iniciais (padrão do 04)
+     e chip verde com o resultado medido. A do meio em surface--gold.
+     Rodapé mono central com a régua de medição. */
+
+  .head{position:absolute;left:var(--pad);top:92px;max-width:1100px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:56px}
+
+  /* grade: left 96 + 448 + 32 + 448 + 32 + 448 = 1504 → +96 = 1600 ✓
+     vertical: top 280 → bottom 120 = 500px de altura;
+     rodapé em bottom 56 (folga de ~40px sob os cards) ✓ */
+  .wall{position:absolute;left:var(--pad);right:var(--pad);top:280px;bottom:120px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+
+  .q{padding:34px 36px 32px;display:flex;flex-direction:column}
+  .q .mark{font-family:var(--serif);font-size:60px;line-height:.7;color:var(--gold);
+    opacity:.45}
+  .q blockquote{margin-top:18px;font-size:17px;line-height:1.6;font-style:italic;
+    color:var(--text-2)}
+  .q .rule{height:1px;background:var(--border);margin:20px 0 18px}
+
+  .who{display:flex;align-items:center;gap:14px}
+  .avatar{width:44px;height:44px;border-radius:50%;flex:0 0 44px;
+    background:var(--gold-dim);border:1px solid var(--gold-border);
+    display:grid;place-items:center;
+    font-family:var(--num);font-weight:600;font-size:15px;color:var(--gold)}
+  .who .name{font-size:14px;font-weight:600;color:var(--text-1)}
+  .who .org{margin-top:3px;font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+  .q .chip{margin-top:auto;align-self:flex-start}
+
+  .foot{position:absolute;left:0;right:0;bottom:56px;text-align:center}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Resultados">
+
+    <header class="head">
+      <div class="eyebrow">Depoimentos · turmas 05 e 06</div>
+      <h1 class="h-serif">Não é promessa. <em>É diário de bordo.</em></h1>
+    </header>
+
+    <section class="wall">
+
+      <figure class="q surface">
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <blockquote>Meu comitê semanal caiu de três horas para quarenta minutos. O relatório chega pronto; a reunião virou só decisão.</blockquote>
+        <div class="rule" aria-hidden="true"></div>
+        <div class="who">
+          <span class="avatar" aria-hidden="true">PA</span>
+          <div>
+            <div class="name">Paulo Andrade</div>
+            <div class="org">COO · logística, 480 pessoas</div>
+          </div>
+        </div>
+        <span class="chip chip--green"><span class="dot"></span>−11h/sem de reunião</span>
+      </figure>
+
+      <figure class="q surface surface--gold">
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <blockquote>O fechamento contábil levava nove dias. Automatizamos a conciliação na semana três do programa — hoje fecha em um.</blockquote>
+        <div class="rule" aria-hidden="true"></div>
+        <div class="who">
+          <span class="avatar" aria-hidden="true">MK</span>
+          <div>
+            <div class="name">Marina Kimura</div>
+            <div class="org">CFO · indústria alimentícia</div>
+          </div>
+        </div>
+        <span class="chip chip--green"><span class="dot"></span>−92% no ciclo de fechamento</span>
+      </figure>
+
+      <figure class="q surface">
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <blockquote>Cada vendedor sai com proposta pronta na mesma call. O funil não mudou; a velocidade de resposta virou outra empresa.</blockquote>
+        <div class="rule" aria-hidden="true"></div>
+        <div class="who">
+          <span class="avatar" aria-hidden="true">RS</span>
+          <div>
+            <div class="name">Rafael Sotero</div>
+            <div class="org">Head comercial · SaaS B2B</div>
+          </div>
+        </div>
+        <span class="chip chip--green"><span class="dot"></span>3,4× propostas emitidas</span>
+      </figure>
+
+    </section>
+
+    <footer class="foot">
+      <span class="mono-label">todos medidos em 90 dias de fluxo · base de acompanhamento G4</span>
+    </footer>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>33 · Três pilares percentuais (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 33 — Três pilares percentuais (dark, hairlines
+     verticais). Diferente do 14-tres-pilares (linhas horizontais
+     empilhadas, light): aqui os 3 eixos ficam lado a lado em
+     dark mode, cada um com um número/percentual gigante em gold,
+     separados por hairline vertical. Bom pra regras de alocação
+     (ex: 70/20/10) ou 3 cenários comparados.
+     Accent: barra do eyebrow + <em> no H1 + os 3 números dos
+     pilares em gold (exceção documentada: números-eixo contam
+     como 1 unidade coletiva, não 3 isoladas, porque formam uma
+     única série visual comparativa).
+     ============================================================ */
+
+  .hdr { position: absolute; left: var(--pad); right: var(--pad); top: 96px; }
+  .hdr .eyebrow { margin-bottom: 18px; }
+  .hdr h1 { font-family: var(--f-display); font-weight: 600; font-size: 56px; line-height: 1.0; letter-spacing: -0.028em; color: var(--fg); max-width: 1280px; }
+  .hdr h1 em { font-style: italic; font-weight: 500; color: var(--accent); }
+
+  .pillars { position: absolute; left: var(--pad); right: var(--pad); top: 280px; bottom: 60px; display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; column-gap: 0; align-items: stretch; }
+  .pillars .vrule { background: var(--hairline); width: 1px; height: 100%; }
+
+  .pillar { padding: 0 36px; display: flex; flex-direction: column; gap: 24px; }
+  .pillar:first-child { padding-left: 0; }
+  .pillar:last-child { padding-right: 0; }
+  .pillar .tag { font-family: var(--f-mono); font-weight: 500; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-muted); }
+  .pillar .num { font-family: var(--f-display); font-weight: 600; font-size: 96px; line-height: 0.9; letter-spacing: -0.04em; color: var(--accent); }
+  .pillar .hd { font-family: var(--f-display); font-weight: 500; font-style: italic; font-size: 32px; line-height: 1.1; letter-spacing: -0.02em; color: var(--fg); }
+  .pillar p { font-family: var(--f-text); font-weight: 400; font-size: 16px; line-height: 1.55; color: var(--fg-2); max-width: 360px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Regra de alocação">
+
+    <div class="hdr">
+      <div class="eyebrow">Regra</div>
+      <h1>70 / 20 / 10. <em>A regra de alocação.</em></h1>
+    </div>
+
+    <section class="pillars" aria-label="Três pilares">
+      <div class="pillar">
+        <div class="tag">70%</div>
+        <div class="num">70%</div>
+        <div class="hd">Primeiro pilar</div>
+        <p>Descrição do que compõe a maior fatia — o motor previsível.</p>
+      </div>
+      <div class="vrule"></div>
+      <div class="pillar">
+        <div class="tag">20%</div>
+        <div class="num">20%</div>
+        <div class="hd">Segundo pilar</div>
+        <p>Descrição da fatia intermediária — variação controlada.</p>
+      </div>
+      <div class="vrule"></div>
+      <div class="pillar">
+        <div class="tag">10%</div>
+        <div class="num">10%</div>
+        <div class="hd">Terceiro pilar</div>
+        <p>Descrição da menor fatia — espaço de experimento.</p>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

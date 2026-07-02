@@ -1,4 +1,4 @@
-# G4 Aulas IA — Playbook (v3)
+# G4 Aulas IA — Playbook (v4)
 
 > **Como construir e evoluir slides HTML das aulas G4** (Academia de IA, Gestão e Estratégia, e futuras).
 > Reúne aprendizados de **4 sessões** + 2 decks publicados de 29 slides cada.
@@ -35,9 +35,9 @@ Mono     →  IBM Plex Mono      (eyebrows, labels, dados)
 
 **Hierarquia por italic + weight, NUNCA por troca de fonte.** Sempre a mesma família.
 
-Exceção editorial (só capa e divisor): Cormorant Garamond serif pra criar "peso editorial" no título principal. Carregado via `<link>` Google Fonts no `<head>`.
+Exceção editorial (capa, divisor e família de quotes — 20, 26, 34, 43): Cormorant Garamond serif pra criar "peso editorial".
 
-**Carregamento**: já tem `@import` no `style.css` carregando Space Grotesk + IBM Plex Sans + IBM Plex Mono. Se precisar Cormorant, adicione `<link>` separado no `<head>` do slide.
+**Carregamento**: o `@import` do `style.css` carrega as 4 famílias (Space Grotesk + IBM Plex Sans + IBM Plex Mono + Cormorant Garamond). Nenhum `<link>` extra é necessário no slide.
 
 ---
 
@@ -52,6 +52,8 @@ Dark (`.mode-dark` no `<article class="slide">`):
 - `--accent` continua `#B9915B` (dourado igual)
 
 Ative dark com `class="mode-dark"`. Os tokens semânticos reescritos automaticamente — você não precisa declarar cor nenhuma no slide.
+
+**Safety net (v4)**: os tokens crus de texto/linha (`--ink`, `--ink-2`, `--muted`, `--rule`) também flipam no `.mode-dark`. Um slide copiado do light não imprime mais letra preta em fundo navy. A exceção é texto escuro de propósito (sobre painel dourado ou célula paper dentro de slide dark): use `var(--on-accent)` no gold e hex explícito `#0F1419` no paper.
 
 ---
 
@@ -69,9 +71,9 @@ Exemplos:
 
 ---
 
-## 5. Os 20 templates (vocabulário visual)
+## 5. Os 48 templates (vocabulário visual)
 
-Eles estão em `/Users/joaovitorsilva/.g4os/workspaces/novo-espao-de-trabalho/sessions/260614-awake-grove/artifacts/` (01-capa.html ... 20-quote-hero.html). Cada um é um arquivo único, totalmente funcional, com `<style>` local + `<article class="slide">` no padrão.
+Eles estão em `templates/` (01-capa.html ... 48-numero-hero.html). Cada um é um arquivo único, totalmente funcional, com `<style>` local + `<article class="slide">` no padrão. Para navegar visualmente: `examples/catalog.html` (grid com filtro por categoria + toggle light/dark; abrir via `python3 -m http.server` na raiz do repo).
 
 | # | Template | Quando usar | Quando NÃO usar |
 |---|----------|-------------|------------------|
@@ -95,6 +97,34 @@ Eles estão em `/Users/joaovitorsilva/.g4os/workspaces/novo-espao-de-trabalho/se
 | 18 | Bento mosaic | 4-6 blocos com proporções variadas | Tudo do mesmo tamanho (use 11) |
 | 19 | Stepper | 4-5 etapas sequenciais com output | Sem output visível (use 11) |
 | 20 | Quote hero | Citação grande em dark mode | Em slide claro (use 04) |
+| 21 | 2-boxes | Provocação binária ("por esporte" vs "profissional") | 3+ opções (use 22) |
+| 22 | Mixed grid | Comparação complexa (matriz + lista + cards) | Conteúdo simples (use 18) |
+| 23 | Custom 2-col | Headline à esquerda, corpo à direita | Texto muito longo |
+| 24 | Pergunta CTA | Pergunta de transição entre blocos | Como conteúdo (é respiro) |
+| 25 | Hero logo G4 | Capa alternativa com marca + patterns | Slides internos |
+| 26 | Quote galeria split | Citação + imagem grande em moldura mat | Sem imagem forte (use 04/20) |
+| 27 | Mentor hero | Bio com nome gigante + retrato 38% | Bio curta (use 02) |
+| 28 | Transição aceleradores | "O que vem a seguir" + 4 itens numerados | Etapas com detalhe (use 19) |
+| 29 | Bento comparativo | Dois mosaicos lado a lado (A vs B) | Comparação simples (use 09/17) |
+| 30 | Grid de ferramentas | 4 colunas descritivas (stack, métodos) | Dados numéricos (use 10) |
+| 31 | Narrativa numérica | 3 conceitos ensinados com um dado cada | KPIs puros (use 10) |
+| 32 | Bento de métricas | Mosaico 3×3 com bignums (ex: 70/20/10) | Poucos dados (use 48) |
+| 33 | Três pilares percentuais | Regra de alocação com % gigante (dark) | Pilares sem número (use 14) |
+| 34 | Encerramento quote | Fechamento com citação serif + CTA (dark) | Fechamento com contato (use 15) |
+| 35 | Gráfico de linha | Tendência/evolução no tempo (SVG) | Comparação pontual (use 05/16) |
+| 36 | Gráfico donut | Composição/share de um todo | Mais de 5 fatias (use 38) |
+| 37 | Barras duplas | 2 séries × N categorias (antes vs depois) | 1 série só (use 16) |
+| 38 | Barras de progresso | % de adoção/share por item | Valores absolutos (use 05) |
+| 39 | Imagem full + overlay | Foto impactante + título por cima (dark) | Sem foto de qualidade |
+| 40 | Imagem hero lateral | Tese + imagem full-bleed 38% sem moldura | Imagem que precisa moldura (use 12/26) |
+| 41 | Galeria duo | Duas evidências visuais lado a lado | 1 imagem só (use 12) |
+| 42 | Quote de post/tweet | Post de LinkedIn/X como evidência | Citação clássica (use 03/04) |
+| 43 | Quote dupla | Duas visões em contraste | 1 voz só (use 04) |
+| 44 | Tabela comparativa | Matriz de critérios × opções, 1 recomendada | 2 opções (use 09/17) |
+| 45 | Checklist | O que funciona vs o que evitar | Lista simples (use 13) |
+| 46 | Funil | Conversão/afunilamento em estágios | Etapas sem perda (use 19) |
+| 47 | Exercício em passos | Dinâmica com tempos por etapa | Sequência sem tempo (use 19) |
+| 48 | Número hero | Um dado só como takeaway | Vários números (use 10/32) |
 
 **Como reaproveitar**: copie o arquivo `.html` do template escolhido pra dentro do seu deck, renomeie (e.g. `08-divisor.html` → `08-minha-secao.html`), edite copy + dados + CSS local.
 
@@ -197,14 +227,36 @@ ifr.setAttribute('srcdoc', s.html);  // setAttribute lida com escape corretament
 **Erro**: o parent (index.html) tem o `style.css` inline, mas o iframe via `srcdoc` cria um documento novo que não herda o CSS do parent. Slide renderiza sem estilo.
 **Fix**: **inline o `style.css` em cada slide também**, não só no parent. Deck-inlined = `<style>...</style>` no index + dentro de cada slide.
 
+### 7.9 Eyebrow local em cima do data-section
+**Erro**: o `data-section` do `<article>` renderiza via `.slide::before` em `top: 48px; left: var(--pad)`. Um eyebrow/kicker local posicionado no mesmo `top: 48px` imprime um texto por cima do outro (aconteceu no template 30).
+**Fix**: a faixa `top: 0–80px` do canto superior esquerdo é reservada pro `data-section`. Eyebrows locais começam em `top: 96px` (ou zere o `data-section=""`).
+
+### 7.10 Orçamento de accent estourado por repetição
+**Erro**: em layouts de colunas/células repetidas, dar `color: var(--accent)` ao elemento-hero de CADA coluna multiplica o dourado (3 colunas = 3 accents; aconteceu no template 31).
+**Fix**: a classe de accent vai numa modificadora (`.lead`, `.current`, `.destaque`) aplicada a UMA coluna/célula; as demais ficam em `--fg`.
+
+---
+
+## 7B. Tratamentos de imagem (portados do deck founder-ia-conteudo)
+
+Quatro formas canônicas de colocar imagem num slide, da mais moldurada à mais crua:
+
+1. **Moldura "mat de galeria"** (templates 26, 41) — `padding` de 20-22px com `linear-gradient` de mat + keyline dourada fina (`box-shadow: 0 0 0 1px rgba(185,145,91,0.5)`) no clip interno. Única exceção permitida a border-radius/sombra. Versão dark usa alfas navy (ver `26-quote-galeria-split-dark.html`).
+2. **Hero lateral full-bleed** (template 40) — imagem sangrando topo-a-base em 38% da largura, sem moldura, com `.edge-blend` (`linear-gradient(to right, var(--bg), transparent)` de ~120px) fundindo a borda esquerda da foto com o fundo. Ajuste o enquadramento com `object-position` (comentado no arquivo).
+3. **Full-bleed com overlay** (template 39) — foto cobre os 1600×900 inteiros + overlay `linear-gradient(to top, rgba(0,11,21,0.92), rgba(0,11,21,0.15))` + texto ancorado na base esquerda. Sempre dark.
+4. **Frame com legenda** (template 12) — screenshot/foto documental com sidebar de leitura.
+
+**Overlay decorativo de raios**: `assets/patterns/overlay-raios.png` (portado do deck founder-ia) — posicionar `right: 0; bottom: 0; width/height: 900px; background-size: contain; opacity: 0.7; pointer-events: none` em capas/divisores/encerramentos dark. Mesma família dos `pattern-shield/symbol.png` usados no template 25.
+
+**Placeholder padrão**: os templates de imagem não usam foto real — usam `div` escura com hachura `repeating-linear-gradient(45deg, ...)` + label mono. Cada template documenta em comentário HTML como trocar pela foto final.
+
 ---
 
 ## 8. Fluxo de criação de slide (1 por vez)
 
 ```bash
-# 1. Copiar template mais próximo
-cp /Users/joaovitorsilva/.g4os/workspaces/novo-espao-de-trabalho/sessions/260614-awake-grove/artifacts/05-grafico.html \
-   artifacts/slides/08-meu-grafico.html
+# 1. Copiar template mais próximo (catálogo visual: examples/catalog.html)
+cp templates/05-grafico.html meu-deck/08-meu-grafico.html
 
 # 2. Editar o slide
 # - Copiar do template-base
@@ -212,7 +264,7 @@ cp /Users/joaovitorsilva/.g4os/workspaces/novo-espao-de-trabalho/sessions/260614
 # - Adicionar entrada no array `slides` do index.html (n, file, name)
 
 # 3. Validar visualmente
-# - Abrir o deck local no browser: file:///Users/joaovitorsilva/.g4os/workspaces/novo-espao-de-trabalho/sessions/260623-misty-lake/artifacts/slides/index.html
+# - Abrir o deck local no browser (index.html do deck, ou o slide direto)
 # - Ir no card do slide novo, dar zoom/print
 # - Mandar print pro usuário validar
 
@@ -321,9 +373,8 @@ Antes de inlinear: comprimir tudo. PNGs > 500KB → sips -Z 1200 ou otimizar via
 
 ## 14. Onde isso está documentado
 
-- **`AGENTS.md`** (mesma pasta) — regras firmes, tokens, lista de templates, mapeamento dos 29 slides
-- **`AUDITORIA.md`** (mesma pasta) — auditoria visual do deck atual (✅/⚠️/❌)
-- **Catálogo canônico de 20 templates** — `/Users/joaovitorsilva/.g4os/workspaces/novo-espao-de-trabalho/sessions/260614-awake-grove/artifacts/`
+- **`AGENTS.md`** (mesma pasta) — regras firmes, tokens, lista dos 48 templates, mapeamento dos 29 slides
+- **Catálogo canônico de 48 templates** — `templates/` (navegável em `examples/catalog.html`)
 - **Projeto** — `Aulas G4 - IA` (`project_c1402fb9-6848-4cea-9fef-489da1fbf7fe`)
 - **Sessões-chave**:
   - `260614-awake-grove` — design system + 20 templates
@@ -339,16 +390,14 @@ Antes de inlinear: comprimir tudo. PNGs > 500KB → sips -Z 1200 ou otimizar via
 Se você tá chegando nessa sessão sem contexto:
 
 1. **Ler `AGENTS.md`** (regras firmes) + **`playbook.md`** (este arquivo, prosa).
-2. **Olhar `auditoria.md`** (status atual do deck).
-3. **Olhar o catálogo de 20 templates** em `260614-awake-grove/artifacts/`.
-4. **Olhar o deck atual** (29 slides) em `260623-misty-lake/artifacts/slides/`.
-5. **Procurar o template mais próximo** no catálogo pra novo slide.
-6. **1 slide por vez**: copiar → editar → validar visualmente → próximo.
-7. **Publicar** com `mcp__g4os-pages__republish_page(slug="aula-ia-ge", html=<deck-inlined>)`.
+2. **Olhar o catálogo de 48 templates** em `templates/` (navegável em `examples/catalog.html`).
+3. **Procurar o template mais próximo** no catálogo pra novo slide.
+4. **1 slide por vez**: copiar → editar → validar visualmente → próximo.
+5. **Publicar** com `mcp__g4os-pages__republish_page(slug="...", html=<deck-inlined>)`.
 
 **Atalhos úteis**:
 - Sub-agente Opus 4.7: `mcp__session__subagent_run(prompt, connectionSlug="managed-g4-aigateway", model="anthropic.claude-opus-4-7")`
-- Build deck-inlined: script Python em `260615-awake-creek` session
+- Build deck-inlined: `build-deck-inlined.py` (raiz do repo)
 - Comprimir vídeo: `ffmpeg -y -i in.mp4 -vf "scale=-2:480" -c:v libx264 -preset slow -crf 28 -an -movflags +faststart out.mp4`
 - Comprimir PNG: `sips -Z 1600 in.png --out out.png` (mantém proporção, max 1600px)
 - Comprimir JPG: `sips -s format jpeg --setProperty quality 0.8 in.jpg --out out.jpg`

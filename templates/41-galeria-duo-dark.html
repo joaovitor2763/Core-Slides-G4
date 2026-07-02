@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>41 · Galeria duo (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 41 (dark) — Galeria duo. Idêntico à versão light,
+     exceto .mode-dark no <article> e o gradiente do mat adaptado
+     para tons navy (mesma adaptação do 26-quote-galeria-split-dark).
+
+     Accent: barra do eyebrow + keylines douradas das DUAS molduras
+     (padrão decorativo aceito da lib — por isso NENHUM outro
+     accent no slide; o <em> do título é só italic).
+
+     Para usar fotos reais: dentro de cada .img-clip, troque o
+     placeholder (.hatch/svg/.ph-label) por
+       <img src="assets/foto.jpg" alt=""
+            style="width:100%; height:100%; object-fit:cover; display:block;">
+     ============================================================ */
+
+  /* ---- header: eyebrow + título + lede ---- */
+  .duo-header {
+    position: absolute;
+    top: 96px;
+    left: var(--pad);
+    right: var(--pad);
+  }
+  .duo-header .eyebrow { margin-bottom: 24px; }
+  .duo-header h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 60px;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    color: var(--fg);
+  }
+  .duo-header h1 em { font-style: italic; font-weight: 500; }  /* sem cor — accent já está nas keylines */
+  .duo-header .lede {
+    margin-top: 18px;
+    font-size: 20px;
+    line-height: 1.45;
+    color: var(--fg-2);
+    max-width: 980px;
+  }
+
+  /* ---- fileira das duas molduras ---- */
+  .duo-row {
+    position: absolute;
+    top: 330px;
+    left: var(--pad);
+    right: var(--pad);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  /* mat de galeria em tons navy (adaptação dark do template 26) */
+  .duo-row .frame {
+    position: relative;
+    height: 420px;
+    padding: 18px;
+    background: linear-gradient(158deg,
+      rgba(230, 238, 243, 0.11) 0%,
+      rgba(230, 238, 243, 0.035) 48%,
+      rgba(0, 8, 16, 0.10) 100%);
+    border: 1px solid rgba(230, 238, 243, 0.16);
+    border-radius: 22px;
+    box-shadow:
+      inset 0 1px 0 rgba(230, 238, 243, 0.28),
+      inset 0 0 0 1px rgba(0, 8, 16, 0.35),
+      0 34px 80px -26px rgba(0, 8, 16, 0.85),
+      0 10px 28px -16px rgba(0, 8, 16, 0.7);
+  }
+  .duo-row .img-clip {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    /* keyline dourada fina emoldurando a imagem */
+    box-shadow:
+      0 0 0 1px rgba(185, 145, 91, 0.55),
+      0 2px 12px -4px rgba(0, 8, 16, 0.6);
+  }
+  .duo-row .img-clip .hatch {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, transparent 0 14px, rgba(255,255,255,0.04) 14px 15px);
+  }
+  .duo-row .img-clip svg { opacity: 0.26; }
+  .duo-row .img-clip .ph-label {
+    position: absolute;
+    bottom: 22px;
+    left: 24px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* legenda mono embaixo de cada moldura: caption + fonte */
+  .duo-row .legend {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .duo-row .legend .cap { color: var(--fg-2); font-weight: 500; }
+  .duo-row .legend .src { color: var(--fg-muted); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Evidência">
+
+    <!-- header -->
+    <header class="duo-header">
+      <div class="eyebrow">Antes e depois</div>
+      <h1>O mesmo pipeline, <em>seis meses</em> depois.</h1>
+      <p class="lede">À esquerda, a operação comercial em planilhas; à direita, o funil assistido por IA. Mesma equipe, mesmo mercado — outro nível de previsibilidade.</p>
+    </header>
+
+    <!-- duas molduras -->
+    <div class="duo-row">
+
+      <figure>
+        <div class="frame">
+          <div class="img-clip">
+            <div class="hatch"></div>
+            <svg viewBox="0 0 100 100" width="110" height="110">
+              <rect x="10" y="20" width="80" height="60" fill="none" stroke="white" stroke-width="1.5"/>
+              <circle cx="32" cy="42" r="8" fill="white"/>
+              <path d="M20 70 L40 50 L60 65 L80 45 L90 55 L90 80 L10 80 Z" fill="white"/>
+            </svg>
+            <div class="ph-label">[ IMAGEM · 1280×768 ]</div>
+          </div>
+        </div>
+        <figcaption class="legend">
+          <span class="cap">Fig. 01 — Pipeline em planilha · Jan/2026</span>
+          <span class="src">Fonte: Operação comercial</span>
+        </figcaption>
+      </figure>
+
+      <figure>
+        <div class="frame">
+          <div class="img-clip">
+            <div class="hatch"></div>
+            <svg viewBox="0 0 100 100" width="110" height="110">
+              <rect x="10" y="20" width="80" height="60" fill="none" stroke="white" stroke-width="1.5"/>
+              <circle cx="32" cy="42" r="8" fill="white"/>
+              <path d="M20 70 L40 50 L60 65 L80 45 L90 55 L90 80 L10 80 Z" fill="white"/>
+            </svg>
+            <div class="ph-label">[ IMAGEM · 1280×768 ]</div>
+          </div>
+        </div>
+        <figcaption class="legend">
+          <span class="cap">Fig. 02 — Funil assistido por IA · Jun/2026</span>
+          <span class="src">Fonte: CRM · G4 OS</span>
+        </figcaption>
+      </figure>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

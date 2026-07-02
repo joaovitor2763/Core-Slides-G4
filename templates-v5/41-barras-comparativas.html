@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>41 · Barras comparativas</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Barras agrupadas (light): 2 séries × 4 categorias dentro de surface
+     grande, padrão do 06 — baseline firme 2px, categorias ABAIXO da
+     baseline, valores .num no topo de cada barra. Série "Antes" neutra,
+     série "Com fluxo" em gradiente gold. Legenda de séries em chips
+     no header do card. */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:104px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:62px;max-width:780px}
+  .head .read{max-width:400px;padding-bottom:8px}
+
+  /* painel: 352 + 460 = 812 = 900 − 88 ✓ · interno 1408 − 128 = 1280 */
+  .panel{position:absolute;left:var(--pad);right:var(--pad);top:352px;bottom:88px;
+    padding:44px 64px 36px;display:flex;flex-direction:column}
+
+  .panel-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+  .legend{display:flex;gap:10px}
+
+  /* chart: pares de barras ancorados na baseline; categorias abaixo dela.
+     Vertical: chart ≈ 329px · val 34 + col (máx 250) + cat 30 = 314 ✓ */
+  .chart{flex:1;display:grid;grid-template-columns:repeat(4,1fr);
+    align-items:end;justify-items:center;position:relative;padding:0 16px}
+  .chart::after{content:'';position:absolute;left:0;right:0;bottom:30px;height:2px;
+    border-radius:2px;background:var(--border-2)}
+  /* gridline de referência · 12h = 125px acima da baseline (30 + 125 = 155) */
+  .chart::before{content:'';position:absolute;left:0;right:0;bottom:155px;height:1px;
+    background:repeating-linear-gradient(90deg,var(--border-2) 0 6px,transparent 6px 14px)}
+  .ref{position:absolute;left:0;bottom:155px;transform:translateY(50%);
+    font-family:var(--mono);font-size:10px;color:var(--text-3);
+    background:var(--surface);padding-right:8px;z-index:1}
+
+  .group{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+    height:100%;position:relative;z-index:1}
+  /* par: 84 + 10 + 84 = 178px por grupo */
+  .pair{display:flex;align-items:flex-end;gap:10px}
+  .b{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;width:84px}
+  .b .val{font-family:var(--num);font-weight:600;font-size:26px;
+    letter-spacing:-.02em;color:var(--text-3);margin-bottom:8px}
+  .b .col{width:84px;border-radius:10px 10px 0 0;background:rgba(0,31,53,.14)}
+  .b--gold .col{background:linear-gradient(180deg,var(--gold-300),var(--gold-500))}
+  .b--gold .val{color:var(--gold)}
+  .group .cat{margin-top:18px;height:12px;line-height:12px;font-family:var(--mono);
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+
+  /* alturas pré-calculadas · escala 100% = 24h = 250px (1h ≈ 10,42px)
+     12h → 125px · 3h → 31px
+      9h →  94px · 2h → 21px
+     16h → 167px · 5h → 52px
+     24h → 250px · 8h → 83px */
+  .h12{height:125px} .h3{height:31px}
+  .h9{height:94px}   .h2{height:21px}
+  .h16{height:167px} .h5{height:52px}
+  .h24{height:250px} .h8{height:83px}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Resultados">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Operação · antes e depois</div>
+        <h1 class="h-serif">As mesmas entregas, num quarto <em>do tempo.</em></h1>
+      </div>
+      <p class="body read">Não é trabalhar mais rápido: é tirar do humano as horas que a máquina executa melhor — e devolver o resto ao julgamento.</p>
+    </header>
+
+    <section class="panel surface">
+      <div class="panel-top">
+        <span class="mono-label">Horas médias por entregável · time de operações</span>
+        <div class="legend">
+          <span class="chip"><span class="dot"></span>Antes</span>
+          <span class="chip chip--gold"><span class="dot"></span>Com fluxo</span>
+        </div>
+      </div>
+
+      <div class="chart">
+        <span class="ref">12h</span>
+
+        <div class="group">
+          <div class="pair">
+            <div class="b"><div class="val">12h</div><div class="col h12"></div></div>
+            <div class="b b--gold"><div class="val">3h</div><div class="col h3"></div></div>
+          </div>
+          <div class="cat">Relatório</div>
+        </div>
+
+        <div class="group">
+          <div class="pair">
+            <div class="b"><div class="val">9h</div><div class="col h9"></div></div>
+            <div class="b b--gold"><div class="val">2h</div><div class="col h2"></div></div>
+          </div>
+          <div class="cat">Proposta</div>
+        </div>
+
+        <div class="group">
+          <div class="pair">
+            <div class="b"><div class="val">16h</div><div class="col h16"></div></div>
+            <div class="b b--gold"><div class="val">5h</div><div class="col h5"></div></div>
+          </div>
+          <div class="cat">Análise</div>
+        </div>
+
+        <div class="group">
+          <div class="pair">
+            <div class="b"><div class="val">24h</div><div class="col h24"></div></div>
+            <div class="b b--gold"><div class="val">8h</div><div class="col h8"></div></div>
+          </div>
+          <div class="cat">Onboarding</div>
+        </div>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>12 · Passos</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Método em 4 passos: linha conectora dashed atravessando por trás,
+     4 surfaces--flat em grid, número serif itálico gold, chip de output.
+     O passo atual em surface--gold. */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:110px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:54px;max-width:720px}
+  .head .read{max-width:420px;padding-bottom:6px}
+
+  /* conectora: atravessa o meio da faixa de cards (y = 340 + 210 = 550) */
+  .track{position:absolute;left:var(--pad);right:var(--pad);top:550px;height:0;
+    border-top:1px dashed var(--border-2)}
+
+  /* grid: x 96 → 1504 (1408px) · y 340 → 760 (420px)
+     4 colunas · (1408 − 3×24) / 4 = 334px */
+  .steps{position:absolute;left:var(--pad);right:var(--pad);top:340px;height:420px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+
+  .step{padding:36px 34px 30px;display:flex;flex-direction:column}
+  .step .idx{font-family:var(--serif);font-style:italic;font-weight:400;
+    font-size:54px;line-height:1;color:var(--gold)}
+  .step .name{font-family:var(--num);font-size:22px;font-weight:600;
+    letter-spacing:-.01em;color:var(--text-1);margin-top:22px}
+  .step .desc{margin-top:10px}
+  .step .out{margin-top:auto;align-self:flex-start}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Método G4">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Framework · aula 02</div>
+        <h1 class="h-serif">Quatro passos até o fluxo <em>que roda sozinho.</em></h1>
+      </div>
+      <p class="body read">Cada passo termina com uma entrega concreta. Se não gera artefato, não é passo — é reunião.</p>
+    </header>
+
+    <div class="track" aria-hidden="true"></div>
+
+    <section class="steps">
+      <div class="step surface surface--flat">
+        <span class="idx">01</span>
+        <div class="name">Mapear</div>
+        <p class="small desc">Liste os processos repetitivos do time e o custo em horas de cada um.</p>
+        <span class="chip out">&rarr; lista pronta</span>
+      </div>
+
+      <div class="step surface surface--gold">
+        <span class="idx">02</span>
+        <div class="name">Priorizar</div>
+        <p class="small desc">Cruze volume × regra clara × dor. Só um processo passa para o próximo passo.</p>
+        <span class="chip chip--gold out"><span class="dot"></span>&rarr; ranking de impacto</span>
+      </div>
+
+      <div class="step surface surface--flat">
+        <span class="idx">03</span>
+        <div class="name">Prototipar</div>
+        <p class="small desc">Monte a primeira versão em uma tarde, com dados reais e revisão humana.</p>
+        <span class="chip out">&rarr; fluxo rodando</span>
+      </div>
+
+      <div class="step surface surface--flat">
+        <span class="idx">04</span>
+        <div class="name">Medir</div>
+        <p class="small desc">Compare horas antes × depois por 30 dias. O número decide se escala.</p>
+        <span class="chip out">&rarr; painel de ROI</span>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

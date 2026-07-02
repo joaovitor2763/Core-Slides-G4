@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>34 · Encerramento quote (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 34 — Encerramento com quote centralizado (dark).
+     Diferente do 15-encerramento (hero + rail de contato, light):
+     aqui o slide fecha com uma citação/metáfora grande em serif,
+     centralizada, atribuição mono, e uma caixa de CTA com
+     hairlines gold acima/abaixo. Espelha a estética da capa
+     (marca centralizada no topo) pra fechar o círculo do deck.
+     Accent: <em> na quote + hairlines/texto do CTA em gold.
+     (2 unidades — CTA conta como bloco utilitário único.)
+     ============================================================ */
+
+  .brand {
+    position: absolute;
+    top: var(--pad);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    z-index: 4;
+  }
+  .brand .mark {
+    width: 40px; height: 40px;
+    border: 1px solid var(--fg-2);
+    border-radius: 50%;
+  }
+  .brand .label { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-2); }
+
+  .close-stack {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1200px; max-width: 1200px;
+    text-align: center;
+    z-index: 2;
+    display: flex; flex-direction: column; align-items: center;
+  }
+
+  .close-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 96px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    max-width: 1280px;
+  }
+  .close-quote em { font-style: italic; font-weight: 500; color: var(--accent); }
+
+  .close-attr { margin-top: 48px; font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-muted); }
+
+  .close-cta {
+    margin-top: 72px;
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-top: 18px; padding-bottom: 18px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    max-width: 760px;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Encerramento">
+
+    <div class="brand">
+      <div class="mark"></div>
+      <div class="label">Nome do programa</div>
+    </div>
+
+    <div class="close-stack">
+      <p class="close-quote">Metáfora de fechamento <em>em destaque</em>.</p>
+      <div class="close-attr">— Autor · Programa</div>
+      <div class="close-cta">Chamada para ação clara em uma linha.</div>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

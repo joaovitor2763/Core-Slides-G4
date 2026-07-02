@@ -9,7 +9,7 @@
    Modo dark disponível via classe .mode-dark no <article class="slide">
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 
 /* ---- Paleta crua (sempre disponível, independente do modo) ---- */
 :root {
@@ -84,6 +84,15 @@
   --accent-soft:  var(--gold-300);
   --accent-deep:  var(--gold-700);
   --on-accent:    var(--navy-700);
+
+  /* Safety net: tokens crus de texto/linha também flipam no dark.
+     Slides copiados do modo light com var(--ink)/var(--muted)/var(--rule)
+     degradam graciosamente em vez de imprimir preto sobre navy.
+     Texto escuro sobre painel dourado deve usar var(--on-accent). */
+  --ink:      var(--navy-50);
+  --ink-2:    var(--navy-100);
+  --muted:    var(--navy-200);
+  --rule:     var(--rule-dark);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }

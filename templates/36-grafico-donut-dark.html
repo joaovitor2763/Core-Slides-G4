@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>36 · Gráfico donut (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Slide 36 — donut chart via conic-gradient + legenda
+     Donut de 460px à esquerda com furo central (círculo interno
+     var(--bg)) e número grande no centro. UM segmento em accent
+     (o que importa); demais em tons neutros derivados de --fg
+     via color-mix (funciona em light e dark).
+     ============================================================ */
+
+  /* ---------- header ---------- */
+  .head {
+    position: absolute;
+    left: var(--pad);
+    top: 120px;
+    right: var(--pad);
+  }
+  .head h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    color: var(--fg);
+    margin-top: 22px;
+    max-width: 1100px;
+  }
+  .head h1 em { font-style: italic; font-weight: 500; }
+
+  /* ---------- tons dos segmentos ---------- */
+  .slide {
+    --seg-1: color-mix(in srgb, var(--fg) 82%, var(--bg));  /* reuniões */
+    --seg-2: color-mix(in srgb, var(--fg) 55%, var(--bg));  /* operacional */
+    --seg-3: color-mix(in srgb, var(--fg) 30%, var(--bg));  /* e-mail e mensagens */
+    --seg-4: var(--accent);                                  /* estratégia (destaque) */
+  }
+
+  /* ---------- donut (esquerda) ---------- */
+  .donut {
+    position: absolute;
+    left: var(--pad);
+    top: 336px;
+    width: 460px;
+    height: 460px;
+    border-radius: 50%;
+    /* fatias em sentido horário a partir do topo:
+       Reuniões 38%  →   0% – 38%
+       Operacional 27% → 38% – 65%
+       E-mail 21%    →  65% – 86%
+       Estratégia 14% → 86% – 100%  (accent) */
+    background: conic-gradient(
+      var(--seg-1) 0% 38%,
+      var(--seg-2) 38% 65%,
+      var(--seg-3) 65% 86%,
+      var(--seg-4) 86% 100%
+    );
+  }
+  /* furo central */
+  .donut::after {
+    content: "";
+    position: absolute;
+    inset: 78px;                 /* 460 − 2×78 = furo de 304px */
+    border-radius: 50%;
+    background: var(--bg);
+  }
+  .donut .center {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .donut .center .num {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 96px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+  }
+  .donut .center .lbl {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-top: 12px;
+  }
+
+  /* ---------- legenda (direita) ---------- */
+  .legend {
+    position: absolute;
+    left: 720px;
+    right: var(--pad);
+    top: 352px;
+  }
+  .legend .row {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    padding: 22px 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .legend .row:last-child { border-bottom: 1px solid var(--hairline); }
+  .legend .sw {
+    width: 10px;
+    height: 10px;
+    flex: none;
+    align-self: center;
+  }
+  .legend .name {
+    font-family: var(--f-text);
+    font-size: 19px;
+    color: var(--fg);
+  }
+  .legend .desc {
+    font-family: var(--f-text);
+    font-size: 14px;
+    color: var(--fg-muted);
+    margin-left: auto;
+    margin-right: 32px;
+  }
+  .legend .val {
+    font-family: var(--f-mono);
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    color: var(--fg);
+    width: 72px;
+    text-align: right;
+    flex: none;
+  }
+  .legend .row--accent .name { font-style: italic; font-weight: 500; }
+
+  .legend .note {
+    margin-top: 26px;
+    font-family: var(--f-text);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--fg-2);
+    max-width: 620px;
+  }
+
+  /* ---------- fonte ---------- */
+  .source {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 56px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Alocação de tempo">
+
+    <div class="head">
+      <div class="eyebrow">Agenda da liderança</div>
+      <h1>Onde a semana do gestor <em>realmente</em> vai.</h1>
+    </div>
+
+    <!-- donut: fatias comentadas no CSS (38 / 27 / 21 / 14) -->
+    <div class="donut">
+      <div class="center">
+        <div class="num">14%</div>
+        <div class="lbl">em estratégia</div>
+      </div>
+    </div>
+
+    <!-- legenda -->
+    <div class="legend">
+      <div class="row">
+        <span class="sw" style="background: var(--seg-1);"></span>
+        <span class="name">Reuniões recorrentes</span>
+        <span class="desc">status, alinhamentos, rituais</span>
+        <span class="val">38%</span>
+      </div>
+      <div class="row">
+        <span class="sw" style="background: var(--seg-2);"></span>
+        <span class="name">Operacional direto</span>
+        <span class="desc">aprovações, revisão, exceções</span>
+        <span class="val">27%</span>
+      </div>
+      <div class="row">
+        <span class="sw" style="background: var(--seg-3);"></span>
+        <span class="name">E-mail e mensagens</span>
+        <span class="desc">caixa de entrada, Slack, follow-ups</span>
+        <span class="val">21%</span>
+      </div>
+      <div class="row row--accent">
+        <span class="sw" style="background: var(--seg-4);"></span>
+        <span class="name">Estratégia e pessoas</span>
+        <span class="desc">o trabalho que só o gestor faz</span>
+        <span class="val">14%</span>
+      </div>
+      <div class="note">Menos de um dia por semana sobra para o trabalho de maior alavancagem. É essa fatia que a automação das outras três devolve.</div>
+    </div>
+
+    <div class="source">
+      <span>Fonte: diagnóstico de agenda · turmas G4 2025</span>
+      <span>n = 312 gestores · semana típica</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

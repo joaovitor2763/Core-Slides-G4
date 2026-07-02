@@ -1,5 +1,7 @@
 # G4 Aulas IA — AGENTS.md (v3 · consolidada)
 
+> ⚠️ **Este arquivo rege a biblioteca v4 (`templates/`).** Para a geração ATUAL — **v5 "Órbita" em `templates-v5/`** — a source of truth é **`templates-v5/GUIA.md`** (tokens, padrões de código, catálogo e QA). Para decks novos, use a v5.
+
 > **Source of truth** pra construção/edição dos slides HTML das aulas G4.
 > Reúne o que foi aprendido em: `260614-awake-grove` (20 templates), `260615-sunny-dolphin` (29 slides Academia de IA), `260615-awake-creek` (PDF export) e `260623-misty-lake` (29 slides Gestão e Estratégia).
 
@@ -48,6 +50,8 @@ Nunca editar/criar vários slides em lote. Nunca confiar em screenshot headless 
 | `--fg-muted` | `#80AABF` (navy-200) |
 | `--hairline` | `#2D3B4A` (rule-dark) |
 | `--accent` | **mesmo `#B9915B`** |
+
+**Safety net (v4)**: no `.mode-dark`, os tokens crus de texto/linha também flipam (`--ink`→navy-50, `--ink-2`→navy-100, `--muted`→navy-200, `--rule`→rule-dark). Slide copiado do light com `var(--ink)` não imprime mais preto sobre navy. **Exceção**: texto escuro sobre painel dourado/paper dentro de slide dark deve usar `var(--on-accent)` (gold) ou hex explícito `#0F1419` (paper) — nunca `var(--ink)`.
 
 ### Navy scale (sempre disponível)
 `50 #E6EEF3 · 100 #B3CCD9 · 200 #80AABF · 300 #4D88A5 · 400 #26668A · 500 #001F35 · 600 #001A2D · 700 #001525 · 800 #00101D · 900 #000B15`
@@ -126,7 +130,7 @@ artifacts/
 
 ---
 
-## Lista dos 30 templates (20 canônicos + 5 custom × light/dark)
+## Lista dos 48 templates (20 canônicos + 5 custom + 9 do founder-ia + 14 da expansão v4 × light/dark)
 
 ### 20 templates canônicos (com variantes light/dark em arquivos separados)
 
@@ -165,7 +169,40 @@ artifacts/
 | 24 | Pergunta CTA | Pergunta de transição | Eyebrow + h1 grande + sub-texto + seta opcional. Baseado no slide 09 pergunta-transicao. |
 | 25 | Hero com logo G4 | Capa alternativa | Header com logo G4 + hairline dourada + tag "Para quem quer mais" + título hero + barra dourada. Baseado no slide 01 capa e slide 24 divisor. |
 
-**Total no repo**: 48 arquivos de template (20 canônicos × 2 + 5 custom × 2 + 1 style.css = 41 + style.css + 08 já é dark nativo = 41 arquivos de template).
+### 9 templates custom adicionais (extraídos do deck founder-ia-conteudo, 2026-07)
+
+| # | Template | Tipo | Modo | Notas |
+|---|----------|------|------|-------|
+| 26 | Quote galeria split | Citação com moldura | light + dark | Split 50/50: imagem em moldura "mat de galeria" (gradiente + keyline dourada) à esquerda, citação serif grande à direita. Diferente do 03 (retrato pequeno 340×420 + citação ao lado) — aqui a imagem ocupa 50% do canvas. Baseado nos slides 02/08 (provocação/referência). |
+| 27 | Mentor hero | Bio + retrato grande | light + dark | Retrato 38% à direita + nome gigante (140px) + bio em blocos separados por hairline + signoff mono. Diferente do 02-palestrante (nome 108px, bio em 1 parágrafo corrido) — tipografia maior e bio estruturada em blocos. Baseado nos slides 03/14 (mentor / few-shot learner). |
+| 28 | Transição com aceleradores | Transição + lista | light + dark | Rail estreito (280px) com eyebrow + label-sub à esquerda; H1 + body + fileira de 4 itens numerados com hairline no topo à direita. Bom pra "o que vem a seguir". Baseado no slide 04 (transição). |
+| 29 | Bento comparativo | Comparação em mosaico duplo | light + dark | DOIS bentos internos lado a lado (1 hero + 2 células menores cada), com group-label acima de cada um — compara "lado A" vs "lado B". Diferente do 18-bento (1 mosaico só) e do 22-mixed-grid (matriz 2×2 + painel). Baseado no slide 05 (onde a IA ajuda). |
+| 30 | Grid de ferramentas | Grid 4 colunas descritivo | light + dark | 4 colunas com índice + nome grande + descrição + tag mono (empurrada ao fim com margin-top:auto) + faixa gold de takeaway no rodapé. Diferente do 10-stats (números puros) — aqui o conteúdo é descritivo, não numérico. Baseado no slide 09 (pilha de ferramentas). |
+| 31 | Narrativa numérica | 3 colunas editoriais | light + dark | Cada coluna: hero-num (dado/símbolo) + headline com 1 `<em>` + parágrafo explicativo. Fecha com takeaway centralizado. Diferente do 10-stats (métrica + label curto) — aqui ensina um conceito em 3 passos. Baseado no slide 10 (métricas). |
+| 32 | Bento de métricas | Mosaico 3×3 assimétrico | light + dark | 6 células de tamanhos variados numa grade 3×3, cada uma com kicker + headline + sub + 1 bignum. Diferente do 22-mixed-grid (matriz 2×2 + painel lateral). Bom pra breakdown de entregáveis (ex: 70/20/10). Baseado no slide 13 (entrega do exercício). |
+| 33 | Três pilares percentuais (dark) | Manifesto / regra de alocação | dark | 3 eixos lado a lado (não empilhados) com hairline vertical entre eles, cada um com um número/percentual gigante em gold. Diferente do 14-tres-pilares (linhas horizontais empilhadas, light). Baseado no slide 14 (70/20/10). |
+| 34 | Encerramento quote (dark) | Fechamento com citação | dark | Quote serif grande centralizada + atribuição mono + caixa de CTA com hairlines gold acima/abaixo + marca centralizada no topo (espelha a capa). Diferente do 15-encerramento (hero + rail de contato, light). Baseado no slide 16 (encerramento). |
+
+### 14 templates da expansão v4 (2026-07 — gráficos, imagens, quotes, comparação, sequência)
+
+| # | Template | Tipo | Modo | Notas |
+|---|----------|------|------|-------|
+| 35 | Gráfico de linha | Dados / tendência | light + dark | Único gráfico em SVG inline (polyline + dots + gridlines dashed); série base em `--fg`, último segmento/ponto + valor final em accent; coluna editorial de insight à direita. Coordenadas comentadas com a conversão valor→y. |
+| 36 | Gráfico donut | Dados / composição | light + dark | Donut via `conic-gradient` (percentuais comentados), furo central com `::after` em `--bg` + número grande; segmentos neutros via `color-mix(--fg, --bg)`, 1 fatia em accent; legenda com hairline-top à direita. |
+| 37 | Barras duplas | Dados / antes-depois | light + dark | Barras verticais agrupadas, 2 séries × 4 categorias; série "Antes" em `--fg-muted`, série "Com IA" em accent; legenda mono no topo; técnica do 16 (val dentro do `.stem`, alturas px comentadas). |
+| 38 | Barras de progresso | Dados / adoção-share | light + dark | 4-5 barras horizontais: label mono + track `--bg-2` + fill px pré-calculado + valor %; só a linha mais importante em accent; nota "como ler" no rodapé. |
+| 39 | Imagem full + overlay | Imagem hero | **dark (único)** | Foto full-bleed 1600×900 + overlay `linear-gradient(to top, rgba(0,11,21,0.92), …)` + eyebrow/título/caption ancorados na base esquerda. Comentário no HTML documenta como trocar o placeholder por foto real. Portado do padrão de overlay do deck founder-ia. |
+| 40 | Imagem hero lateral | Imagem + tese | light + dark | Imagem full-bleed lateral direita 38% (topo a base, sem moldura) com `.edge-blend` de 120px (`linear-gradient(to right, var(--bg), transparent)`) fundindo com o fundo; esquerda com título display 100px + lede + bloco hairline. Portado do slide 03-mentor do deck founder-ia. |
+| 41 | Galeria duo | Imagem / evidências | light + dark | Duas molduras "mat de galeria" (gradiente + keyline dourada, técnica do 26) lado a lado com legendas mono (Fig. 01/02); bom pra antes/depois visual. |
+| 42 | Quote de post/tweet | Citação / evidência | light + dark | Post do LinkedIn/X reproduzido em bloco com border hairline (sem sombra): avatar circular 56px + nome/handle + texto 32px + meta mono; coluna direita de contexto editorial "por que importa". |
+| 43 | Quote dupla | Citação / contraste | light + dark | Duas citações lado a lado com vrule central e aspa decorativa grande em cada lado; atribuição do lado defendido em accent. |
+| 44 | Tabela comparativa | Comparação / matriz | light + dark | Grid 4 col × 5 linhas com técnica bento (gap 1px sobre `--hairline`); header mono uppercase; coluna recomendada com `border-top: 2px solid var(--accent)`; marcadores tipográficos ● ○ — com legenda. |
+| 45 | Checklist fazer × evitar | Comparação / prática | light + dark | Duas colunas: "o que funciona" (+ mono) vs "o que evitar" (— mono muted); itens separados por hairlines; barra accent só no header positivo. |
+| 46 | Funil | Dados / conversão | light + dark | 4 estágios em barras horizontais decrescentes (larguras px comentadas), tons via `color-mix`, estágio final em accent; coluna direita com taxa total + insight. |
+| 47 | Exercício em passos | Sequência / dinâmica | light + dark | 6 passos em grid com numeral 40px + tag de tempo mono ("5 min"); passo atual com numeral accent; rodapé "6 passos · 45 min · entrega". Portado do slide 12-exercicio do deck founder-ia. |
+| 48 | Número hero | Dados / takeaway | light + dark | Um número gigante (240px) assimétrico à esquerda com sufixo em accent + coluna direita com parágrafos hairline + fonte do dado. |
+
+**Total no repo**: 48 templates → **92 arquivos** (91 `.html` + `style.css`). Têm par light/dark todos exceto os dark-únicos (08, 20, 33, 34, 39).
 
 ---
 
@@ -214,6 +251,11 @@ artifacts/
 - **Slide 19 (stepper) é o caso clássico de `flex:1` em flex-direction:column cria vácuo invisível** — sem `justify-content: space-between` o conteúdo cola no topo.
 - **Slide 6 (will-smith) é o caso clássico de "vídeo pesado no g4os-pages"** — comprimir com ffmpeg `libx264 -crf 28 -vf "scale=-2:480" -an` antes de inline-ar (33MB → 610KB).
 - **Slide 6 também é o caso de "src= como string literal quebra template"** — em cards de passador publicado, use `ifr.setAttribute('srcdoc', html)` em vez de template literal com `${s.html}`.
+- **Os darks v3 são o caso clássico de "token cru não flipa"** — 20 variantes dark usavam `color: var(--ink)` (token cru, #0F1419) achando que flipava no `.mode-dark`. Só os tokens semânticos (`--fg`, `--bg`…) flipavam → letra preta sobre navy. Corrigido com safety net no style.css (tokens crus agora flipam também) + `var(--on-accent)` para texto sobre painel dourado.
+- **`Cormorant Garamond` agora é carregada pelo `style.css`** (junto das 3 famílias). Antes, os templates 26/34/43 declaravam a serif sem carregá-la → fallback genérico feio. Não precisa mais de `<link>` extra no slide.
+- **Eyebrow local ≠ `data-section`** — os dois não podem dizer a mesma coisa (redundância visível no canto do slide). `data-section` = seção do deck; eyebrow = tema do slide.
+- **Template 30 é o caso clássico de "eyebrow local em cima do data-section"** — o `data-section` renderiza via `.slide::before` em `top:48px; left:var(--pad)`. Nenhum elemento local pode ocupar essa faixa; eyebrows locais começam em `top:96px`.
+- **Template 31 é o caso clássico de "orçamento de accent estourado por repetição"** — 3 colunas iguais com número gold cada = 3 unidades de accent. Em layouts repetidos, só a coluna/célula líder (`.lead`) leva accent; as demais ficam em `--fg`.
 - **Publicação única em sites.g4oscloud.com** — para o passador inlinado, cada slide precisa ter o `style.css` inline também (senão o CSS não carrega no srcdoc). 5MB é o limite por arquivo.
 
 ---
@@ -253,9 +295,10 @@ artifacts/
 
 ## Cross-references
 
-- **Catálogo canônico de 20 templates** (raw HTML): `templates/`
+- **Catálogo canônico de 48 templates** (raw HTML): `templates/`
+- **Catálogo navegável** (grid com filtro por categoria + toggle light/dark): `examples/catalog.html` — abrir via servidor local (`python3 -m http.server` na raiz) por causa dos iframes
 - **Playbook narrativo** (prosa + exemplos): `playbook.md` (mesma pasta)
-- **Passador de slides** (exemplo): `examples/index.html`
+- **Passador de slides** (exemplo/base do build): `examples/index.html`
 - **Como publicar**: `docs/PUBLISH.md`
 - **Como exportar PDF**: `docs/EXPORT-PDF.md`
 - **Como customizar templates**: `docs/CUSTOMIZE.md`

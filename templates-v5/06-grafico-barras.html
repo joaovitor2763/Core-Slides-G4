@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>06 · Gráfico de barras</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Gráfico em superfície suave: card com radius envolvendo o chart,
+     barras com topo arredondado, valor em Space Grotesk, delta chips.
+     Título serif à esquerda, leitura à direita do header. */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:104px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:62px;max-width:760px}
+  .head .read{max-width:400px;padding-bottom:8px}
+
+  .panel{position:absolute;left:var(--pad);right:var(--pad);top:352px;bottom:88px;
+    padding:44px 64px 36px;display:flex;flex-direction:column}
+
+  .panel-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+  .legend{display:flex;gap:10px}
+
+  /* chart: barras ancoradas numa baseline firme; categorias abaixo dela.
+     Geometria: chart ≈ 334px · val 48 + col + cat 30 — escala 100% = 250px */
+  .chart{flex:1;display:grid;grid-template-columns:repeat(4,1fr);column-gap:40px;
+    align-items:end;position:relative;padding:0 16px}
+  .chart::after{content:'';position:absolute;left:0;right:0;bottom:30px;height:2px;
+    border-radius:2px;background:var(--border-2)}
+  /* gridline de referência · 50% = 125px acima da baseline */
+  .chart::before{content:'';position:absolute;left:0;right:0;bottom:155px;height:1px;
+    background:repeating-linear-gradient(90deg,var(--border-2) 0 6px,transparent 6px 14px)}
+
+  .bar{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative;z-index:1}
+  .bar .val{font-family:var(--num);font-weight:600;font-size:32px;letter-spacing:-.02em;color:var(--text-2);margin-bottom:12px}
+  .bar .col{width:100%;max-width:200px;border-radius:10px 10px 0 0;background:rgba(0,31,53,.10)}
+  .bar--gold .col{background:linear-gradient(180deg,var(--gold-300),var(--gold-500))}
+  .bar--gold .val{color:var(--gold)}
+  .bar .cat{margin-top:18px;height:12px;line-height:12px;font-family:var(--mono);font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+
+  /* alturas pré-calculadas · 100% = 250px
+     81% = 203px · 44% = 110px · 37% = 93px · 29% = 73px */
+  .c1{height:203px} .c2{height:110px} .c3{height:93px} .c4{height:73px}
+
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Diagnóstico">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Pesquisa · adoção</div>
+        <h1 class="h-serif">O gargalo não é a ferramenta. <em>É o fluxo.</em></h1>
+      </div>
+      <p class="body read">81% dos gestores já testaram IA — mas menos de um terço a colocou dentro de um processo que roda sem eles.</p>
+    </header>
+
+    <section class="panel surface">
+      <div class="panel-top">
+        <span class="mono-label">% de gestores da base G4 · N = 1.240</span>
+        <div class="legend">
+          <span class="chip chip--green"><span class="dot"></span>+37 pts em 12 meses</span>
+        </div>
+      </div>
+
+      <div class="chart">
+        <span style="position:absolute;left:0;bottom:155px;transform:translateY(50%);font-family:var(--mono);font-size:10px;color:var(--text-3);background:var(--surface);padding-right:8px;z-index:1">50</span>
+        <div class="bar bar--gold">
+          <div class="val">81%</div>
+          <div class="col c1"></div>
+          <div class="cat">Testou IA</div>
+        </div>
+        <div class="bar">
+          <div class="val">44%</div>
+          <div class="col c2"></div>
+          <div class="cat">Usa toda semana</div>
+        </div>
+        <div class="bar">
+          <div class="val">37%</div>
+          <div class="col c3"></div>
+          <div class="cat">Tem skill própria</div>
+        </div>
+        <div class="bar">
+          <div class="val">29%</div>
+          <div class="col c4"></div>
+          <div class="cat">Fluxo automatizado</div>
+        </div>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

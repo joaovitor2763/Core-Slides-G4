@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>46 · Funil (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 46 — Funil de conversão/priorização (4 estágios).
+     Barras horizontais empilhadas, alinhadas à esquerda, com
+     larguras decrescentes PRÉ-CALCULADAS em px (100% = 880px).
+     Barras em tons neutros derivados de var(--fg) via color-mix
+     (funciona em light e dark); apenas o estágio final em
+     var(--accent). Coluna direita com leitura editorial.
+     Accent: barra do eyebrow + barra do estágio final. (2 un.)
+     ============================================================ */
+
+  .head { position: absolute; left: var(--pad); right: var(--pad); top: 96px; }
+  .head .eyebrow { margin-bottom: 24px; }
+  .head h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 1.0;
+    letter-spacing: -0.028em;
+    color: var(--fg);
+    max-width: 1100px;
+  }
+  .head h1 em { font-style: italic; font-weight: 500; }
+
+  /* ---- funil (coluna esquerda) ---- */
+  .funnel {
+    position: absolute;
+    left: var(--pad);
+    top: 340px;
+    bottom: 96px;
+    width: 1020px;                 /* 880px de barra máx + folga p/ valor */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .stage-row { display: flex; align-items: center; gap: 24px; }
+
+  .bar {
+    height: 84px;
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+    flex: none;
+  }
+  /* tons neutros decrescentes — misturas de fg com bg */
+  .s1 .bar { background: color-mix(in srgb, var(--fg) 92%, var(--bg)); }
+  .s2 .bar { background: color-mix(in srgb, var(--fg) 72%, var(--bg)); }
+  .s3 .bar { background: color-mix(in srgb, var(--fg) 52%, var(--bg)); }
+  .s4 .bar { background: var(--accent); }   /* único accent do slide */
+
+  /* larguras pré-calculadas · 100% = 880px */
+  .s1 .bar { width: 880px; }  /* 12.400 leads   → 100%  de 880px = 880px */
+  .s2 .bar { width: 405px; }  /*  5.700 diag.   →  46%  de 880px = 405px */
+  .s3 .bar { width: 158px; }  /*  2.230 prop.   →  18%  de 880px = 158px */
+  .s4 .bar { width: 114px; }  /*    810 alunos  →  6,5% de 880px = 114px (mín. p/ label) */
+
+  .bar .lbl {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bg);
+    white-space: nowrap;
+  }
+  .s4 .bar .lbl { color: var(--on-accent); }
+
+  .val {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 30px;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+  .val .pct {
+    display: block;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-top: 4px;
+  }
+
+  /* ---- leitura editorial (coluna direita) ---- */
+  .read {
+    position: absolute;
+    right: var(--pad);
+    top: 340px;
+    bottom: 96px;
+    width: 300px;
+    border-left: 1px solid var(--hairline);
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column;
+  }
+  .read .k {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .read .rate {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 88px;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--fg);
+    margin-top: 16px;
+  }
+  .read .rate-sub {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-top: 10px;
+  }
+  .read .insight {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--hairline);
+    font-family: var(--f-text);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--fg-2);
+  }
+  .read .insight em { font-style: italic; font-weight: 500; }
+  .read .src {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--hairline);
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Funil">
+
+    <div class="head">
+      <div class="eyebrow">Conversão · 2025</div>
+      <h1>Onde o funil <em>afunila</em> de verdade.</h1>
+    </div>
+
+    <div class="funnel">
+
+      <div class="stage-row s1">
+        <div class="bar"><span class="lbl">Leads qualificados</span></div>
+        <div class="val">12.400<span class="pct">100%</span></div>
+      </div>
+
+      <div class="stage-row s2">
+        <div class="bar"><span class="lbl">Diagnósticos</span></div>
+        <div class="val">5.700<span class="pct">46%</span></div>
+      </div>
+
+      <div class="stage-row s3">
+        <div class="bar"><span class="lbl">Propostas</span></div>
+        <div class="val">2.230<span class="pct">18%</span></div>
+      </div>
+
+      <div class="stage-row s4">
+        <div class="bar"><span class="lbl">Alunos</span></div>
+        <div class="val">810<span class="pct">6,5%</span></div>
+      </div>
+
+    </div>
+
+    <div class="read">
+      <div class="k">Conversão total</div>
+      <div class="rate">6,5%</div>
+      <div class="rate-sub">lead → aluno</div>
+      <p class="insight">A maior perda não está no fechamento — está entre o lead e o diagnóstico. Cada ponto recuperado ali vale <em>mais que dobrar</em> o esforço na última etapa.</p>
+      <div class="src">Fonte · CRM consolidado 12m</div>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

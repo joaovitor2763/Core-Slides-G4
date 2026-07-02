@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>31 · Divisor claro</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Divisor de seção em paper — espelho light do 02-divisor: número ghost
+     gigante sangrando à direita, título serif à esquerda-centro, chip de
+     contexto e hairline curta gold. Gravura armilar no canto inferior
+     direito com as bordas cortadas do PNG mantidas FORA do canvas
+     (a arte fica no lado direito do PNG → right/bottom negativos). */
+
+  .armilar--corner{width:780px;height:439px;right:-30px;bottom:-30px;opacity:.5}
+
+  /* ghost: 340px, ~2 dígitos ≈ 480px de largura · right:-70px
+     → sangra levemente (~70px) para fora do canvas, de propósito */
+  .chapter-ghost{position:absolute;right:-70px;top:50%;transform:translateY(-56%);
+    font-size:340px;line-height:1;white-space:nowrap}
+
+  /* bloco: chip 33 + gap 34 + h1 2 linhas × ~84 = 168 + gap 44 + hairline
+     ≈ 280px de altura → top 316 centraliza no eixo vertical */
+  .block{position:absolute;left:var(--pad);top:316px;max-width:920px}
+  .block .chip{margin-bottom:34px}
+  .block h1{font-size:80px}
+  .block .rule{margin-top:44px;width:120px;height:1px;background:var(--gold);opacity:.65}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Imersão · IA na operação">
+
+    <div class="armilar armilar--engraving armilar--corner" aria-hidden="true"></div>
+    <div class="ghost chapter-ghost" aria-hidden="true">03</div>
+
+    <div class="block">
+      <span class="chip chip--gold"><span class="dot"></span>Parte 03 · Prática</span>
+      <h1 class="h-serif">Mão na massa: o fluxo<br>que você leva <em>pronto.</em></h1>
+      <div class="rule" aria-hidden="true"></div>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

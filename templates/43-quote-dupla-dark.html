@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>43 · Quote dupla (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Slide 43 — Quote dupla (duas escolas em contraste)
+     Grid 2 colunas com vrule central hairline; cada lado com
+     aspa tipográfica decorativa em opacity baixa, quote 30px
+     e atribuição mono. Único accent: atribuição do lado defendido.
+     ============================================================ */
+
+  .header {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 116px;
+  }
+  .header .eyebrow { margin-bottom: 24px; }
+  .header h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+  }
+  .header h1 em { font-style: italic; font-weight: 500; }
+
+  .duo {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 320px;
+    bottom: 110px;
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;   /* vrule central */
+    align-items: stretch;
+  }
+  .duo > .vrule { background: var(--hairline); }
+
+  .side {
+    position: relative;
+    padding: 72px 64px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .side--a { padding-left: 0; }
+  .side--b { padding-right: 0; }
+
+  /* aspa decorativa — só tipografia, opacity baixa, nunca compete */
+  .mark {
+    position: absolute;
+    top: -26px;
+    left: 64px;
+    font-family: 'Cormorant Garamond', 'Garamond', serif;
+    font-weight: 600;
+    font-size: 200px;
+    line-height: 1;
+    color: var(--fg);
+    opacity: 0.10;
+    pointer-events: none;
+    user-select: none;
+  }
+  .side--a .mark { left: 0; }
+
+  .school {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 30px;
+  }
+
+  .q {
+    font-family: 'Cormorant Garamond', 'Garamond', serif;
+    font-weight: 500;
+    font-size: 44px;
+    line-height: 1.28;
+    letter-spacing: -0.005em;
+    color: var(--fg);
+    max-width: 560px;
+  }
+  .q em { font-style: italic; font-weight: 500; }
+
+  .attr {
+    margin-top: auto;                    /* alinha as duas atribuições na base */
+    padding-top: 24px;
+    border-top: 1px solid var(--hairline);
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    line-height: 1.7;
+  }
+  .attr .who { color: var(--fg); }
+
+  /* único accent do slide: a atribuição do lado defendido */
+  .side--b .attr .who { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Conceito">
+
+    <header class="header">
+      <div class="eyebrow">Duas escolas</div>
+      <h1>Copiloto ou <em>funcionário digital?</em></h1>
+    </header>
+
+    <div class="duo">
+
+      <!-- VISÃO A -->
+      <section class="side side--a">
+        <div class="mark" aria-hidden="true">&ldquo;</div>
+        <div class="school">Visão A · assistência</div>
+        <blockquote class="q">
+          A IA é um copiloto: o humano decide, a máquina acelera. Automatizar julgamento é abrir mão da sua <em>vantagem competitiva</em>.
+        </blockquote>
+        <div class="attr">
+          <span class="who">Escola do copiloto</span><br>
+          consultorias · 2023–2024
+        </div>
+      </section>
+
+      <div class="vrule" aria-hidden="true"></div>
+
+      <!-- VISÃO B -->
+      <section class="side side--b">
+        <div class="mark" aria-hidden="true">&ldquo;</div>
+        <div class="school">Visão B · delegação</div>
+        <blockquote class="q">
+          A IA é um funcionário digital: recebe o processo, executa ponta a ponta e reporta exceções. O gestor vira <em>gestor de agentes</em>.
+        </blockquote>
+        <div class="attr">
+          <span class="who">Escola do agente</span><br>
+          tese G4 · a partir de 2025
+        </div>
+      </section>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  // center + scale-to-fit
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

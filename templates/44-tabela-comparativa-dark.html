@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>44 · Tabela comparativa (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Slide 44 — Tabela comparativa (matriz editorial)
+     Grid 4 col × 5 linhas com hairlines via técnica bento:
+     wrapper com background var(--hairline) + gap 1px, células
+     com background var(--bg). Uma coluna destacada (recomendada)
+     com border-top 2px accent + header em accent — único accent.
+     ============================================================ */
+
+  .header {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 116px;
+  }
+  .header .eyebrow { margin-bottom: 24px; }
+  .header h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    max-width: 1100px;
+  }
+  .header h1 em { font-style: italic; font-weight: 500; }
+  .header .lede {
+    margin-top: 20px;
+    font-size: 21px;
+    color: var(--fg-2);
+    max-width: 860px;
+  }
+
+  /* matriz — começa em top 384px (há h1 + lede acima) */
+  .matrix {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 384px;
+    bottom: 96px;                       /* 900 − 384 − 96 = 420px de altura */
+    display: grid;
+    grid-template-columns: 1.35fr 1fr 1fr 1fr;
+    grid-template-rows: 64px repeat(4, 1fr);   /* header + 4 critérios */
+    gap: 1px;                           /* hairlines pela fresta */
+    background: var(--hairline);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .cell {
+    background: var(--bg);
+    padding: 18px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* header row — mono uppercase muted */
+  .cell--head {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    justify-content: flex-end;
+    padding-bottom: 16px;
+  }
+
+  /* primeira coluna = critérios */
+  .cell--crit {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.25;
+    color: var(--fg);
+  }
+
+  /* células de valor */
+  .cell--val {
+    font-family: var(--f-text);
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--fg-2);
+  }
+  .cell--val .dot {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    color: var(--fg);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .cell--val .dot.off { color: var(--fg-muted); }
+
+  /* coluna recomendada — único accent do slide */
+  .cell--reco.cell--head {
+    border-top: 2px solid var(--accent);
+    color: var(--accent);
+    margin-top: -1px;                   /* compensa a hairline superior */
+  }
+  .cell--reco.cell--val { color: var(--fg); }
+
+  /* legenda dos marcadores */
+  .legend {
+    position: absolute;
+    right: var(--pad);
+    top: 348px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Decisão de stack">
+
+    <header class="header">
+      <div class="eyebrow">Matriz de escolha</div>
+      <h1>Três formas de levar IA <em>pro time de vendas.</em></h1>
+      <p class="lede">Mesma tecnologia, três níveis de institucionalização — e resultados muito diferentes em 90 dias.</p>
+    </header>
+
+    <div class="legend">● atende &nbsp;&nbsp;○ parcial &nbsp;&nbsp;— não atende</div>
+
+    <div class="matrix">
+      <!-- header row -->
+      <div class="cell cell--head">Critério</div>
+      <div class="cell cell--head">Prompt avulso</div>
+      <div class="cell cell--head">Assistente configurado</div>
+      <div class="cell cell--head cell--reco">Skill no G4 OS</div>
+
+      <!-- linha 1 -->
+      <div class="cell cell--crit">Consistência entre vendedores</div>
+      <div class="cell cell--val"><span class="dot off">—</span>cada um faz do seu jeito</div>
+      <div class="cell cell--val"><span class="dot">○</span>depende de quem configurou</div>
+      <div class="cell cell--val cell--reco"><span class="dot">●</span>mesmo processo pra todos</div>
+
+      <!-- linha 2 -->
+      <div class="cell cell--crit">Tempo até o primeiro resultado</div>
+      <div class="cell cell--val"><span class="dot">●</span>minutos</div>
+      <div class="cell cell--val"><span class="dot">●</span>1–2 dias</div>
+      <div class="cell cell--val cell--reco"><span class="dot">○</span>1–2 semanas</div>
+
+      <!-- linha 3 -->
+      <div class="cell cell--crit">Auditoria e versionamento</div>
+      <div class="cell cell--val"><span class="dot off">—</span>histórico se perde no chat</div>
+      <div class="cell cell--val"><span class="dot">○</span>instruções fixas, sem log</div>
+      <div class="cell cell--val cell--reco"><span class="dot">●</span>versionado, com registro</div>
+
+      <!-- linha 4 -->
+      <div class="cell cell--crit">Sobrevive à troca de pessoas</div>
+      <div class="cell cell--val"><span class="dot off">—</span>sai com o funcionário</div>
+      <div class="cell cell--val"><span class="dot">○</span>fica na conta pessoal</div>
+      <div class="cell cell--val cell--reco"><span class="dot">●</span>ativo institucional</div>
+    </div>
+
+  </article>
+</div>
+<script>
+  // center + scale-to-fit
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

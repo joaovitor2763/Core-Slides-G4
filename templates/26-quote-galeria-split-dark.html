@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>26 · Quote galeria split (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  .split-stage { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+
+  .split-image { position: relative; padding: 96px 16px 96px 96px; display: flex; align-items: center; justify-content: center; }
+  .split-image .frame {
+    position: relative;
+    width: 520px;
+    max-width: 100%;
+    aspect-ratio: 3 / 4;
+    padding: 22px;
+    background: linear-gradient(158deg,
+      rgba(230, 238, 243, 0.11) 0%,
+      rgba(230, 238, 243, 0.035) 48%,
+      rgba(0, 8, 16, 0.10) 100%);
+    border: 1px solid rgba(230, 238, 243, 0.16);
+    border-radius: 22px;
+    box-shadow:
+      inset 0 1px 0 rgba(230, 238, 243, 0.28),
+      inset 0 0 0 1px rgba(0, 8, 16, 0.35),
+      0 34px 80px -26px rgba(0, 8, 16, 0.85),
+      0 10px 28px -16px rgba(0, 8, 16, 0.7);
+  }
+  .split-image .img-clip {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    box-shadow:
+      0 0 0 1px rgba(185, 145, 91, 0.55),
+      0 2px 12px -4px rgba(0, 8, 16, 0.6);
+  }
+  .split-image .img-clip svg { opacity: 0.28; }
+  .split-image .img-clip .cap {
+    position: absolute; bottom: 34px; left: 34px;
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,255,255,0.5);
+  }
+
+  .split-text { position: relative; padding: 96px 96px 96px 8px; display: flex; flex-direction: column; justify-content: center; }
+  .split-text .eyebrow { margin-bottom: 36px; }
+
+  .split-quote {
+    font-family: 'Cormorant Garamond', 'Garamond', serif;
+    font-weight: 500;
+    font-size: 60px;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    max-width: 680px;
+  }
+  .split-quote em { color: var(--accent); font-style: italic; font-weight: 500; }
+
+  .split-attr {
+    margin-top: 36px;
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Provocação">
+
+    <div class="split-stage">
+
+      <div class="split-image">
+        <div class="frame">
+          <div class="img-clip">
+            <svg viewBox="0 0 100 100" width="140" height="140">
+              <rect x="20" y="20" width="60" height="60" fill="none" stroke="white" stroke-width="2"/>
+              <line x1="20" y1="20" x2="80" y2="80" stroke="white" stroke-width="2"/>
+            </svg>
+            <div class="cap">[ IMAGEM · 3:4 ]</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-text">
+        <div class="eyebrow">Princípio</div>
+        <div class="split-quote">
+          Redes sociais são <em>psicologia</em>.<br>
+          Psicologia é <em>padrão</em>.
+        </div>
+        <div class="split-attr">— Autor da frase</div>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

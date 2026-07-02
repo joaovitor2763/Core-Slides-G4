@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Core Slides G4 · Catálogo de Templates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy-50:  #E6EEF3;
+    --navy-100: #B3CCD9;
+    --navy-200: #80AABF;
+    --navy-500: #001F35;
+    --navy-600: #001A2D;
+    --navy-700: #001525;
+    --gold-300: #D4B189;
+    --gold-500: #B9915B;
+    --paper:    #F5F4F3;
+    --rule:     #2D3B4A;
+
+    --f-display: 'Space Grotesk', system-ui, sans-serif;
+    --f-text:    'IBM Plex Sans', system-ui, sans-serif;
+    --f-mono:    'IBM Plex Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--navy-700);
+    color: var(--navy-50);
+    font-family: var(--f-text);
+    -webkit-font-smoothing: antialiased;
+  }
+  .deck { max-width: 1720px; margin: 0 auto; padding: 72px 64px 160px; }
+  .deck-head {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 28px; margin-bottom: 36px;
+  }
+  .deck-head h1 {
+    font-family: var(--f-display);
+    font-size: 48px; line-height: 1; font-weight: 600; letter-spacing: -0.02em;
+  }
+  .deck-head h1 em { color: var(--gold-500); font-style: italic; font-weight: 400; }
+  .deck-head .meta {
+    color: var(--navy-200); font-family: var(--f-mono);
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  }
+
+  .toolbar {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px; margin-bottom: 44px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip, .mode-btn {
+    background: transparent; border: 1px solid var(--rule); color: var(--navy-100);
+    padding: 9px 16px; font-family: var(--f-mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;
+    transition: border-color .15s, color .15s;
+  }
+  .chip:hover, .mode-btn:hover { border-color: var(--gold-500); color: var(--gold-300); }
+  .chip.active { border-color: var(--gold-500); color: var(--gold-500); }
+  .mode-btn.active { border-color: var(--gold-500); color: var(--gold-500); }
+  .modes { display: flex; gap: 8px; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+  @media (max-width: 1280px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  .card {
+    position: relative; background: var(--navy-600); border: 1px solid var(--rule);
+    overflow: hidden; cursor: pointer; text-decoration: none; color: inherit;
+    transition: border-color .2s, transform .2s;
+    display: block;
+  }
+  .card:hover { border-color: var(--gold-500); transform: translateY(-2px); }
+  .card.hidden { display: none; }
+  .card .frame {
+    width: 100%; aspect-ratio: 16 / 9; overflow: hidden; position: relative;
+    background: var(--paper);
+  }
+  .card .frame iframe {
+    width: 1600px; height: 900px; border: 0;
+    transform-origin: top left; pointer-events: none;
+  }
+  .card .info {
+    padding: 16px 20px;
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    font-family: var(--f-mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .card .info .num  { color: var(--gold-500); }
+  .card .info .name { color: var(--navy-100); flex: 1; }
+  .card .info .badge { color: var(--navy-200); border: 1px solid var(--rule); padding: 3px 8px; }
+</style>
+</head>
+<body>
+
+<div class="deck">
+  <div class="deck-head">
+    <h1>Core Slides <em>G4</em></h1>
+    <div class="meta" id="count"></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="chips" id="chips"></div>
+    <div class="modes">
+      <button class="mode-btn active" data-mode="light" type="button">Light</button>
+      <button class="mode-btn" data-mode="dark" type="button">Dark</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<script>
+  // cat: Estrutura | Quotes | Dados | Imagem | Comparação | Sequência | Grids | Texto
+  // dark: 'pair' (tem -dark.html) | 'only' (arquivo único já é dark) | 'none' (só light)
+  const T = [
+    { n: 1,  slug: '01-capa',                   name: 'Capa',                        cat: 'Estrutura',  dark: 'pair' },
+    { n: 2,  slug: '02-palestrante',            name: 'Palestrante',                 cat: 'Estrutura',  dark: 'pair' },
+    { n: 3,  slug: '03-quote-com-imagem',       name: 'Quote com imagem',            cat: 'Quotes',     dark: 'pair' },
+    { n: 4,  slug: '04-quote-sem-imagem',       name: 'Quote sem imagem',            cat: 'Quotes',     dark: 'pair' },
+    { n: 5,  slug: '05-grafico',                name: 'Gráfico barras horizontais',  cat: 'Dados',      dark: 'pair' },
+    { n: 6,  slug: '06-texto-focado',           name: 'Texto focado',                cat: 'Texto',      dark: 'pair' },
+    { n: 7,  slug: '07-timeline',               name: 'Timeline',                    cat: 'Sequência',  dark: 'pair' },
+    { n: 8,  slug: '08-divisor',                name: 'Divisor de bloco',            cat: 'Estrutura',  dark: 'only' },
+    { n: 9,  slug: '09-comparacao',             name: 'Comparação antes × depois',   cat: 'Comparação', dark: 'pair' },
+    { n: 10, slug: '10-stats',                  name: 'Stats / métricas',            cat: 'Dados',      dark: 'pair' },
+    { n: 11, slug: '11-agenda',                 name: 'Agenda',                      cat: 'Sequência',  dark: 'pair' },
+    { n: 12, slug: '12-imagem-legenda',         name: 'Imagem + legenda',            cat: 'Imagem',     dark: 'pair' },
+    { n: 13, slug: '13-lista',                  name: 'Lista numerada',              cat: 'Texto',      dark: 'pair' },
+    { n: 14, slug: '14-tres-pilares',           name: 'Três pilares',                cat: 'Texto',      dark: 'pair' },
+    { n: 15, slug: '15-encerramento',           name: 'Encerramento',                cat: 'Estrutura',  dark: 'pair' },
+    { n: 16, slug: '16-grafico-vertical',       name: 'Gráfico vertical + nota',     cat: 'Dados',      dark: 'pair' },
+    { n: 17, slug: '17-a-vs-b',                 name: 'A vs B (split 50/50)',        cat: 'Comparação', dark: 'pair' },
+    { n: 18, slug: '18-bento',                  name: 'Bento mosaic',                cat: 'Grids',      dark: 'pair' },
+    { n: 19, slug: '19-stepper',                name: 'Stepper 4 etapas',            cat: 'Sequência',  dark: 'pair' },
+    { n: 20, slug: '20-quote-hero',             name: 'Quote hero',                  cat: 'Quotes',     dark: 'only' },
+    { n: 21, slug: '21-2-boxes',                name: 'Dois boxes',                  cat: 'Grids',      dark: 'pair' },
+    { n: 22, slug: '22-mixed-grid',             name: 'Mixed grid',                  cat: 'Grids',      dark: 'pair' },
+    { n: 23, slug: '23-custom-2col',            name: 'Duas colunas custom',         cat: 'Texto',      dark: 'pair' },
+    { n: 24, slug: '24-pergunta-cta',           name: 'Pergunta / CTA',              cat: 'Estrutura',  dark: 'pair' },
+    { n: 25, slug: '25-hero-logo-g4',           name: 'Hero logo G4',                cat: 'Estrutura',  dark: 'pair' },
+    { n: 26, slug: '26-quote-galeria-split',    name: 'Quote + galeria split',       cat: 'Quotes',     dark: 'pair' },
+    { n: 27, slug: '27-mentor-hero',            name: 'Mentor hero',                 cat: 'Estrutura',  dark: 'pair' },
+    { n: 28, slug: '28-transicao-aceleradores', name: 'Transição + aceleradores',    cat: 'Sequência',  dark: 'pair' },
+    { n: 29, slug: '29-bento-comparativo',      name: 'Bento comparativo',           cat: 'Grids',      dark: 'pair' },
+    { n: 30, slug: '30-grid-ferramentas',       name: 'Grid de ferramentas',         cat: 'Grids',      dark: 'pair' },
+    { n: 31, slug: '31-narrativa-numerica',     name: 'Narrativa numérica',          cat: 'Dados',      dark: 'pair' },
+    { n: 32, slug: '32-bento-metricas',         name: 'Bento de métricas',           cat: 'Dados',      dark: 'pair' },
+    { n: 33, slug: '33-tres-pilares-percent',   name: 'Três pilares percentuais',    cat: 'Dados',      dark: 'only' },
+    { n: 34, slug: '34-encerramento-quote',     name: 'Encerramento com quote',      cat: 'Quotes',     dark: 'only' },
+    { n: 35, slug: '35-grafico-linha',          name: 'Gráfico de linha',            cat: 'Dados',      dark: 'pair' },
+    { n: 36, slug: '36-grafico-donut',          name: 'Gráfico donut',               cat: 'Dados',      dark: 'pair' },
+    { n: 37, slug: '37-grafico-barras-duplas',  name: 'Barras duplas',               cat: 'Dados',      dark: 'pair' },
+    { n: 38, slug: '38-grafico-progresso',      name: 'Barras de progresso',         cat: 'Dados',      dark: 'pair' },
+    { n: 39, slug: '39-imagem-full-overlay',    name: 'Imagem full + overlay',       cat: 'Imagem',     dark: 'only' },
+    { n: 40, slug: '40-imagem-hero-lateral',    name: 'Imagem hero lateral',         cat: 'Imagem',     dark: 'pair' },
+    { n: 41, slug: '41-galeria-duo',            name: 'Galeria duo',                 cat: 'Imagem',     dark: 'pair' },
+    { n: 42, slug: '42-quote-tweet',            name: 'Quote de post/tweet',         cat: 'Quotes',     dark: 'pair' },
+    { n: 43, slug: '43-quote-dupla',            name: 'Quote dupla',                 cat: 'Quotes',     dark: 'pair' },
+    { n: 44, slug: '44-tabela-comparativa',     name: 'Tabela comparativa',          cat: 'Comparação', dark: 'pair' },
+    { n: 45, slug: '45-checklist',              name: 'Checklist fazer × evitar',    cat: 'Comparação', dark: 'pair' },
+    { n: 46, slug: '46-funil',                  name: 'Funil',                       cat: 'Dados',      dark: 'pair' },
+    { n: 47, slug: '47-exercicio-passos',       name: 'Exercício em passos',         cat: 'Sequência',  dark: 'pair' },
+    { n: 48, slug: '48-numero-hero',            name: 'Número hero',                 cat: 'Dados',      dark: 'pair' },
+  ];
+
+  const BASE = '../templates/';
+  const CATS = ['Todos', 'Estrutura', 'Quotes', 'Dados', 'Imagem', 'Comparação', 'Sequência', 'Grids', 'Texto'];
+  let cat = 'Todos';
+  let mode = 'light';
+
+  function fileFor(t) {
+    if (t.dark === 'only') return t.slug + '.html';           // arquivo único, já é dark
+    if (mode === 'dark' && t.dark === 'pair') return t.slug + '-dark.html';
+    return t.slug + '.html';
+  }
+
+  const grid = document.getElementById('grid');
+  const cards = T.map(t => {
+    const a = document.createElement('a');
+    a.className = 'card';
+    a.target = '_blank';
+    const frame = document.createElement('div'); frame.className = 'frame';
+    const ifr = document.createElement('iframe');
+    ifr.setAttribute('scrolling', 'no');
+    ifr.setAttribute('loading', 'lazy');
+    ifr.addEventListener('load', () => {
+      ifr.style.transform = `scale(${Math.min(frame.clientWidth / 1600, frame.clientHeight / 900)})`;
+    });
+    frame.appendChild(ifr); a.appendChild(frame);
+    const info = document.createElement('div'); info.className = 'info';
+    const num = document.createElement('span'); num.className = 'num';
+    num.textContent = String(t.n).padStart(2, '0');
+    const name = document.createElement('span'); name.className = 'name';
+    name.textContent = t.name;
+    info.appendChild(num); info.appendChild(name);
+    if (t.dark === 'only') {
+      const b = document.createElement('span'); b.className = 'badge'; b.textContent = 'dark';
+      info.appendChild(b);
+    }
+    a.appendChild(info);
+    grid.appendChild(a);
+    return { t, a, ifr };
+  });
+
+  function render() {
+    let visible = 0;
+    cards.forEach(({ t, a, ifr }) => {
+      const show = cat === 'Todos' || t.cat === cat;
+      a.classList.toggle('hidden', !show);
+      const src = BASE + fileFor(t);
+      if (a.getAttribute('data-src') !== src) {
+        a.setAttribute('data-src', src);
+        a.href = src;
+        ifr.src = src;
+      }
+      if (show) visible++;
+    });
+    document.getElementById('count').textContent =
+      `${visible} de ${T.length} templates · 16:9 · paper + navy + gold`;
+  }
+
+  const chips = document.getElementById('chips');
+  CATS.forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (c === cat ? ' active' : '');
+    b.type = 'button';
+    b.textContent = c;
+    b.onclick = () => {
+      cat = c;
+      chips.querySelectorAll('.chip').forEach(x => x.classList.toggle('active', x.textContent === c));
+      render();
+    };
+    chips.appendChild(b);
+  });
+
+  document.querySelectorAll('.mode-btn').forEach(b => {
+    b.onclick = () => {
+      mode = b.dataset.mode;
+      document.querySelectorAll('.mode-btn').forEach(x => x.classList.toggle('active', x === b));
+      render();
+    };
+  });
+
+  addEventListener('resize', () => cards.forEach(({ a, ifr }) => {
+    const frame = a.querySelector('.frame');
+    ifr.style.transform = `scale(${Math.min(frame.clientWidth / 1600, frame.clientHeight / 900)})`;
+  }));
+
+  render();
+</script>
+</body>
+</html>

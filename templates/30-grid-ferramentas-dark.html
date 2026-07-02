@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>30 · Grid de ferramentas (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Template 30 — Grid de ferramentas/etapas (4 colunas).
+     Diferente do 10-stats (números puros): aqui cada coluna tem
+     um índice + nome grande + descrição + tag mono no rodapé da
+     coluna (empurrada com margin-top:auto). Fecha com uma faixa
+     gold de takeaway. Bom pra "a stack que usamos" ou "4 passos".
+     Accent: barra do eyebrow + <em> no H1 + hairline gold do
+     rodapé (conta como 1 unidade — é utilitária, não decorativa).
+     ============================================================ */
+
+  .title-block { position: absolute; left: var(--pad); top: 168px; right: var(--pad); }
+  .title-block .h-display { font-size: 88px; line-height: 1.0; letter-spacing: -0.03em; font-weight: 600; }
+  .title-block .h-display em { display: block; font-style: italic; font-weight: 500; color: var(--accent); margin-top: 6px; }
+
+  .grid-tools {
+    position: absolute;
+    left: var(--pad); right: var(--pad);
+    top: 470px; bottom: 168px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 48px;
+  }
+  .tool { position: relative; padding-top: 24px; display: flex; flex-direction: column; }
+  .tool::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--fg); }
+  .tool .idx { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-muted); }
+  .tool .name { font-family: var(--f-display); font-weight: 600; font-size: 38px; line-height: 1.02; letter-spacing: -0.02em; color: var(--fg); margin-top: 18px; }
+  .tool .desc { font-family: var(--f-text); font-size: 15px; line-height: 1.5; color: var(--fg-2); margin-top: 16px; max-width: 280px; }
+  .tool .model { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-muted); margin-top: auto; padding-top: 18px; }
+
+  .footer-gold { position: absolute; left: var(--pad); right: var(--pad); bottom: 96px; padding-top: 20px; border-top: 1px solid var(--accent); font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Ferramentas">
+
+    <header class="head" style="position:absolute; left:var(--pad); top:96px;">
+      <div class="eyebrow">A stack</div>
+    </header>
+
+    <div class="title-block">
+      <h1 class="h-display">Quatro ferramentas. <em>Cada uma faz uma coisa.</em></h1>
+    </div>
+
+    <div class="grid-tools">
+      <div class="tool">
+        <div class="idx">01 — Categoria</div>
+        <div class="name">Ferramenta A</div>
+        <div class="desc">O que essa ferramenta faz em uma frase curta.</div>
+        <div class="model">detalhe · quando usar</div>
+      </div>
+      <div class="tool">
+        <div class="idx">02 — Categoria</div>
+        <div class="name">Ferramenta B</div>
+        <div class="desc">O que essa ferramenta faz em uma frase curta.</div>
+        <div class="model">detalhe · quando usar</div>
+      </div>
+      <div class="tool">
+        <div class="idx">03 — Categoria</div>
+        <div class="name">Ferramenta C</div>
+        <div class="desc">O que essa ferramenta faz em uma frase curta.</div>
+        <div class="model">detalhe · quando usar</div>
+      </div>
+      <div class="tool">
+        <div class="idx">04 — Categoria</div>
+        <div class="name">Ferramenta D</div>
+        <div class="desc">O que essa ferramenta faz em uma frase curta.</div>
+        <div class="model">detalhe · quando usar</div>
+      </div>
+    </div>
+
+    <div class="footer-gold">Frase de takeaway sobre a stack.</div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit(); window.addEventListener('resize', fit);
+</script>
+</body>
+</html>

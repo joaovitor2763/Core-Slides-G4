@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>37 · Gráfico de barras duplas (dark)</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* ============================================================
+     Slide 37 — barras verticais agrupadas (2 séries × 4 categorias)
+     Série A ("Antes") em var(--fg-muted); série B ("Com IA") em
+     var(--accent) — a série accent é o único accent do slide.
+     Técnica do template 16: alturas px pré-calculadas, baseline
+     1px, valor DENTRO do .stem (ancorado no topo da barra).
+     ============================================================ */
+
+  /* ---------- header ---------- */
+  .head {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 120px;
+  }
+  .head h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    color: var(--fg);
+    margin-top: 22px;
+    max-width: 1050px;
+  }
+  .head h1 em { font-style: italic; font-weight: 500; }
+
+  /* ---------- legenda (topo direito do chart) ---------- */
+  .legend {
+    position: absolute;
+    right: var(--pad);
+    top: 356px;
+    display: flex;
+    gap: 36px;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .legend .item { display: flex; align-items: center; gap: 12px; }
+  .legend .sw { width: 10px; height: 10px; }
+  .legend .sw--a { background: var(--fg-muted); }
+  .legend .sw--b { background: var(--accent); }
+
+  /* ---------- chart ---------- */
+  .chart {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 420px;
+    height: 340px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 88px;
+  }
+  .chart::before {          /* baseline 1px */
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: var(--fg);
+  }
+  /* gridlines dashed — 24 h = 320px acima da baseline → top 20px;
+     12 h = 160px acima da baseline → top 180px (chart de 340px) */
+  .chart .gl {
+    position: absolute;
+    left: 0; right: 0;
+    border-top: 1px dashed var(--hairline);
+    pointer-events: none;
+  }
+  .gl-24 { top: 20px; }
+  .gl-12 { top: 180px; }
+  .chart .yt {
+    position: absolute;
+    left: -8px;
+    transform: translate(-100%, -50%);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+  }
+  .yt-24 { top: 20px; }
+  .yt-12 { top: 180px; }
+  .yt-0  { top: 100%; }
+
+  /* grupo = 2 barras lado a lado */
+  .group {
+    flex: 1;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 12px;
+  }
+  .stem {
+    width: 128px;
+    position: relative;      /* referência do .val */
+  }
+  .stem--a { background: var(--fg-muted); }
+  .stem--b { background: var(--accent); }
+
+  /* valor DENTRO do stem, 12px acima do topo da barra */
+  .stem .val {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(100% + 12px);
+    font-family: var(--f-mono);
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    color: var(--fg-muted);
+  }
+  .stem--b .val { color: var(--accent); font-weight: 500; }
+
+  /* label da categoria, centralizado sob o grupo */
+  .group .lbl {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(100% + 16px);
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    white-space: nowrap;
+  }
+
+  /* ---------- fonte ---------- */
+  .source {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 56px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Comparativo">
+
+    <div class="head">
+      <div class="eyebrow">Antes e depois</div>
+      <h1>Horas por entregável, <em>antes e com IA</em> no fluxo.</h1>
+    </div>
+
+    <!-- legenda mono no topo direito do chart -->
+    <div class="legend">
+      <span class="item"><span class="sw sw--a"></span>Antes</span>
+      <span class="item"><span class="sw sw--b"></span>Com IA</span>
+    </div>
+
+    <!-- chart 340px de altura · escala: 24 h = 320px → 1 h = 13,33px
+         Relatório mensal:  12 h = 160px · 3 h = 40px
+         Proposta comercial: 9 h = 120px · 2 h = 27px
+         Análise de mercado: 16 h = 213px · 5 h = 67px
+         Onboarding de cliente: 24 h = 320px · 8 h = 107px -->
+    <div class="chart">
+      <div class="gl gl-24"></div>
+      <div class="gl gl-12"></div>
+      <span class="yt yt-24">24h</span>
+      <span class="yt yt-12">12h</span>
+      <span class="yt yt-0">0</span>
+
+      <div class="group">
+        <div class="stem stem--a" style="height: 160px;"><span class="val">12h</span></div>
+        <div class="stem stem--b" style="height: 40px;"><span class="val">3h</span></div>
+        <div class="lbl">Relatório mensal</div>
+      </div>
+
+      <div class="group">
+        <div class="stem stem--a" style="height: 120px;"><span class="val">9h</span></div>
+        <div class="stem stem--b" style="height: 27px;"><span class="val">2h</span></div>
+        <div class="lbl">Proposta comercial</div>
+      </div>
+
+      <div class="group">
+        <div class="stem stem--a" style="height: 213px;"><span class="val">16h</span></div>
+        <div class="stem stem--b" style="height: 67px;"><span class="val">5h</span></div>
+        <div class="lbl">Análise de mercado</div>
+      </div>
+
+      <div class="group">
+        <div class="stem stem--a" style="height: 320px;"><span class="val">24h</span></div>
+        <div class="stem stem--b" style="height: 107px;"><span class="val">8h</span></div>
+        <div class="lbl">Onboarding de cliente</div>
+      </div>
+    </div>
+
+    <div class="source">
+      <span>Fonte: medição interna · 4 squads piloto</span>
+      <span>média por entregável · Q1 2026</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const sx = window.innerWidth  / 1600;
+    const sy = window.innerHeight / 900;
+    const s  = Math.min(sx, sy);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+</script>
+</body>
+</html>
