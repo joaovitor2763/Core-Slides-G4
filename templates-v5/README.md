@@ -20,7 +20,7 @@ cp 06-grafico-barras.html meu-slide.html   # copie o mais próximo e edite
 
 Funciona direto via `file://` — slides e index no mesmo diretório.
 
-## Os 51 slides
+## Os 52 slides
 
 | # | Slide | Modo |
 |---|-------|------|
@@ -75,6 +75,7 @@ Funciona direto via `file://` — slides e index no mesmo diretório.
 | 49 | Equipe / mentores | dark |
 | 50 | Prova social (3 quotes) | light |
 | 51 | Conceito + imagem (blocos + ilustração 3:4) | light |
+| 52 | Exercício prático (grade de passos + tempo total) | light |
 
 **Nota do topo**: o `data-section` é só metadado — NÃO renderiza nada. O único kicker visível é o `.eyebrow` do título.
 

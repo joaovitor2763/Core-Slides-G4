@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>52 · Exercício prático</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Exercício prático em passos: grade 3×2 de cards numerados que preenche
+     o canvas, tempo de cada passo colado no passo, e painel de resumo
+     (tempo total + entregável) no cabeçalho, à direita do título.
+     Grid: 3 col × 452px + 2 gaps × 26 = 1408 ✓ · linhas 190px + gap 24
+     → grid ocupa y 388..792 < 804 ✓ */
+
+  .head{position:absolute;left:96px;top:110px;width:940px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:58px}
+  .head h1 em{white-space:nowrap}
+
+  /* painel-resumo do exercício */
+  .meta{position:absolute;right:96px;top:118px;width:330px;padding:26px 30px 24px;
+    text-align:right}
+  .meta .total{font-family:var(--num);font-weight:600;font-size:44px;
+    letter-spacing:-.02em;color:var(--text-1);line-height:1}
+  .meta .total small{font-size:18px;font-weight:500;color:var(--text-3);margin-left:6px}
+  .meta .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
+  .meta .out{margin-top:14px;padding-top:14px;border-top:1px solid var(--border-2);
+    font-size:14px;color:var(--text-2)}
+  .meta .out strong{color:var(--gold);font-weight:600}
+
+  .grid{position:absolute;left:96px;top:396px;width:1408px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .step{position:relative;padding:28px 30px 26px;min-height:186px}
+  .step .row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
+  .step .n{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--gold)}
+  .step .t{font-family:var(--num);font-weight:600;font-size:20px;letter-spacing:-.01em;
+    color:var(--text-1);margin-bottom:10px}
+  .step .d{font-size:15px;line-height:1.55;color:var(--text-2)}
+  .step .min{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+    color:var(--text-3)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Exercício">
+
+    <header class="head">
+      <div class="eyebrow">Exercício prático</div>
+      <h1 class="h-serif">Mapear 3 referências, sair com <em>10 roteiros.</em></h1>
+    </header>
+
+    <aside class="meta surface--flat">
+      <div class="lbl">Tempo total</div>
+      <div class="total">45<small>min</small></div>
+      <div class="out">Entregável: <strong>10 roteiros ranqueados</strong>, prontos pra gravar.</div>
+    </aside>
+
+    <div class="grid">
+      <div class="step surface--flat">
+        <div class="row"><span class="n">Passo 01</span><span class="min">5 min</span></div>
+        <div class="t">Definir a rede</div>
+        <p class="d">Instagram, LinkedIn ou YouTube — cada uma tem algoritmo próprio. Escolha uma só.</p>
+      </div>
+      <div class="step surface--flat">
+        <div class="row"><span class="n">Passo 02</span><span class="min">10 min</span></div>
+        <div class="t">Definir 3 referências</div>
+        <p class="d">Quem faz o que você admira. Pode ser de fora, do exterior, de outro tema.</p>
+      </div>
+      <div class="step surface--flat">
+        <div class="row"><span class="n">Passo 03</span><span class="min">10 min</span></div>
+        <div class="t">Analisar a referência</div>
+        <p class="d">G4 Reels Insights: views, likes/view, shares/view. Separe o que está acima da média.</p>
+      </div>
+      <div class="step surface--flat">
+        <div class="row"><span class="n">Passo 04</span><span class="min">5 min</span></div>
+        <div class="t">Gerar os insights</div>
+        <p class="d">Opus 4.6: estrutura de hook, narrativa, edição. O que se repete nos que performam.</p>
+      </div>
+      <div class="step surface--flat">
+        <div class="row"><span class="n">Passo 05</span><span class="min">5 min</span></div>
+        <div class="t">Escolher o tema</div>
+        <p class="d">Grok ou Perplexity pra puxar o que está trending. Cruzar com os padrões do passo 4.</p>
+      </div>
+      <div class="step surface--flat">
+        <div class="row"><span class="n">Passo 06</span><span class="min">10 min</span></div>
+        <div class="t">Produzir 10 roteiros</div>
+        <p class="d">Opus 4.6 escreve 10 variações. Você ranqueia, escolhe, leva pra gravar.</p>
+      </div>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>
