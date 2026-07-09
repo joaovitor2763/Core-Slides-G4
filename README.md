@@ -172,35 +172,74 @@ Detalhes completos: [`templates-short-deck/GUIA.md`](templates-short-deck/GUIA.m
 
 ---
 
-## Estrutura do repo
+## Estrutura recomendada para um deck/projeto de slides
+
+**A pasta do seu deck deve seguir a mesma estrutura das pastas de templates** (`templates-short-deck/` ou `templates-expanded-deck/`):
 
 ```
-Core-Slides-G4/
-├── README.md                    ← este arquivo
-├── AGENTS.md                    ← regras firmes (canvas, paleta, tipografia, restrições)
-├── playbook.md                  ← prosa + exemplos + fluxo de uso + padrões de bug
-├── LICENSE                      ← MIT
-│
-├── build-deck-inlined.py        ← builda um deck HTML único (≤5MB) pra publicar
-│
-├── templates-short-deck/        ← 52 slides Órbita (deck curto)
-├── templates-expanded-deck/     ← 109 slides Órbita (deck expandido)
-│
-├── examples/
-│   ├── index.html               ← passador de slides (base do build, 2 colunas)
-│   └── catalog.html             ← catálogo navegável
-│
-├── assets/                      ← logos, padrões, imagens exemplo
-│   ├── logos/                   ← g4-logo-branca.svg
-│   ├── patterns/                ← pattern-shield, pattern-symbol
-│   └── images/                  ← imagens exemplo
-│
-└── docs/
-    ├── EXPORT-PDF.md            ← Chrome headless, 1 slide por vez
-    ├── PUBLISH.md               ← g4os-pages, deck-inlined, ≤5MB
-    ├── CUSTOMIZE.md             ← como criar variantes dos templates
-    └── CHANGELOG.md             ← histórico de iterações
+meu-deck/                        ← pasta raiz do seu deck
+├── index.html                   ← passador de slides (navegação + modo apresentação)
+├── style.css                    ← design system compartilhado (tokens + classes)
+├── slides/                      ← todos os slides do deck, um .html por slide
+│   ├── 01-capa.html
+│   ├── 02-agenda.html
+│   ├── 03-quote.html
+│   ├── 04-conceito.html
+│   ├── 05-grafico-barras.html
+│   ├── ...
+│   └── NN-encerramento.html
+├── assets/                      ← imagens, logos, padrões, fontes do deck
+│   ├── logos/                   ← ex: g4-logo-branca.svg
+│   ├── images/                  ← ex: mentor-retrato.jpg, produto-mockup.png
+│   ├── patterns/                ← ex: armilar-solid-ice.png
+│   └── data/                    ← ex: vendas-2026-q2.json (se houver dados)
+└── build/                       ← (opcional) output do build-deck-inlined.py
+    └── meu-deck-inlined.html
 ```
+
+**Regras de estrutura:**
+
+1. **`index.html` no root** — é o passador. Lê `slides/` e renderiza. Abra `file://.../meu-deck/index.html` no browser pra navegar com setas/Espaço/Esc.
+2. **`style.css` no root** — único CSS compartilhado, contém os tokens (`--bg`, `--gold`, etc.) e classes semânticas (`.head`, `.eyebrow`, `.body`, `.num`, `.kpi`). Cada slide faz `<link rel="stylesheet" href="../style.css" />`.
+3. **`slides/` é uma subpasta** — todos os slides são arquivos `.html` independentes. Nomes com prefixo numérico (`01-`, `02-`, ...) pra ordenar.
+4. **`assets/` no root** — imagens, logos, padrões e dados. Paths nos slides: `../assets/images/...`.
+5. **Cada slide é auto-contido** — `<style>/* CSS local */</style>` no head, `<article class="slide" data-section="...">` no body, `<script>fit()</script>` no fim. Copy de `templates-short-deck/NN-nome.html` pra `slides/NN-nome.html`, ajuste os paths de `style.css` e `assets/` (`style.css` → `../style.css`, `assets/foo.png` → `../assets/foo.png`).
+
+**Como montar o deck:**
+
+```bash
+# 1. Crie a pasta com a estrutura acima
+mkdir -p meu-deck/slides meu-deck/assets/{images,logos,patterns,data}
+cp templates-short-deck/index.html  meu-deck/index.html
+cp templates-short-deck/style.css   meu-deck/style.css
+
+# 2. Copie os templates que você vai usar
+cp templates-short-deck/01-capa.html         meu-deck/slides/01-capa.html
+cp templates-short-deck/05-agenda.html       meu-deck/slides/02-agenda.html
+cp templates-short-deck/06-grafico-barras.html meu-deck/slides/03-grafico.html
+# ... etc
+
+# 3. Em CADA slide copiado, ajuste os paths
+#    <link rel="stylesheet" href="style.css" />          → ../style.css
+#    <img src="assets/foo.png" />                         → ../assets/foo.png
+# (1 find/sed resolve pra todos: sed -i '' 's|href="style.css"|href="../style.css"|g; s|src="assets/|src="../assets/|g' meu-deck/slides/*.html)
+
+# 4. Edite copy + dados em cada slide (1 slide por vez, validar visualmente)
+
+# 5. Publique (opcional)
+python3 build-deck-inlined.py --slides meu-deck/slides --assets meu-deck/assets \
+  --index templates-short-deck/index.html --out meu-deck/build/inlined.html \
+  --title "Meu Deck"
+# Depois: g4os-pages republish_page(slug, html)
+```
+
+**Vantagens dessa estrutura:**
+
+- Cada slide é independente → editar, versionar e revisar 1 por vez.
+- `style.css` único → 1 lugar pra mexer em tokens.
+- `assets/` centralizado → 1 lugar pra mexer em imagens.
+- `index.html` auto-contido → abre no browser sem servidor.
+- Funciona idêntico nas pastas `templates-short-deck/` e `templates-expanded-deck/`.
 
 ---
 
@@ -213,27 +252,6 @@ Core-Slides-G4/
 - **Como exportar PDF** → [`docs/EXPORT-PDF.md`](docs/EXPORT-PDF.md)
 - **Como publicar no g4os-pages** → [`docs/PUBLISH.md`](docs/PUBLISH.md)
 - **Como customizar templates** → [`docs/CUSTOMIZE.md`](docs/CUSTOMIZE.md)
-- **Changelog** → [`docs/CHANGELOG.md`](docs/CHANGELOG.md)
-
----
-
-## Proveniência
-
-Sessões-chave que produziram este repo:
-
-| Sessão | Contribuição |
-|---|---|
-| `260614-awake-grove` | Design system v1 + 15 templates canônicos |
-| `260615-sunny-dolphin` | 1ª aula (G4 Academia de IA) — 29 slides |
-| `260615-awake-creek` | Técnica de export PDF (Chrome headless 1 slide por vez) |
-| `260623-misty-lake` | 2ª aula (G4 Gestão e Estratégia) + 5 templates novos + publicação g4os-pages |
-| `deck founder-ia-conteudo` | Templates 26-34 + padrões de imagem (moldura mat, hero lateral, overlay) |
-| `expansão v4 (2026-07)` | Templates 35-48 + darks 27-32 + catálogo navegável |
-| `geração Órbita (2026-07-07)` | Nova linguagem visual editorial-orgânica. 52 templates no `templates-short-deck/`. |
-| `expansão Órbita (2026-07-07)` | +57 templates organizados em 10 categorias no `templates-expanded-deck/` (109 total). |
-| `rebrand de folders (2026-07-09)` | `templates-v5/ → templates-short-deck/`, `templates-v6/ → templates-expanded-deck/`. README reescrito como "Two decks, one language". |
-
-**Projeto**: `Aulas G4 - IA` (id: `project_c1402fb9-6848-4cea-9fef-489da1fbf7fe`)
 
 ---
 
