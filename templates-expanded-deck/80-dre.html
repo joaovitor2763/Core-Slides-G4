@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>80 · DRE resumida</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* DRE resumida (light): topo com eyebrow + título serif 44px à esquerda
+     e mono-label "R$ mil · competência" no topo-direita; tabela <table>
+     real dentro de surface, 4 colunas (conta · real · plano · Δ).
+
+     ARITMÉTICA VALIDADA (R$ mil):
+       real : 5.240 − 890 = 4.350 · 4.350 − 1.960 = 2.390 ·
+              2.390 − 1.370 = 1.020 · 1.020 / 4.350 = 23,4% ✓
+       plano: 5.000 − 850 = 4.150 · 4.150 − 1.910 = 2.240 ·
+              2.240 − 1.310 = 930 · 930 / 4.150 = 22,4% ✓
+       Δ real vs plano: 5.240/5.000 = +4,8% · 890/850 = +4,7% ·
+              4.350/4.150 = +4,8% · 1.960/1.910 = +2,6% ·
+              2.390/2.240 = +6,7% · 1.370/1.310 = +4,6% (estouro → red) ·
+              1.020/930 = +9,7% · 23,4 − 22,4 = +1,0 p.p. ✓
+
+     GEOMETRIA Y: head 96 → ~190 · panel 250 → 772 (spec pedia 790; encurtei
+       18px para o rodapé caber ≤ y 804) · rodapé 786 → ~802 ✓
+       dentro do panel: 522 − padding (8+10) = 504 ·
+       header 44 + linhas 56+54+56+54+56+54+74+50 = 498 ≤ 504 ✓
+     GEOMETRIA X: panel 96 → 1504 (1408) · tabela interna 1408 − 96 = 1312 ·
+       colunas 40% + 20% + 20% + 20% = 100% ✓ */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:96px;
+    display:flex;align-items:flex-start;justify-content:space-between;gap:48px}
+  .head .eyebrow{margin-bottom:16px}
+  .head h1{font-size:44px;max-width:900px}
+  .head .mono-label{margin-top:6px;flex:0 0 auto}
+
+  .panel{position:absolute;left:var(--pad);right:var(--pad);top:250px;bottom:128px;
+    padding:8px 48px 10px}
+
+  /* separate (não collapse) para o radius funcionar nas pontas da linha EBITDA */
+  table{width:100%;border-collapse:separate;border-spacing:0}
+  th{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text-3);text-align:right;height:44px;
+    vertical-align:middle;border-bottom:1px solid var(--border-2)}
+  th:first-child{text-align:left;padding-left:18px}
+  th:last-child{padding-right:18px}
+
+  td{height:56px;text-align:right;vertical-align:middle;
+    border-bottom:1px solid var(--border)}
+  td:first-child{text-align:left;padding-left:18px}
+  td:last-child{padding-right:18px}
+  tbody tr:nth-child(even) td{background:rgba(0,31,53,.025)}
+  tbody tr:last-child td{border-bottom:none}
+
+  .lbl{font-size:16.5px;font-weight:500;color:var(--text-2)}
+  td .num{font-size:19px;font-weight:400;color:var(--text-2)}
+  .col-plan .num{color:var(--text-3);font-weight:400}
+
+  /* linhas de custo: tudo em text-3, sem hairline antes de subtotal/EBITDA */
+  .r-cost td{height:54px;border-bottom:none}
+  .r-cost .lbl{font-weight:400;color:var(--text-3);font-size:15.5px}
+  .r-cost .num{color:var(--text-3);font-size:18px}
+
+  /* subtotais: régua 1.5px em cima + números 500 */
+  .r-sub td{border-top:1.5px solid var(--border-2)}
+  .r-sub .lbl{font-weight:600;color:var(--text-1)}
+  .r-sub .num{font-weight:500;color:var(--text-1);font-size:20px}
+  .r-sub .col-plan .num{color:var(--text-3)}
+
+  /* EBITDA — única protagonista gold: faixa gold-dim com contorno
+     gold-border (mesma receita do destaque do 14-tabela), padding maior
+     na VERTICAL (74px vs 54–56px das demais linhas), radius nas pontas,
+     números 22px. Horizontal: 17px + 1px de borda = 18px das outras
+     células → label e chip alinham no pixel com as colunas. */
+  .r-ebitda td{height:74px;background:var(--gold-dim) !important;
+    border-top:1px solid var(--gold-border);border-bottom:1px solid var(--gold-border)}
+  .r-ebitda td:first-child{border-radius:var(--r-md) 0 0 var(--r-md);padding-left:17px;
+    border-left:1px solid var(--gold-border)}
+  .r-ebitda td:last-child{border-radius:0 var(--r-md) var(--r-md) 0;padding-right:17px;
+    border-right:1px solid var(--gold-border)}
+  .r-ebitda .lbl{font-family:var(--num);font-weight:600;font-size:17px;
+    letter-spacing:.02em;color:var(--text-1)}
+  .r-ebitda .num{font-size:22px;font-weight:600;color:var(--text-1)}
+  .r-ebitda .col-plan .num{font-weight:400;color:var(--text-3)}
+
+  /* linha de margem (razão, não soma): mais leve */
+  .r-margin td{height:50px}
+  .r-margin .lbl{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+  .r-margin .num{font-size:17px;color:var(--text-2)}
+
+  /* Δ: chips só onde há leitura (verde = resultado acima do plano;
+     vermelho = custo estourou); demais deltas em mono muted */
+  .chip--mini{padding:4px 11px;font-size:10px;letter-spacing:.08em}
+  .dmut{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--text-3)}
+
+  .foot{position:absolute;left:var(--pad);top:786px;line-height:1.15;color:var(--text-3)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Lorem ipsum · 1º tri 2026</div>
+        <h1 class="h-serif">Lorem ipsum dolor, sit amet: <em>consectetur elit.</em></h1>
+      </div>
+      <span class="mono-label">R$ mil · consectetur</span>
+    </header>
+
+    <section class="panel surface">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:40%">Lorem</th>
+            <th style="width:20%">Amet</th>
+            <th style="width:20%">Dolor</th>
+            <th style="width:20%">Δ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="lbl">Lorem ipsum</span></td>
+            <td><span class="num">5.240</span></td>
+            <td class="col-plan"><span class="num">5.000</span></td>
+            <td><span class="chip chip--green chip--mini">+4,8%</span></td>
+          </tr>
+          <tr class="r-cost">
+            <td><span class="lbl">(−) Lorem ipsum dolor</span></td>
+            <td><span class="num">−890</span></td>
+            <td class="col-plan"><span class="num">−850</span></td>
+            <td><span class="dmut">+4,7%</span></td>
+          </tr>
+          <tr class="r-sub">
+            <td><span class="lbl">Lorem ipsum sit</span></td>
+            <td><span class="num">4.350</span></td>
+            <td class="col-plan"><span class="num">4.150</span></td>
+            <td><span class="dmut">+4,8%</span></td>
+          </tr>
+          <tr class="r-cost">
+            <td><span class="lbl">(−) sit</span></td>
+            <td><span class="num">−1.960</span></td>
+            <td class="col-plan"><span class="num">−1.910</span></td>
+            <td><span class="dmut">+2,6%</span></td>
+          </tr>
+          <tr class="r-sub">
+            <td><span class="lbl">Amet dolor</span></td>
+            <td><span class="num">2.390</span></td>
+            <td class="col-plan"><span class="num">2.240</span></td>
+            <td><span class="chip chip--green chip--mini">+6,7%</span></td>
+          </tr>
+          <tr class="r-cost">
+            <td><span class="lbl">(−) Lorem ipsum adipiscing</span></td>
+            <td><span class="num">−1.370</span></td>
+            <td class="col-plan"><span class="num">−1.310</span></td>
+            <td><span class="chip chip--red chip--mini">+4,6%</span></td>
+          </tr>
+          <tr class="r-ebitda">
+            <td><span class="lbl">Lorem</span></td>
+            <td><span class="num">1.020</span></td>
+            <td class="col-plan"><span class="num">930</span></td>
+            <td><span class="chip chip--green chip--mini">+9,7%</span></td>
+          </tr>
+          <tr class="r-margin">
+            <td><span class="lbl">Lorem ipsum</span></td>
+            <td><span class="num">23,4%</span></td>
+            <td class="col-plan"><span class="num">22,4%</span></td>
+            <td><span class="dmut">+1,0 p.p.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="small foot">Lorem &gt;5% ipsum dolor sit amet consectetur elit.</p>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

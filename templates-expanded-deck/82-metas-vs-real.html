@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>82 · Metas × realizado</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Metas × realizado (light): bullet bars financeiras YTD.
+     Head y104 (eyebrow + serif 46 + chip resumo à direita).
+     Linhas: x96–1504 · y280–760 → 5 linhas × 96px = 480px ✓ (280 + 480 = 760).
+     Colunas por linha: 210 (mono-label) + 860 (track) + 118 (valor .num)
+       + 172 (chip) + 3×16 gap = 1408 = 1600 − 192 ✓
+     Track: pill 14px em surface-2 · escala 100% da meta = 700px (1% = 7px).
+     Marcador da meta: traço 2×26 var(--text-1) em x=700 do track
+       (track começa em 96+210+16 = 322 → traço no canvas em x≈1022).
+     Fills pré-calculados: 112%→784 · 118%→826 (líder, ÚNICO gold) ·
+       96%→672 · 104%→728 · 108%→756 · máx 826 < 860 ✓
+     Rodapé legenda mono em y778. Nada abaixo de y=804 ✓ */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:104px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:46px;max-width:860px}
+  .head .chip{margin-bottom:6px}
+
+  /* guia da meta: caption mono centrada no traço (canvas x=1022) */
+  .metacap{position:absolute;left:1022px;top:236px;transform:translateX(-50%);
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+
+  .rows{position:absolute;left:var(--pad);width:1408px;top:280px;height:480px}
+  /* linha-guia vertical tracejada unindo os traços de meta
+     (centro do traço dentro de .rows: 226 + 700 = 926 → left 925, 1px);
+     sobe até y=258 (280 − 22) para encostar na caption "meta · 100%" */
+  .rows::before{content:'';position:absolute;left:925px;top:-22px;bottom:4px;width:1px;
+    background:repeating-linear-gradient(180deg,var(--border-2) 0 6px,transparent 6px 13px)}
+
+  /* 210 + 860 + 118 + 172 + 3×16 = 1408 ✓ · 5 × 96 = 480 ✓ */
+  .row{box-sizing:border-box;height:96px;position:relative;
+    display:grid;grid-template-columns:210px 860px 118px 172px;column-gap:16px;
+    align-items:center}
+  .row + .row{border-top:1px solid var(--border)}
+
+  .lab .mono-label{display:block;color:var(--text-2)}
+  .lab .small{display:block;font-size:12px;line-height:1.3;margin-top:6px}
+
+  .track{position:relative;width:860px;height:14px;
+    border-radius:var(--r-pill);background:var(--surface-2)}
+  .fill{position:absolute;left:0;top:0;height:14px;border-radius:var(--r-pill);
+    background:rgba(0,31,53,.35)}
+  .row--lead .fill{background:linear-gradient(90deg,var(--gold-300),var(--gold-500))}
+  /* traço da meta: 2×26 centrado no track de 14 → top −6 */
+  .tick{position:absolute;left:699px;top:-6px;width:2px;height:26px;
+    background:var(--text-1);border-radius:1px}
+
+  /* larguras pré-calculadas · 100% da meta = 700px (1% = 7px)
+     112% = 784px · 118% = 826px · 96% = 672px · 104% = 728px · 108% = 756px */
+  .w112{width:784px} .w118{width:826px} .w96{width:672px}
+  .w104{width:728px} .w108{width:756px}
+
+  .val{font-size:20px;text-align:right;color:var(--text-1)}
+  .row--lead .val{color:var(--gold)}
+  .row .chip{justify-self:end}
+
+  /* rodapé: 778 + ~16 = 794 < 804 ✓ */
+  .legend{position:absolute;left:var(--pad);top:778px;
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+  .legend .sw-bar{width:26px;height:8px;border-radius:4px;background:rgba(0,31,53,.35)}
+  .legend .sw-tick{width:2px;height:14px;border-radius:1px;background:var(--text-1)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">YTD · março 2026</div>
+        <h1 class="h-serif">Lorem ipsum, <span class="dim">dolor amet.</span></h1>
+      </div>
+      <span class="chip"><span class="dot"></span>3 de 5 lorem ipsum</span>
+    </header>
+
+    <div class="metacap">lorem · 100%</div>
+
+    <section class="rows">
+
+      <div class="row">
+        <div class="lab"><span class="mono-label">Lorem ipsum</span></div>
+        <div class="track"><div class="fill w112"></div><span class="tick"></span></div>
+        <span class="num val">R$ 8,4 mi</span>
+        <span class="chip chip--green"><span class="dot"></span>112% da lorem</span>
+      </div>
+
+      <div class="row row--lead">
+        <div class="lab"><span class="mono-label">Lorem ipsum dolor</span></div>
+        <div class="track"><div class="fill w118"></div><span class="tick"></span></div>
+        <span class="num val">R$ 21,2 mi</span>
+        <span class="chip chip--green"><span class="dot"></span>118% da lorem</span>
+      </div>
+
+      <div class="row">
+        <div class="lab"><span class="mono-label">Dolor amet</span></div>
+        <div class="track"><div class="fill w96"></div><span class="tick"></span></div>
+        <span class="num val">61,4%</span>
+        <span class="chip chip--red"><span class="dot"></span>96% da lorem</span>
+      </div>
+
+      <div class="row">
+        <div class="lab"><span class="mono-label">Sed</span></div>
+        <div class="track"><div class="fill w104"></div><span class="tick"></span></div>
+        <span class="num val">73</span>
+        <span class="chip chip--green"><span class="dot"></span>104% da lorem</span>
+      </div>
+
+      <div class="row">
+        <div class="lab">
+          <span class="mono-label">Consectetur</span>
+          <span class="small">lorem ipsum, dolor sit</span>
+        </div>
+        <div class="track"><div class="fill w108"></div><span class="tick"></span></div>
+        <span class="num val">2,6%</span>
+        <span class="chip chip--red"><span class="dot"></span>108% da lorem</span>
+      </div>
+
+    </section>
+
+    <footer class="legend">
+      <span class="sw-bar"></span>lorem = voluptate
+      <span>·</span>
+      <span class="sw-tick"></span>dolor = amet
+      <span>·</span>
+      amet YTD
+    </footer>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

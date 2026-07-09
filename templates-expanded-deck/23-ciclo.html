@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>23 · Ciclo</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Ciclo de 4 etapas: anel de 480px (borda 22px em conic-gradient,
+     4 segmentos — 3 tons navy + 1 gold) à esquerda, callouts absolutos
+     em volta com linha fina 1px, coluna editorial à direita.
+
+     Geometria do anel: left 230, top 270, 480px → centro (470,510),
+     raio externo 240. Pontos a 45°: NE (640,340) · SE (640,680) ·
+     SW (300,680) · NW (300,340). Furo: inset 22px (miolo 436px).
+     Segmentos (conic from 0deg = 12h, horário): 01 NE · 02 SE ·
+     03 SW (gold) · 04 NW. Limites: anel 270+480 = 750 < 804 ✓ */
+
+  .ring{position:absolute;left:230px;top:270px;width:480px;height:480px;
+    border-radius:50%;
+    background:conic-gradient(from 0deg,
+      rgba(0,31,53,.16) 0 90deg,
+      rgba(0,31,53,.30) 90deg 180deg,
+      var(--gold)       180deg 270deg,
+      rgba(0,31,53,.50) 270deg 360deg)}
+  .ring .core{position:absolute;inset:22px;border-radius:50%;background:var(--bg);
+    display:grid;place-items:center;text-align:center}
+  .ring .core .label{font-family:var(--serif);font-style:italic;font-weight:400;
+    font-size:31px;letter-spacing:-.01em;color:var(--text-2)}
+  .ring .core .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--text-3);margin-top:10px}
+
+  /* conectores callout → anel: linha fina + dot terminal nas duas pontas
+     (dot maior ancora na borda externa do anel; dot menor no callout) */
+  .links{position:absolute;inset:0;pointer-events:none}
+  .links line{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .links .dot-ring{fill:var(--text-3)}
+  .links .dot-co{fill:var(--text-3);opacity:.7}
+
+  .co{position:absolute;width:260px}
+  .co .idx{font-family:var(--mono);font-size:12px;font-weight:500;
+    letter-spacing:.16em;color:var(--text-3)}
+  .co .idx-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .co h3{font-family:var(--num);font-weight:600;font-size:20px;
+    letter-spacing:-.01em;color:var(--text-1);margin-bottom:6px}
+  .co--gold .idx{color:var(--gold)}
+
+  .read{position:absolute;left:1000px;width:504px;top:282px}
+  .read .eyebrow{margin-bottom:22px}
+  .read h1{font-size:50px;margin-bottom:26px}
+  .read .body{margin-bottom:20px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <div class="ring" aria-hidden="true">
+      <div class="core">
+        <div>
+          <div class="label">Lorem ipsum sit</div>
+          <div class="sub">4 lorem · ipsum dolor sit</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- conectores: centro (470,510) R=240 · pontos a 45°:
+         NE (640,340) · SE (640,680) · SW (300,680) · NW (300,340) -->
+    <svg class="links" viewBox="0 0 1600 900" aria-hidden="true">
+      <line x1="662" y1="234" x2="640" y2="340"/>
+      <circle class="dot-co"   cx="662" cy="234" r="3"/>
+      <circle class="dot-ring" cx="640" cy="340" r="5"/>
+
+      <line x1="722" y1="716" x2="640" y2="680"/>
+      <circle class="dot-co"   cx="722" cy="716" r="3"/>
+      <circle class="dot-ring" cx="640" cy="680" r="5"/>
+
+      <line x1="250" y1="702" x2="300" y2="680"/>
+      <circle class="dot-co"   cx="250" cy="702" r="3"/>
+      <circle class="dot-ring" cx="300" cy="680" r="5"/>
+
+      <line x1="240" y1="234" x2="300" y2="340"/>
+      <circle class="dot-co"   cx="240" cy="234" r="3"/>
+      <circle class="dot-ring" cx="300" cy="340" r="5"/>
+    </svg>
+
+    <!-- 01 · topo-direita -->
+    <div class="co" style="left:640px;top:112px">
+      <div class="idx-row"><span class="idx">01</span></div>
+      <h3>Lorem</h3>
+      <p class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor.</p>
+    </div>
+
+    <!-- 02 · baixo-direita -->
+    <div class="co" style="left:730px;top:692px">
+      <div class="idx-row"><span class="idx">02</span></div>
+      <h3>Adipiscing</h3>
+      <p class="small">Lorem ipsum, dolor sit amet consectetur adipiscing elit.</p>
+    </div>
+
+    <!-- 03 · baixo-esquerda · etapa gold -->
+    <div class="co co--gold" style="left:96px;top:676px">
+      <div class="idx-row"><span class="idx">03</span><span class="chip chip--gold"><span class="dot"></span>Lorem ipsum</span></div>
+      <h3>Dolor sit amet</h3>
+      <p class="small">Duis aute irure voluptate velit cillum fugiat nulla.</p>
+    </div>
+
+    <!-- 04 · topo-esquerda -->
+    <div class="co" style="left:96px;top:112px">
+      <div class="idx-row"><span class="idx">04</span></div>
+      <h3>Ipsum</h3>
+      <p class="small">Excepteur sint occaecat cupidatat proident culpa officia.</p>
+    </div>
+
+    <aside class="read">
+      <div class="eyebrow">Lorem · ipsum</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet. <span class="dim">Sed amet.</span></h1>
+      <p class="body">Lorem ipsum dolor sit amet consectetur adipiscing elit sed. Incididunt labore magna aliqua enim minim veniam quis nostrud ullamco — nisi commodo duis aute irure voluptate velit cillum.</p>
+      <p class="small">Lorem ipsum dolor: sed tempor incididunt labore magna, aliqua enim minim veniam quis nostrud ullamco.</p>
+    </aside>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

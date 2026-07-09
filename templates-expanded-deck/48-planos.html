@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>48 · Planos</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Pricing dark: 3 surfaces lado a lado ancoradas na base, o plano do
+     meio em surface--gold, levemente maior e elevado (translateY −10px),
+     com chip "mais escolhido" flutuando no topo. Título serif à esquerda
+     com chip "sem fidelidade" ao lado. */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:96px;
+    display:flex;align-items:flex-end;gap:28px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:58px}
+  .head .chip{margin-bottom:10px}
+
+  /* grade: left 96 + 448 + 32 + 448 + 32 + 448 = 1504 → +96 pad = 1600 ✓
+     base dos cards: bottom 96 → y 804
+     card normal: 470px → topo em 334
+     card gold: 496px + translateY(−10) → ocupa 298 … 794
+     chip do gold: top −17 → y ≈ 281 (header termina ~198, folga ok) */
+  .plans{position:absolute;left:var(--pad);right:var(--pad);bottom:96px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:32px;align-items:end}
+
+  .plan{height:470px;padding:38px 38px 34px;position:relative;
+    display:flex;flex-direction:column}
+  .plan--gold{height:496px;transform:translateY(-10px)}
+  .plan--gold .flag{position:absolute;top:-17px;left:50%;transform:translateX(-50%)}
+
+  .plan .name{font-family:var(--mono);font-size:12px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+  .plan .price{margin-top:16px;font-size:56px;line-height:1}
+  .plan .price .per{font-family:var(--mono);font-size:13px;font-weight:500;
+    letter-spacing:.08em;color:var(--text-3);margin-left:6px}
+  .plan--gold .price{color:var(--gold)}
+  .plan .pitch{margin-top:12px}
+
+  .plan .rule{height:1px;background:var(--border);margin:22px 0 20px}
+
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:13px}
+  .plan li{display:flex;gap:12px;align-items:baseline;
+    font-size:14.5px;line-height:1.45;color:var(--text-2)}
+  .plan li::before{content:'+';font-family:var(--mono);font-size:13px;
+    font-weight:500;color:var(--gold);flex:0 0 auto}
+
+  .plan .act{margin-top:auto}
+  .plan .cta{width:100%;justify-content:center}
+  .btn-ghost{display:inline-flex;align-items:center;justify-content:center;
+    width:100%;padding:15px 30px;border-radius:var(--r-pill);
+    border:1px solid var(--border-2);color:var(--text-2);
+    font-family:var(--num);font-size:16px;font-weight:600;letter-spacing:.02em}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Lorem ipsum · sit amet</div>
+        <h1 class="h-serif">Lorem ipsum dolor. <em>Sit amet consectetur.</em></h1>
+      </div>
+      <span class="chip">lorem ipsum · dolor sit amet consectetur</span>
+    </header>
+
+    <section class="plans">
+
+      <div class="plan surface">
+        <div class="name">Lorem ipsum</div>
+        <div class="price num">R$ 600<span class="per">/mês</span></div>
+        <p class="small pitch">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do tempor.</p>
+        <div class="rule" aria-hidden="true"></div>
+        <ul>
+          <li>Lorem ipsum dolor sit amet elit</li>
+          <li>1 lorem ipsum dolor sit amet</li>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Lorem ipsum sit 4 mil dolor</li>
+        </ul>
+        <div class="act"><span class="btn-ghost">Lorem 14 dias</span></div>
+      </div>
+
+      <div class="plan plan--gold surface surface--gold">
+        <span class="flag chip chip--gold"><span class="dot"></span>dolor sit amet</span>
+        <div class="name">Amet</div>
+        <div class="price num">R$ 2.400<span class="per">/mês</span></div>
+        <p class="small pitch">Lorem 8 ipsum. Dolor sit amet consectetur adipiscing elit sed do labore.</p>
+        <div class="rule" aria-hidden="true"></div>
+        <ul>
+          <li>Lorem ipsum dolor, sit amet consectetur</li>
+          <li>Lorem ipsum dolor sit adipiscing</li>
+          <li>Dolor ipsum sit amet consectetur</li>
+          <li>Lorem ipsum dolor sit amet</li>
+        </ul>
+        <div class="act"><span class="cta">Lorem ipsum</span></div>
+      </div>
+
+      <div class="plan surface">
+        <div class="name">Adipiscing</div>
+        <div class="price num">lorem ipsum</div>
+        <p class="small pitch">Lorem de 8 ipsum, dolor consectetur, elit e adipiscing sed tempor labore.</p>
+        <div class="rule" aria-hidden="true"></div>
+        <ul>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Lorem ipsum et dolor sit amet elit</li>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Lorem ipsum dolor consectetur</li>
+        </ul>
+        <div class="act"><span class="btn-ghost">Lorem ipsum dolor sit</span></div>
+      </div>
+
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

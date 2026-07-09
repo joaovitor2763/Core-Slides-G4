@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>69 · Dinâmica de turma</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Dinâmica de turma (logística projetável, light):
+     TOPO — eyebrow + título serif 44px à esquerda (x 96, ~y 106–210);
+     painel-resumo à direita: x 1150 → 1504 (354px) · y 96 → 240 (144px).
+     CORPO — 3 colunas .surface em x 96 → 1504:
+       3 × 453.33px + 2 × 24px de gap = 1360 + 48 = 1408 ✓ (grid 1fr resolve)
+       y 290 → 780 (altura 490px). Coluna do meio (execução) = surface--gold.
+     Tempos: formação 3+2+5 = 10 · execução 5+10+10 = 25 · apresentação 5+3+2 = 10
+       → 10 + 25 + 10 = 45 min = tempo total do painel ✓
+     RODAPÉ — linha de materiais em y 788 (14px, line-height 1 → termina ~802 ≤ 804 ✓). */
+
+  .head{position:absolute;left:var(--pad);top:106px;width:980px}
+  .head .eyebrow{margin-bottom:18px}
+  .head h1{font-size:44px}
+
+  /* painel-resumo: 354 × 144 · label + tempo total + chip de entrega */
+  .meta{position:absolute;left:1150px;top:96px;width:354px;height:144px;
+    padding:22px 26px 20px;display:flex;flex-direction:column;justify-content:space-between}
+  .meta .total{font-family:var(--num);font-weight:600;font-size:44px;
+    letter-spacing:-.02em;color:var(--text-1);line-height:1}
+  .meta .total small{font-size:18px;font-weight:500;color:var(--text-3);margin-left:6px}
+  .meta .mono-label{margin-bottom:8px}
+  .meta .chip{align-self:flex-start;font-size:10.5px;padding:6px 12px}
+
+  /* corpo: grade de 3 fases */
+  .grid{position:absolute;left:var(--pad);top:290px;width:1408px;height:490px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .col{padding:24px 30px 18px;display:flex;flex-direction:column}
+  .col-head{display:flex;align-items:baseline;justify-content:space-between;
+    padding-bottom:16px;border-bottom:1px solid var(--border-2)}
+  .col-head .kick{font-family:var(--mono);font-size:11.5px;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-2)}
+  .col-head .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--text-3)}
+  .col--gold .col-head .kick{color:var(--gold)}
+  .col--gold .col-head{border-bottom-color:var(--gold-border)}
+
+  .list{flex:1;display:flex;flex-direction:column}
+  .it{flex:1;display:flex;align-items:center;gap:14px}
+  .it + .it{border-top:1px solid var(--border-2)}
+  .it .mk{font-family:var(--mono);font-size:16px;color:var(--text-3);flex:0 0 auto}
+  .col--gold .it .mk{color:var(--gold)}
+  .it .tx{flex:1;font-size:16px;line-height:1.5}
+  .it .tx strong{color:var(--text-1);font-weight:600}
+  .it .chip{flex:0 0 auto;padding:5px 11px;font-size:10.5px}
+
+  /* rodapé de materiais */
+  .foot{position:absolute;left:var(--pad);top:788px;line-height:1}
+  .foot .fk{font-family:var(--mono);font-size:10.5px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-right:12px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet elit.</h1>
+    </header>
+
+    <aside class="meta surface surface--flat">
+      <div>
+        <div class="mono-label">Lorem ipsum</div>
+        <div class="total">45<small>min</small></div>
+      </div>
+      <span class="chip">lorem: 1 ipsum dolor sit amet</span>
+    </aside>
+
+    <section class="grid">
+
+      <div class="col surface surface--flat">
+        <div class="col-head"><span class="kick">01 · Lorem</span><span class="sub">10 min</span></div>
+        <div class="list">
+          <div class="it">
+            <span class="mk">+</span>
+            <p class="body tx"><strong>Lorem ipsum 4</strong>, consectetur adipi — dolor sit amet ipsum elit.</p>
+            <span class="chip">3 min</span>
+          </div>
+          <div class="it">
+            <span class="mk">+</span>
+            <p class="body tx">Lorem ipsum dolor: <strong>1 sit amet elit</strong> + 3 consectetur.</p>
+            <span class="chip">2 min</span>
+          </div>
+          <div class="it">
+            <span class="mk">+</span>
+            <p class="body tx">Lorem ipsum dolor o <strong>proident culpa amet</strong> em una labore.</p>
+            <span class="chip">5 min</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col col--gold surface surface--gold">
+        <div class="col-head"><span class="kick">02 · Ipsum</span><span class="sub">25 min</span></div>
+        <div class="list">
+          <div class="it">
+            <span class="mk">+</span>
+            <p class="body tx">Lorem <strong>ipsum dolor</strong> — consectetur adipiscing.</p>
+            <span class="chip">5 min</span>
+          </div>
+          <div class="it">
+            <span class="mk">+</span>
+            <p class="body tx">Consectetur <strong>sit tempor</strong>; adipiscing elit sed labore.</p>
+            <span class="chip">10 min</span>
+          </div>
+          <div class="it">
+            <span class="mk">+</span>
+            <p class="body tx"><strong>Consectetur</strong> lorem ipsum; o dolor sit amet a laborum elit.</p>
+            <span class="chip">10 min</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col surface surface--flat">
+        <div class="col-head"><span class="kick">03 · Dolor</span><span class="sub">10 min</span></div>
+        <div class="list">
+          <div class="it">
+            <span class="mk">+</span>
+            <p class="body tx">Lorem ipsum dolor <strong>1 sit amet</strong> por elit sed.</p>
+            <span class="chip">5 min</span>
+          </div>
+          <div class="it">
+            <span class="mk">+</span>
+            <p class="body tx"><strong>Consectetur adipi</strong> — una dolor sit amet elit.</p>
+            <span class="chip">3 min</span>
+          </div>
+          <div class="it">
+            <span class="mk">+</span>
+            <p class="body tx">Lorem ipsum dolor sit: <strong>tempor</strong> que consectetur elit sed.</p>
+            <span class="chip">2 min</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <p class="small foot"><span class="fk">Lorem</span>ipsum dolor · 1 consectetur adipiscing elit · sit-amet</p>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

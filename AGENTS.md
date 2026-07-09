@@ -2,7 +2,7 @@
 
 > **Dois decks, uma linguagem.** Para a geração ATUAL — **`templates-short-deck/` (52)** e **`templates-expanded-deck/` (109)**, ambos na linguagem visual "Órbita" — a source of truth dos tokens, padrões de código, catálogo e QA é a `GUIA.md` de cada pasta. Este `AGENTS.md` continua sendo a referência firme pra regras que valem pros DOIS decks + pro acervo legacy.
 >
-> **Localização dos templates**: as 4 pastas de templates (`templates-short-deck/`, `templates-expanded-deck/`, `templates-legacy/`, `templates-column/`) são **gitignored** — oficiais são distribuídos fora do repo (zip / g4os-pages / Notion) e baixados localmente. Veja `README.md` → *Working with the official templates*.
+> **Localização dos templates**: `templates-short-deck/` e `templates-expanded-deck/` vão no `git clone` (são os decks oficiais). `templates-legacy/` e `templates-column/` são gitignored (acervo congelado / skin opcional, local-only). Veja `README.md` → *Working with the official templates*.
 
 > **Source of truth** pra construção/edição dos slides HTML das aulas G4.
 > Reúne o que foi aprendido em: `260614-awake-grove` (20 templates), `260615-sunny-dolphin` (29 slides Academia de IA), `260615-awake-creek` (PDF export) e `260623-misty-lake` (29 slides Gestão e Estratégia).

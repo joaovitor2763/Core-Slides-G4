@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>91 · Tração</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Pitch · tração (dark): chart de MRR em card à esquerda + coluna de
+     número-hero gold à direita. Linha SVG sobe com aceleração (composto),
+     área gold ecoa a família; o protagonista gold é o "R$ 1,9M".
+
+     geometria horizontal: card 96..1040 (944px) · gap 60 · aside 1100..1504 (404px)
+       → 944 + 60 + 404 = 1408 = 1600 − 192 ✓
+     vertical: header top 100 · card top 240 height 550 → bottom 790 ≤ 804 ✓
+     card interno: 944 − 88 = 856 · 550 − 88 = 462 (padding 44)
+       → panel-top ~17 + gap 15 + svg 420 = 452 ≤ 462 ✓ */
+
+  .head{position:absolute;left:var(--pad);top:100px;width:900px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:44px}
+
+  .panel{position:absolute;left:var(--pad);top:240px;width:944px;height:550px;
+    padding:44px;display:flex;flex-direction:column}
+  .panel-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}
+
+  .chart-svg{display:block;width:856px;height:420px}
+  .grid-line{stroke:var(--border-2);stroke-width:1;stroke-dasharray:3 7}
+  .baseline{stroke:var(--border-2);stroke-width:2}
+  .axis-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;fill:var(--text-3)}
+  .line{fill:none;stroke:var(--text-1);stroke-width:2.5;stroke-linecap:round}
+  /* dot de milestone: "furo" na cor do fundo dark (--navy-700) + anel claro */
+  .dot-ms{fill:var(--navy-700);stroke:var(--text-2);stroke-width:2}
+  .ms-line{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .ms-dot{fill:var(--text-3)}
+  .ms-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;fill:var(--text-2)}
+
+  /* coluna direita — sem surface, direto no fundo (assimetria com o card) */
+  .aside{position:absolute;left:1100px;top:240px;width:404px;height:550px;
+    display:flex;flex-direction:column;align-items:flex-start}
+  .aside .hero{font-size:62px;line-height:1;color:var(--gold)}
+  .aside .hero small{font-size:32px;font-weight:600;letter-spacing:-.02em}
+  .aside .hero-label{margin-top:14px}
+  /* dois margin-top:auto dividem o respiro vertical em partes iguais
+     (hero no topo · chips ao centro · nota ancorada na base do card) */
+  .aside .chips{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:auto}
+  .aside .note{margin-top:auto;padding-top:26px;border-top:1px solid var(--border);width:100%}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum · 15 meses</div>
+      <!-- em.dim (itálico muted, não gold): o protagonista gold do slide é o hero R$ 1,9M -->
+      <h1 class="h-serif">Lorem ipsum dolor adipiscing <em class="dim">sit amet elit.</em></h1>
+    </header>
+
+    <section class="panel surface">
+      <div class="panel-top">
+        <span class="mono-label">Lorem ipsum · R$ milhões</span>
+        <span class="mono-label">jan 2025 → mar 2026</span>
+      </div>
+
+      <!--
+        Conversão valor → coordenada (SVG 856 × 420):
+        · eixo X — 8 pontos bimestrais, x = 68 + i·106 → 68, 174, 280, 386, 492, 598, 704, 810
+        · eixo Y — plot de y=30 (R$ 2,0M) a y=350 (R$ 0) ⇒ y = 350 − valor·160
+            0,19 → 320 · 0,26 → 308 · 0,35 → 294 · 0,47 → 275
+            0,66 → 244 · 0,92 → 203 · 1,35 → 134 · 1,90 → 46
+          (0,19 → 1,90 em 14 meses ≈ +18% m/m médio — bate com o chip)
+        · curvas C: controles horizontais a meio-passo (±53px) de cada ponto
+        · gridlines: 0,5 / 1,0 / 1,5 / 2,0M → y = 270 / 190 / 110 / 30 · baseline 2px em y=350
+        · milestones no path: i=0 lançamento (68,320) · i=3 PMF jul/25 (386,275) ·
+          i=5 1º time de vendas nov/25 (598,203) — hastes verticais + dot r3 no label
+      -->
+      <svg class="chart-svg" viewBox="0 0 856 420" aria-label="MRR cresce de R$ 190 mil em janeiro de 2025 para R$ 1,9 milhão em março de 2026">
+        <defs>
+          <linearGradient id="fill-gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="rgba(201,160,92,.36)"/> <!-- gold dark #C9A05C -->
+            <stop offset="1" stop-color="rgba(201,160,92,0)"/>
+          </linearGradient>
+        </defs>
+
+        <!-- gridlines horizontais + ticks do eixo Y -->
+        <line class="grid-line" x1="68" y1="270" x2="810" y2="270"/>
+        <line class="grid-line" x1="68" y1="190" x2="810" y2="190"/>
+        <line class="grid-line" x1="68" y1="110" x2="810" y2="110"/>
+        <line class="grid-line" x1="68" y1="30"  x2="810" y2="30"/>
+        <text class="axis-label" x="52" y="354" text-anchor="end">R$ 0</text>
+        <text class="axis-label" x="52" y="274" text-anchor="end">0,5</text>
+        <text class="axis-label" x="52" y="194" text-anchor="end">1,0</text>
+        <text class="axis-label" x="52" y="114" text-anchor="end">1,5</text>
+        <text class="axis-label" x="52" y="34"  text-anchor="end">2,0M</text>
+
+        <!-- baseline 2px -->
+        <line class="baseline" x1="68" y1="350" x2="810" y2="350"/>
+
+        <!-- área sob a linha (eco gold da família) -->
+        <path fill="url(#fill-gold)" d="M68,320
+          C121,320 121,308 174,308
+          C227,308 227,294 280,294
+          C333,294 333,275 386,275
+          C439,275 439,244 492,244
+          C545,244 545,203 598,203
+          C651,203 651,134 704,134
+          C757,134 757,46 810,46
+          L810,350 L68,350 Z"/>
+
+        <!-- linha MRR -->
+        <path class="line" d="M68,320
+          C121,320 121,308 174,308
+          C227,308 227,294 280,294
+          C333,294 333,275 386,275
+          C439,275 439,244 492,244
+          C545,244 545,203 598,203
+          C651,203 651,134 704,134
+          C757,134 757,46 810,46"/>
+
+        <!-- milestone 1 · lançamento (68,320): haste da borda do dot (320−6=314) a 256
+             (dot r3 + label acima da gridline de 0,5 em y=270) -->
+        <line class="ms-line" x1="68" y1="314" x2="68" y2="256"/>
+        <circle class="ms-dot" cx="68" cy="256" r="3"/>
+        <text class="ms-label" x="80" y="260" text-anchor="start">adipiscing</text>
+        <circle class="dot-ms" cx="68" cy="320" r="6"/>
+
+        <!-- milestone 2 · PMF (386,275): haste da borda do dot (275−6=269) a 206, label à direita -->
+        <line class="ms-line" x1="386" y1="269" x2="386" y2="206"/>
+        <circle class="ms-dot" cx="386" cy="206" r="3"/>
+        <text class="ms-label" x="398" y="210" text-anchor="start">Lorem · ipsum 95%</text>
+        <circle class="dot-ms" cx="386" cy="275" r="6"/>
+
+        <!-- milestone 3 · 1º time de vendas (598,203): haste da borda do dot (203−6=197) a 120,
+             label à esquerda (à direita colidiria com a subida da curva) -->
+        <line class="ms-line" x1="598" y1="197" x2="598" y2="120"/>
+        <circle class="ms-dot" cx="598" cy="120" r="3"/>
+        <text class="ms-label" x="586" y="124" text-anchor="end">lorem ipsum sit</text>
+        <circle class="dot-ms" cx="598" cy="203" r="6"/>
+
+        <!-- último ponto: halo gold-dim + dot gold r7 -->
+        <circle cx="810" cy="46" r="18" fill="var(--gold-dim)"/>
+        <circle cx="810" cy="46" r="7" fill="var(--gold)"/>
+
+        <!-- labels do eixo X -->
+        <text class="axis-label" x="68"  y="384" text-anchor="middle">jan/25</text>
+        <text class="axis-label" x="174" y="384" text-anchor="middle">mar/25</text>
+        <text class="axis-label" x="280" y="384" text-anchor="middle">mai/25</text>
+        <text class="axis-label" x="386" y="384" text-anchor="middle">jul/25</text>
+        <text class="axis-label" x="492" y="384" text-anchor="middle">set/25</text>
+        <text class="axis-label" x="598" y="384" text-anchor="middle">nov/25</text>
+        <text class="axis-label" x="704" y="384" text-anchor="middle">jan/26</text>
+        <text class="axis-label" x="810" y="384" text-anchor="middle">mar/26</text>
+      </svg>
+    </section>
+
+    <aside class="aside">
+      <div class="num hero"><small>R$</small> 1,9<small>M</small></div>
+      <span class="mono-label hero-label">Lorem · março 2026</span>
+      <div class="chips">
+        <span class="chip chip--green"><span class="dot"></span>+18% m/m lorem</span>
+        <span class="chip chip--green"><span class="dot"></span>Sit 124%</span>
+        <span class="chip"><span class="dot"></span>lorem 1,1% · amet</span>
+      </div>
+      <p class="small note">Lorem ipsum 100% dolor sit amet; consectetur adipiscing sed 4 meses.</p>
+    </aside>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

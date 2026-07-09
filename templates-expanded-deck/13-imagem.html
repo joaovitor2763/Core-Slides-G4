@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>13 · Imagem hero</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Slide de imagem hero (dark): placeholder de foto ocupando ~58% do
+     canvas à direita, levemente rotacionado, com esfera armilar atrás e chip gold
+     flutuando sobre o canto. Texto editorial na coluna esquerda. */
+
+
+  /* coluna esquerda: left 96 + width 470 = termina em 566 */
+  .copy{position:absolute;left:var(--pad);top:230px;width:470px}
+  .copy .eyebrow{margin-bottom:26px}
+  .copy h1{font-size:72px}
+  .copy .body{margin-top:30px;max-width:430px}
+  .copy .tags{margin-top:38px;display:flex;gap:12px}
+
+  /* moldura da foto: left 624 + width 900 = 1524 → sobra 76px à direita.
+     top 150 + height 620 = 770 → sobra 130px embaixo.
+     rotação de −1.2° desloca os cantos ~10px — segue dentro do canvas. */
+  .photo{position:absolute;left:624px;top:150px;width:900px;height:620px;
+    border-radius:var(--r-xl);overflow:hidden;
+    transform:rotate(-1.2deg);
+    display:grid;place-items:center}
+
+  /* hachura sutil + gradiente interno escuro (só do placeholder) */
+  .photo::before{content:'';position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(-45deg,rgba(255,255,255,.035) 0 1px,transparent 1px 18px),
+      linear-gradient(160deg,rgba(255,255,255,.05),rgba(0,11,21,.75))}
+  .photo .tag{position:relative;z-index:1}
+
+  /* chip flutuando sobre o canto superior-esquerdo da foto */
+  .flag{position:absolute;left:596px;top:126px;z-index:3;box-shadow:var(--shadow-sm)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+
+
+    <div class="copy">
+      <div class="eyebrow">Lorem ipsum dolor sit</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet <em>tempor.</em></h1>
+      <p class="body">Lorem ipsum dolor sit amet consectetur, sed adipiscing: 4 tempor incididunt ut labore magna aliqua enim ad 22h. Duis aute irure dolor in 18h07 — voluptate velit esse cillum, fugiat nulla pariatur.</p>
+      <div class="tags">
+        <span class="chip">Lorem · 62 ipsum</span>
+        <span class="chip">Dolor sit 90 dias</span>
+      </div>
+    </div>
+
+    <!-- Para usar uma foto real: troque o conteúdo do .photo por
+         <img src="assets/sua-foto.jpg" alt="..." style="width:100%;height:100%;object-fit:cover">
+         e remova a regra .photo::before (hachura/gradiente do placeholder). -->
+    <figure class="photo surface" aria-label="Espaço reservado para fotografia">
+      <span class="mono-label tag">[ FOTO · LOREM 1200×900 ]</span>
+    </figure>
+
+    <span class="chip chip--gold flag"><span class="dot"></span>Lorem sit</span>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

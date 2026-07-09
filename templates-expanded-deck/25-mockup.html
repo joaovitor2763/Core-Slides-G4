@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>25 · Mockup de produto</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Mockup dark: laptop 100% CSS à direita, leitura editorial à esquerda.
+     Geometria horizontal: pad 96 + texto 560 (96+560=656) · laptop tela
+     left 764 + 740 = 1504 = 1600−96 ✓ · base 694+880 = 1574 < 1600 ✓
+     sombra 674+920 = 1594 < 1600 ✓ · viewport interno 720×450 = 16:10 ✓
+     Geometria vertical: tela top 170 + 470 = 640 · base 640→668 ·
+     sombra 676→716 < 804 (900−96) ✓ */
+
+
+  /* ── coluna esquerda ── */
+  .copy{position:absolute;left:var(--pad);top:238px;max-width:560px}
+  .copy .eyebrow{margin-bottom:26px}
+  .copy h1{font-size:76px}
+  .copy .sub{margin-top:28px;max-width:520px}
+  .copy .chips{margin-top:36px;display:flex;gap:12px}
+
+  /* ── laptop ─────────────────────────────────────────────────
+     TELA: 740×470 externos · border 10px → viewport interno
+     720×450 = exatamente 16:10.
+     PARA USAR SCREENSHOT REAL: apague o <div class="ui">…</div>
+     inteiro e coloque no lugar
+       <img src="assets/seu-screenshot.png"
+            style="width:100%;height:100%;object-fit:cover;object-position:top">
+     — o overflow:hidden da .screen já recorta no radius. */
+  .screen{position:absolute;left:764px;top:170px;width:740px;height:470px;
+    border:10px solid rgba(230,238,243,.92);
+    border-radius:18px 18px 0 0;
+    background:var(--navy-800);overflow:hidden;z-index:2}
+
+  /* BASE/TECLADO: “trapézio” via border-radius assimétrico + gradiente
+     que escurece nas pontas (lê como profundidade). Dobradiça 740px
+     alinhada à tela; deck 880px centrado (764−70 = 694). */
+  .hinge{position:absolute;left:764px;top:640px;width:740px;height:8px;
+    background:linear-gradient(180deg,#C9D4DC,#9FB0BC);z-index:2}
+  .deck{position:absolute;left:694px;top:648px;width:880px;height:20px;
+    background:linear-gradient(180deg,#E9EEF2 0%,#C2CFD8 55%,#8FA2AF 100%);
+    border-radius:6px 6px 22px 22px / 4px 4px 14px 14px;z-index:2}
+  .deck::before{/* pegador central (thumb notch) */
+    content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);
+    width:130px;height:9px;border-radius:0 0 10px 10px;
+    background:linear-gradient(180deg,#A9BAC5,#8FA2AF)}
+  .shadow{position:absolute;left:674px;top:676px;width:920px;height:40px;
+    border-radius:50%;z-index:1;filter:blur(10px);
+    background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent 72%)}
+
+  /* ── conteúdo-demo da tela: mini-interface do G4 OS ──
+     sidebar escura estreita + header + 3 cards skeleton. */
+  .ui{display:flex;width:100%;height:100%;background:#02131F}
+  .ui .side{width:64px;flex:none;background:#000D18;
+    border-right:1px solid rgba(255,255,255,.06);
+    display:flex;flex-direction:column;align-items:center;gap:18px;padding-top:20px}
+  .ui .side .mark{width:26px;height:26px;border-radius:8px;
+    background:linear-gradient(135deg,var(--gold-300),var(--gold-700))}
+  .ui .side i{width:20px;height:20px;border-radius:6px;background:rgba(255,255,255,.10)}
+  .ui .side i.on{background:rgba(201,160,92,.5)}
+  .ui .main{flex:1;padding:22px 26px;display:flex;flex-direction:column;gap:14px}
+  .ui .topbar{display:flex;align-items:center;justify-content:space-between}
+  .ui .topbar b{font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:rgba(230,238,243,.55);font-weight:500}
+  .ui .topbar .pill{width:92px;height:18px;border-radius:999px;background:rgba(255,255,255,.09)}
+  .ui .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;flex:1}
+  .ui .card{border:1px solid rgba(255,255,255,.08);border-radius:12px;
+    background:rgba(255,255,255,.04);padding:16px 16px 0;overflow:hidden}
+  .ui .card .tag{width:56px;height:10px;border-radius:5px;background:rgba(201,160,92,.45);margin-bottom:14px}
+  .ui .card .ln{height:8px;border-radius:4px;background:rgba(255,255,255,.12);margin-bottom:9px}
+  .ui .card .ln.s{width:62%}
+  .ui .card .ln.m{width:84%}
+  .ui .card .blk{height:64px;border-radius:8px;background:rgba(255,255,255,.06);margin-top:14px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="copy">
+      <div class="eyebrow">Lorem ipsum · dolor</div>
+      <h1 class="h-serif">Lorem ipsum,<br><em>sit amet elit.</em></h1>
+      <p class="lede sub">Lorem ipsum dolor sit amet consectetur adipiscing elit sed — do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <div class="chips">
+        <span class="chip chip--gold"><span class="dot"></span>Lorem ipsum</span>
+        <span class="chip">42 dolor sit amet</span>
+      </div>
+    </div>
+
+    <!-- laptop CSS puro -->
+    <div class="shadow" aria-hidden="true"></div>
+    <div class="screen">
+      <!-- Troque este .ui por um <img> de screenshot real (ver comentário no CSS) -->
+      <div class="ui" aria-hidden="true">
+        <div class="side">
+          <span class="mark"></span><i class="on"></i><i></i><i></i><i></i>
+        </div>
+        <div class="main">
+          <div class="topbar"><b>Lorem · dolor sit</b><span class="pill"></span></div>
+          <div class="cards">
+            <div class="card"><div class="tag"></div><div class="ln m"></div><div class="ln s"></div><div class="ln"></div><div class="blk"></div></div>
+            <div class="card"><div class="tag"></div><div class="ln"></div><div class="ln m"></div><div class="ln s"></div><div class="blk"></div></div>
+            <div class="card"><div class="tag"></div><div class="ln s"></div><div class="ln"></div><div class="ln m"></div><div class="blk"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hinge" aria-hidden="true"></div>
+    <div class="deck" aria-hidden="true"></div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

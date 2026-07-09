@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>109 · Gráfico combo</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Combo dark "Resultados": card grande à esquerda com barras verticais
+     (série 1) + linha pontilhada SVG sobreposta (série 2) e, à direita,
+     4 tiles de KPI 2×2 + chip de rodapé.
+
+     geometria horizontal: card 96..1080 (984) · gap 60 · coluna 1140..1504 (364)
+       → 984 + 60 + 364 = 1408 = 1600 − 192 ✓
+     vertical: header 100..211 · card 250..790 (540) · coluna dir 250..790 ✓ (≤804)
+
+     card interior (padding 40): 904 × 460
+       legenda 16 + 16 margem = 32 · chart 428 = plot 398 + faixa de anos 30
+     barras: 8 × 56 + 7 gaps × 64 = 896 · margens laterais 2 × 4 = 904 ✓
+       lefts = 4 + i·120 → 4, 124, 244, 364, 484, 604, 724, 844
+       centros x = 32 + i·120 → 32, 152, 272, 392, 512, 632, 752, 872 */
+
+  .head{position:absolute;left:var(--pad);top:100px;max-width:1000px}
+  .head .eyebrow{margin-bottom:18px}
+  .head h1{font-size:44px}
+  .head .sub{margin-top:14px;font-style:italic}
+
+  /* ── CARD DO GRÁFICO ─────────────────────────────────────── */
+  .panel{position:absolute;left:96px;top:250px;width:984px;height:540px;
+    padding:40px;display:flex;flex-direction:column}
+
+  .legend{display:flex;gap:28px;margin-bottom:16px}
+  .lg-item{display:inline-flex;align-items:center;gap:9px;height:16px;
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+  .sw{width:10px;height:10px;border-radius:3px;background:rgba(255,255,255,.14)} /* mesma cor das barras */
+  .sw--dot{border-radius:50%;background:var(--gold-300)}
+
+  .chart{position:relative;flex:1} /* 428px */
+  .chart::after{content:'';position:absolute;left:0;right:0;bottom:30px;height:2px;
+    border-radius:2px;background:var(--border-2)} /* baseline */
+
+  /* barras coladas na baseline (bottom:30 = topo da baseline) */
+  .bar{position:absolute;bottom:30px;width:56px;z-index:1;
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+  .bar .pct{font-family:var(--mono);font-size:10px;font-weight:500;
+    letter-spacing:.08em;color:var(--green);margin-bottom:4px}
+  .bar .val{font-family:var(--num);font-weight:600;font-size:13px;
+    letter-spacing:-.01em;color:var(--text-2);margin-bottom:6px;white-space:nowrap}
+  .bar .col{width:56px;border-radius:8px 8px 0 0;background:rgba(255,255,255,.14)}
+  .bar--gold .col{background:linear-gradient(180deg,var(--gold-300),var(--gold-500))}
+  .bar--gold .val{color:var(--gold)}
+
+  /* série 1 — escala LINEAR · 100px = R$ 250M (1px = R$ 2,5M) — ajustada p/ caber
+     40→16 · 55→22 · 90→36 · 150→60 · 230→92 · 340→136 · 520→208 · 750→300px */
+  .c1{height:16px}.c2{height:22px}.c3{height:36px}.c4{height:60px}
+  .c5{height:92px}.c6{height:136px}.c7{height:208px}.c8{height:300px}
+
+  .b1{left:4px}.b2{left:124px}.b3{left:244px}.b4{left:364px}
+  .b5{left:484px}.b6{left:604px}.b7{left:724px}.b8{left:844px}
+
+  /* anos abaixo da baseline */
+  .yr{position:absolute;bottom:0;width:56px;text-align:center;
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.1em;color:var(--text-3)}
+
+  /* série 2 — SVG 904×398 (1 unidade = 1px), passando ACIMA das barras
+     conversão: h = 52 + valor·0,63 · y = 398 − h
+     17→y335 · 39→y321 · 129→y265 · 308→y152 · 339→y132 · 342→y130 · 426→y78 · 500→y31
+     x nos centros das barras (32 + i·120) · curvas C com controles a ±60px */
+  .s2{position:absolute;left:0;top:0;width:904px;height:398px;
+    pointer-events:none;z-index:2}
+  .s2-line{fill:none;stroke:var(--text-3);stroke-width:2;
+    stroke-dasharray:6 8;stroke-linecap:round}
+  .s2 .pt{fill:var(--text-2)}
+  .s2 .pv{font-family:var(--num);font-weight:600;font-size:11px;fill:var(--text-2)}
+
+  /* ── COLUNA DIREITA — KPIs 2×2 ────────────────────────────
+     tiles: 2 × 172 + 20 = 364 ✓ · 2 × 235 + 20 = 490 · chip no rodapé (base y790) */
+  .kpis{position:absolute;left:1140px;top:250px;width:364px;
+    display:grid;grid-template-columns:172px 172px;grid-auto-rows:235px;gap:20px}
+  .tile{padding:26px 22px;display:flex;flex-direction:column}
+  .tile .tnum{font-size:30px;line-height:1;white-space:nowrap}
+  .tile .small{margin-top:auto}
+
+  .foot-chip{position:absolute;left:1140px;bottom:110px} /* base = y790 ✓ */
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <!-- HEADER · ex.: eyebrow "Resultados · 2019–2026" · título "Receita cresce 18× em oito anos"
+         · sub: leitura do gráfico em uma linha -->
+    <header class="head">
+      <div class="eyebrow">Lorem · ipsum dolor</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet <span class="dim">consectetur elit.</span></h1>
+      <p class="small sub">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, quis nostrud veniam.</p>
+    </header>
+
+    <!-- GRÁFICO COMBO · ex.: série 1 (barras) = receita anual em R$ M · série 2 (linha) = alunos ativos em K -->
+    <section class="panel surface">
+
+      <!-- legenda · ex.: "Receita anual (R$ M)" · "Alunos ativos (K)" -->
+      <div class="legend">
+        <span class="lg-item"><span class="sw"></span>Lorem ipsum dolor</span>
+        <span class="lg-item"><span class="sw sw--dot"></span>Sit amet tempor</span>
+      </div>
+
+      <div class="chart">
+
+        <!-- série 2: linha pontilhada sobre as barras · valores 17/39/129/308/339/342/426/500 -->
+        <svg class="s2" viewBox="0 0 904 398" aria-label="Série secundária de 17 a 500">
+          <path class="s2-line" d="M32,335
+            C92,335 92,321 152,321
+            C212,321 212,265 272,265
+            C332,265 332,152 392,152
+            C452,152 452,132 512,132
+            C572,132 572,130 632,130
+            C692,130 692,78 752,78
+            C812,78 812,31 872,31"/>
+          <circle class="pt" cx="32"  cy="335" r="4"/>
+          <circle class="pt" cx="152" cy="321" r="4"/>
+          <circle class="pt" cx="272" cy="265" r="4"/>
+          <circle class="pt" cx="392" cy="152" r="4"/>
+          <circle class="pt" cx="512" cy="132" r="4"/>
+          <circle class="pt" cx="632" cy="130" r="4"/>
+          <circle class="pt" cx="752" cy="78"  r="4"/>
+          <circle class="pt" cx="872" cy="31"  r="4"/>
+          <!-- labels a 12px acima de cada dot -->
+          <text class="pv" x="32"  y="323" text-anchor="middle">17</text>
+          <text class="pv" x="152" y="309" text-anchor="middle">39</text>
+          <text class="pv" x="272" y="253" text-anchor="middle">129</text>
+          <text class="pv" x="392" y="140" text-anchor="middle">308</text>
+          <text class="pv" x="512" y="120" text-anchor="middle">339</text>
+          <text class="pv" x="632" y="118" text-anchor="middle">342</text>
+          <text class="pv" x="752" y="66"  text-anchor="middle">426</text>
+          <text class="pv" x="872" y="19"  text-anchor="middle">500</text>
+        </svg>
+
+        <!-- série 1: barras · % de crescimento YoY sobre as 4 últimas -->
+        <div class="bar b1"><div class="val">R$ 40M</div><div class="col c1"></div></div>
+        <div class="bar b2"><div class="val">R$ 55M</div><div class="col c2"></div></div>
+        <div class="bar b3"><div class="val">R$ 90M</div><div class="col c3"></div></div>
+        <div class="bar b4"><div class="val">R$ 150M</div><div class="col c4"></div></div>
+        <div class="bar b5"><div class="pct">+53%</div><div class="val">R$ 230M</div><div class="col c5"></div></div>
+        <div class="bar b6"><div class="pct">+48%</div><div class="val">R$ 340M</div><div class="col c6"></div></div>
+        <div class="bar b7"><div class="pct">+53%</div><div class="val">R$ 520M</div><div class="col c7"></div></div>
+        <div class="bar bar--gold b8"><div class="pct">+44%</div><div class="val">R$ 750M</div><div class="col c8"></div></div>
+
+        <span class="yr b1">2019</span><span class="yr b2">2020</span>
+        <span class="yr b3">2021</span><span class="yr b4">2022</span>
+        <span class="yr b5">2023</span><span class="yr b6">2024</span>
+        <span class="yr b7">2025</span><span class="yr b8">2026</span>
+      </div>
+    </section>
+
+    <!-- KPIs · ex.: "alunos formados" / "receita acumulada" / "NPS médio" / "vidas impactadas" -->
+    <section class="kpis">
+      <div class="tile surface surface--flat">
+        <div class="num tnum">+70K</div>
+        <p class="small">Lorem ipsum dolor sit amet</p>
+      </div>
+      <div class="tile surface surface--flat">
+        <div class="num tnum">R$ 500M</div>
+        <p class="small">Consectetur adipiscing elit sed</p>
+      </div>
+      <div class="tile surface surface--flat">
+        <div class="num tnum">92%</div>
+        <p class="small">Tempor incididunt ut labore</p>
+      </div>
+      <div class="tile surface surface--flat">
+        <div class="num tnum">1M</div>
+        <p class="small">Magna aliqua enim veniam</p>
+      </div>
+    </section>
+
+    <!-- RODAPÉ · ex.: "Fonte: dados auditados · FY2026" -->
+    <span class="chip foot-chip">Lorem ipsum sit dolor</span>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

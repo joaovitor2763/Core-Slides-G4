@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>103 · Dois mentores</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Dois mentores em metades espelhadas (split misto, cf. 27-split):
+     <article> é LIGHT · metade esquerda é div.mode-dark x 0–800 com
+     background var(--navy-700) manual (tokens re-escopam) · metade
+     direita light x 800–1600 · costura central 1px var(--border-2) em x=800.
+
+     Cada metade (largura 800, padding lateral 72 → útil x 72–728 = 656px):
+       eyebrow (só na metade dark)  @ (72, 84)
+       retrato 260×320              @ (72, 170) → termina x=332, y=490 ✓
+       bloco do nome                @ (368, 176) — 368 = 72+260+36 de gap
+                                      largura 360 → 368+360 = 728 ✓
+         nome 38px ×2 linhas ≈ 86px → y≈262
+         kicker mono +14 → y≈293
+         3 chips empilhados +22 → y≈425 < 490 (não passa do retrato) ✓
+       rodapé (logos + bio)         @ top 568 (faixa y 540–780):
+         hairline + 32 de respiro → logos-texto y≈600
+         bio .small 4 linhas ×21px = 84 → começa y≈648, termina y≈732 ≤ 780 ✓
+     Único protagonista gold: o sobrenome <em> do mentor da ESQUERDA. */
+
+  .half{position:absolute;top:0;bottom:0;width:800px}
+  .half--a{left:0;background:var(--navy-700)}   /* metade dark 0–800 */
+  .half--b{left:800px}                          /* metade light 800–1600 */
+
+  /* costura central */
+  .seam{position:absolute;left:800px;top:0;bottom:0;width:1px;
+    background:var(--border-2);z-index:5}
+
+  /* eyebrow geral — só no topo-esquerda da metade dark */
+  .half--a .eyebrow{position:absolute;left:72px;top:84px}
+
+  /* retrato placeholder 260×320 (gradiente fotográfico + iniciais serif) */
+  .portrait{position:absolute;left:72px;top:170px;width:260px;height:320px;
+    border-radius:var(--r-lg);overflow:hidden;
+    border:1px solid var(--border-2);box-shadow:var(--shadow-md);
+    /* placeholder fotográfico — navy tokens (fixos por design, seguros em light/dark) */
+    background:linear-gradient(170deg,var(--navy-500) 0%,var(--navy-700) 62%,var(--navy-900) 100%)}
+  /* iniciais claras SEMPRE (retrato é escuro nas duas metades) → navy-50 + opacity, sem hex cru */
+  .portrait .initials{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
+    font-family:var(--serif);font-weight:500;font-size:64px;line-height:1;
+    letter-spacing:.02em;color:var(--navy-50);opacity:.30}
+  .portrait .tag{position:absolute;left:0;right:0;bottom:18px;text-align:center}
+
+  /* bloco de identidade à direita do retrato */
+  .who{position:absolute;left:368px;top:176px;width:360px}
+  .who .name{font-size:38px;line-height:1.12}
+  .who .name .last{font-style:italic;font-weight:400}
+  .who .spec{margin-top:14px;font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+  .who .tags{margin-top:22px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+
+  /* rodapé da metade: linha de logos-texto + mini-bio */
+  .foot{position:absolute;left:72px;right:72px;top:568px;
+    border-top:1px solid var(--border);padding-top:32px}
+  .foot .logos{display:flex;gap:54px}
+  .foot .logos span{font-family:var(--mono);font-size:12px;font-weight:500;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--text-3)}
+  .foot .bio{margin-top:26px;max-width:610px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <!-- ============ METADE ESQUERDA · dark (mentor protagonista) ============ -->
+    <div class="half half--a mode-dark">
+
+      <!-- título geral do slide — ex.: "Os mentores do programa" -->
+      <div class="eyebrow">Lorem ipsum dolor</div>
+
+      <!-- retrato do mentor 1 · para usar foto real: substitua este div por
+           <img src="assets/sua-foto.jpg" alt="Nome" style="width:100%;height:100%;object-fit:cover"> -->
+      <figure class="portrait" aria-hidden="true">
+        <span class="ghost initials">LI</span>
+        <span class="mono-label tag">[ Retrato 260×320 ]</span>
+      </figure>
+
+      <div class="who">
+        <!-- nome do mentor — ex.: "Ana Ribeiro" · sobrenome <em> = único gold do slide -->
+        <h2 class="h-serif name">Lorem<br><em class="last">Ipsum</em></h2>
+        <!-- especialidades — ex.: "estratégia · M&A · pricing" -->
+        <div class="spec">Consectetur · adipiscing</div>
+        <!-- credenciais curtas — ex.: "2 exits", "15 anos em operação", "500+ mentorados" -->
+        <div class="tags">
+          <span class="chip">Sed tempor</span>
+          <span class="chip">Magna aliqua</span>
+          <span class="chip">Enim veniam</span>
+        </div>
+      </div>
+
+      <div class="foot">
+        <!-- logos-texto — ex.: empresas onde o mentor atuou: "AMBEV · XP · STONE" -->
+        <div class="logos" aria-label="Empresas">
+          <span>Nostrud</span><span>Ullamco</span><span>Commodo</span>
+        </div>
+        <!-- mini-bio de 4 linhas — ex.: trajetória e o que ensina no programa -->
+        <p class="small bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed tempor incididunt labore magna aliqua enim minim veniam. Quis nostrud ullamco nisi commodo, duis aute irure voluptate velit cillum fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident, culpa officia deserunt mollit anim laborum sed magna.</p>
+      </div>
+
+    </div>
+
+    <!-- ============ METADE DIREITA · light (mentor 2, espelhada) ============ -->
+    <div class="half half--b">
+
+      <!-- retrato do mentor 2 · para usar foto real: substitua este div por
+           <img src="assets/sua-foto.jpg" alt="Nome" style="width:100%;height:100%;object-fit:cover"> -->
+      <figure class="portrait" aria-hidden="true">
+        <span class="ghost initials">DS</span>
+        <span class="mono-label tag">[ Retrato 260×320 ]</span>
+      </figure>
+
+      <div class="who">
+        <!-- nome do mentor — ex.: "Bruno Costa" · sobrenome .dim (sem gold) -->
+        <h2 class="h-serif name">Dolor<br><span class="dim last">Sit</span></h2>
+        <!-- especialidades — ex.: "operações · growth · vendas B2B" -->
+        <div class="spec">Incididunt · voluptate</div>
+        <!-- credenciais curtas — ex.: "3 scale-ups", "ex-COO", "professor convidado" -->
+        <div class="tags">
+          <span class="chip">Duis aute</span>
+          <span class="chip">Velit cillum</span>
+          <span class="chip">Fugiat nulla</span>
+        </div>
+      </div>
+
+      <div class="foot">
+        <!-- logos-texto — ex.: empresas onde o mentor atuou: "NUBANK · LOFT · VTEX" -->
+        <div class="logos" aria-label="Empresas">
+          <span>Pariatur</span><span>Occaecat</span><span>Proident</span>
+        </div>
+        <!-- mini-bio de 4 linhas — ex.: trajetória e o que ensina no programa -->
+        <p class="small bio">Excepteur sint occaecat cupidatat proident, culpa officia deserunt mollit anim laborum sed tempor magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed tempor incididunt labore enim minim veniam quis nostrud. Ullamco nisi commodo duis aute irure, voluptate velit cillum fugiat nulla pariatur sint culpa.</p>
+      </div>
+
+    </div>
+
+    <div class="seam" aria-hidden="true"></div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

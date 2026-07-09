@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>63 · Objetivos de aprendizagem</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Objetivos de aprendizagem ("o que você sai sabendo"), light.
+     RAIL ESQUERDO: x 96 → 500 (404px) · y 140 → 804 (664px, flex column,
+       chip de meta ancorado embaixo, alinhado à base da grade).
+     DIREITA: grid 2×2 · x 560 → 1504 (944px) · y 140 → 804 (664px).
+       Colunas: (944 − 24) / 2 = 460px cada ✓  · Linhas: (664 − 24) / 2 = 320px cada ✓
+       Vão rail→grade: 560 − 500 = 60px.
+     Cada card: numeral serif ghost 72px no canto sup. direito + claim .num 20px
+     + .small (como será praticado). Card 01 = surface--gold + chip--gold
+     "aplicável amanhã" — único protagonista gold do slide. */
+
+  .rail{position:absolute;left:var(--pad);top:140px;width:404px;height:664px;
+    display:flex;flex-direction:column}
+  .rail .eyebrow{margin-bottom:26px}
+  .rail h1{font-size:54px}
+  .rail .lede{margin-top:26px;max-width:380px}
+  .rail .meta{margin-top:auto;align-self:flex-start}
+
+  .grid{position:absolute;left:560px;top:140px;width:944px;height:664px;
+    display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:24px}
+
+  .obj{position:relative;padding:32px 34px 30px;display:flex;flex-direction:column}
+  .obj .idx{position:absolute;top:22px;right:30px;font-size:72px;line-height:1}
+  .obj .tag{align-self:flex-start}
+  .obj .claim{font-size:20px;letter-spacing:-.01em;line-height:1.3;
+    margin-top:auto;max-width:340px}
+  /* card 04: claim caberia em 1 linha nos 340px e desalinharia o topo com o card 03;
+     max-width 300px força a quebra "…contrato de / resultado" — mesmo rag dos irmãos */
+  .obj:nth-child(4) .claim{max-width:300px}
+  .obj .how{margin-top:12px;max-width:372px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="rail">
+      <div class="eyebrow">Voluptate</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet</h1>
+      <p class="lede">Lorem ipsum dolor sit amet consectetur adipiscing elit tempor.</p>
+      <span class="chip meta">lorem 04 · 2h sit amet</span>
+    </header>
+
+    <section class="grid">
+      <div class="obj surface surface--gold">
+        <span class="ghost idx">01</span>
+        <span class="chip chip--gold tag"><span class="dot"></span>adipiscing elit</span>
+        <div class="num claim">Lorem ipsum dolor sit amet consectetur</div>
+        <p class="small how">Lorem ipsum dolor sit amet consectetur adipiscing, elit sed tempor, incididunt labore.</p>
+      </div>
+
+      <div class="obj surface">
+        <span class="ghost idx">02</span>
+        <div class="num claim">Lorem ipsum consectetur adipiscing&times;tempor</div>
+        <p class="small how">Excepteur sint occaecat: 12 cupidatat proident culpa officia deserunt mollit anim.</p>
+      </div>
+
+      <div class="obj surface">
+        <span class="ghost idx">03</span>
+        <div class="num claim">Consectetur adipiscing elit sed tempor</div>
+        <p class="small how">Lorem ipsum dolor consectetur: adipiscing elit, 30 tempor, sed labore magna aliqua.</p>
+      </div>
+
+      <div class="obj surface">
+        <span class="ghost idx">04</span>
+        <div class="num claim">Lorem ipsum dolor consectetur elit</div>
+        <p class="small how">Ullamco nisi commodo: duis aute irure dolor voluptate velit cillum fugiat nulla.</p>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

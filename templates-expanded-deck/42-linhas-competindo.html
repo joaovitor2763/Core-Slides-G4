@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>42 · Linhas competindo</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Duas trajetórias no mesmo SVG (light, padrão do 07): linha gold
+     3px subindo vs. linha muted 2px tracejada quase flat. Gap do último
+     trimestre destacado com chave vertical fina + label mono "+46 pts".
+     Legenda em chips no header do card. */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:104px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:62px;max-width:800px}
+  .head .read{max-width:400px;padding-bottom:8px}
+
+  /* painel: 352 + 452 = 804 = 900 − 96 ✓ · interno 1408 − 120 = 1288 */
+  .panel{position:absolute;left:var(--pad);right:var(--pad);top:352px;bottom:96px;
+    padding:44px 60px 34px;display:flex;flex-direction:column}
+  .panel-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .legend{display:flex;gap:10px}
+
+  .chart-svg{display:block;width:1280px;height:330px}
+  .grid-line{stroke:var(--border-2);stroke-width:1;stroke-dasharray:3 7}
+  .axis-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;fill:var(--text-3)}
+  .line-a{fill:none;stroke:var(--gold);stroke-width:3;stroke-linecap:round}
+  .line-b{fill:none;stroke:var(--text-3);stroke-width:2;stroke-linecap:round;stroke-dasharray:6 8}
+  .dot-a{fill:#FFFFFF;stroke:var(--gold);stroke-width:2.5}
+  .dot-b{fill:#FFFFFF;stroke:var(--text-3);stroke-width:2}
+  .final-a{font-family:var(--num);font-weight:600;font-size:30px;letter-spacing:-.03em;fill:var(--gold)}
+  .final-b{font-family:var(--num);font-weight:600;font-size:30px;letter-spacing:-.03em;fill:var(--text-3)}
+  .gap-brace{stroke:var(--gold);stroke-width:1.5}
+  .gap-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;fill:var(--gold)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Adipiscing · dolor sit</div>
+        <h1 class="h-serif">Lorem ipsum dolor sit <em>amet elit.</em></h1>
+      </div>
+      <p class="body read">Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor magna. Sed do eiusmod tempor incididunt ut labore dolore.</p>
+    </header>
+
+    <section class="panel surface">
+      <div class="panel-top">
+        <span class="mono-label">% lorem ipsum dolor sit amet · T1·25 → T2·26</span>
+        <div class="legend">
+          <span class="chip chip--gold"><span class="dot"></span>Lorem sit</span>
+          <span class="chip"><span class="dot"></span>Amet elit</span>
+        </div>
+      </div>
+
+      <!--
+        Conversão valor → coordenada (SVG 1280 × 330):
+        · eixo X — 6 pontos, x = 90 + i·204  →  90, 294, 498, 702, 906, 1110
+        · eixo Y — plot de y=20 (80%) a y=280 (0%) ⇒ y = 280 − valor·3,25
+          linha A (com fluxo): 12% → 241 · 21% → 212 · 33% → 173 · 47% → 127 · 58% → 92 · 68% → 59
+          linha B (sem fluxo): 10% → 248 · 12% → 241 · 14% → 235 · 17% → 225 · 19% → 218 · 22% → 209
+        · curvas C: controles horizontais a meio-passo (±102px) de cada ponto
+        · gridlines: 0/20/40/60/80% → y = 280 / 215 / 150 / 85 / 20
+        · chave do gap: x = 1216, de y=59 a y=209 (68% − 22% = +46 pts)
+      -->
+      <svg class="chart-svg" viewBox="0 0 1280 330" aria-label="Com fluxo sobe de 12% para 68%; sem fluxo vai de 10% para 22%">
+        <defs>
+          <linearGradient id="fill-gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="rgba(185,145,91,.20)"/>
+            <stop offset="1" stop-color="rgba(185,145,91,0)"/>
+          </linearGradient>
+        </defs>
+
+        <!-- gridlines horizontais + labels do eixo Y -->
+        <line class="grid-line" x1="90" y1="280" x2="1110" y2="280"/>
+        <line class="grid-line" x1="90" y1="215" x2="1110" y2="215"/>
+        <line class="grid-line" x1="90" y1="150" x2="1110" y2="150"/>
+        <line class="grid-line" x1="90" y1="85"  x2="1110" y2="85"/>
+        <line class="grid-line" x1="90" y1="20"  x2="1110" y2="20"/>
+        <text class="axis-label" x="70" y="284" text-anchor="end">0</text>
+        <text class="axis-label" x="70" y="219" text-anchor="end">20</text>
+        <text class="axis-label" x="70" y="154" text-anchor="end">40</text>
+        <text class="axis-label" x="70" y="89"  text-anchor="end">60</text>
+        <text class="axis-label" x="70" y="24"  text-anchor="end">80</text>
+
+        <!-- área sob a linha A -->
+        <path fill="url(#fill-gold)" d="M90,241
+          C192,241 192,212 294,212
+          C396,212 396,173 498,173
+          C600,173 600,127 702,127
+          C804,127 804,92 906,92
+          C1008,92 1008,59 1110,59
+          L1110,280 L90,280 Z"/>
+
+        <!-- linha B · sem fluxo (tracejada, quase flat) -->
+        <path class="line-b" d="M90,248
+          C192,248 192,241 294,241
+          C396,241 396,235 498,235
+          C600,235 600,225 702,225
+          C804,225 804,218 906,218
+          C1008,218 1008,209 1110,209"/>
+
+        <!-- linha A · com fluxo (gold) -->
+        <path class="line-a" d="M90,241
+          C192,241 192,212 294,212
+          C396,212 396,173 498,173
+          C600,173 600,127 702,127
+          C804,127 804,92 906,92
+          C1008,92 1008,59 1110,59"/>
+
+        <!-- dots · linha B -->
+        <circle class="dot-b" cx="90"  cy="248" r="5"/>
+        <circle class="dot-b" cx="294" cy="241" r="5"/>
+        <circle class="dot-b" cx="498" cy="235" r="5"/>
+        <circle class="dot-b" cx="702" cy="225" r="5"/>
+        <circle class="dot-b" cx="906" cy="218" r="5"/>
+        <circle class="dot-b" cx="1110" cy="209" r="6"/>
+
+        <!-- dots · linha A -->
+        <circle class="dot-a" cx="90"  cy="241" r="6"/>
+        <circle class="dot-a" cx="294" cy="212" r="6"/>
+        <circle class="dot-a" cx="498" cy="173" r="6"/>
+        <circle class="dot-a" cx="702" cy="127" r="6"/>
+        <circle class="dot-a" cx="906" cy="92"  r="6"/>
+        <!-- último ponto A: halo + dot maior -->
+        <circle cx="1110" cy="59" r="18" fill="rgba(185,145,91,.18)"/>
+        <circle class="dot-a" cx="1110" cy="59" r="8"/>
+
+        <!-- valores finais ao lado do último ponto de cada linha -->
+        <text class="final-a" x="1138" y="70">68%</text>
+        <text class="final-b" x="1138" y="220">22%</text>
+
+        <!-- chave/cota do gap no último trimestre: +46 pts -->
+        <line class="gap-brace" x1="1216" y1="59"  x2="1216" y2="209"/>
+        <line class="gap-brace" x1="1208" y1="59"  x2="1216" y2="59"/>
+        <line class="gap-brace" x1="1208" y1="209" x2="1216" y2="209"/>
+        <text class="gap-label" x="1226" y="139">+46 pts</text>
+
+        <!-- labels do eixo X -->
+        <text class="axis-label" x="90"   y="314" text-anchor="middle">T1·25</text>
+        <text class="axis-label" x="294"  y="314" text-anchor="middle">T2·25</text>
+        <text class="axis-label" x="498"  y="314" text-anchor="middle">T3·25</text>
+        <text class="axis-label" x="702"  y="314" text-anchor="middle">T4·25</text>
+        <text class="axis-label" x="906"  y="314" text-anchor="middle">T1·26</text>
+        <text class="axis-label" x="1110" y="314" text-anchor="middle">T2·26</text>
+      </svg>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

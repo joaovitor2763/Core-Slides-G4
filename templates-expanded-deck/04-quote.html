@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>04 · Quote editorial</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Citação editorial (light): aspa serif gigante em ghost no topo-esquerda,
+     quote assimétrica ocupando ~65% à esquerda, coluna direita com um
+     dado que valida a fala. Avatar circular com iniciais (sem foto). */
+
+  /* aspa ghost: 340px, ancorada no topo-esquerda, atrás da quote */
+  .mark{position:absolute;left:72px;top:34px;font-size:340px;line-height:1}
+
+  /* coluna esquerda: left 96 + width 940 = termina em 1036 */
+  .quote-col{position:absolute;left:var(--pad);top:236px;width:940px}
+  .quote-col blockquote{font-size:64px;line-height:1.16}
+
+  .attrib{position:absolute;left:var(--pad);bottom:96px;display:flex;align-items:center;gap:22px}
+  .avatar{width:64px;height:64px;border-radius:50%;
+    background:var(--gold-dim);border:1px solid var(--gold-border);
+    display:grid;place-items:center;
+    font-family:var(--num);font-weight:600;font-size:20px;letter-spacing:.02em;color:var(--gold)}
+  .who .name{font-family:var(--num);font-weight:600;font-size:19px;color:var(--text-1)}
+  .who .role{margin-top:4px}
+  .attrib .chip{margin-left:18px}
+
+  /* coluna direita: left 1124 + width 380 = 1504 → +96 pad = 1600 ✓
+     top 268 + height 348 = 616 (dentro do canvas) */
+  .proof{position:absolute;right:var(--pad);top:268px;width:380px;
+    padding:44px 40px 40px}
+  .proof .mono-label{display:block;margin-bottom:26px}
+  .proof .num{font-size:56px;line-height:1;color:var(--gold)}
+  .proof .caption{margin-top:18px}
+  .proof .chip{margin-top:26px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <div class="ghost mark" aria-hidden="true">&ldquo;</div>
+
+    <figure class="quote-col">
+      <blockquote class="h-serif">Lorem ipsum dolor sit amet consectetur elit sed tempor. Duis aute irure; nostrud quis <em>sit voluptate elit.</em></blockquote>
+    </figure>
+
+    <div class="attrib">
+      <span class="avatar" aria-hidden="true">LI</span>
+      <div class="who">
+        <div class="name">Lorem Ipsum</div>
+        <div class="small role">Dolor · sit amet consectetur, 340 incididunt</div>
+      </div>
+      <span class="chip">Lorem ipsum · ep. 112</span>
+    </div>
+
+    <aside class="proof surface surface--flat">
+      <span class="mono-label">Lorem ipsum dolor</span>
+      <div class="num">−11 h</div>
+      <p class="body caption">de lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incididunt labore.</p>
+      <span class="chip chip--gold"><span class="dot"></span>Lorem sed 90 dias</span>
+    </aside>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

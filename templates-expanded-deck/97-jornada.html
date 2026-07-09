@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>97 · Jornada do usuário</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Jornada do usuário (light): curva de valor percebido sobre 5 colunas
+     de etapa. Topo: eyebrow + título serif 44px. Área do chart entre
+     x 96–1504 e y 240–640; faixa de labels mono em y 660–700; descrição
+     .small por etapa em y 710–800. Etapa 3 ("adota") é o momento aha:
+     dot gold r7 com halo sólido + callout surface conectado por linha.
+
+     Geometria X · área útil 1504 − 96 = 1408 · 5 colunas de 281,6px
+     (5 × 281,6 = 1408 ✓) · fronteiras internas (gridlines dashed):
+     x = 96 + 281,6·i → 377,6 · 659,2 · 940,8 · 1222,4
+     centros de coluna: x = 96 + 140,8 + 281,6·i → 237 · 518 · 800 · 1082 · 1363
+
+     Geometria Y · chart 240–640 (baseline em 640) · labels top 664 ·
+     descrições top 710 (1 linha de .small = 21px → fim 731 < 804 ✓)
+
+     Conversão valor percebido (0–100) → y: y = 640 − valor·3,8
+       descobre 10 → 602 · ativa 25 → 545 · adota 50 → 450 ·
+       expande 75 → 355 · indica 90 → 298   (100 → 260, folga de 20px)
+     Curvas C: controles horizontais a meio-passo (±141px) de cada ponto. */
+
+  .head{position:absolute;left:var(--pad);top:100px}
+  .head .eyebrow{margin-bottom:16px}
+  .head h1{font-size:44px;max-width:1100px}
+
+  /* legenda da série, alinhada à direita no topo do chart */
+  .legend{position:absolute;right:var(--pad);top:206px;
+    display:inline-flex;align-items:center;gap:10px}
+  .legend::before{content:'';width:26px;height:3px;border-radius:2px;background:var(--gold)}
+
+  .chart{position:absolute;inset:0;pointer-events:none}
+  .grid-v{stroke:var(--border-2);stroke-width:1;stroke-dasharray:3 7}
+  .baseline{stroke:var(--border-2);stroke-width:2}
+  .curve{fill:none;stroke:var(--gold);stroke-width:3;stroke-linecap:round}
+  .pt{fill:var(--text-3)}
+  .link{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+
+  /* callout do momento aha: 340px centrado no dot da etapa 3 (x=800 → left 630).
+     Altura determinística = 1 (borda) + 15 + 14 (label lh) + 5 + 21 (.small lh)
+     + 16 + 1 (borda) = 73px → borda inferior em 264 + 73 = 337 */
+  .aha{position:absolute;left:630px;top:264px;width:340px;padding:15px 22px 16px;
+    border-radius:var(--r-md);text-align:center}
+  .aha .mono-label{color:var(--gold);display:block;margin-bottom:5px;line-height:14px}
+
+  /* faixa das etapas: labels mono centrados por coluna (left = fronteira, w = 281,6) */
+  .stage-label{position:absolute;top:664px;width:282px;text-align:center;
+    font-family:var(--mono);font-size:13px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--text-2)}
+  .stage-label--aha{color:var(--gold)}
+
+  /* descrição da etapa: .small centrado, 240px (left = centro − 120) */
+  .stage-desc{position:absolute;top:710px;width:240px;text-align:center}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem · consectetur 90 dias</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit <em>amet consectetur elit.</em></h1>
+    </header>
+
+    <span class="legend mono-label">Dolor sit amet</span>
+
+    <svg class="chart" viewBox="0 0 1600 900" aria-label="Curva de valor percebido crescendo da etapa descobre até a etapa indica">
+      <defs>
+        <linearGradient id="fill-gold" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="rgba(185,145,91,.20)"/>
+          <stop offset="1" stop-color="rgba(185,145,91,0)"/>
+        </linearGradient>
+      </defs>
+
+      <!-- gridlines verticais nas 4 fronteiras internas (y 240 → 640) -->
+      <line class="grid-v" x1="377.6"  y1="240" x2="377.6"  y2="640"/>
+      <line class="grid-v" x1="659.2"  y1="240" x2="659.2"  y2="640"/>
+      <line class="grid-v" x1="940.8"  y1="240" x2="940.8"  y2="640"/>
+      <line class="grid-v" x1="1222.4" y1="240" x2="1222.4" y2="640"/>
+
+      <!-- baseline do chart em y=640 -->
+      <line class="baseline" x1="96" y1="640" x2="1504" y2="640"/>
+
+      <!-- área sob a curva (gold → transparente, fechando na baseline) -->
+      <path fill="url(#fill-gold)" d="M237,602
+        C378,602 378,545 518,545
+        C659,545 659,450 800,450
+        C941,450 941,355 1082,355
+        C1223,355 1223,298 1363,298
+        L1363,640 L237,640 Z"/>
+
+      <!-- curva de valor percebido -->
+      <path class="curve" d="M237,602
+        C378,602 378,545 518,545
+        C659,545 659,450 800,450
+        C941,450 941,355 1082,355
+        C1223,355 1223,298 1363,298"/>
+
+      <!-- dots das etapas (r5 · var(--text-3)) -->
+      <circle class="pt" cx="237"  cy="602" r="5"/>
+      <circle class="pt" cx="518"  cy="545" r="5"/>
+      <circle class="pt" cx="1082" cy="355" r="5"/>
+      <circle class="pt" cx="1363" cy="298" r="5"/>
+
+      <!-- etapa 3 · momento aha: halo sólido + dot gold r7 -->
+      <circle cx="800" cy="450" r="16" fill="rgba(185,145,91,.18)"/>
+      <circle cx="800" cy="450" r="7"  fill="var(--gold)"/>
+    </svg>
+
+    <!-- callout do momento aha (centrado na etapa 3 · borda inferior em y=337) -->
+    <div class="aha surface">
+      <span class="mono-label">Lorem ipsum</span>
+      <span class="small">Lorem ipsum dolor sit amet consectetur.</span>
+    </div>
+
+    <!-- conector do callout, DEPOIS do callout no DOM para o dot r3 pintar
+         sobre a borda: r3 na borda inferior EXATA do callout (800,337) →
+         r5 na borda EXATA do halo (halo r16 em 800,450 → topo 800,434) -->
+    <svg class="chart" viewBox="0 0 1600 900" aria-hidden="true">
+      <line class="link" x1="800" y1="337" x2="800" y2="434"/>
+      <circle class="pt" cx="800" cy="337" r="3"/>
+      <circle class="pt" cx="800" cy="434" r="5"/>
+    </svg>
+
+    <!-- faixa das etapas · left = 96 + 281,6·i -->
+    <div class="stage-label" style="left:96px">Deserunt</div>
+    <div class="stage-label" style="left:377.6px">Velit</div>
+    <div class="stage-label stage-label--aha" style="left:659.2px">Ipsum</div>
+    <div class="stage-label" style="left:940.8px">Ullamco</div>
+    <div class="stage-label" style="left:1222.4px">Labore</div>
+
+    <!-- descrições · left = centro − 120 → 117 · 398 · 680 · 962 · 1243 -->
+    <p class="small stage-desc" style="left:117px">Lorem ipsum dolor sit amet elit</p>
+    <p class="small stage-desc" style="left:398px">Ipsum dolor sit amet elit 1 dia</p>
+    <p class="small stage-desc" style="left:680px">Dolor sit amet consectetur elit</p>
+    <p class="small stage-desc" style="left:962px">Ipsum dolor sit amet elit</p>
+    <p class="small stage-desc" style="left:1243px">Lorem 72 dolor sit amet consectetur</p>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

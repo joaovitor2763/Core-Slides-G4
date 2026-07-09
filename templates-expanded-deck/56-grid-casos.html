@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>56 · Grid de casos de uso</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Grid de casos de uso — dark. Header assimétrico (título serif à esquerda,
+     nota de leitura à direita) + DUAS bandas de 4 colunas, cada banda com
+     rótulo mono ROTACIONADO encostado à esquerda.
+
+     Horizontal: rótulo x96, largura 40 (96→136) · gap 24 → conteúdo x160.
+       Colunas: 4 × 321 + 3 × 20 (gap) = 1344 = 1504 − 160 ✓
+       lefts: 160 · 501 · 842 · 1183 (1183 + 321 = 1504 ✓)
+     Vertical: head top 96 (≈96→175) · banda A y250–500 · gap 40 ·
+       banda B y540–790 · respiro inferior 900 − 790 = 110 ✓
+     Banda interna: card 116px + 28 gap + resultado ≤3 linhas (≈63px) = 207 ≤ 250 ✓
+
+     Único protagonista gold do slide: card 'criação de apps' (gradiente
+     gold-300→gold-500, texto/ícone var(--on-gold)). */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:96px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:16px}
+  .head h1{font-size:46px;line-height:1.12;max-width:760px}
+  .head .read{max-width:400px;padding-bottom:6px}
+
+  /* rótulo lateral rotacionado — lê de baixo para cima; traço gold
+     ancorado no topo exato da banda (alinhado ao topo dos cards) */
+  .blabel{position:absolute;left:var(--pad);width:40px;height:250px;
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+    gap:14px}
+  .blabel::before{content:'';width:1px;height:24px;background:var(--gold);opacity:.85}
+  .blabel span{writing-mode:vertical-rl;transform:rotate(180deg);
+    font-family:var(--mono);font-size:12px;font-weight:500;
+    letter-spacing:.24em;text-transform:uppercase;color:var(--text-3)}
+  .blabel--a{top:250px}
+  .blabel--b{top:540px}
+
+  /* bandas: grid 4 colunas — linha 1 cards (116px), linha 2 resultados */
+  .band{position:absolute;left:160px;width:1344px;
+    display:grid;grid-template-columns:repeat(4,321px);
+    grid-template-rows:116px auto;column-gap:20px;row-gap:28px}
+  .band--a{top:250px}
+  .band--b{top:540px}
+
+  .card{display:flex;align-items:center;gap:16px;padding:0 22px}
+  .disc{flex:none;width:44px;height:44px;border-radius:50%;
+    background:var(--surface-2);border:1px solid var(--border);
+    display:grid;place-items:center;color:var(--text-2)}
+  .disc svg{width:22px;height:22px}
+  .name{font-size:14px;line-height:1.35;letter-spacing:.06em;
+    text-transform:uppercase;font-weight:600}
+
+  /* caso-destaque — ÚNICO gradiente gold do slide */
+  .card--gold{background:linear-gradient(160deg,var(--gold-300),var(--gold-500));
+    border-color:var(--gold-border);color:var(--on-gold)}
+  .card--gold .name{color:var(--on-gold)}
+  .card--gold .disc{background:rgba(26,19,0,.10);          /* rgba de --on-gold #1A1300 */
+    border-color:rgba(26,19,0,.24);color:var(--on-gold)}
+
+  /* célula de resultado — itálico, seta muda alinhada à esquerda */
+  .result{position:relative;font-style:italic;color:var(--text-2);
+    padding:0 10px 0 24px;max-width:310px}
+  .result::before{content:'→';position:absolute;left:0;top:1px;
+    font-family:var(--mono);font-style:normal;font-size:13px;color:var(--text-3)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Lorem ipsum</div>
+        <h1 class="h-serif">Lorem ipsum dolor <span class="dim">amet elit.</span></h1>
+      </div>
+      <p class="body read">Lorem ipsum dolor sit amet consectetur adipiscing — elit sed do eiusmod tempor incididunt labore. Ut enim minim.</p>
+    </header>
+
+    <!-- banda A · aplicações -->
+    <div class="blabel blabel--a" aria-hidden="true"><span>adipiscing</span></div>
+    <section class="band band--a">
+
+      <div class="card surface surface--flat">
+        <div class="disc" aria-hidden="true">
+          <!-- balança -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4v15.5M8.5 19.5h7M5.5 6.5h13"/>
+            <path d="M5.5 6.5 2.9 11.6M5.5 6.5 8.1 11.6M2.9 11.6a2.6 2.6 0 0 0 5.2 0"/>
+            <path d="M18.5 6.5 15.9 11.6M18.5 6.5 21.1 11.6M15.9 11.6a2.6 2.6 0 0 0 5.2 0"/>
+          </svg>
+        </div>
+        <h3 class="name num">Lorem ipsum sit</h3>
+      </div>
+
+      <div class="card surface surface--flat card--gold">
+        <div class="disc" aria-hidden="true">
+          <!-- janela de app + criar -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3.2" y="4.2" width="17.6" height="15.6" rx="2.4"/>
+            <path d="M3.2 8.6h17.6M6.3 6.4h.01M8.6 6.4h.01"/>
+            <path d="M12 11.5v4.8M9.6 13.9h4.8"/>
+          </svg>
+        </div>
+        <h3 class="name num">Dolor sit amet</h3>
+      </div>
+
+      <div class="card surface surface--flat">
+        <div class="disc" aria-hidden="true">
+          <!-- ciclo + moeda -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 4.5V9h-4.5"/>
+            <path d="M4.2 9a8.2 8.2 0 0 1 13.5-3L21 9"/>
+            <path d="M3 19.5V15h4.5"/>
+            <path d="M19.8 15a8.2 8.2 0 0 1-13.5 3L3 15"/>
+            <circle cx="12" cy="12" r="2.3"/>
+          </svg>
+        </div>
+        <h3 class="name num">Sed tempor incididunt</h3>
+      </div>
+
+      <div class="card surface surface--flat">
+        <div class="disc" aria-hidden="true">
+          <!-- tendência -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 17.5l5.3-5.3 3.4 3.4 7.3-7.3"/>
+            <path d="M14.8 8.3h4.7V13"/>
+          </svg>
+        </div>
+        <h3 class="name num">Consectetur adipiscing</h3>
+      </div>
+
+      <p class="small result">44 lorem ipsum dolor sit amet consectetur, adipiscing elit sed.</p>
+      <p class="small result">2 lorem ipsum dolor sit amet — consectetur adipiscing elit tempor sed.</p>
+      <p class="small result">Consectetur adipiscing elit sed, do eiusmod tempor.</p>
+      <p class="small result">Lorem ipsum dolor sit amet consectetur elit.</p>
+
+    </section>
+
+    <!-- banda B · áreas -->
+    <div class="blabel blabel--b" aria-hidden="true"><span>amet</span></div>
+    <section class="band band--b">
+
+      <div class="card surface surface--flat">
+        <div class="disc" aria-hidden="true">
+          <!-- calculadora -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5.2" y="3.2" width="13.6" height="17.6" rx="2.2"/>
+            <path d="M8.6 7h6.8"/>
+            <path d="M8.6 11.2h.01M12 11.2h.01M15.4 11.2h.01M8.6 14.6h.01M12 14.6h.01M15.4 14.6h.01"/>
+            <path d="M8.6 18h6.8"/>
+          </svg>
+        </div>
+        <h3 class="name num">Laborum</h3>
+      </div>
+
+      <div class="card surface surface--flat">
+        <div class="disc" aria-hidden="true">
+          <!-- alto-falante -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12.5 4.8 7.6 8.8H4.4v6.4h3.2l4.9 4V4.8z"/>
+            <path d="M15.8 9.6a3.9 3.9 0 0 1 0 4.8"/>
+            <path d="M18.4 7.4a7.3 7.3 0 0 1 0 9.2"/>
+          </svg>
+        </div>
+        <h3 class="name num">Adipiscing</h3>
+      </div>
+
+      <div class="card surface surface--flat">
+        <div class="disc" aria-hidden="true">
+          <!-- pacote -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3.2l7.6 4.3v9L12 20.8l-7.6-4.3v-9L12 3.2z"/>
+            <path d="M4.4 7.5 12 11.8l7.6-4.3"/>
+            <path d="M12 11.8v9"/>
+          </svg>
+        </div>
+        <h3 class="name num">Tempor</h3>
+      </div>
+
+      <div class="card surface surface--flat">
+        <div class="disc" aria-hidden="true">
+          <!-- banco de dados -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="5.4" rx="7.4" ry="2.6"/>
+            <path d="M4.6 5.4v6.6c0 1.4 3.3 2.6 7.4 2.6s7.4-1.2 7.4-2.6V5.4"/>
+            <path d="M4.6 12v6.6c0 1.4 3.3 2.6 7.4 2.6s7.4-1.2 7.4-2.6V12"/>
+          </svg>
+        </div>
+        <h3 class="name num">Enim</h3>
+      </div>
+
+      <p class="small result">Consectetur adipiscing elit sed tempor incididunt 9h, ut labore.</p>
+      <p class="small result">12 lorem ipsum dolor sit amet consectetur — adipiscing 2.</p>
+      <p class="small result">Lorem ipsum 300 dolor sit amet consectetur adipiscing elit sed.</p>
+      <p class="small result">Consectetur adipiscing elit sed do eiusmod tempor, incididunt ut labore.</p>
+
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

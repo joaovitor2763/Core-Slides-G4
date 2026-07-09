@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>64 · Conceito no número</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Conceito no número (light): ensina UM conceito e prova com um exemplo
+     trabalhado. Esquerda = o termo + definição + como explicar para o time.
+     Direita = card com o exemplo numérico (receita × custo × margem),
+     com barras antes→depois em escala comentada.
+
+     ESQUERDA (x 96..760):
+       eyebrow y120 · termo serif 74px y196 (2 linhas ×78 → ~352) ·
+       definição .lede y392 (3 linhas ≈ 100 → ~492) · hairline y536 ·
+       kicker mono y572 + fala itálica y604 (3 linhas ≈ 96 → ~700 < 804 ✓)
+
+     DIREITA · card .surface x 820..1504 (684) · y 196..780 (584) · padding 40
+       interno útil: 604 de largura
+       escala das barras: R$ 1M = 40px  → receita 10M=400 · 12M=480
+                                          custo   6M=240 · 6,4M=256
+       linha 1 (receita): label y96 · barra antes y126 (h14) · barra depois y148
+       linha 2 (custo):   label y212 · barras y242/264
+       painel margem (gold-dim): y330..430 · radius r-md
+       leitura final .small: y462
+       PROTAGONISTA GOLD = <em> do termo; painel gold-dim é apoio */
+
+  .eyebrow--top{position:absolute;left:var(--pad);top:120px}
+
+  .term{position:absolute;left:var(--pad);top:196px;width:664px;
+    font-size:74px;line-height:1.05}
+
+  .def{position:absolute;left:var(--pad);top:392px;width:640px}
+
+  .hair{position:absolute;left:var(--pad);top:536px;width:560px;height:1px;
+    background:var(--border)}
+
+  .say-k{position:absolute;left:var(--pad);top:572px;
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+  .say{position:absolute;left:var(--pad);top:604px;width:620px;
+    font-style:italic;color:var(--text-2)}
+
+  /* ── card do exemplo ── */
+  .ex{position:absolute;left:820px;top:196px;width:684px;height:584px;
+    padding:40px}
+  .ex .k{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+
+  .row{position:absolute;left:40px;right:40px}
+  .row .label{display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:12px}
+  .row .name{font-family:var(--num);font-weight:600;font-size:16px;
+    letter-spacing:-.01em;color:var(--text-1)}
+
+  .bar{height:14px;border-radius:999px;position:relative;margin-bottom:8px}
+  .bar--antes{background:rgba(0,31,53,.16)}
+  .bar--depois{background:rgba(0,31,53,.38)}
+  .bar .val{position:absolute;left:calc(100% + 12px);top:50%;
+    transform:translateY(-50%);
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+    color:var(--text-3);white-space:nowrap}
+
+  /* painel da margem — o resultado do conceito (apoio gold-dim) */
+  .result{position:absolute;left:40px;right:40px;top:330px;height:100px;
+    background:var(--gold-dim);border-radius:var(--r-md);
+    padding:22px 28px;display:flex;align-items:center;gap:20px}
+  .result .name{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--gold-700)}
+  .result .num{font-size:27px;flex:1;text-align:right}
+
+  .read{position:absolute;left:40px;right:40px;top:466px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <div class="eyebrow eyebrow--top">Consectetur elit</div>
+
+    <h1 class="h-serif term">Voluptate<br><em>consectetur</em></h1>
+
+    <p class="lede def">Lorem ipsum dolor sit amet consectetur adipiscing elit — sed do eiusmod tempor incididunt ut <b>labore et dolore magna</b>.</p>
+
+    <div class="hair" aria-hidden="true"></div>
+
+    <span class="say-k">Lorem ipsum dolor sit amet</span>
+    <p class="body say">“Lorem ipsum dolor sit amet, consectetur adipiscing elit sed tempor? Incididunt ut labore dolore magna aliqua.”</p>
+
+    <!-- ══ exemplo trabalhado ══ -->
+    <aside class="ex surface">
+      <span class="k">Lorem ipsum dolor sit · sed tempor R$ 10M</span>
+
+      <!-- escala: R$ 1M = 40px -->
+      <div class="row" style="top:96px">
+        <div class="label"><span class="name">Laborum</span><span class="chip chip--green"><span class="dot"></span>+20%</span></div>
+        <div class="bar bar--antes"  style="width:400px"><span class="val">R$ 10,0M · elit</span></div>
+        <div class="bar bar--depois" style="width:480px"><span class="val">R$ 12,0M</span></div>
+      </div>
+
+      <div class="row" style="top:212px">
+        <div class="label"><span class="name">Consectetur elit</span><span class="chip">+6%</span></div>
+        <div class="bar bar--antes"  style="width:240px"><span class="val">R$ 6,0M · elit</span></div>
+        <div class="bar bar--depois" style="width:256px"><span class="val">R$ 6,4M</span></div>
+      </div>
+
+      <div class="result">
+        <span class="name">Tempor</span>
+        <span class="num">R$ 4,0M → R$ 5,6M</span>
+        <span class="chip chip--green"><span class="dot"></span>+40%</span>
+      </div>
+
+      <p class="small read">Lorem ipsum dolor sit 20%; amet consectetur 6%. Adipiscing elit sed — do eiusmod tempor <b>3× labore</b> et dolore magna — aliqua enim veniam.</p>
+    </aside>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

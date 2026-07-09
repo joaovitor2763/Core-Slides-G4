@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>54 · Hub de entregas</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Hub de entregas: disco central + 2 anéis, com 8 entregas ABRAÇANDO o
+     anel (nome em pill + descrição), cada uma ligada por spoke CURTO
+     (~56px) com dot nas duas pontas. Os blocos acompanham a curvatura do
+     círculo (bordas de texto escalonadas de propósito, como na referência).
+     Slide denso → sem armilar.
+
+     Centro (800,490) · disco Ø300 (r150: left 650, top 340)
+     anéis Ø380 (r190, sólido) e Ø440 (r220, dashed)
+     Âncoras no anel externo r220 · ângulo α a partir da vertical:
+       α45°:  sin .707 cos .707 → (800±155.6, 490−155.6) → L1 (644,334) · R1 (956,334)
+       α80°:  sin .985 cos .174 → (800±216.6, 490−38.2) → L2 (583,452) · R2 (1017,452)
+       α115°: sin .906 cos −.423 → (800±199.4, 490+93)  → L3 (601,583) · R3 (999,583)
+       α150°: sin .5   cos −.866 → (800±110,  490+190.5)→ L4 (690,681) · R4 (910,681)
+     Spokes de 56px horizontais → dot do texto em anchor.x ∓ 56:
+       L1 588 · L2 527 · L3 545 · L4 634  ·  R1 1012 · R2 1073 · R3 1055 · R4 966
+     Pills terminam 10px antes do dot do texto (right/left edge = dot ∓ 10).
+     Cada item: pill (h34, centro = y da âncora) + descrição .small (máx 320px,
+     2 linhas) — item seguinte começa ≥118px abaixo → sem colisão.
+     L4 desc termina ~742 < 804 ✓ · descrições da esquerda: left ≥ 197 > 96 ✓ */
+
+  .head{position:absolute;left:var(--pad);top:88px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:44px}
+
+  /* ── centro ── */
+  .hub{position:absolute;left:650px;top:340px;width:300px;height:300px;
+    border-radius:50%;background:var(--surface);border:1px solid var(--border-2);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+  .hub .k{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+  .hub .name{font-family:var(--serif);font-weight:500;font-size:42px;
+    letter-spacing:-.02em;color:var(--text-1)}
+  .hub .hair{width:36px;height:1px;background:var(--gold);opacity:.85}
+  .hub .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text-3)}
+
+  .ring{position:absolute;border-radius:50%;border:1px solid var(--ring);pointer-events:none}
+  .ring--in{left:610px;top:300px;width:380px;height:380px}
+  .ring--out{left:580px;top:270px;width:440px;height:440px;border-style:dashed}
+
+  /* ── itens ── */
+  .item{position:absolute;width:340px}
+  .item--l{text-align:right}
+  .item .pill{display:inline-flex;align-items:center;
+    padding:7px 18px;border-radius:999px;border:1px solid var(--border-2);
+    font-family:var(--num);font-weight:600;font-size:15px;
+    letter-spacing:-.01em;color:var(--text-1)}
+  .item .pill--gold{background:var(--gold-dim);border-color:var(--gold-border);
+    color:var(--gold)}
+  .item .small{display:block;margin-top:8px;line-height:1.5}
+
+  /* ── spokes ── */
+  .wires{position:absolute;inset:0;pointer-events:none}
+  .wires line{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .wires .tip{fill:var(--text-3);opacity:.75}
+  .wires .ring-dot{fill:var(--text-3)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum dolor</div>
+      <h1 class="h-serif">Lorem ipsum, <span class="dim">dolor tempor.</span></h1>
+    </header>
+
+    <div class="ring ring--out" aria-hidden="true"></div>
+    <div class="ring ring--in" aria-hidden="true"></div>
+
+    <div class="hub">
+      <span class="k">Occaecat</span>
+      <span class="name">Dolor Sit</span>
+      <span class="hair" aria-hidden="true"></span>
+      <span class="sub">8 tempor · 1 adipiscing</span>
+    </div>
+
+    <!-- spokes: dot r3 no lado do texto · dot r5 na borda exata do anel Ø440 -->
+    <svg class="wires" viewBox="0 0 1600 900" aria-hidden="true">
+      <line x1="588"  y1="334" x2="644" y2="334"/><circle class="tip" cx="588"  cy="334" r="3"/><circle class="ring-dot" cx="644" cy="334" r="5"/>
+      <line x1="527"  y1="452" x2="583" y2="452"/><circle class="tip" cx="527"  cy="452" r="3"/><circle class="ring-dot" cx="583" cy="452" r="5"/>
+      <line x1="545"  y1="583" x2="601" y2="583"/><circle class="tip" cx="545"  cy="583" r="3"/><circle class="ring-dot" cx="601" cy="583" r="5"/>
+      <line x1="634"  y1="681" x2="690" y2="681"/><circle class="tip" cx="634"  cy="681" r="3"/><circle class="ring-dot" cx="690" cy="681" r="5"/>
+      <line x1="1012" y1="334" x2="956" y2="334"/><circle class="tip" cx="1012" cy="334" r="3"/><circle class="ring-dot" cx="956" cy="334" r="5"/>
+      <line x1="1073" y1="452" x2="1017" y2="452"/><circle class="tip" cx="1073" cy="452" r="3"/><circle class="ring-dot" cx="1017" cy="452" r="5"/>
+      <line x1="1055" y1="583" x2="999" y2="583"/><circle class="tip" cx="1055" cy="583" r="3"/><circle class="ring-dot" cx="999" cy="583" r="5"/>
+      <line x1="966"  y1="681" x2="910" y2="681"/><circle class="tip" cx="966"  cy="681" r="3"/><circle class="ring-dot" cx="910" cy="681" r="5"/>
+    </svg>
+
+    <!-- ESQUERDA (right edge da pill = dot − 10 · pill h34 → top = âncora − 17) -->
+    <div class="item item--l" style="right:1022px;top:317px"><!-- 1600−578=1022 -->
+      <span class="pill pill--gold">Dolor Tempor</span>
+      <span class="small">Lorem ipsum dolor sit amet consectetur de 2 dias adipiscing elit sed tempor magna.</span>
+    </div>
+    <div class="item item--l" style="right:1083px;top:435px">
+      <span class="pill">Consectetur elit</span>
+      <span class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit sed.</span>
+    </div>
+    <div class="item item--l" style="right:1065px;top:566px">
+      <span class="pill">Tempor incididunt</span>
+      <span class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit magna.</span>
+    </div>
+    <div class="item item--l" style="right:976px;top:664px">
+      <span class="pill">Ullamco nisi</span>
+      <span class="small">Lorem ipsum, dolor sit amet consectetur adipiscing elit sed do.</span>
+    </div>
+
+    <!-- DIREITA (left edge da pill = dot + 10) -->
+    <div class="item" style="left:1022px;top:317px">
+      <span class="pill">Consectetur veniam</span>
+      <span class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor.</span>
+    </div>
+    <div class="item" style="left:1083px;top:435px">
+      <span class="pill">Dolor Sit</span>
+      <span class="small">Lorem ipsum sed 600+ dolor sit amet consectetur adipiscing elit.</span>
+    </div>
+    <div class="item" style="left:1065px;top:566px">
+      <span class="pill">Aliqua nostrud</span>
+      <span class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit.</span>
+    </div>
+    <div class="item" style="left:976px;top:664px">
+      <span class="pill">Nisi ullamco</span>
+      <span class="small">Lorem ipsum dolor sit amet consectetur adipiscing.</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

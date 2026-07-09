@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>101 · Fases do programa</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Fases do programa (dark) — 3 fases em colunas com sub-cards aninhados.
+     TOPO-ESQUERDA — eyebrow + título serif 46px (y 96 → ~180).
+     COLUNAS — x: 96 + 448 + 32 + 448 + 32 + 448 = 1504 ✓ (3×448 + 2×32 = 1408 = 1600−192 ✓)
+       y: 240 → 790 (altura 550). Coluna do meio = surface--gold (única protagonista).
+     DENTRO de cada coluna (padding 20 → miolo 408 × 510):
+       barra de fase 44px (surface-2 · gold-dim no meio)
+       + subtítulo .num 18px, 2 linhas (~64px c/ margem)
+       + sub-card A (kicker mono + .small 2 linhas ≈ 117px)
+       + sub-card B (flex:1 → ~257px · kicker mono + lista ·)
+       lista: 7 itens × 21px + 6 × 6px gap = 183 ≤ ~203 disponíveis ✓
+     Nada abaixo de y 790 ≤ 804 ✓. Slide denso → sem armilar. */
+
+  .head{position:absolute;left:var(--pad);top:96px;width:1100px}
+  .head .eyebrow{margin-bottom:16px}
+  .head h1{font-size:46px}
+
+  /* grade das 3 fases */
+  .cols{position:absolute;left:var(--pad);top:240px;width:1408px;height:550px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .col{padding:20px;display:flex;flex-direction:column}
+
+  /* barra de fase: 44px, mono 12 uppercase centrado */
+  .bar{height:44px;flex:0 0 44px;border-radius:var(--r-md);background:var(--surface-2);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-size:12px;font-weight:600;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--text-2)}
+  .col--gold .bar{background:var(--gold-dim);border:1px solid var(--gold-border);color:var(--gold)}
+
+  /* subtítulo da fase: .num 18px, 2 linhas */
+  .sub{margin:14px 4px 0;font-size:18px;line-height:1.4;color:var(--text-1)}
+
+  /* sub-cards aninhados */
+  .card{border:1px solid var(--border);border-radius:var(--r-md);padding:16px 18px;margin-top:16px}
+  .card--fill{flex:1;margin-top:12px}
+  .card .kick{font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:9px}
+  .col--gold .card .kick{color:var(--gold)}
+
+  .card ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .card li{display:flex;gap:10px;align-items:baseline;
+    font-size:14px;line-height:1.5;color:var(--text-3)}
+  .card li::before{content:'·';font-family:var(--mono);font-weight:600;
+    color:var(--text-3);flex:0 0 auto}
+  .col--gold .card li::before{color:var(--gold)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <!-- título · ex.: "Agenda do programa" / "Como funciona, fase a fase" -->
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum · dolor</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit, <span class="dim">amet consectetur elit.</span></h1>
+    </header>
+
+    <section class="cols">
+
+      <!-- fase 1 · ex.: avaliação (diagnóstico antes da imersão) -->
+      <div class="col surface">
+        <!-- barra da fase · ex.: "Avaliação" -->
+        <div class="bar">Lorem</div>
+        <!-- subtítulo · ex.: "Entendemos o momento do negócio antes do primeiro encontro" -->
+        <p class="num sub">Lorem ipsum dolor sit amet consectetur, adipiscing elit sed tempor.</p>
+        <!-- sub-card A · ex.: "Comprometimento" + o que se espera do participante -->
+        <div class="card">
+          <div class="kick">Lorem ipsum</div>
+          <p class="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed tempor incididunt labore magna aliqua veniam.</p>
+        </div>
+        <!-- sub-card B · ex.: "Informações solicitadas" + lista (DRE, organograma, metas…) -->
+        <div class="card card--fill">
+          <div class="kick">Ipsum dolor sit</div>
+          <ul>
+            <li>Lorem ipsum dolor</li>
+            <li>Sit amet consectetur</li>
+            <li>Adipiscing elit sed</li>
+            <li>Tempor incididunt</li>
+            <li>Labore magna aliqua</li>
+            <li>Enim minim veniam</li>
+            <li>Quis nostrud ullamco</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- fase 2 · ex.: planejamento (imersão principal) — única coluna gold -->
+      <div class="col col--gold surface surface--gold">
+        <!-- barra da fase · ex.: "Planejamento" -->
+        <div class="bar">Ipsum</div>
+        <!-- subtítulo · ex.: "Três dias de construção guiada com o time de mentores" -->
+        <p class="num sub">Ipsum dolor sit amet elit, consectetur adipiscing sed incididunt.</p>
+        <!-- sub-card A · ex.: "Comprometimento" + dedicação esperada na fase -->
+        <div class="card">
+          <div class="kick">Dolor ipsum</div>
+          <p class="small">Ipsum dolor sit amet consectetur, adipiscing elit sed tempor incididunt labore magna aliqua enim minim.</p>
+        </div>
+        <!-- sub-card B · ex.: "Entregas da fase" + lista (plano de metas, mapa de rotina…) -->
+        <div class="card card--fill">
+          <div class="kick">Sit consectetur</div>
+          <ul>
+            <li>Ipsum dolor amet</li>
+            <li>Consectetur elit sed</li>
+            <li>Tempor labore magna</li>
+            <li>Aliqua enim veniam</li>
+            <li>Nostrud ullamco nisi</li>
+            <li>Commodo duis aute</li>
+            <li>Irure voluptate velit</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- fase 3 · ex.: refinamento (acompanhamento pós-imersão) -->
+      <div class="col surface">
+        <!-- barra da fase · ex.: "Refinamento" -->
+        <div class="bar">Dolor</div>
+        <!-- subtítulo · ex.: "Ciclos de revisão até o plano rodar sem a nossa mão" -->
+        <p class="num sub">Dolor sit amet ipsum elit, consectetur sed adipiscing tempor.</p>
+        <!-- sub-card A · ex.: "Comprometimento" + ritmo dos encontros de revisão -->
+        <div class="card">
+          <div class="kick">Amet tempor</div>
+          <p class="small">Dolor sit amet ipsum consectetur, adipiscing elit sed tempor incididunt labore magna aliqua veniam quis.</p>
+        </div>
+        <!-- sub-card B · ex.: "Checkpoints" — poucos itens, como na referência -->
+        <div class="card card--fill">
+          <div class="kick">Elit incididunt</div>
+          <ul>
+            <li>Dolor ipsum amet</li>
+            <li>Sit consectetur elit</li>
+            <li>Sed tempor labore</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

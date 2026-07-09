@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>03 · Mentor</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Apresentação do mentor (dark): nome serif gigante com sobrenome
+     itálico gold à esquerda; retrato placeholder 420×520 à direita
+     com esfera armilar sangrando. Assimétrico por peso. */
+
+  .brand{position:absolute;left:var(--pad);top:84px}
+  .brand .logo{height:24px}
+
+  /* órbita parcial atrás do retrato (sangra à direita) */
+  .armilar--corner{width:780px;height:439px;right:-30px;bottom:-30px;opacity:.26}
+
+  /* retrato: 1084 + 420 = 1504 = 1600 − 96 ✓ · 190 + 520 = 710 ✓ */
+  .portrait{position:absolute;left:1084px;top:190px;width:420px;height:520px;
+    border-radius:var(--r-xl);border:1px solid var(--border-2);
+    background:linear-gradient(160deg,var(--navy-600) 0%,var(--navy-800) 74%,var(--navy-900) 100%);
+    box-shadow:var(--shadow-lg);overflow:hidden}
+  .portrait .initials{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);
+    font-size:300px;line-height:1}
+  .portrait .tag{position:absolute;left:0;right:0;bottom:30px;text-align:center}
+
+  /* bloco do nome: 96 + 900 = 996 < 1084 (não encosta no retrato) ✓ */
+  .who{position:absolute;left:var(--pad);top:236px;width:900px}
+  .who .eyebrow{margin-bottom:28px}
+  .who h1{font-size:110px}
+  .who h1 .last{font-style:italic;font-weight:400;color:var(--gold)}
+  .who .role{margin-top:22px;font-family:var(--mono);font-size:13px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--text-3)}
+  .who .bio{margin-top:26px;max-width:640px}
+  .who .creds{margin-top:40px;display:flex;gap:12px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <div class="armilar armilar--engraving armilar--corner" aria-hidden="true"></div>
+
+    <header class="brand">
+      <img class="logo" src="assets/g4-logo-branca.svg" alt="G4 Educação">
+    </header>
+
+    <div class="portrait" aria-hidden="true">
+      <div class="ghost initials">LI</div>
+      <div class="mono-label tag">[ Lorem 3:4 ]</div>
+    </div>
+
+    <div class="who">
+      <div class="eyebrow">Lorem ipsum dolor</div>
+      <h1 class="h-serif">Lorem<br><span class="last">Ipsum</span></h1>
+      <div class="role">Dolor sit amet &amp; elit · Sed tempor</div>
+      <p class="lede bio">Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor magna. Duis aute irure dolor sit voluptate velit: cillum fugiat, pariatur nostrud amet.</p>
+      <div class="creds">
+        <span class="chip">15 anos sed laborum</span>
+        <span class="chip">2 lorem</span>
+        <span class="chip chip--gold"><span class="dot"></span>500+ adipiscing</span>
+      </div>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

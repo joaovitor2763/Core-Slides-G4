@@ -2,7 +2,7 @@
 
 > **Two decks, one language.** Build G4 slides by picking the deck that matches your project size — not by version number. All official templates share the **"Órbita"** visual language (Playfair serif + Space Grotesk display, navy + gold + paper, sphere armilar overlay, surfaces with radius + soft shadow, chips/pills for meta).
 >
-> 📦 **The `templates-*/` folders are gitignored** — the canonical source of the official templates is distributed separately (zip / g4os-pages / Notion) and you drop them in locally. See [Working with the official templates](#working-with-the-official-templates).
+> 📦 **`templates-short-deck/` e `templates-expanded-deck/` vão pro git** (são os templates oficiais). `templates-legacy/` e `templates-column/` são gitignored (acervo congelado / skin opcional, local-only).
 
 ## The official decks
 
@@ -10,8 +10,8 @@
 |---|---|---|
 | **[`templates-short-deck/`](templates-short-deck/README.md)** | **52** | Lean projects — aulas, workshops, talks, internal decks. The minimum viable G4. **Start here.** |
 | **[`templates-expanded-deck/`](templates-expanded-deck/README.md)** | **109** | Everything: case study (8 etapas), relatório financeiro (DRE, fluxo de caixa, orçamento, cenários, mapa de riscos), pitch de vendas, apresentação de produto. Same language as short-deck, more layouts. |
-| **[`templates-legacy/`](templates-legacy/)** | **48** | v4 hairline-minimalista acervo. Frozen. Reference only (use for compatibility with old decks). **Também gitignored** — baixe separadamente. |
-| `templates-column/` | 52 | Optional third skin — same 52 layouts as short-deck, re-skinned with the [Column](https://column.com) fintech visual language. Drop-in alternative. |
+| **[`templates-legacy/`](templates-legacy/)** | **48** | v4 hairline-minimalista acervo. Frozen. Reference only (use for compatibility with old decks). **Gitignored** — local-only (não vai no `git clone`). |
+| `templates-column/` | 52 | Optional third skin — same 52 layouts as short-deck, re-skinned with the [Column](https://column.com) fintech visual language. Drop-in alternative. **Gitignored** — local-only. |
 
 > **Decisão prática:** se você não sabe qual escolher, vá de `short-deck` (52). Ele cobre 90% dos projetos. Se faltar layout (ex: você precisa de um slide de fluxo de caixa), promova o deck para `expanded-deck` e copie o template extra que falta.
 
@@ -45,33 +45,20 @@ open meu-slide.html
 
 ## Working with the official templates
 
-As pastas `templates-*/` são **locais e gitignored** — elas não viajam no `git clone`. O motivo é simples: os 109 templates Órbita são conteúdo versionado fora do repo (zip publicado / g4os-pages / Notion), pra evitar commits ruidosos a cada novo template.
+Os **dois decks oficiais** (`templates-short-deck/` 52 slides e `templates-expanded-deck/` 109 slides) **vão no `git clone`** — são o produto deste repo. Você abre o `index.html` da pasta e navega no passador, ou copia o template mais próximo e edita:
 
-**Para usar localmente, faça UM dos seguintes:**
+```bash
+# Já funciona após git clone
+open templates-short-deck/index.html
+cp templates-short-deck/06-grafico-barras.html meu-slide.html
+# editar + validar visualmente
+```
 
-1. **Baixe o zip oficial** (link distribuído pelo time) e descompacte em `templates-short-deck/` (ou `templates-expanded-deck/`):
+**As outras duas pastas são local-only (gitignored):**
+- `templates-legacy/` (48 v4 hairline) — acervo congelado, mantido em disco pra rodar o skill `g4-slides` mas **não vai no `git clone`**. Se precisar, baixe separadamente.
+- `templates-column/` (52 com pele Column) — skin opcional, mesmo caso.
 
-    ```bash
-    unzip ~/Downloads/core-slides-short-deck.zip   # cria/atualiza templates-short-deck/
-    ```
-
-2. **Rode o script de refresh** (se existir no seu setup — `[TODO: link to refresh script]`):
-
-    ```bash
-    ./scripts/refresh-templates.sh   # puxa do canonical store
-    ```
-
-3. **Rode a partir do g4os-pages** (se o seu ambiente expõe):
-
-    ```bash
-    mcp g4os-pages fetch --slug g4-slides-short-deck --out templates-short-deck/
-    ```
-
-**A partir daí, é só `cp` e editar.** O `style.css` e o `index.html` de cada pasta já vêm prontos pra `open file://...index.html` no browser e navegar no passador.
-
-**Pra atualizar os templates no futuro**, repita o passo acima. O `.gitignore` garante que suas edições locais de slides (`meu-slide.html`) e qualquer trabalho em progresso **não** sejam sobrescritos.
-
-> **Quem precisa commitar `style.css`, `index.html` ou assets do deck?** Force-add explicitamente: `git add -f templates-short-deck/style.css`. Não commite slides individuais — eles são outputs, não código.
+> **Quem precisa commitar `style.css` ou `index.html` dos decks Órbita?** Eles já estão commitados. Não force-add nada a menos que esteja criando uma variante.
 
 ---
 
@@ -101,10 +88,10 @@ Core-Slides-G4/
 │
 ├── build-deck-inlined.py        ← builda um deck HTML único (≤5MB) pra publicar
 │
-├── templates-short-deck/        ← (LOCAL) 52 slides, baixado do canonical store
-├── templates-expanded-deck/     ← (LOCAL) 109 slides, baixado do canonical store
-├── templates-legacy/            ← (LOCAL) 48 templates v4, baixado do canonical store (acervo hairline)
-├── templates-column/            ← (LOCAL) 52 slides com pele Column
+├── templates-short-deck/        ← (COMMITTED) 52 slides Órbita
+├── templates-expanded-deck/     ← (COMMITTED) 109 slides Órbita
+├── templates-legacy/            ← (LOCAL) 48 templates v4 hairline, gitignored
+├── templates-column/            ← (LOCAL) 52 slides com pele Column, gitignored
 │
 ├── examples/
 │   ├── index.html               ← passador de slides (grid 2 col + modo apresentação, base do build)
@@ -122,7 +109,7 @@ Core-Slides-G4/
     └── CHANGELOG.md             ← histórico de iterações (v1 → v4)
 ```
 
-> **Pastas marcadas `(LOCAL)`** são preenchidas depois do `git clone` (vide [Working with the official templates](#working-with-the-official-templates)). Todas as 4 pastas de templates são gitignored — o repo é só o design system, a documentação, o build script e os assets compartilhados.
+> **Pastas marcadas `(LOCAL)`** são gitignored — não vêm no `git clone` (vide [Working with the official templates](#working-with-the-official-templates)). O `git clone` traz apenas `templates-short-deck/` + `templates-expanded-deck/` (os decks oficiais) + design system + docs + assets compartilhados.
 
 ---
 
@@ -132,7 +119,7 @@ Core-Slides-G4/
 
 Catálogo base usado nas aulas da **Imersão em IA G4** (projeto `Aulas G4 - IA`) e nos primeiros decks de produtos do G4 OS. Foi refinado em **4 sessões** com aprendizados de bugs comuns e publicado em **2 decks de 29 slides** (`G4 Academia de IA` e `G4 Gestão e Estratégia`).
 
-Use `templates-legacy/` apenas para compatibilidade com decks antigos. Para projetos novos, use **`templates-short-deck/`** (52) ou **`templates-expanded-deck/`** (109). O acervo também é distribuído pelo canonical store (zip separado).
+Use `templates-legacy/` apenas para compatibilidade com decks antigos. Para projetos novos, use **`templates-short-deck/`** (52) ou **`templates-expanded-deck/`** (109).
 
 Catálogo navegável (filtro por categoria + toggle light/dark) — `python3 -m http.server` na raiz e abrir `http://localhost:8000/examples/catalog.html`.
 

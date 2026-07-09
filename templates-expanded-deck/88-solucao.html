@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>88 · A solução</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Light · pitch da solução em 3 camadas.
+     ESQUERDA — bloco editorial: eyebrow + título serif 54px + lede + chip.
+       Coluna x 96–620 → largura 524.
+     DIREITA — 3 cards .surface empilhados conectados por espinha vertical.
+       Coluna x 700–1504 → largura 804. Gutter 700−620 = 80.
+       Soma: 524 + 80 + 804 = 1408 = 1600 − 2×96 ✓
+
+     Geometria vertical dos cards (zona y 180–800):
+       h = 189 · gap = 26 → 3×189 + 2×26 = 619 ≤ 620 ✓
+       card 1: top 180 → bottom 369
+       card 2: top 395 → bottom 584
+       card 3: top 610 → bottom 799 ≤ 800 ✓
+
+     Conectores (SVG viewBox 0 0 1600 900), espinha no eixo central da
+     coluna direita: x = 700 + 804/2 = 1102.
+       seg 1: (1102,369) → (1102,395)  · dots nas bordas exatas 369 e 395
+       seg 2: (1102,584) → (1102,610)  · dots nas bordas exatas 584 e 610 */
+
+  .intro{position:absolute;left:96px;top:292px;width:524px}
+  .intro .eyebrow{margin-bottom:22px}
+  .intro h1{font-size:54px;max-width:524px}
+  .intro .lede{margin-top:26px;max-width:490px}
+  .intro .chip{margin-top:34px}
+
+  /* wires ACIMA dos cards (z 3 > 2): os dots ancoram no meio da borda
+     e precisam renderizar como círculos completos, não meio-cobertos */
+  .wires{position:absolute;inset:0;z-index:3;pointer-events:none}
+  .wires line{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .wires circle{fill:var(--text-3);opacity:.7}
+
+  .card{position:absolute;left:700px;width:804px;height:189px;z-index:2;
+    display:flex;flex-direction:column;justify-content:center;padding:0 52px}
+  .card .kickrow{display:flex;align-items:baseline;margin-bottom:14px}
+  .card .kick{font-family:var(--mono);font-size:11.5px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+  .card .idx{margin-left:auto;font-family:var(--mono);font-size:11px;
+    font-weight:500;letter-spacing:.14em;color:var(--text-3);opacity:.7}
+  .card .body{font-size:18px;max-width:560px}
+
+  /* card 3 — único protagonista gold do slide */
+  .card--gold .kick{color:var(--gold)}
+  .card--gold .row{display:flex;align-items:baseline;gap:18px}
+  .card--gold .num{font-size:32px;color:var(--gold);line-height:1}
+  .card--gold .body{max-width:560px;white-space:nowrap}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <div class="intro">
+      <div class="eyebrow">Lorem ipsum</div>
+      <h1 class="h-serif">Lorem ipsum dolor, <span class="dim">sit amet consectetur.</span></h1>
+      <p class="lede">Lorem ipsum dolor sit amet consectetur — adipiscing elit sed do eiusmod tempor labore.</p>
+      <div class="chip"><span class="dot"></span>consectetur + adipiscing + labore</div>
+    </div>
+
+    <!-- espinha vertical: dots ancorados nas bordas exatas dos cards -->
+    <svg class="wires" viewBox="0 0 1600 900" aria-hidden="true">
+      <!-- card 1 (borda inferior y=369) → card 2 (borda superior y=395) -->
+      <line x1="1102" y1="369" x2="1102" y2="395"/>
+      <circle cx="1102" cy="369" r="3"/>
+      <circle cx="1102" cy="395" r="3"/>
+      <!-- card 2 (borda inferior y=584) → card 3 (borda superior y=610) -->
+      <line x1="1102" y1="584" x2="1102" y2="610"/>
+      <circle cx="1102" cy="584" r="3"/>
+      <circle cx="1102" cy="610" r="3"/>
+    </svg>
+
+    <!-- card 1 · top 180 -->
+    <section class="card surface" style="top:180px">
+      <div class="kickrow"><span class="kick">Lorem id</span><span class="idx">01 / 03</span></div>
+      <p class="body">Lorem ipsum consectetur do amet: adipiscing, tempor et labore sed elit id.</p>
+    </section>
+
+    <!-- card 2 · top 395 -->
+    <section class="card surface" style="top:395px">
+      <div class="kickrow"><span class="kick">Lorem sit</span><span class="idx">02 / 03</span></div>
+      <p class="body">Consectetur ut labore tempor et aliqua — enim ad minim dolor, sit ea veniam quis.</p>
+    </section>
+
+    <!-- card 3 · top 610 · único gold -->
+    <section class="card surface surface--gold card--gold" style="top:610px">
+      <div class="kickrow"><span class="kick">Lorem amet</span><span class="idx">03 / 03</span></div>
+      <div class="row">
+        <span class="num">+22%</span>
+        <p class="body">de lorem ipsum em 12 meses sed adipiscing ut labore et amet.</p>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

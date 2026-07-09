@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>85 · Cenários</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Cenários financeiros 2026 (light): título serif topo-esquerda +
+     3 cards verticais de cenário. O do meio ("base") é o cenário-guia:
+     surface--gold, elevado 18px, com chip--gold flutuando no topo.
+     Rodapé mono com a análise de sensibilidade.
+
+     Colunas: 96 + 448 + 32 + 448 + 32 + 448 = 1504 → 448×3 + 32×2 = 1408 ✓
+     Vertical: head top 104 (eyebrow 14 + 20 + título 48 → termina ~186)
+       cards laterais: y 270 → 780 (510px)
+       card base: margin-top −18 + stretch → y 252 → 780 (528px)
+       chip "cenário-guia": top −15 → y ≈ 237 (folga de ~50px p/ o título)
+       rodapé mono: top 789, 11px → termina ~804 ✓ (nada além de y 804) */
+
+  .head{position:absolute;left:var(--pad);top:104px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:46px}
+
+  .grid{position:absolute;left:var(--pad);right:var(--pad);top:270px;height:510px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+
+  /* 3 grupos internos (nome+prob · receita · premissas) com space-between:
+     o respiro sobra dividido em 2 vãos iguais, sem banda morta única */
+  .scen{position:relative;padding:40px 38px 36px;
+    display:flex;flex-direction:column;justify-content:space-between}
+  .scen--guia{margin-top:-18px}   /* stretch da grid → 528px, base alinhada em 780 */
+  .scen--guia .flag{position:absolute;top:-15px;left:50%;transform:translateX(-50%)}
+
+  .scen .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .scen .name{font-family:var(--mono);font-size:12.5px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--text-3)}
+  .scen--guia .name{color:var(--text-1)}
+
+  .scen .rev{margin-top:12px;font-size:42px;line-height:1}
+  .scen--guia .rev{color:var(--gold)}
+  .scen .ebitda{margin-top:14px;color:var(--text-2)}
+  .scen .ebitda b{font-family:var(--num);font-weight:600;letter-spacing:-.02em;
+    color:var(--text-2)}
+
+  .scen .rule{height:1px;background:var(--border);margin-bottom:24px}
+  .scen .plabel{margin-bottom:16px}
+  .scen ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+  .scen li{display:flex;gap:12px;align-items:baseline;
+    font-size:14px;line-height:1.5;color:var(--text-2)}
+  .scen li::before{content:'·';font-family:var(--mono);font-size:20px;
+    font-weight:600;line-height:1;color:var(--gold);flex:0 0 auto}
+
+  .foot{position:absolute;left:var(--pad);top:789px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">lorem ipsum · 3 dolor</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet.</h1>
+    </header>
+
+    <section class="grid">
+
+      <div class="scen surface">
+        <div class="top">
+          <span class="name">consectetur</span>
+          <span class="chip">25%</span>
+        </div>
+        <div class="money">
+          <div class="mono-label">lorem ipsum dolor 2026</div>
+          <div class="num rev">R$ 38M</div>
+          <div class="small ebitda">lorem ipsum <b>18%</b></div>
+        </div>
+        <div class="prem">
+          <div class="rule" aria-hidden="true"></div>
+          <div class="mono-label plabel">adipiscing</div>
+          <ul>
+            <li>lorem de 3% ad enim</li>
+            <li>consectetur adipiscing elit sed</li>
+            <li>lorem ipsum dolor</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="scen scen--guia surface surface--gold">
+        <span class="flag chip chip--gold"><span class="dot"></span>lorem ipsum</span>
+        <div class="top">
+          <span class="name">amet</span>
+          <span class="chip">55%</span>
+        </div>
+        <div class="money">
+          <div class="mono-label">lorem ipsum dolor 2026</div>
+          <div class="num rev">R$ 46M</div>
+          <div class="small ebitda">lorem ipsum <b>22%</b></div>
+        </div>
+        <div class="prem">
+          <div class="rule" aria-hidden="true"></div>
+          <div class="mono-label plabel">adipiscing</div>
+          <ul>
+            <li>lorem de 2,2% ad enim</li>
+            <li>2 dolor sit amet elit</li>
+            <li>lorem ipsum +6%</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="scen surface">
+        <div class="top">
+          <span class="name">adipiscing</span>
+          <span class="chip">20%</span>
+        </div>
+        <div class="money">
+          <div class="mono-label">lorem ipsum dolor 2026</div>
+          <div class="num rev">R$ 55M</div>
+          <div class="small ebitda">lorem ipsum <b>24%</b></div>
+        </div>
+        <div class="prem">
+          <div class="rule" aria-hidden="true"></div>
+          <div class="mono-label plabel">adipiscing</div>
+          <ul>
+            <li>lorem de 1,8% ad enim</li>
+            <li>4 dolor sit amet elit</li>
+            <li>lorem ipsum sit S2</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="mono-label foot">lorem ipsum: ±1 pt de dolor ≈ R$ 1,1M de sit no amet</div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

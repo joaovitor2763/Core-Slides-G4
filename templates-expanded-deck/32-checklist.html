@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>32 · Checklist fazer × evitar</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Checklist fazer × evitar (light): duas superfícies lado a lado —
+     a de "funciona" com sombra cheia e marcadores "+" verdes, a de
+     "evitar" flat com "—" vermelhos e texto rebaixado. Título serif
+     à esquerda, leitura de apoio à direita do header. */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:100px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:58px;max-width:780px}
+  .head .read{max-width:400px;padding-bottom:8px}
+
+  /* painéis: left 96 + 688 = 784 · gap 32 · 816 + 688 = 1504 = 1600−96 ✓
+     top 330 + bottom 88 → altura 482 */
+  .panel{position:absolute;top:330px;bottom:88px;width:688px;
+    padding:40px 44px 32px;display:flex;flex-direction:column}
+  .panel--do{left:var(--pad)}
+  .panel--avoid{left:816px}
+
+  .panel-head{display:flex;align-items:center;justify-content:space-between;
+    padding-bottom:22px;border-bottom:1px solid var(--border)}
+  .panel-head .title{font-family:var(--num);font-weight:600;font-size:20px;
+    letter-spacing:-.01em;color:var(--text-1)}
+
+  /* itens: 4 × min 64px = 256px ≤ 482 − 72 (padding) − 55 (header) ✓ */
+  .items{flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
+  .item{display:flex;align-items:center;gap:20px;min-height:64px}
+  .item .mark{flex:none;width:26px;height:26px;border-radius:50%;
+    display:grid;place-items:center;
+    font-family:var(--mono);font-size:14px;font-weight:500;line-height:1}
+  .panel--do .mark{background:var(--green-dim);color:var(--green)}
+  .panel--avoid .mark{background:var(--red-dim);color:var(--red)}
+  .item .body{max-width:540px}
+  .panel--avoid .body{color:var(--text-3)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Lorem ipsum · dolor sit 90 dias</div>
+        <h1 class="h-serif">Lorem ipsum dolor sit amet <em>elit.</em></h1>
+      </div>
+      <p class="body read">Lorem ipsum dolor sit amet consectetur 400 adipiscing. Sed do eiusmod tempor incididunt — ut labore magna.</p>
+    </header>
+
+    <section class="panel panel--do surface">
+      <div class="panel-head">
+        <span class="title">Dolor sit amet</span>
+        <span class="chip chip--green"><span class="dot"></span>Lorem</span>
+      </div>
+      <div class="items">
+        <div class="item">
+          <span class="mark" aria-hidden="true">+</span>
+          <p class="body">Lorem ipsum dolor sit amet consectetur — adipiscing elit sed.</p>
+        </div>
+        <div class="item">
+          <span class="mark" aria-hidden="true">+</span>
+          <p class="body">Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+        </div>
+        <div class="item">
+          <span class="mark" aria-hidden="true">+</span>
+          <p class="body">Lorem ipsum dolor sit amet consectetur elit.</p>
+        </div>
+        <div class="item">
+          <span class="mark" aria-hidden="true">+</span>
+          <p class="body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--avoid surface surface--flat">
+      <div class="panel-head">
+        <span class="title">Lorem ipsum</span>
+        <span class="chip chip--red"><span class="dot"></span>Veniam</span>
+      </div>
+      <div class="items">
+        <div class="item">
+          <span class="mark" aria-hidden="true">&mdash;</span>
+          <p class="body">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do.</p>
+        </div>
+        <div class="item">
+          <span class="mark" aria-hidden="true">&mdash;</span>
+          <p class="body">Lorem ipsum dolor sit amet consectetur adipiscing elit tempor.</p>
+        </div>
+        <div class="item">
+          <span class="mark" aria-hidden="true">&mdash;</span>
+          <p class="body">Lorem ipsum dolor sit amet consectetur adipiscing.</p>
+        </div>
+        <div class="item">
+          <span class="mark" aria-hidden="true">&mdash;</span>
+          <p class="body">Lorem ipsum dolor sit amet consectetur elit.</p>
+        </div>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>
