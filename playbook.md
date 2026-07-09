@@ -1,10 +1,12 @@
-# G4 Aulas IA — Playbook (v4)
+# G4 Aulas IA — Playbook
 
 > **Como construir e evoluir slides HTML das aulas G4** (Academia de IA, Gestão e Estratégia, e futuras).
 > Reúne aprendizados de **4 sessões** + 2 decks publicados de 29 slides cada.
 
 > **Versão firme (regras, tokens, lista de templates)**: ver `AGENTS.md` na mesma pasta.
 > **Auditoria visual atual**: ver `AUDITORIA.md` na mesma pasta.
+
+> **Contexto dos decks**: Este playbook foi escrito originalmente para o acervo v4 (`templates-legacy/`, 48 templates, estilo hairline). As seções 1–7 contêm regras que **valem pros dois decks atuais** (`templates-short-deck/` 52 slides e `templates-expanded-deck/` 109 slides, ambos na linguagem "Órbita") + pro acervo legacy. O catálogo de 48 templates da §5 é o acervo v4 — para os decks atuais, consulte a `GUIA.md` da pasta correspondente (`templates-short-deck/GUIA.md` ou `templates-expanded-deck/GUIA.md`).
 
 ---
 
@@ -71,9 +73,13 @@ Exemplos:
 
 ---
 
-## 5. Os 48 templates (vocabulário visual)
+## 5. Os 48 templates do acervo v4 (vocabulário visual hairline)
 
-Eles estão em `templates/` (01-capa.html ... 48-numero-hero.html). Cada um é um arquivo único, totalmente funcional, com `<style>` local + `<article class="slide">` no padrão. Para navegar visualmente: `examples/catalog.html` (grid com filtro por categoria + toggle light/dark; abrir via `python3 -m http.server` na raiz do repo).
+> **Acervo v4, congelado.** Use apenas pra compatibilidade com decks antigos. Para projetos novos, use os decks Órbita:
+> - **52 slides "curto"** — `templates-short-deck/` (local) + [`templates-short-deck/GUIA.md`](templates-short-deck/GUIA.md)
+> - **109 slides "expandido"** — `templates-expanded-deck/` (local) + [`templates-expanded-deck/GUIA.md`](templates-expanded-deck/GUIA.md)
+
+Eles estão em `templates-legacy/` (01-capa.html ... 48-numero-hero.html). Cada um é um arquivo único, totalmente funcional, com `<style>` local + `<article class="slide">` no padrão. Para navegar visualmente: `examples/catalog.html` (grid com filtro por categoria + toggle light/dark; abrir via `python3 -m http.server` na raiz do repo).
 
 | # | Template | Quando usar | Quando NÃO usar |
 |---|----------|-------------|------------------|
@@ -256,7 +262,7 @@ Quatro formas canônicas de colocar imagem num slide, da mais moldurada à mais 
 
 ```bash
 # 1. Copiar template mais próximo (catálogo visual: examples/catalog.html)
-cp templates/05-grafico.html meu-deck/08-meu-grafico.html
+cp templates-legacy/05-grafico.html meu-deck/08-meu-grafico.html
 
 # 2. Editar o slide
 # - Copiar do template-base
@@ -374,7 +380,9 @@ Antes de inlinear: comprimir tudo. PNGs > 500KB → sips -Z 1200 ou otimizar via
 ## 14. Onde isso está documentado
 
 - **`AGENTS.md`** (mesma pasta) — regras firmes, tokens, lista dos 48 templates, mapeamento dos 29 slides
-- **Catálogo canônico de 48 templates** — `templates/` (navegável em `examples/catalog.html`)
+- **Catálogo canônico de 48 templates (acervo v4)** — `templates-legacy/` (navegável em `examples/catalog.html`)
+- **Catálogo do deck curto (52 Órbita)** — `templates-short-deck/` (local) + `templates-short-deck/GUIA.md`
+- **Catálogo do deck expandido (109 Órbita)** — `templates-expanded-deck/` (local) + `templates-expanded-deck/GUIA.md`
 - **Projeto** — `Aulas G4 - IA` (`project_c1402fb9-6848-4cea-9fef-489da1fbf7fe`)
 - **Sessões-chave**:
   - `260614-awake-grove` — design system + 20 templates
@@ -390,7 +398,7 @@ Antes de inlinear: comprimir tudo. PNGs > 500KB → sips -Z 1200 ou otimizar via
 Se você tá chegando nessa sessão sem contexto:
 
 1. **Ler `AGENTS.md`** (regras firmes) + **`playbook.md`** (este arquivo, prosa).
-2. **Olhar o catálogo de 48 templates** em `templates/` (navegável em `examples/catalog.html`).
+2. **Olhar o catálogo** — para acervo v4: `examples/catalog.html` (navegável). Para decks Órbita atuais: abrir `templates-short-deck/index.html` (52 slides) ou `templates-expanded-deck/index.html` (109 slides).
 3. **Procurar o template mais próximo** no catálogo pra novo slide.
 4. **1 slide por vez**: copiar → editar → validar visualmente → próximo.
 5. **Publicar** com `mcp__g4os-pages__republish_page(slug="...", html=<deck-inlined>)`.

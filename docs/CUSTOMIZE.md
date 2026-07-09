@@ -187,6 +187,6 @@ mcp__session__subagent_run(
 ## TL;DR pra próxima sessão
 
 1. Olhar `AGENTS.md` (regras firmes) + `playbook.md` (prosa)
-2. Escolher template mais próximo da `templates/`
+2. Escolher template mais próximo de `templates-short-deck/` (52) ou `templates-expanded-deck/` (109) — abra o `index.html` da pasta pra navegar com filtro de categoria
 3. Copiar → editar → validar visualmente → próximo
 4. Publicar via g4os-pages (PUBLISH.md)

@@ -1,6 +1,10 @@
-# Core Slides G4 · v5 "Órbita"
+# Core Slides G4 · short-deck (52 slides)
 
-Nova linguagem visual da biblioteca de slides — editorial-orgânica, inspirada na landing do G4 OS (fine-swan) e na rox.com. Substitui o estilo "hairline quadrado" da v4 por:
+O **deck curto** da G4: 52 templates, linguagem visual "Órbita" (editorial-orgânica, inspirada na landing do G4 OS e na rox.com). É o ponto de partida para qualquer projeto — aulas, workshops, talks, decks institucionais enxutos. Se o seu projeto precisa de algo mais (case study, financeiro, pitch de vendas, produto), pule para [`templates-expanded-deck/`](../templates-expanded-deck/README.md).
+
+> **Histórico de naming:** esta pasta se chamava `templates-v5/`. Renomeada em 2026-07-09 para que o nome descreva o **propósito** (deck curto) em vez da versão. Os slides são os mesmos.
+
+## Linguagem "Órbita"
 
 - **Serif display** (Playfair Display) com itálico dourado na palavra-chave
 - **Superfícies suaves**: radius 22px, borda sutil, sombra em camadas — conteúdo denso vive dentro de cards, não solto
@@ -81,4 +85,8 @@ Funciona direto via `file://` — slides e index no mesmo diretório.
 
 Regras herdadas da lib: canvas fixo 1600×900 com `fit()`, `data-section` como kicker automático, dourado com parcimônia (1 protagonista por slide), sem emoji, placeholder de foto documentado em comentário no arquivo.
 
-A lib v4 (48 templates, estilo anterior) segue intacta em `../templates/`.
+## Próximo passo
+
+Se você precisa de layouts para **case study**, **relatório financeiro**, **pitch de vendas** ou **apresentação de produto**, vá para [`templates-expanded-deck/`](../templates-expanded-deck/README.md) — tem os mesmos 52 + 57 templates extras (109 no total), mesma linguagem "Órbita", só mais opções.
+
+A lib v4 (48 templates, estilo hairline) segue intacta em [`templates-legacy/`](../templates-legacy/).

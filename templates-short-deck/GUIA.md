@@ -1,4 +1,4 @@
-# Core Slides G4 · v5 "Órbita" — Guia de uso e edição
+# Core Slides G4 · short-deck "Órbita" — Guia de uso e edição
 
 > Referência completa para **quem (humano ou IA) vai copiar, editar e criar slides** com esta biblioteca.
 > Leia as seções 1–4 antes de tocar em qualquer arquivo. O catálogo (seção 5) diz quando usar cada slide e o que editar nele.
@@ -220,6 +220,6 @@ Formato: **quando usar · o que editar · nota técnica**.
 | `assets/armilar-engraving-ice.png` | gravura para slides **dark** (via `.armilar--engraving`, token automático) |
 | `assets/armilar-engraving-slate.png` | gravura para slides **light** (token automático) |
 | `assets/armilar-solid-*.png` | marca sólida — uso pontual; evite crops que gerem "quarto de esfera" |
-| `assets/overlay-raios.png` | overlay legado da v4 (não usado na v5) |
+| `assets/overlay-raios.png` | overlay legado (v4 hairline, não usado no deck curto) |
 
 Os tokens `--armilar-eng`/`--armilar-solid` trocam o PNG conforme o modo — você só posiciona.

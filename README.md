@@ -1,44 +1,91 @@
 # Core Slides G4
 
-> Biblioteca de slides HTML da G4 Educação (canvas 1600×900, paleta paper + navy + gold), em duas gerações:
+> **Two decks, one language.** Build G4 slides by picking the deck that matches your project size — not by version number. All official templates share the **"Órbita"** visual language (Playfair serif + Space Grotesk display, navy + gold + paper, sphere armilar overlay, surfaces with radius + soft shadow, chips/pills for meta).
 >
-> - **`templates-v5/` — v5 "Órbita" (ATUAL)**: 50 slides na linguagem editorial-orgânica (serif Playfair, superfícies com radius/sombra, chips, gravura da esfera armilar). Comece por **[templates-v5/GUIA.md](templates-v5/GUIA.md)** e navegue com `templates-v5/index.html`.
-> - **`templates/` — v4 (acervo)**: 48 templates no estilo hairline minimalista, mantidos como referência e para decks antigos.
+> 📦 **The `templates-*/` folders are gitignored** — the canonical source of the official templates is distributed separately (zip / g4os-pages / Notion) and you drop them in locally. See [Working with the official templates](#working-with-the-official-templates).
 
-## v5 em 30 segundos
+## The official decks
 
-```bash
-open templates-v5/index.html    # grid de preview + modo apresentação
-cp templates-v5/06-grafico-barras.html meu-slide.html   # copie o mais próximo e edite
-```
+| Deck | Slides | Use it for |
+|---|---|---|
+| **[`templates-short-deck/`](templates-short-deck/README.md)** | **52** | Lean projects — aulas, workshops, talks, internal decks. The minimum viable G4. **Start here.** |
+| **[`templates-expanded-deck/`](templates-expanded-deck/README.md)** | **109** | Everything: case study (8 etapas), relatório financeiro (DRE, fluxo de caixa, orçamento, cenários, mapa de riscos), pitch de vendas, apresentação de produto. Same language as short-deck, more layouts. |
+| **[`templates-legacy/`](templates-legacy/)** | **48** | v4 hairline-minimalista acervo. Frozen. Reference only (use for compatibility with old decks). **Também gitignored** — baixe separadamente. |
+| `templates-column/` | 52 | Optional third skin — same 52 layouts as short-deck, re-skinned with the [Column](https://column.com) fintech visual language. Drop-in alternative. |
 
-Regras, tokens, padrões de código e o catálogo slide a slide: [templates-v5/GUIA.md](templates-v5/GUIA.md).
-
----
-
-## v4 (acervo)
-
-> **48 templates HTML canônicos + design system + playbook** pra construir slides de aula no padrão visual G4 (navy + gold + paper, 1600×900, accent único).
-
-Catálogo base usado nas aulas da **Imersão em IA G4** (projeto `Aulas G4 - IA`) e nos decks de produtos do G4 OS. Foi refinado em **4 sessões** com aprendizados de bugs comuns e publicados em **2 decks de 29 slides** (`G4 Academia de IA` e `G4 Gestão e Estratégia`).
+> **Decisão prática:** se você não sabe qual escolher, vá de `short-deck` (52). Ele cobre 90% dos projetos. Se faltar layout (ex: você precisa de um slide de fluxo de caixa), promova o deck para `expanded-deck` e copie o template extra que falta.
 
 ---
 
-## TL;DR
+## Quick start
 
 ```bash
-# 1. Copia o template mais próximo
-cp templates/05-grafico.html meu-slide.html
+# 1. Clone o repo
+git clone https://github.com/joaovitor2763/Core-Slides-G4.git
+cd Core-Slides-G4
 
-# 2. Edita copy + dados + CSS local
+# 2. Coloque os templates oficiais (passo a passo abaixo)
+#    — ou baixe o zip oficial e descompacte em templates-short-deck/
 
-# 3. Valida visualmente (catálogo completo: python3 -m http.server na raiz
-#    e abre http://localhost:8000/examples/catalog.html — filtro por categoria + light/dark)
+# 3. Copie o template mais próximo do seu slide
+cp templates-short-deck/06-grafico-barras.html meu-slide.html
 
-# 4. Publica (opcional)
-#   - PDF local: usa a técnica do docs/EXPORT-PDF.md (Chrome headless 1 slide por vez)
-#   - Web pública: inline tudo num único HTML ≤5MB e usa g4os-pages (docs/PUBLISH.md)
+# 4. Edite copy + dados + CSS local
+#    (use tokens do templates-short-deck/style.css)
+
+# 5. Valide visualmente abrindo no browser
+open meu-slide.html
+
+# 6. Publique (opcional)
+#   - PDF: docs/EXPORT-PDF.md (Chrome headless, 1 slide por vez)
+#   - Web: docs/PUBLISH.md (g4os-pages, deck-inlined ≤5MB)
 ```
+
+---
+
+## Working with the official templates
+
+As pastas `templates-*/` são **locais e gitignored** — elas não viajam no `git clone`. O motivo é simples: os 109 templates Órbita são conteúdo versionado fora do repo (zip publicado / g4os-pages / Notion), pra evitar commits ruidosos a cada novo template.
+
+**Para usar localmente, faça UM dos seguintes:**
+
+1. **Baixe o zip oficial** (link distribuído pelo time) e descompacte em `templates-short-deck/` (ou `templates-expanded-deck/`):
+
+    ```bash
+    unzip ~/Downloads/core-slides-short-deck.zip   # cria/atualiza templates-short-deck/
+    ```
+
+2. **Rode o script de refresh** (se existir no seu setup — `[TODO: link to refresh script]`):
+
+    ```bash
+    ./scripts/refresh-templates.sh   # puxa do canonical store
+    ```
+
+3. **Rode a partir do g4os-pages** (se o seu ambiente expõe):
+
+    ```bash
+    mcp g4os-pages fetch --slug g4-slides-short-deck --out templates-short-deck/
+    ```
+
+**A partir daí, é só `cp` e editar.** O `style.css` e o `index.html` de cada pasta já vêm prontos pra `open file://...index.html` no browser e navegar no passador.
+
+**Pra atualizar os templates no futuro**, repita o passo acima. O `.gitignore` garante que suas edições locais de slides (`meu-slide.html`) e qualquer trabalho em progresso **não** sejam sobrescritos.
+
+> **Quem precisa commitar `style.css`, `index.html` ou assets do deck?** Force-add explicitamente: `git add -f templates-short-deck/style.css`. Não commite slides individuais — eles são outputs, não código.
+
+---
+
+## "Órbita" visual language
+
+- **Display:** Space Grotesk para h1–h4 + números.
+- **Serif:** Playfair Display em capa, dark dividers e quote-hero — itálico dourado na palavra-chave.
+- **Body:** IBM Plex Sans. Mono (eyebrows, labels, dados): IBM Plex Mono.
+- **Paleta:** paper `#F5F4F3` · navy `#001525` (light e dark) · gold `#B9915B` (light) / `#C9A05C` (dark).
+- **1 accent por slide.** Cards com radius 22 + soft shadow; hairlines para hierarquia em tabelas densas.
+- **Sphere armilar** (`.armilar` / `.armilar--engraving`) como overlay decorativo, com PNGs pré-tingidos por modo em `templates-*/assets/`. Outras decorações: `.grain` (filme), `.ghost` (linha-eco), `.glow` (halo dourado).
+- **Canvas fixo 1600×900** com `fit()` JS que escala pro viewport. Nada de `vw/vh/%` no conteúdo.
+
+Detalhes completos: [`AGENTS.md`](AGENTS.md) (regras firmes) e [`playbook.md`](playbook.md) (prosa, fluxo, padrões de bug).
 
 ---
 
@@ -46,182 +93,58 @@ cp templates/05-grafico.html meu-slide.html
 
 ```
 Core-Slides-G4/
-├── README.md                  ← este arquivo
-├── AGENTS.md                  ← regras firmes (canvas, paleta, tipografia, restrições)
-├── playbook.md                ← prosa + exemplos + fluxo de uso + padrões de bug
-├── LICENSE                    ← MIT
-├── .gitignore                 ← ignora .DS_Store, node_modules, etc
+├── README.md                    ← este arquivo
+├── AGENTS.md                    ← regras firmes (canvas, paleta, tipografia, restrições)
+├── playbook.md                  ← prosa + exemplos + fluxo de uso + padrões de bug
+├── LICENSE                      ← MIT
+├── .gitignore                   ← ignora templates-*/ e *.zip (oficiais são externos)
 │
-├── build-deck-inlined.py      ← builda um deck HTML único (≤5MB) pra publicar
+├── build-deck-inlined.py        ← builda um deck HTML único (≤5MB) pra publicar
 │
-├── templates/                 ← 48 templates × 2 modos (light + dark) + style.css = 91 arquivos .html
-│   ├── style.css              ← design tokens + classes semânticas (compartilhado)
-│   ├── 01-capa.html           ← cada template light tem par NN-nome-dark.html,
-│   ├── 01-capa-dark.html         exceto os dark-únicos: 08, 20, 33, 34, 39
-│   ├── ...
-│   ├── 05-grafico.html        ← gráficos: 05, 16, 35 (linha), 36 (donut),
-│   ├── ...                       37 (barras duplas), 38 (progresso), 46 (funil)
-│   ├── 39-imagem-full-overlay.html   ← imagens: 12, 26, 39, 40 (hero lateral), 41 (galeria)
-│   ├── 42-quote-tweet.html    ← quotes: 03, 04, 20, 26, 34, 42, 43 (dupla)
-│   └── 48-numero-hero.html    ← lista completa com descrições: AGENTS.md e playbook.md §5
+├── templates-short-deck/        ← (LOCAL) 52 slides, baixado do canonical store
+├── templates-expanded-deck/     ← (LOCAL) 109 slides, baixado do canonical store
+├── templates-legacy/            ← (LOCAL) 48 templates v4, baixado do canonical store (acervo hairline)
+├── templates-column/            ← (LOCAL) 52 slides com pele Column
 │
 ├── examples/
-│   ├── index.html             ← passador de slides (grid 2 col + modo apresentação, base do build)
-│   └── catalog.html           ← catálogo navegável dos 48 templates (filtro por categoria + light/dark)
+│   ├── index.html               ← passador de slides (grid 2 col + modo apresentação, base do build)
+│   └── catalog.html             ← catálogo navegável dos 48 templates legacy (filtro por categoria + light/dark)
 │
-├── assets/                    ← logos, padrões, imagens exemplo
-│   ├── logos/                 ← g4-logo-branca.svg
-│   ├── patterns/              ← pattern-shield.png, pattern-symbol.png, overlay-raios.png
-│   └── images/                ← imagens exemplo (Ethan, João, Satya, etc)
+├── assets/                      ← logos, padrões, imagens exemplo (commitado)
+│   ├── logos/                   ← g4-logo-branca.svg
+│   ├── patterns/                ← pattern-shield.png, pattern-symbol.png
+│   └── images/                  ← imagens exemplo (Ethan, João, Satya, etc)
 │
-└── docs/                      ← como publicar + exportar + customizar
-    ├── EXPORT-PDF.md          ← Chrome headless, 1 slide por vez, sem mesclar
-    ├── PUBLISH.md             ← g4os-pages, deck-inlined, ≤5MB
-    ├── CUSTOMIZE.md           ← como criar variantes dos templates
-    └── CHANGELOG.md           ← v1 → v2 → v3 (resumo das iterações)
+└── docs/                        ← como publicar + exportar + customizar
+    ├── EXPORT-PDF.md            ← Chrome headless, 1 slide por vez
+    ├── PUBLISH.md               ← g4os-pages, deck-inlined, ≤5MB
+    ├── CUSTOMIZE.md             ← como criar variantes dos templates
+    └── CHANGELOG.md             ← histórico de iterações (v1 → v4)
 ```
+
+> **Pastas marcadas `(LOCAL)`** são preenchidas depois do `git clone` (vide [Working with the official templates](#working-with-the-official-templates)). Todas as 4 pastas de templates são gitignored — o repo é só o design system, a documentação, o build script e os assets compartilhados.
 
 ---
 
-## Os 48 templates (vocabulário visual)
+## The legacy acervo (v4)
 
-| # | Template | Modo | Quando usar |
-|---|----------|------|-------------|
-| 01 | Capa | dark | Primeira página, abrir seção |
-| 02 | Palestrante | light | Bio do mentor com retrato |
-| 03 | Quote com imagem | light | Citação atribuída a alguém (com retrato) |
-| 04 | Quote sem imagem | light | Citação genérica, aspa marca d'água |
-| 05 | Gráfico horizontal | light | Bar chart com 2-5 categorias |
-| 06 | Texto focado | light | Tese forte em 2 colunas curtas |
-| 07 | Timeline | light | 3-5 eventos cronológicos |
-| 08 | Divisor de bloco | dark | Separar seções dentro do deck |
-| 09 | Comparação A×B | light | Antes/depois, com/sem |
-| 10 | Stats (4 colunas) | light | 4 métricas paralelas |
-| 11 | Agenda | light | 3-6 etapas de uma jornada |
-| 12 | Imagem + legenda | light | Caso/estudo com screenshot ou foto |
-| 13 | Lista numerada | light | 3-7 itens com hierarquia |
-| 14 | Três pilares | light | Manifesto, 3 eixos |
-| 15 | Encerramento | light | Última página, hero + contato |
-| 16 | Gráfico vertical + nota | light | Volume por categoria, com insight |
-| 17 | A vs B | light | Split 50/50, accent no B |
-| 18 | Bento mosaic | light | 4-6 blocos com proporções variadas |
-| 19 | Stepper | light | 4-5 etapas sequenciais com output |
-| 20 | Quote hero | dark | Citação grande em dark mode |
-| 21 | 2-boxes | light/dark | 2 cards grandes (provocação "Por esporte vs Como profissional") |
-| 22 | Mixed grid | light/dark | 4 quadrantes com tipos diferentes (matriz + lista + cards) |
-| 23 | Custom 2-col | light/dark | Headline + sub à esquerda, corpo à direita |
-| 24 | Pergunta CTA | light/dark | Eyebrow + h1 + sub + seta (pergunta de transição dark) |
-| 25 | Hero com logo G4 | light/dark | Header com logo G4 + hairline + tag + barra dourada |
-| 26 | Quote galeria split | light/dark | Citação serif + imagem 50% em moldura "mat de galeria" |
-| 27 | Mentor hero | light/dark | Bio com nome gigante (140px) + retrato 38% |
-| 28 | Transição aceleradores | light/dark | "O que vem a seguir" + fileira de 4 itens numerados |
-| 29 | Bento comparativo | light/dark | Dois mosaicos lado a lado (A vs B) |
-| 30 | Grid de ferramentas | light/dark | 4 colunas descritivas + faixa gold de takeaway |
-| 31 | Narrativa numérica | light/dark | 3 conceitos ensinados com um dado-hero cada |
-| 32 | Bento de métricas | light/dark | Mosaico 3×3 assimétrico com bignums |
-| 33 | Três pilares percentuais | dark | Regra de alocação (ex: 70/20/10) com % gigante |
-| 34 | Encerramento quote | dark | Fechamento com citação serif + CTA entre hairlines |
-| 35 | Gráfico de linha | light/dark | Tendência/evolução no tempo (SVG inline) |
-| 36 | Gráfico donut | light/dark | Composição/share de um todo (conic-gradient) |
-| 37 | Barras duplas | light/dark | 2 séries × 4 categorias (antes vs depois) |
-| 38 | Barras de progresso | light/dark | % de adoção/share por item, 1 linha em accent |
-| 39 | Imagem full + overlay | dark | Foto full-bleed + gradiente + título na base |
-| 40 | Imagem hero lateral | light/dark | Tese + imagem full-bleed 38% com edge-blend |
-| 41 | Galeria duo | light/dark | Duas imagens em moldura mat com legendas |
-| 42 | Quote de post/tweet | light/dark | Post de LinkedIn/X reproduzido + contexto editorial |
-| 43 | Quote dupla | light/dark | Duas visões em contraste com vrule central |
-| 44 | Tabela comparativa | light/dark | Matriz critérios × opções, coluna recomendada em accent |
-| 45 | Checklist | light/dark | O que funciona (+) vs o que evitar (—) |
-| 46 | Funil | light/dark | Conversão em 4 estágios decrescentes |
-| 47 | Exercício em passos | light/dark | Dinâmica com 6 passos + tempo por etapa |
-| 48 | Número hero | light/dark | Um dado gigante como takeaway |
+> **48 templates HTML canônicos + design system + playbook** no estilo hairline minimalista anterior (sem radius, sem sombra, sem serif display).
 
-**Cada template tem versão `-dark.html`**, exceto os dark-únicos (08, 20, 33, 34, 39 — o modo é o design). Total: **91 arquivos `.html`** no repo.
+Catálogo base usado nas aulas da **Imersão em IA G4** (projeto `Aulas G4 - IA`) e nos primeiros decks de produtos do G4 OS. Foi refinado em **4 sessões** com aprendizados de bugs comuns e publicado em **2 decks de 29 slides** (`G4 Academia de IA` e `G4 Gestão e Estratégia`).
 
-**Detalhes completos de cada template** (snippet, anatomia, quando NÃO usar) estão em `playbook.md` §5 e `AGENTS.md`.
+Use `templates-legacy/` apenas para compatibilidade com decks antigos. Para projetos novos, use **`templates-short-deck/`** (52) ou **`templates-expanded-deck/`** (109). O acervo também é distribuído pelo canonical store (zip separado).
 
----
-
-## Quick start
-
-### 1. Estrutura de um slide
-
-```html
-<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8" />
-<title>XX · Minha seção</title>
-<link rel="stylesheet" href="style.css" />
-<style>
-  /* CSS local — use tokens semânticos do style.css */
-  .head { position: absolute; left: var(--pad); top: 132px; right: var(--pad); }
-  .head h1 { font-size: 64px; line-height: 1.05; }
-  .head h1 em { font-style: italic; font-weight: 500; }
-</style>
-</head>
-<body>
-<div class="stage">
-  <article class="slide" data-section="Minha seção">
-    <header class="head">
-      <div class="eyebrow">Eyebrow · tag mono</div>
-      <h1>Título com <em>ênfase</em> em italic.</h1>
-    </header>
-    <!-- conteúdo do slide -->
-  </article>
-</div>
-<script>
-  const slide = document.querySelector('.slide');
-  function fit(){
-    const sx = window.innerWidth  / 1600;
-    const sy = window.innerHeight / 900;
-    const s  = Math.min(sx, sy);
-    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
-  }
-  fit();
-  window.addEventListener('resize', fit);
-</script>
-</body>
-</html>
-```
-
-### 2. Canvas fixo
-
-- **1600×900** (16:9). Nenhum elemento deve ultrapassar esse box.
-- Padding padrão: `var(--pad) = 96px`.
-- JS escala o canvas pro viewport (não use `vw/vh` no conteúdo).
-
-### 3. Paleta
-
-| Token | Light | Dark |
-|---|---|---|
-| `--bg` | `#F5F4F3` (paper) | `#001A2D` (navy-600) |
-| `--fg` | `#0F1419` (ink) | `#E6EEF3` (navy-50) |
-| `--muted` | `#6B7278` | `#80AABF` |
-| `--rule` | `#D8D6CF` | `#2D3B4A` |
-| `--accent` | `#B9915B` (gold) | `#B9915B` (mesmo) |
-
-**Accent: MÁXIMO 1× por slide.**
-
-### 4. Tipografia
-
-| Família | Papel | Classes |
-|---|---|---|
-| **Space Grotesk** | Display (títulos, números) | `.h1`–`.h4` |
-| **IBM Plex Sans** | Corpo (parágrafos) | `.body`, `.lede`, `.caption` |
-| **IBM Plex Mono** | Mono (eyebrows, labels) | `.eyebrow`, `.label-mono` |
-
-Hierarquia por **italic + weight**, NUNCA por troca de fonte.
+Catálogo navegável (filtro por categoria + toggle light/dark) — `python3 -m http.server` na raiz e abrir `http://localhost:8000/examples/catalog.html`.
 
 ---
 
 ## Onde está o quê
 
-- **Regras firmes** (canvas, paleta, tipografia, restrições) → `AGENTS.md`
-- **Prosa, exemplos, fluxo, padrões de bug** → `playbook.md`
-- **48 templates limpos** → `templates/`
-- **style.css compartilhado** → `templates/style.css`
-- **Catálogo navegável** → `examples/catalog.html` (via `python3 -m http.server`)
+- **Regras firmes** (canvas, paleta, tipografia, restrições) → [`AGENTS.md`](AGENTS.md)
+- **Prosa, exemplos, fluxo, padrões de bug** → [`playbook.md`](playbook.md)
+- **Catálogo de 52 slides (curto)** → `templates-short-deck/` (local) + [`templates-short-deck/GUIA.md`](templates-short-deck/GUIA.md)
+- **Catálogo de 109 slides (expandido)** → `templates-expanded-deck/` (local) + [`templates-expanded-deck/GUIA.md`](templates-expanded-deck/GUIA.md)
+- **Catálogo navegável do acervo v4** → `examples/catalog.html` (via `python3 -m http.server`)
 - **Passador de exemplo** → `examples/index.html`
 - **Assets base** (logos, padrões, imagens) → `assets/`
 - **Como exportar PDF** → `docs/EXPORT-PDF.md`
@@ -237,13 +160,16 @@ Sessões-chave que produziram este repo:
 
 | Sessão | Contribuição |
 |---|---|
-| `260614-awake-grove` | Design system v1 + 15 templates canônicos |
+| `260614-awake-grove` | Design system v1 + 15 templates canônicos (v3) |
 | `260614-apt-nebula` | Tokens semânticos no CSS |
-| `260615-sunny-dolphin` | 1ª aula (G4 Academia de IA) — 29 slides |
+| `260615-sunny-dolphin` | 1ª aula (G4 Academia de IA) — 29 slides no v3 |
 | `260615-awake-creek` | Técnica de export PDF (Chrome headless 1 slide por vez) |
 | `260623-misty-lake` | 2ª aula (G4 Gestão e Estratégia) + 5 templates novos (16-20) + publicação g4os-pages |
-| deck `founder-ia-conteudo` | Templates 26-34 + padrões de imagem (moldura mat, hero lateral, overlay-raios) |
-| expansão v4 (2026-07) | Templates 35-48 (gráficos linha/donut/duplas/progresso/funil, imagens overlay/hero/galeria, quotes tweet/dupla, tabela, checklist, exercício, número hero) + darks 27-32 + catálogo navegável |
+| `deck founder-ia-conteudo` | Templates 26-34 + padrões de imagem (moldura mat, hero lateral, overlay) |
+| `expansão v4 (2026-07)` | Templates 35-48 (gráficos linha/donut/duplas/progresso/funil, imagens overlay/hero/galeria, quotes tweet/dupla, tabela, checklist, exercício, número hero) + darks 27-32 + catálogo navegável |
+| `geração Órbita (v5 → short-deck, 2026-07-07)` | Nova linguagem visual editorial-orgânica (Playfair, surfaces, chips, armilar). 52 templates, vira o deck curto. |
+| `expansão Órbita (v6 → expanded-deck, 2026-07-07)` | +57 templates organizados em 10 categorias (case, financeiro, pitch, produto, aulas). 109 total. |
+| `rebrand de folders (2026-07-09)` | `templates-v5/ → templates-short-deck/`, `templates-v6/ → templates-expanded-deck/`, `templates/ → templates-legacy/`. Folders oficiais movidos pra fora do git. README reescrito como "Two decks, one language". |
 
 **Projeto**: `Aulas G4 - IA` (id: `project_c1402fb9-6848-4cea-9fef-489da1fbf7fe`)
 

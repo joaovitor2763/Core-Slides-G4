@@ -37,3 +37,13 @@ npm-debug.log*
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+# Local template folders — oficiais vêm do canonical store (zip / g4os-pages / Notion)
+# Mantidos em disco pra rodar o skill `g4-slides`; conteúdo nunca vai pro git.
+templates-legacy/
+templates-short-deck/
+templates-expanded-deck/
+templates-column/
+
+# Stale re-bundle archives
+*.zip

@@ -1,6 +1,8 @@
-# G4 Aulas IA — AGENTS.md (v3 · consolidada)
+# G4 Aulas IA — AGENTS.md (regras firmes do design system)
 
-> ⚠️ **Este arquivo rege a biblioteca v4 (`templates/`).** Para a geração ATUAL — **v5 "Órbita" em `templates-v5/`** — a source of truth é **`templates-v5/GUIA.md`** (tokens, padrões de código, catálogo e QA). Para decks novos, use a v5.
+> **Dois decks, uma linguagem.** Para a geração ATUAL — **`templates-short-deck/` (52)** e **`templates-expanded-deck/` (109)**, ambos na linguagem visual "Órbita" — a source of truth dos tokens, padrões de código, catálogo e QA é a `GUIA.md` de cada pasta. Este `AGENTS.md` continua sendo a referência firme pra regras que valem pros DOIS decks + pro acervo legacy.
+>
+> **Localização dos templates**: as 4 pastas de templates (`templates-short-deck/`, `templates-expanded-deck/`, `templates-legacy/`, `templates-column/`) são **gitignored** — oficiais são distribuídos fora do repo (zip / g4os-pages / Notion) e baixados localmente. Veja `README.md` → *Working with the official templates*.
 
 > **Source of truth** pra construção/edição dos slides HTML das aulas G4.
 > Reúne o que foi aprendido em: `260614-awake-grove` (20 templates), `260615-sunny-dolphin` (29 slides Academia de IA), `260615-awake-creek` (PDF export) e `260623-misty-lake` (29 slides Gestão e Estratégia).
@@ -295,7 +297,9 @@ artifacts/
 
 ## Cross-references
 
-- **Catálogo canônico de 48 templates** (raw HTML): `templates/`
+- **Catálogo canônico de 52 templates Órbita (curto)**: `templates-short-deck/` (local — vide README) + [`templates-short-deck/GUIA.md`](templates-short-deck/GUIA.md)
+- **Catálogo canônico de 109 templates Órbita (expandido)**: `templates-expanded-deck/` (local — vide README) + [`templates-expanded-deck/GUIA.md`](templates-expanded-deck/GUIA.md)
+- **Acervo v4 (48 templates hairline, congelado)**: `templates-legacy/`
 - **Catálogo navegável** (grid com filtro por categoria + toggle light/dark): `examples/catalog.html` — abrir via servidor local (`python3 -m http.server` na raiz) por causa dos iframes
 - **Playbook narrativo** (prosa + exemplos): `playbook.md` (mesma pasta)
 - **Passador de slides** (exemplo/base do build): `examples/index.html`
