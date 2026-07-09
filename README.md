@@ -35,7 +35,6 @@ open meu-slide.html
 
 # 6. Publique (opcional)
 #   - PDF: docs/EXPORT-PDF.md (Chrome headless, 1 slide por vez)
-#   - Web: docs/PUBLISH.md (g4os-pages, deck-inlined ≤5MB)
 ```
 
 ---
@@ -230,7 +229,6 @@ cp templates-short-deck/06-grafico-barras.html meu-deck/slides/03-grafico.html
 python3 build-deck-inlined.py --slides meu-deck/slides --assets meu-deck/assets \
   --index templates-short-deck/index.html --out meu-deck/build/inlined.html \
   --title "Meu Deck"
-# Depois: g4os-pages republish_page(slug, html)
 ```
 
 **Vantagens dessa estrutura:**
@@ -250,7 +248,6 @@ python3 build-deck-inlined.py --slides meu-deck/slides --assets meu-deck/assets 
 - **Catálogo do deck curto (52)** + GUIA detalhada → [`templates-short-deck/`](templates-short-deck/) (especialmente [`templates-short-deck/GUIA.md`](templates-short-deck/GUIA.md))
 - **Catálogo do deck expandido (109)** + GUIA detalhada → [`templates-expanded-deck/`](templates-expanded-deck/) (especialmente [`templates-expanded-deck/GUIA.md`](templates-expanded-deck/GUIA.md))
 - **Como exportar PDF** → [`docs/EXPORT-PDF.md`](docs/EXPORT-PDF.md)
-- **Como publicar no g4os-pages** → [`docs/PUBLISH.md`](docs/PUBLISH.md)
 - **Como customizar templates** → [`docs/CUSTOMIZE.md`](docs/CUSTOMIZE.md)
 
 ---
