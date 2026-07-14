@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>13 · Mapa de stakeholders</title>
+<link rel="stylesheet" href="style.css?v=5.2">
+<style>
+  /* Framework 13 · oito grupos orbitando a empresa; arcos parciais marcam
+     cada satélite; Clientes é o único protagonista gold. */
+  .ringd{position:absolute;left:170px;top:220px;width:600px;height:600px;border-radius:50%;border:1.2px dashed var(--border)}
+  .spoke{position:absolute;left:470px;top:519px;height:0;width:300px;border-top:1.3px dashed var(--border-2);transform-origin:left center}
+  .middot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--text-3);opacity:.6}
+  .arcbox{position:absolute;width:150px;height:150px}
+  .arcbox .arc{fill:none;stroke:var(--text-3);stroke-width:4.5;stroke-linecap:round;opacity:.45}
+  .arcbox .arc--gold{stroke:var(--gold);opacity:1}
+  .hub{position:absolute;left:320px;top:370px;width:300px;height:300px;border-radius:50%;background:var(--surface-2);border:1px solid var(--border);
+    display:grid;place-items:center;text-align:center;padding:60px;z-index:2}
+  .hub strong{font:600 22px/1.2 var(--num);letter-spacing:-.02em;color:var(--text-1)}
+  .sat{position:absolute;width:116px;height:116px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-sm);
+    display:grid;place-items:center;text-align:center;padding:14px;font:600 14px/1.2 var(--num);color:var(--text-1);z-index:2}
+  .sat--gold{background:var(--gold-dim);border-color:var(--gold-border);box-shadow:var(--shadow-md),0 0 0 5px rgba(185,145,91,.08)}
+  .read{position:absolute;left:940px;top:210px;width:564px}
+  .read .eyebrow{margin-bottom:22px}.read h1{font-size:52px;margin-bottom:26px}.read .lede{margin-bottom:24px}
+  .read .body{margin-bottom:0}
+</style>
+<meta id="acfifjfajpekbmhmjppnmmjgmhjkildl"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Frameworks · stakeholders">
+    <div class="ringd" aria-hidden="true" style="translate: 1px -79px;"></div>
+    <div class="spoke" style="transform: rotate(-90deg); translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="spoke" style="transform: rotate(-45deg); translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="spoke" aria-hidden="true" style="translate: 1px -79px;"></div>
+    <div class="spoke" style="transform: rotate(45deg); translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="spoke" style="transform: rotate(90deg); translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="spoke" style="transform: rotate(135deg); translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="spoke" style="transform: rotate(180deg); translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="spoke" style="transform: rotate(225deg); translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="middot" style="left: 466px; top: 326px; translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="middot" style="left: 600px; top: 382px; translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="middot" style="left: 656px; top: 516px; translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="middot" style="left: 600px; top: 650px; translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="middot" style="left: 466px; top: 706px; translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="middot" style="left: 332px; top: 650px; translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="middot" style="left: 276px; top: 516px; translate: 1px -79px;" aria-hidden="true"></div>
+    <div class="middot" style="left: 332px; top: 382px; translate: 1px -79px;" aria-hidden="true"></div>
+    <!-- um mini-SVG por arco parcial (editável individualmente) -->
+    <svg class="arcbox" style="left: 395px; top: 145px; translate: 1px -79px;" viewBox="0 0 150 150" aria-hidden="true"><circle class="arc" cx="75" cy="75" r="66" pathLength="100" stroke-dasharray="58 42" transform="rotate(120 75 75)"></circle></svg>
+    <svg class="arcbox" style="left: 607px; top: 233px; translate: 1px -79px;" viewBox="0 0 150 150" aria-hidden="true"><circle class="arc" cx="75" cy="75" r="66" pathLength="100" stroke-dasharray="58 42" transform="rotate(165 75 75)"></circle></svg>
+    <svg class="arcbox" style="left: 695px; top: 445px; translate: 1px -79px;" viewBox="0 0 150 150" aria-hidden="true"><circle class="arc arc--gold" cx="75" cy="75" r="66" pathLength="100" stroke-dasharray="58 42" transform="rotate(210 75 75)"></circle></svg>
+    <svg class="arcbox" style="left: 607px; top: 657px; translate: 1px -79px;" viewBox="0 0 150 150" aria-hidden="true"><circle class="arc" cx="75" cy="75" r="66" pathLength="100" stroke-dasharray="58 42" transform="rotate(255 75 75)"></circle></svg>
+    <svg class="arcbox" style="left: 395px; top: 745px; translate: 1px -79px;" viewBox="0 0 150 150" aria-hidden="true"><circle class="arc" cx="75" cy="75" r="66" pathLength="100" stroke-dasharray="58 42" transform="rotate(300 75 75)"></circle></svg>
+    <svg class="arcbox" style="left: 183px; top: 657px; translate: 1px -79px;" viewBox="0 0 150 150" aria-hidden="true"><circle class="arc" cx="75" cy="75" r="66" pathLength="100" stroke-dasharray="58 42" transform="rotate(345 75 75)"></circle></svg>
+    <svg class="arcbox" style="left: 95px; top: 445px; translate: 1px -79px;" viewBox="0 0 150 150" aria-hidden="true"><circle class="arc" cx="75" cy="75" r="66" pathLength="100" stroke-dasharray="58 42" transform="rotate(30 75 75)"></circle></svg>
+    <svg class="arcbox" style="left: 183px; top: 233px; translate: 1px -79px;" viewBox="0 0 150 150" aria-hidden="true"><circle class="arc" cx="75" cy="75" r="66" pathLength="100" stroke-dasharray="58 42" transform="rotate(75 75 75)"></circle></svg>
+
+    <div class="hub" style="translate: 1px -79px;"><strong>Empresa<br>ou projeto</strong></div>
+    <div class="sat" style="left: 412px; top: 162px; translate: 1px -79px;">Sócios</div>
+    <div class="sat" style="left: 624px; top: 250px; translate: 1px -79px;">Time</div>
+    <div class="sat sat--gold" style="left: 712px; top: 462px; translate: 1px -79px;">Clientes</div>
+    <div class="sat" style="left: 624px; top: 674px; translate: 1px -79px;">Fornecedores</div>
+    <div class="sat" style="left: 412px; top: 762px; translate: 1px -79px;">Comunidade</div>
+    <div class="sat" style="left: 200px; top: 674px; translate: 1px -79px;">Governo</div>
+    <div class="sat" style="left: 112px; top: 462px; translate: 1px -79px;">Bancos</div>
+    <div class="sat" style="left: 200px; top: 250px; translate: 1px -79px;">Imprensa</div>
+
+    <aside class="read" style="translate: 0px 56px;">
+      <div class="eyebrow">Framework · mapa de stakeholders</div>
+      <h1 class="h-serif">Quem orbita <em>o seu projeto.</em></h1>
+      <p class="lede">Toda decisão relevante mexe com interesses ao redor — e cada grupo tem peso e expectativa diferentes.</p>
+      <p class="body">Mapeie quem é afetado, avalie o que cada grupo espera e equilibre as demandas antes de definir o plano. O mapa não elimina conflitos de interesse; ele garante que nenhum grupo relevante seja ignorado na decisão.</p>
+    </aside>
+  </article>
+</div>
+<script>
+  const slide=document.querySelector('.slide');function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);slide.style.transform=`translate(-50%, -50%) scale(${s})`}addEventListener('resize',fit);fit();
+</script>
+
+
+</body></html>

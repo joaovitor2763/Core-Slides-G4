@@ -1,10 +1,10 @@
-# G4 Aulas IA — AGENTS.md (regras firmes do design system)
+# Core Slides G4 — AGENTS.md (regras firmes do design system)
 
-> **Dois decks, uma linguagem.** Para a geração ATUAL — **`templates-short-deck/` (52)** e **`templates-expanded-deck/` (109)**, ambos na linguagem visual "Órbita" — a source of truth dos tokens, padrões de código, catálogo e QA é a `GUIA.md` de cada pasta. Este `AGENTS.md` continua sendo a referência firme pra regras que valem pros DOIS decks + pro acervo legacy.
+> **Três decks, uma linguagem.** Para a geração ATUAL — **`templates-short-deck/` (52)**, **`templates-expanded-deck/` (109)** e **`deck-frameworks/` (biblioteca especializada)**, todos na linguagem visual "Órbita" — a source of truth dos tokens, padrões de código, catálogo e QA é a `GUIA.md` de cada pasta. Este `AGENTS.md` continua sendo a referência firme para regras compartilhadas + acervo legacy.
 >
-> **Localização dos templates**: `templates-short-deck/` e `templates-expanded-deck/` vão no `git clone` (são os decks oficiais). `templates-legacy/` e `templates-column/` são gitignored (acervo congelado / skin opcional, local-only). Veja `README.md` → *Working with the official templates*.
+> **Localização dos templates**: `templates-short-deck/`, `templates-expanded-deck/` e `deck-frameworks/` vão no `git clone` (são bibliotecas oficiais). `templates-legacy/` e `templates-column/` são gitignored (acervo congelado / skin opcional, local-only). Veja `README.md` → *The three official decks*.
 
-> **Source of truth** pra construção/edição dos slides HTML das aulas G4.
+> **Source of truth** para construção e edição de slides HTML G4 — aulas, apresentações, pitches e frameworks.
 > Reúne o que foi aprendido em: `260614-awake-grove` (20 templates), `260615-sunny-dolphin` (29 slides Academia de IA), `260615-awake-creek` (PDF export) e `260623-misty-lake` (29 slides Gestão e Estratégia).
 
 > Para prosa e exemplos, ver `playbook.md` (mesma pasta). Este arquivo é só regras.
@@ -14,6 +14,36 @@
 ## Regra de ouro
 **UM slide por vez.** Criar/editar → validar visualmente → só então passar ao próximo.
 Nunca editar/criar vários slides em lote. Nunca confiar em screenshot headless do Chrome (decodifica imagem tarde demais) — abrir no navegador real ou pedir print ao usuário.
+
+---
+
+## Biblioteca `deck-frameworks/`
+
+`deck-frameworks/` é a biblioteca especializada para slides em que **o modelo visual é o conteúdo** — ciclos, sistemas, camadas, mapas conceituais, modelos de decisão e ferramentas estratégicas customizadas.
+
+### Quando usar
+
+- Use `deck-frameworks/` quando a mensagem depende de relações espaciais, loops, níveis, eixos ou conexões próprias.
+- Use `templates-short-deck/` ou `templates-expanded-deck/` para gráficos, tabelas, agendas, quotes, capas e layouts editoriais comuns.
+- Não transforme qualquer lista em framework: se a geometria não explica uma relação, prefira um layout de conteúdo.
+
+### Como explorar e estender
+
+1. Abra `deck-frameworks/index.html` e escolha o modelo geometricamente mais próximo.
+2. Leia `deck-frameworks/GUIA.md` e o comentário de geometria no topo do HTML escolhido.
+3. Copie o template para o projeto; não sobrescreva o original com conteúdo específico.
+4. Troque copy e labels antes de alterar estrutura.
+5. Se alterar estrutura, recalcule e documente raios, ângulos, coordenadas, limites e conectores.
+6. Valide no navegador real, um slide por vez.
+7. Só adicione ao catálogo oficial um framework reutilizável; nesse caso, registre-o em `deck-frameworks/index.html` e no `GUIA.md`.
+
+### Regras de geometria
+
+- Linhas e setas terminam em elementos reais; conectores não podem flutuar.
+- A ordem visual deve continuar legível sem animação.
+- Labels não podem depender apenas de cor; use número, nome ou posição explícita.
+- O framework deve continuar editável em HTML/CSS/SVG — não rasterize o diagrama inteiro.
+- Um único protagonista gold por slide; as demais partes usam neutros e hierarquia tipográfica.
 
 ---
 
@@ -299,6 +329,7 @@ artifacts/
 
 - **Catálogo canônico de 52 templates Órbita (curto)**: `templates-short-deck/` (local — vide README) + [`templates-short-deck/GUIA.md`](templates-short-deck/GUIA.md)
 - **Catálogo canônico de 109 templates Órbita (expandido)**: `templates-expanded-deck/` (local — vide README) + [`templates-expanded-deck/GUIA.md`](templates-expanded-deck/GUIA.md)
+- **Biblioteca especializada de frameworks Órbita**: `deck-frameworks/` + [`deck-frameworks/GUIA.md`](deck-frameworks/GUIA.md)
 - **Acervo v4 (48 templates hairline, congelado)**: `templates-legacy/`
 - **Catálogo navegável** (grid com filtro por categoria + toggle light/dark): `examples/catalog.html` — abrir via servidor local (`python3 -m http.server` na raiz) por causa dos iframes
 - **Playbook narrativo** (prosa + exemplos): `playbook.md` (mesma pasta)

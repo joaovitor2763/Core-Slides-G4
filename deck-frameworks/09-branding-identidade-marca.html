@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>09 · Branding, identidade, marca</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Framework 09 · corrente de três estados: intenção → expressão → percepção.
+     Círculos Ø270 em (350/800/1250, 520); satélites nas órbitas r185. */
+  .head{position:absolute;left:96px;top:72px;width:1408px;display:grid;grid-template-columns:820px 1fr;gap:90px;align-items:end}
+  .head .eyebrow{margin-bottom:18px}.head h1{font-size:46px}.head .lede{font-size:17px}
+  .orbit{position:absolute;top:335px;width:370px;height:370px;border-radius:50%;border:1.5px dashed var(--border-2)}
+  .disc{position:absolute;top:385px;width:270px;height:270px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-md);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;z-index:2}
+  .disc .idx{font:500 10px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
+  .disc strong{font:600 23px/1.1 var(--num);letter-spacing:-.02em;color:var(--text-1);margin-bottom:10px}
+  .disc p{font:13.5px/1.45 var(--sans);color:var(--text-3)}
+  .disc--gold{border-color:var(--gold-border);box-shadow:var(--shadow-lg),0 0 0 6px var(--gold-dim)}
+  .link{position:absolute;top:493px;width:54px;height:54px;border-radius:50%;background:var(--surface-2);border:1px solid var(--border);display:grid;place-items:center;z-index:3}
+  .link svg{width:20px;height:20px;fill:none;stroke:var(--gold);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .sat{position:absolute;transform:translate(-50%,-50%);padding:10px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--border);
+    box-shadow:var(--shadow-sm);font:500 12.5px var(--sans);color:var(--text-2);white-space:nowrap;z-index:2}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Frameworks · marca">
+    <header class="head">
+      <div><div class="eyebrow">Framework · três estados da marca</div><h1 class="h-serif">Branding é intenção. <em>Marca é percepção.</em></h1></div>
+      <p class="lede">O que você projeta passa pela forma como se apresenta — e só vira marca quando o cliente percebe. O trabalho é encurtar a distância entre os três estados.</p>
+    </header>
+
+    <div class="orbit" style="left:165px" aria-hidden="true"></div>
+    <div class="orbit" style="left:615px" aria-hidden="true"></div>
+    <div class="orbit" style="left:1065px" aria-hidden="true"></div>
+
+    <div class="disc" style="left:215px"><span class="idx">01 · Intenção</span><strong>Branding</strong><p>Como você quer ser percebido.</p></div>
+    <div class="disc" style="left:665px"><span class="idx">02 · Expressão</span><strong>Identidade</strong><p>Como a marca se apresenta.</p></div>
+    <div class="disc disc--gold" style="left:1115px"><span class="idx">03 · Percepção</span><strong>Marca</strong><p>Como o cliente de fato percebe você.</p></div>
+
+    <span class="link" style="left:548px" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6l6 6-6 6M13 6l6 6-6 6"/></svg></span>
+    <span class="link" style="left:998px" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6l6 6-6 6M13 6l6 6-6 6"/></svg></span>
+
+    <span class="sat" style="left:244px;top:368px">Público-alvo</span>
+    <span class="sat" style="left:413px;top:346px">Promessa</span>
+    <span class="sat" style="left:272px;top:688px">Posicionamento</span>
+    <span class="sat" style="left:428px;top:688px">Personalidade</span>
+
+    <span class="sat" style="left:694px;top:368px">Logo &amp; paleta</span>
+    <span class="sat" style="left:863px;top:346px">Tipografia</span>
+    <span class="sat" style="left:722px;top:688px">Tom de voz</span>
+    <span class="sat" style="left:878px;top:688px">Mensagem</span>
+
+    <span class="sat" style="left:1144px;top:368px">Expectativa</span>
+    <span class="sat" style="left:1313px;top:346px">Emoções</span>
+    <span class="sat" style="left:1172px;top:688px">Impressão</span>
+    <span class="sat" style="left:1328px;top:688px">Decisão</span>
+  </article>
+</div>
+<script>
+  const slide=document.querySelector('.slide');function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);slide.style.transform=`translate(-50%, -50%) scale(${s})`}addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>

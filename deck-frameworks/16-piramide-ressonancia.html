@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>16 · Pirâmide de ressonância</title>
+<link rel="stylesheet" href="style.css?v=5.2">
+<style>
+  /* Framework 16 · pirâmide de ressonância (Keller): 4 camadas centradas em x=800,
+     faixas horizontais de leitura (estágio à esquerda, meta à direita).
+     Tudo em divs com clip-path — cada camada é uma peça editável. */
+  .head{position:absolute;left:96px;top:64px;width:1408px;display:grid;grid-template-columns:820px 1fr;gap:90px;align-items:end}
+  .head .eyebrow{margin-bottom:16px}.head h1{font-size:44px}.head .lede{font-size:16.5px}
+  .band{position:absolute;left:96px;width:1408px;height:140px;background:rgba(0,31,53,.03);border-top:1.5px dashed var(--border-2)}
+  .band--gold{background:var(--gold-dim);border-top:0;border-radius:14px 14px 0 0}
+  .layer{position:absolute;display:grid;place-items:center;text-align:center;color:#fff;font:600 15px/1.2 var(--num);letter-spacing:.01em}
+  .divider{position:absolute;width:4px;background:var(--bg)}
+  .srow{position:absolute;left:128px;width:300px}
+  .srow .n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--surface);border:1px solid var(--border-2);font:600 12px var(--num);color:var(--text-2);margin-bottom:8px}
+  .srow strong{display:block;font:600 16px var(--num);color:var(--text-1)}
+  .srow p{font:13px/1.4 var(--sans);color:var(--text-3);margin-top:3px}
+  .goal{position:absolute;left:1172px;width:300px;text-align:right;font:13.5px/1.5 var(--sans);color:var(--text-2)}
+  .goal .mono-label{display:block;margin-bottom:5px}
+</style>
+<meta id="acfifjfajpekbmhmjppnmmjgmhjkildl"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Frameworks · marca">
+    <header class="head">
+      <div><div class="eyebrow">Framework · ressonância</div><h1 class="h-serif">A pirâmide da <em>ressonância de marca.</em></h1></div>
+      <p class="lede">Cada camada responde a uma pergunta do cliente — e a marca só sobe de nível quando a camada de baixo está resolvida.</p>
+    </header>
+
+    <div class="band band--gold" style="top:240px" aria-hidden="true"></div>
+    <div class="band" style="top:380px" aria-hidden="true"></div>
+    <div class="band" style="top:520px" aria-hidden="true"></div>
+    <div class="band" style="top:660px;border-radius:0 0 14px 14px" aria-hidden="true"></div>
+
+    <div class="layer" style="left:718px;top:242px;width:164px;height:136px;background:var(--gold);clip-path:polygon(50% 0,100% 100%,0 100%);padding-top:66px;color:var(--on-gold);font-size:13px">Ressonância</div>
+    <div class="layer" style="left:636px;top:382px;width:328px;height:136px;background:rgba(0,31,53,.55);clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)"></div>
+    <div class="layer" style="left:555px;top:522px;width:490px;height:136px;background:rgba(0,31,53,.68);clip-path:polygon(16.6% 0,83.4% 0,100% 100%,0 100%)"></div>
+    <div class="layer" style="left:473px;top:662px;width:654px;height:136px;background:var(--navy-500);clip-path:polygon(12.5% 0,87.5% 0,100% 100%,0 100%)">Saliência</div>
+    <div class="divider" style="left:798px;top:388px;height:130px" aria-hidden="true"></div>
+    <div class="divider" style="left:798px;top:528px;height:130px" aria-hidden="true"></div>
+    <span class="layer" style="inset: 440px auto auto 676px; width: 120px; height: 20px; background: none; position: absolute; margin: 0px; min-width: 0px; z-index: 20;">Julgamento</span>
+    <span class="layer" style="inset: 440px auto auto 804px; width: 120px; height: 20px; background: none; position: absolute; margin: 0px; min-width: 0px; z-index: 20;">Sentimentos</span>
+    <span class="layer" style="left:640px;top:580px;width:140px;height:20px;background:none">Performance</span>
+    <span class="layer" style="left:820px;top:580px;width:140px;height:20px;background:none">Imaginário</span>
+
+    <div class="srow" style="top:276px"><span class="n">4</span><strong>Relacionamento</strong><p>O que existe entre nós dois?</p></div>
+    <div class="srow" style="top:416px"><span class="n">3</span><strong>Resposta</strong><p>O que o cliente acha de você?</p></div>
+    <div class="srow" style="top:556px"><span class="n">2</span><strong>Significado</strong><p>O que você é, na prática?</p></div>
+    <div class="srow" style="top:696px"><span class="n">1</span><strong>Identidade</strong><p>Quem é você?</p></div>
+
+    <div class="goal" style="top:296px"><span class="mono-label">Meta do estágio</span>Lealdade ativa e intensa.</div>
+    <div class="goal" style="top:436px"><span class="mono-label">Meta do estágio</span>Reações positivas e acessíveis.</div>
+    <div class="goal" style="top:576px"><span class="mono-label">Meta do estágio</span>Paridade e diferença percebidas.</div>
+    <div class="goal" style="top:716px"><span class="mono-label">Meta do estágio</span>Consciência ampla e profunda.</div>
+  </article>
+</div>
+<script>
+  const slide=document.querySelector('.slide');function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);slide.style.transform=`translate(-50%, -50%) scale(${s})`}addEventListener('resize',fit);fit();
+</script>
+
+
+</body></html>

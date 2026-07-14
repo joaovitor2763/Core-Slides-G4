@@ -1,15 +1,16 @@
 # Core Slides G4
 
-> **Two decks, one language.** Build G4 slides by picking the deck that matches your project size — not by version number. All official templates share the **"Órbita"** visual language (Playfair serif + Space Grotesk display, navy + gold + paper, sphere armilar overlay, surfaces with radius + soft shadow, chips/pills for meta).
+> **Three decks, one language.** Build G4 slides by picking the library that matches the job — not by version number. All official templates share the **"Órbita"** visual language (Playfair serif + Space Grotesk display, navy + gold + paper, sphere armilar overlay, surfaces with radius + soft shadow, chips/pills for meta).
 
-## The two official decks
+## The three official decks
 
 | Deck | Slides | Use it for |
 |---|---|---|
 | **[`templates-short-deck/`](templates-short-deck/README.md)** | **52** | Lean projects — aulas, workshops, talks, internal decks. The minimum viable G4. **Start here.** |
-| **[`templates-expanded-deck/`](templates-expanded-deck/README.md)** | **109** | Everything: case study (8 etapas), relatório financeiro (DRE, fluxo de caixa, orçamento, cenários, mapa de riscos), pitch de vendas, apresentação de produto. Same language as short-deck, more layouts. |
+| **[`templates-expanded-deck/`](templates-expanded-deck/README.md)** | **109** | Everything: case study, financeiro, pitch de vendas e produto. Same language as short-deck, more layouts. |
+| **[`deck-frameworks/`](deck-frameworks/GUIA.md)** | **18** | Frameworks visuais — ciclos, sistemas, mapas de decisão, branding e ferramentas estratégicas. |
 
-> **Decisão prática:** se você não sabe qual escolher, vá de `short-deck` (52). Ele cobre 90% dos projetos. Se faltar layout (ex: você precisa de um slide de fluxo de caixa), promova o deck para `expanded-deck` e copie o template extra que falta.
+> **Decisão prática:** comece em `short-deck`. Use `expanded-deck` quando faltar um layout operacional específico; use `deck-frameworks` quando o centro do slide for um modelo ou ferramenta visual.
 
 ---
 
@@ -23,6 +24,7 @@ cd Core-Slides-G4
 # 2. Abra o passador do deck escolhido no browser
 open templates-short-deck/index.html
 # (ou: open templates-expanded-deck/index.html)
+# (frameworks: open deck-frameworks/index.html)
 
 # 3. Copie o template mais próximo do seu slide
 cp templates-short-deck/06-grafico-barras.html meu-slide.html
@@ -78,7 +80,7 @@ Cada template é um arquivo `.html` único e auto-contido. A estrutura é sempre
 - **Use tokens do `style.css`** (`var(--bg)`, `var(--gold)`, `var(--text-1)` etc.), nunca hex de texto direto.
 - **1 accent por slide** (gold com parcimônia). Sem emoji. Sem `vw/vh`.
 
-Detalhes completos por template (anatomia, quando NÃO usar, customização): [`templates-short-deck/GUIA.md`](templates-short-deck/GUIA.md) ou [`templates-expanded-deck/GUIA.md`](templates-expanded-deck/GUIA.md).
+Detalhes completos por template (anatomia, quando NÃO usar, customização): [`templates-short-deck/GUIA.md`](templates-short-deck/GUIA.md), [`templates-expanded-deck/GUIA.md`](templates-expanded-deck/GUIA.md) ou [`deck-frameworks/GUIA.md`](deck-frameworks/GUIA.md).
 
 ---
 
@@ -155,6 +157,48 @@ Tudo do `short-deck` (01-52) **+ 57 templates extras**, organizados em 10 catego
 - **Referências G4** (101-109): público-alvo, duplo mentor, seta processo, pentágono pilares, jornada programas, matriz programas, funil horizontal, gráfico combo, recap, biblioteca, dinâmica turma, perfil+quote, galeria retratos, plano anual, objetivos, conceito+definição, canvas exercício, pergunta debate, gantt
 
 Catálogo completo + GUIA detalhada: [`templates-expanded-deck/README.md`](templates-expanded-deck/README.md).
+
+### `deck-frameworks/` — frameworks customizados
+
+Use esta biblioteca quando o **framework é o conteúdo principal do slide**: ciclos, sistemas, camadas, mapas conceituais, modelos de decisão e ferramentas estratégicas que exigem geometria própria. Para gráficos, tabelas, agendas, quotes ou layouts editoriais comuns, continue usando `short-deck` ou `expanded-deck`.
+
+**Como explorar:**
+
+```bash
+open deck-frameworks/index.html
+```
+
+O catálogo mostra todos os frameworks e oferece **Apresentar** e **Modo apresentador**. Abra o [`deck-frameworks/GUIA.md`](deck-frameworks/GUIA.md) para entender a anatomia, a intenção e o melhor ponto de partida de cada modelo.
+
+| # | Framework | Use quando precisar mostrar… |
+|---|---|---|
+| 01 | Ciclos interdependentes | Dois loops que trocam informação por um handoff crítico. |
+| 02 | Escolha de proposta de valor | Uma decisão central entre seis territórios de diferenciação. |
+| 03 | Espectro de proposta de valor | Camadas entre negócio, prospect, produto e conversão. |
+| 04 | Alavancas de criação de valor | Seis formas complementares de gerar valor. |
+| 05 | Builder de proposta de valor | Uma ferramenta circular construída em seis partes. |
+| 06 | Canvas de proposta de valor | Encaixe entre mapa de valor e perfil do cliente. |
+| 07 | Mapa de valor × perfil do cliente | Relação bowtie entre oferta e necessidades do cliente. |
+| 08 | Pentágono de co-criação | Cinco movimentos conectados por um princípio central. |
+| 09 | Branding, identidade, marca | Passagem da intenção para expressão e percepção. |
+| 10 | Processo de desenvolvimento da marca | Cinco etapas sequenciais com duas camadas de leitura. |
+| 11 | Marca e negócio | Relação entre estratégia de negócio e estratégia de marca. |
+| 12 | Do mercado ao nicho | Recorte progressivo de mercado, segmento e nicho. |
+| 13 | Mapa de stakeholders | Grupos de interesse orbitando a organização. |
+| 14 | Interseções (Venn) | Sobreposições e territórios compartilhados. |
+| 15 | Elementos da estratégia de marca | Quatro dimensões organizadas ao redor de um núcleo. |
+| 16 | Pirâmide de ressonância | Evolução hierárquica até relacionamento e ressonância. |
+| 17 | Modelo de gestão de marca | Circuito entre identidade, expressão, percepção e gestão. |
+| 18 | Painel de execução da marca | Estágios, progresso e prioridades de implementação. |
+
+**Como criar um framework customizado:**
+
+1. Comece pelo template geometricamente mais próximo em `deck-frameworks/`.
+2. Copie o arquivo; nunca altere o template-base para um projeto específico.
+3. Preserve `style.css`, tokens Órbita, canvas 1600×900 e o orçamento de um protagonista gold.
+4. Recalcule raios, ângulos, coordenadas e conectores — e documente a geometria no comentário do CSS.
+5. Valide no navegador **um slide por vez**; verificação automática não substitui QA visual.
+6. Se o novo modelo for reutilizável, registre-o no array `slides` de `deck-frameworks/index.html` e documente-o no `GUIA.md`.
 
 ---
 

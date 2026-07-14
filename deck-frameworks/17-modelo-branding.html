@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>17 · Modelo de gestão de marca</title>
+<link rel="stylesheet" href="style.css?v=5.2" />
+<style>
+  /* Framework 17 · circuito da marca: dois territórios (identidade e
+     conhecimento) sobre uma pista única — comunicação leva, tracking traz.
+     Poucos traços: 1 pista, 2 círculos, 2 anéis, chips. */
+  .read{position:absolute;left:96px;top:250px;width:540px}
+  .read .eyebrow{margin-bottom:22px}.read h1{font-size:50px;margin-bottom:26px}.read .lede{margin-bottom:24px}
+  .track{position:absolute;left:700px;top:270px;width:810px;height:440px;border-radius:220px;border:1.5px dashed var(--border-2)}
+  .tri{position:absolute;width:0;height:0;border-left:11px solid var(--text-3);border-top:7px solid transparent;border-bottom:7px solid transparent;opacity:.7;z-index:2}
+  .orb{position:absolute;width:360px;height:360px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-md);z-index:2}
+  .orb-ring{position:absolute;width:250px;height:250px;border-radius:50%;border:1.4px dashed var(--border-2);z-index:3}
+  .orb-title{position:absolute;width:170px;text-align:center;z-index:4}
+  .orb-title strong{display:block;font:600 19px/1.2 var(--num);letter-spacing:-.02em;color:var(--text-1);margin-bottom:7px}
+  .orb-title span{font:500 9.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
+  .tag{position:absolute;transform:translate(-50%,-50%);display:inline-flex;align-items:center;padding:8px 15px;border-radius:999px;
+    background:var(--surface-2);border:1px solid var(--border);font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-2);white-space:nowrap;z-index:4}
+  .node{position:absolute;width:236px;height:58px;border-radius:999px;display:grid;place-items:center;text-align:center;
+    font:600 14px var(--num);letter-spacing:.01em;z-index:5}
+  .node--gold{background:var(--gold);color:var(--on-gold);box-shadow:0 14px 34px -12px var(--gold-border)}
+  .node--soft{background:var(--surface);border:1px solid var(--border-2);color:var(--text-2);box-shadow:var(--shadow-sm)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Frameworks · marca">
+    <aside class="read">
+      <div class="eyebrow">Framework · gestão de marca</div>
+      <h1 class="h-serif">Identidade emitida, <em>conhecimento percebido.</em></h1>
+      <p class="lede">A marca opera num circuito: você projeta identidade pela comunicação, o mercado devolve percepção pelo tracking.</p>
+      <p class="body">Do lado emissor, os atributos que você controla — cultura, personalidade, símbolos, nome. Do lado receptor, o que se forma na cabeça do cliente: consciência e imagem. A gestão de marca é manter os dois lados girando alinhados.</p>
+    </aside>
+
+    <div class="track" aria-hidden="true"></div>
+    <span class="tri" style="left:1268px;top:262px" aria-hidden="true"></span>
+    <span class="tri" style="left:932px;top:702px;transform:rotate(180deg)" aria-hidden="true"></span>
+
+    <div class="orb" style="left:740px;top:310px" aria-hidden="true"></div>
+    <div class="orb" style="left:1110px;top:310px" aria-hidden="true"></div>
+    <div class="orb-ring" style="left:795px;top:365px" aria-hidden="true"></div>
+    <div class="orb-ring" style="left:1165px;top:365px" aria-hidden="true"></div>
+
+    <div class="orb-title" style="left:835px;top:462px"><strong>Identidade da marca</strong><span>Emissor · valor projetado</span></div>
+    <div class="orb-title" style="left:1205px;top:462px"><strong>Conhecimento da marca</strong><span>Receptor · valor percebido</span></div>
+
+    <span class="tag" style="left:920px;top:365px">Cultura</span>
+    <span class="tag" style="left:1028px;top:428px">Personalidade</span>
+    <span class="tag" style="left:1028px;top:553px">Slogan</span>
+    <span class="tag" style="left:920px;top:615px">Nome</span>
+    <span class="tag" style="left:812px;top:553px">Símbolos</span>
+    <span class="tag" style="left:812px;top:428px">Caráter</span>
+
+    <span class="tag" style="left:1182px;top:428px">Consciência</span>
+    <span class="tag" style="left:1398px;top:428px">Diferenciação</span>
+    <span class="tag" style="left:1398px;top:553px">Imagem</span>
+    <span class="tag" style="left:1182px;top:553px">Identificação</span>
+
+    <div class="node node--gold" style="left:987px;top:241px">Comunicação e posicionamento</div>
+    <div class="node node--soft" style="left:987px;top:681px">Tracking e feedback</div>
+  </article>
+</div>
+<script>
+  const slide=document.querySelector('.slide');function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);slide.style.transform=`translate(-50%, -50%) scale(${s})`}addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>
