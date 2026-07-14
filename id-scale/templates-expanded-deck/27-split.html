@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>27 · Split antes/depois</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Split literal: metade navy (antes) × metade paper (depois).
+     O <article> é LIGHT; o painel navy é um div interno com a classe
+     mode-dark (re-escopa os tokens) + background navy manual.
+     Horizontal: navy 0→800 · paper 800→1600 · divisa em x=800 ·
+     pill 64px centrada: left 768 (800−32), top 418 (450−32) ✓
+     Conteúdo: cada metade com padding 96 → colunas de 608px úteis. */
+
+  .half{position:absolute;top:0;bottom:0;width:800px;
+    padding:0 88px 0 var(--pad);display:flex;flex-direction:column;justify-content:center}
+  .half--antes{left:0;background:var(--navy-700);color:var(--text-1)}
+  .half--depois{left:800px;padding:0 var(--pad) 0 120px}
+
+  .half .eyebrow{margin-bottom:26px}
+  .half h2{font-size:52px;max-width:560px}
+  .half .list{margin-top:40px;display:flex;flex-direction:column;gap:18px;list-style:none}
+  .half .list li{display:flex;gap:14px;font-size:14px;line-height:1.55;color:var(--text-3);max-width:520px}
+  .half--antes .list li::before{content:'—';font-family:var(--mono);color:var(--text-3);flex:none}
+  .half--depois .list li{color:var(--text-2);font-size:15px}
+  .half--depois .list li::before{content:'+';font-family:var(--mono);font-weight:500;color:var(--gold);flex:none}
+  .half--depois .chip{align-self:flex-start;margin-top:36px}
+
+  /* kicker mono de cada metade — ancorado no rodapé */
+  .kicker{position:absolute;bottom:76px;left:var(--pad);
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+  .half--depois .kicker{left:120px}
+
+  /* divisa central: linha + pill circular sobreposta */
+  .seam{position:absolute;left:799px;top:0;bottom:0;width:2px;
+    background:linear-gradient(180deg,transparent,var(--gold-border) 22%,var(--gold-border) 78%,transparent);z-index:5}
+  .pivot{position:absolute;left:768px;top:418px;width:64px;height:64px;
+    border-radius:50%;z-index:6;display:grid;place-items:center;
+    font-family:var(--num);font-size:24px;font-weight:600;color:var(--gold)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <div class="half half--antes mode-dark">
+      <div class="eyebrow">Lorem</div>
+      <h2 class="h-serif">Lorem ipsum dolor sit amet <span class="dim">consectetur.</span></h2>
+      <ul class="list">
+        <li>Lorem ipsum dolor sit amet consectetur adipiscing — elit sed do eiusmod tempor.</li>
+        <li>Lorem ipsum dolor sit amet consectetur adipiscing elit tempor.</li>
+        <li>Lorem ipsum dolor sit; 1 sed amet 3 consectetur adipiscing elit.</li>
+      </ul>
+      <span class="kicker">Consectetur sed</span>
+    </div>
+
+    <div class="half half--depois">
+      <div class="eyebrow">Ipsum</div>
+      <h2 class="h-serif">Lorem ipsum dolor <em>40 minutos.</em></h2>
+      <ul class="list">
+        <li>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</li>
+        <li>Lorem ipsum dolor sit amet — consectetur adipiscing.</li>
+        <li>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor.</li>
+      </ul>
+      <span class="chip chip--green"><span class="dot"></span>−92% amet consectetur</span>
+      <span class="kicker">Lorem ipsum dolor</span>
+    </div>
+
+    <div class="seam" aria-hidden="true"></div>
+    <div class="pivot surface">→</div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

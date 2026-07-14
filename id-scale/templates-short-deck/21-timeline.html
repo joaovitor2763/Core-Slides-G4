@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>21 · Timeline</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Linha do tempo horizontal: trilho em y=530, 4 marcos com dot,
+     ano em Space Grotesk e card surface--flat alternando acima/abaixo
+     do trilho. Marco atual (2026) em gold com halo. Seta → 2027 no fim.
+
+     Geometria X · dots em 240 / 550 / 860 / 1170 · cards 270px
+     centrados no dot (left = x−135): 105 / 415 / 725 / 1035.
+     Card 4 termina em 1035+270 = 1305 < trilho fim 1310 ✓
+     Geometria Y · trilho 530–532 · dot 523–537 (14px) ·
+     card abaixo top 560 · card acima bottom 400 (borda inferior y=500). */
+
+  .head{position:absolute;left:var(--pad);top:104px;max-width:900px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:54px}
+
+  /* trilho: 96 → 1310 (seta ocupa 1330 → ~1504 = 1600−pad) */
+  .trail{position:absolute;left:var(--pad);top:530px;width:1214px;height:2px;
+    border-radius:2px;background:var(--border-2)}
+  .next{position:absolute;left:1330px;top:522px;font-family:var(--mono);
+    font-size:13px;letter-spacing:.14em;color:var(--text-3)}
+
+  .dot{position:absolute;top:523px;width:14px;height:14px;border-radius:50%;
+    background:var(--bg);border:3px solid var(--text-3);z-index:2}
+  .dot--now{border-color:var(--gold);box-shadow:0 0 0 9px var(--gold-dim)}
+
+  .year{position:absolute;width:270px;text-align:center;font-size:28px}
+  .year--now{color:var(--gold)}
+  /* ano acima do dot (marcos 1 e 3): baseline termina em y≈496 */
+  .y-up{top:468px}
+  /* ano abaixo do dot (marcos 2 e 4): começa em y=552 */
+  .y-down{top:552px}
+
+  .card{position:absolute;width:270px;padding:20px 22px;border-radius:var(--r-md)}
+  .card h3{font-family:var(--num);font-weight:600;font-size:20px;
+    letter-spacing:-.01em;color:var(--text-1);margin-bottom:8px}
+  /* card abaixo do trilho (marcos 1 e 3) */
+  .c-down{top:560px}
+  /* card acima do trilho (marcos 2 e 4): bottom = 900−500 = 400 */
+  .c-up{bottom:400px}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Roadmap">
+
+    <header class="head">
+      <div class="eyebrow">Evolução · 2023–2026</div>
+      <h1 class="h-serif">De experimento a <em>infraestrutura.</em></h1>
+    </header>
+
+    <div class="trail" aria-hidden="true"></div>
+    <span class="next">→ 2027</span>
+
+    <!-- marco 1 · 2023 · x=240 · ano acima, card abaixo -->
+    <span class="dot" style="left:233px"></span>
+    <div class="year num y-up" style="left:105px">2023</div>
+    <div class="card surface--flat surface c-down" style="left:105px">
+      <h3>Experimentos isolados</h3>
+      <p class="small">ChatGPT no navegador, cada gestor por conta própria — sem método nem medição.</p>
+    </div>
+
+    <!-- marco 2 · 2024 · x=550 · card acima, ano abaixo -->
+    <span class="dot" style="left:543px"></span>
+    <div class="card surface--flat surface c-up" style="left:415px">
+      <h3>Primeiras skills</h3>
+      <p class="small">Prompts viram ativos versionados do time de vendas, com dono e exemplos.</p>
+    </div>
+    <div class="year num y-down" style="left:415px">2024</div>
+
+    <!-- marco 3 · 2025 · x=860 · ano acima, card abaixo -->
+    <span class="dot" style="left:853px"></span>
+    <div class="year num y-up" style="left:725px">2025</div>
+    <div class="card surface--flat surface c-down" style="left:725px">
+      <h3>Fluxos em produção</h3>
+      <p class="small">Proposta, follow-up e onboarding rodam sozinhos, com gate humano.</p>
+    </div>
+
+    <!-- marco 4 · 2026 · x=1170 · ATUAL (gold) · card acima, ano abaixo -->
+    <span class="dot dot--now" style="left:1163px"></span>
+    <div class="card surface--flat surface c-up" style="left:1035px">
+      <h3>IA como infraestrutura</h3>
+      <p class="small">Toda área opera com skills medidas em horas poupadas e receita.</p>
+    </div>
+    <div class="year num y-down year--now" style="left:1035px">2026</div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

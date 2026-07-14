@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>20 · Matriz 2×2</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Matriz 2×2 (light): título editorial à esquerda, quadro de 4
+     quadrantes surface--flat à direita com eixos-seta finos e labels
+     mono rotacionados. Quadrante recomendado em surface--gold. */
+
+  /* coluna editorial: left 96 · max-width 470 (termina em 566 < 610) */
+  .intro{position:absolute;left:var(--pad);top:250px;max-width:470px}
+  .intro .eyebrow{margin-bottom:24px}
+  .intro h1{font-size:54px;margin-bottom:28px}
+  .intro .body{margin-bottom:30px}
+  .intro .chips{display:flex;gap:12px;flex-wrap:wrap}
+
+  /* quadro: left 684 + 820 = 1504 = 1600 − 96 ✓
+     top 140 + 620 = 760 · margens verticais simétricas (140/140) ✓ */
+  .board{position:absolute;left:684px;top:140px;width:820px;height:620px;
+    display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:16px}
+
+  .quad{padding:34px 36px;display:flex;flex-direction:column;gap:12px}
+  .quad .qname{font-family:var(--num);font-size:24px;font-weight:600;
+    letter-spacing:-.02em;color:var(--text-1)}
+  .quad .small{max-width:300px}
+  .quad .chip{align-self:flex-start;margin-bottom:2px}
+
+  /* eixo Y: linha em x=644 (40px à esquerda do quadro), seta para cima */
+  .axis-y{position:absolute;left:644px;top:140px;width:2px;height:620px;
+    background:var(--text-3);border-radius:2px}
+  .axis-y::before{content:'';position:absolute;top:-9px;left:-4px;
+    border-left:5px solid transparent;border-right:5px solid transparent;
+    border-bottom:9px solid var(--text-3)}
+  .axis-y-label{position:absolute;left:610px;top:450px;white-space:nowrap;
+    transform:translate(-50%,-50%) rotate(-90deg)}
+
+  /* eixo X: linha em y=800 (40px abaixo do quadro), seta para a direita */
+  .axis-x{position:absolute;left:684px;top:800px;width:820px;height:2px;
+    background:var(--text-3);border-radius:2px}
+  .axis-x::after{content:'';position:absolute;right:-9px;top:-4px;
+    border-top:5px solid transparent;border-bottom:5px solid transparent;
+    border-left:9px solid var(--text-3)}
+  .axis-x-label{position:absolute;left:684px;width:820px;top:818px;text-align:center}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Método">
+
+    <div class="intro">
+      <div class="eyebrow">Priorização de tarefas</div>
+      <h1 class="h-serif">Nem tudo merece <em>automação.</em></h1>
+      <p class="body">Liste as 20 tarefas que consomem sua semana e posicione cada uma nos dois eixos. A decisão sai do achismo: o quadrante diz o que fazer com cada tarefa.</p>
+      <div class="chips">
+        <span class="chip">Exercício em duplas</span>
+        <span class="chip">20 min</span>
+      </div>
+    </div>
+
+    <div class="axis-y" aria-hidden="true"></div>
+    <span class="mono-label axis-y-label">Gosta da tarefa ↑</span>
+    <div class="axis-x" aria-hidden="true"></div>
+    <span class="mono-label axis-x-label">Capacidade da IA →</span>
+
+    <section class="board" aria-label="Matriz de adoção de IA por tarefa">
+      <div class="quad surface surface--flat">
+        <span class="qname">Mantenha humano</span>
+        <p class="small">Você gosta e a IA ainda faz mal: é aqui que seu julgamento vale caro. Proteja esse tempo.</p>
+      </div>
+      <div class="quad surface surface--flat">
+        <span class="qname">Copiloto</span>
+        <p class="small">Você gosta e a IA ajuda: divida a tarefa com ela e fique com a revisão e a decisão final.</p>
+      </div>
+      <div class="quad surface surface--flat">
+        <span class="qname">Simplifique</span>
+        <p class="small">Ninguém faz bem — nem você, nem a máquina. Elimine, encurte ou renegocie a entrega.</p>
+      </div>
+      <div class="quad surface surface--gold">
+        <span class="chip chip--gold"><span class="dot"></span>Comece aqui</span>
+        <span class="qname">Automatize</span>
+        <p class="small">Você não gosta e a IA executa bem: vire fluxo automático ainda esta semana, sem cerimônia.</p>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

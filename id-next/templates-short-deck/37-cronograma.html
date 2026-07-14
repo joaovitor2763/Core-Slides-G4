@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>37 · Cronograma</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Cronograma multi-dia (dark): 4 colunas de dias com blocos de sessão,
+     faixas de horário (manhã/almoço/tarde/noite) como linhas tracejadas
+     atravessando atrás das colunas, labels mono à esquerda.
+
+     Geometria X: pad 96 · rail de faixas ocupa 96–176 · colunas de 310px
+     em 190 / 524 / 858 / 1192 (gap 24) → 1192+310 = 1502 ≤ 1504 ✓
+     Geometria Y: título 64–140 · chips de dia 176 · linhas de faixa em
+     manhã 238 / almoço 452 / tarde 506 / noite 712 · blocos 252–801 ·
+     nota 838 → tudo < 900 ✓ */
+
+  .head{position:absolute;left:var(--pad);top:64px}
+  .head .eyebrow{margin-bottom:16px}
+  .head h1{font-size:44px}
+
+  /* linhas de faixa: tracejadas, atrás das colunas (z-index 0) */
+  .band{position:absolute;left:var(--pad);right:var(--pad);height:1px;z-index:0;
+    background:repeating-linear-gradient(90deg,var(--border-2) 0 6px,transparent 6px 14px)}
+  .band-label{position:absolute;left:var(--pad);width:80px;z-index:2;
+    font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text-3);
+    transform:translateY(-50%);background:var(--bg);padding:6px 8px 6px 0}
+
+  /* header de cada dia: pill outline gold */
+  .day{position:absolute;top:176px;display:flex;align-items:center;gap:12px}
+  .day .chip{background:transparent;border-color:var(--gold-border);color:var(--text-1)}
+  .day .date{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text-3)}
+
+  /* bloco de sessão */
+  .blk{position:absolute;width:310px;padding:15px 16px;border-radius:var(--r-md);z-index:1}
+  .blk .name{font-family:var(--num);font-weight:600;font-size:15px;
+    letter-spacing:-.01em;color:var(--text-1);line-height:1.35}
+  .blk .theme{font-family:var(--serif);font-style:italic;font-size:13.5px;
+    line-height:1.4;color:var(--text-3);margin-top:5px}
+  .blk--gold{background:var(--gold-dim);border:1px solid var(--gold-border);box-shadow:var(--shadow-sm)}
+  .blk--gold .name{color:var(--gold)}
+  .blk--tall{background:var(--surface-2);border:1px solid var(--border);height:281px;display:flex;
+    flex-direction:column;justify-content:flex-start}
+  .blk--tall .slot{font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--text-3);margin-top:auto}
+
+  .note{position:absolute;left:var(--pad);top:838px}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Programa">
+
+    <header class="head">
+      <div class="eyebrow">Imersão · 4 dias</div>
+      <h1 class="h-serif">Quatro dias <em>dentro</em> da operação.</h1>
+    </header>
+
+    <!-- faixas de horário -->
+    <div class="band" style="top:238px" aria-hidden="true"></div>
+    <span class="band-label" style="top:238px">manhã</span>
+    <div class="band" style="top:452px" aria-hidden="true"></div>
+    <span class="band-label" style="top:452px">almoço</span>
+    <div class="band" style="top:506px" aria-hidden="true"></div>
+    <span class="band-label" style="top:506px">tarde</span>
+    <div class="band" style="top:712px" aria-hidden="true"></div>
+    <span class="band-label" style="top:712px">noite</span>
+
+    <!-- headers dos dias -->
+    <div class="day" style="left:190px"><span class="chip">Dia 1</span><span class="date">seg · 13 jul</span></div>
+    <div class="day" style="left:524px"><span class="chip">Dia 2</span><span class="date">ter · 14 jul</span></div>
+    <div class="day" style="left:858px"><span class="chip">Dia 3</span><span class="date">qua · 15 jul</span></div>
+    <div class="day" style="left:1192px"><span class="chip">Dia 4</span><span class="date">qui · 16 jul</span></div>
+
+    <!-- Dia 1 -->
+    <div class="blk surface surface--flat" style="left:190px;top:252px">
+      <div class="name">Abertura &amp; diagnóstico</div>
+      <div class="theme">onde a IA entra no seu P&amp;L</div>
+    </div>
+    <div class="blk surface surface--flat" style="left:190px;top:520px">
+      <div class="name">IA em vendas</div>
+      <div class="theme">pipeline que anda sozinho</div>
+    </div>
+    <div class="blk blk--gold" style="left:190px;top:608px">
+      <div class="name">Plantão G4 OS</div>
+      <div class="theme">mão na massa com o time G4</div>
+    </div>
+    <div class="blk surface surface--flat" style="left:190px;top:726px">
+      <div class="name">Jantar da turma</div>
+      <div class="theme">networking guiado por setor</div>
+    </div>
+
+    <!-- Dia 2 -->
+    <div class="blk surface surface--flat" style="left:524px;top:252px">
+      <div class="name">Agentes na operação</div>
+      <div class="theme">do prompt ao processo com dono</div>
+    </div>
+    <div class="blk surface surface--flat" style="left:524px;top:340px">
+      <div class="name">Estudo de caso ao vivo</div>
+      <div class="theme">a G4 por dentro, sem filtro</div>
+    </div>
+    <div class="blk blk--tall" style="left:524px;top:520px">
+      <div class="name">Mentorias individuais</div>
+      <div class="theme">45 minutos com um mentor da sua área, sobre o seu negócio — traga o problema real</div>
+      <div class="slot">tarde → noite · agenda própria</div>
+    </div>
+
+    <!-- Dia 3 -->
+    <div class="blk surface surface--flat" style="left:858px;top:252px">
+      <div class="name">IA em marketing</div>
+      <div class="theme">volume com governança de marca</div>
+    </div>
+    <div class="blk surface surface--flat" style="left:858px;top:520px">
+      <div class="name">Dados &amp; copilotos</div>
+      <div class="theme">o ERP finalmente conversando</div>
+    </div>
+    <div class="blk blk--gold" style="left:858px;top:608px">
+      <div class="name">Plantão G4 OS</div>
+      <div class="theme">sua primeira skill no ar</div>
+    </div>
+    <div class="blk surface surface--flat" style="left:858px;top:726px">
+      <div class="name">Fórum aberto</div>
+      <div class="theme">casos levados pela turma</div>
+    </div>
+
+    <!-- Dia 4 -->
+    <div class="blk surface surface--flat" style="left:1192px;top:252px">
+      <div class="name">Governança &amp; risco</div>
+      <div class="theme">quem assina o que a IA entrega</div>
+    </div>
+    <div class="blk surface surface--flat" style="left:1192px;top:520px">
+      <div class="name">Plano de 90 dias</div>
+      <div class="theme">sua operação, redesenhada</div>
+    </div>
+    <div class="blk surface surface--flat" style="left:1192px;top:726px">
+      <div class="name">Encerramento</div>
+      <div class="theme">compromissos &amp; certificados</div>
+    </div>
+
+    <p class="small note italic">*amostra representativa — horários e mentores podem mudar</p>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

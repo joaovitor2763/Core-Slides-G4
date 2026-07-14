@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>94 · Próximos passos</title>
+<link rel="stylesheet" href="style.css?v=next1">
+<style>
+  /* Próximos passos pós-reunião (pitch, dark):
+     — topo-esquerda: eyebrow + título serif 52px (sem em gold; o gold é do card 1)
+     — 3 cards horizontais: x 96 → 1504 · 3×448 + 2×32 = 1344 + 64 = 1408 ✓
+       y 340 → 660 (altura 320) · lefts: 96 · 576 · 1056
+     — card 1 = surface--gold + chip--gold "agora" (único protagonista gold)
+     — rodapé y 740: pill outline manual (~48px de altura → termina em ~788 < 804 ✓)
+     — armilar--engraving no canto inferior direito, bordas fora do canvas */
+
+  .armilar--corner{width:780px;height:439px;right:-30px;bottom:-30px;opacity:.18}
+
+  .head{position:absolute;left:var(--pad);top:118px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:52px;max-width:900px}
+
+  .card{position:absolute;top:340px;width:448px;height:320px;
+    padding:36px 36px 30px;display:flex;flex-direction:column}
+  .card--1{left:96px}
+  .card--2{left:576px}
+  .card--3{left:1056px}
+
+  .card .top{display:flex;align-items:flex-start;justify-content:space-between}
+  .card .idx{font-family:var(--serif);font-style:italic;font-weight:400;
+    font-size:44px;line-height:1;color:var(--text-3)}
+  .card .name{font-family:var(--num);font-weight:600;font-size:19px;
+    letter-spacing:-.01em;color:var(--text-1);margin-top:26px}
+  .card .desc{margin-top:10px;max-width:370px}
+  .card .when{margin-top:auto;padding-top:16px;border-top:1px solid var(--border)}
+
+  /* rodapé de ação: pill outline manual + contato mono */
+  .action{position:absolute;left:var(--pad);top:740px;
+    display:flex;align-items:center;gap:26px}
+  .pill{display:inline-flex;align-items:center;gap:10px;
+    padding:14px 26px;border:1px solid var(--border-2);
+    border-radius:999px;font-size:15px}
+</style>
+<meta id="acfifjfajpekbmhmjppnmmjgmhjkildl"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum sit</div>
+      <h1 class="h-serif">Lorem ipsum, dolor amet.</h1>
+    </header>
+
+    <section class="card surface surface--gold card--1">
+      <div class="top">
+        <span class="idx">1</span>
+        <span class="chip chip--gold"><span class="dot"></span>lorem</span>
+      </div>
+      <div class="name">Lorem ipsum dolor sit</div>
+      <p class="small desc">Lorem ipsum de 45 min para consectetur adipiscing elit e labore magna aliqua dolor sit amet.</p>
+      <div class="mono-label when">lorem, sit dolor amet</div>
+    </section>
+
+    <section class="card surface surface--flat card--2">
+      <div class="top">
+        <span class="idx">2</span>
+      </div>
+      <div class="name">Lorem ipsum dolor sit amet elit</div>
+      <p class="small desc">Lorem ipsum do consectetur elit adipiscing sit dolor amet de 90 dias com labore magna aliqua.</p>
+      <div class="mono-label when">sed 16 de maio</div>
+    </section>
+
+    <section class="card surface surface--flat card--3">
+      <div class="top">
+        <span class="idx">3</span>
+      </div>
+      <div class="name">Lorem ipsum dolor</div>
+      <p class="small desc">Lorem ipsum de dolor sit amet consectetur adipiscing elit, labore e magna aliqua enim veniam.</p>
+      <div class="mono-label when">lorem sit 26 de maio</div>
+    </section>
+
+    <footer class="action">
+      <span class="pill num">Lorem ipsum dolor sit →</span>
+      <span class="mono-label">lorem.ipsum@dolorsit.com · (11) 98800-1234</span>
+    </footer>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+
+
+</body></html>

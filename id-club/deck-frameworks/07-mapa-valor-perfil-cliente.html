@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>07 · Mapa de valor × perfil do cliente</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Framework 07 · canvas em "bowtie" duplo: mapa de valor à esquerda,
+     perfil do cliente à direita, encaixe gold no corredor central. */
+  .head{position:absolute;left:96px;top:72px;width:1408px;display:grid;grid-template-columns:760px 1fr;gap:100px;align-items:end}
+  .head .eyebrow{margin-bottom:18px}.head h1{font-size:46px}.head .lede{font-size:18px}
+  .board{position:absolute;top:250px;width:640px;height:540px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);box-shadow:var(--shadow-md)}
+  .board--l{left:96px}.board--r{left:864px}
+  .split{position:absolute;height:0;border-top:1.5px solid var(--border-2);transform-origin:left center}
+  .badge{position:absolute;width:88px;height:88px;border-radius:50%;background:var(--surface);border:1px solid var(--gold-border);box-shadow:var(--shadow-sm),0 0 0 5px var(--gold-dim);display:grid;place-items:center;z-index:2}
+  .badge svg{position:static;width:34px;height:34px;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .zone{position:absolute}
+  .zone strong{display:block;font:600 16px var(--num);letter-spacing:-.01em;color:var(--text-1);margin-bottom:6px}
+  .zone p{font:13px/1.5 var(--sans);color:var(--text-3)}
+  .aline{position:absolute;height:0;border-top:2.5px solid var(--gold)}
+  .atri{position:absolute;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent}
+  .atri--r{border-left:14px solid var(--gold)}
+  .atri--l{border-right:14px solid var(--gold)}
+  .fit-label{position:absolute;left:760px;top:540px;width:80px;text-align:center;font:500 10px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Frameworks · proposta de valor">
+    <header class="head">
+      <div><div class="eyebrow">Framework · canvas de valor</div><h1 class="h-serif">Mapa de valor, <em>perfil do cliente.</em></h1></div>
+      <p class="lede">Descreva os dois lados com a mesma disciplina. A proposta de valor é a ponte — e ela só para em pé quando os dois apoios existem.</p>
+    </header>
+
+    <div class="aline" style="left:740px;top:511px;width:44px" aria-hidden="true"></div>
+    <span class="atri atri--r" style="left:784px;top:504px" aria-hidden="true"></span>
+    <div class="aline" style="left:816px;top:511px;width:44px" aria-hidden="true"></div>
+    <span class="atri atri--l" style="left:802px;top:504px" aria-hidden="true"></span>
+    <div class="fit-label">Encaixe</div>
+
+    <div class="board board--l">
+      <div class="split" style="left:12px;top:15px;width:453px;transform:rotate(32.9deg)" aria-hidden="true"></div>
+      <div class="split" style="left:12px;top:523px;width:453px;transform:rotate(-32.9deg)" aria-hidden="true"></div>
+      <div class="split" style="left:436px;top:269px;width:192px" aria-hidden="true"></div>
+      <div class="badge" style="left:370px;top:226px" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M14 8h20l8 12-18 20L6 20zM6 20h36M24 40L14 8M24 40L34 8"/></svg></div>
+      <div class="zone" style="left:36px;top:206px;width:152px">
+        <strong>Produtos &amp; serviços</strong>
+        <p>A lista do que você vende — em torno do que a proposta é construída.</p>
+      </div>
+      <div class="zone" style="left:252px;top:52px;width:330px">
+        <strong>Criadores de ganho</strong>
+        <p>Como a oferta produz os resultados que o cliente espera, deseja ou seria surpreendido por ter.</p>
+      </div>
+      <div class="zone" style="left:252px;top:408px;width:330px">
+        <strong>Aliviadores de dor</strong>
+        <p>Como a oferta elimina dores, custos e situações que o cliente quer evitar.</p>
+      </div>
+    </div>
+
+    <div class="board board--r">
+      <div class="split" style="left:248px;top:261px;width:453px;transform:rotate(-32.9deg)" aria-hidden="true"></div>
+      <div class="split" style="left:248px;top:277px;width:453px;transform:rotate(32.9deg)" aria-hidden="true"></div>
+      <div class="split" style="left:12px;top:269px;width:192px" aria-hidden="true"></div>
+      <div class="badge" style="left:182px;top:226px;border-color:var(--border-2);box-shadow:var(--shadow-sm)" aria-hidden="true"><svg viewBox="0 0 48 48" style="stroke:var(--text-2)"><circle cx="24" cy="16" r="7"/><path d="M10 40c1.5-9 6.5-13 14-13s12.5 4 14 13"/></svg></div>
+      <div class="zone" style="left:452px;top:196px;width:152px;text-align:right">
+        <strong>Tarefas do cliente</strong>
+        <p>O que ele está tentando resolver, realizar ou evitar no contexto dele.</p>
+      </div>
+      <div class="zone" style="left:58px;top:52px;width:330px">
+        <strong>Ganhos</strong>
+        <p>Benefícios que o cliente espera, deseja — ou que o encantariam se aparecessem.</p>
+      </div>
+      <div class="zone" style="left:58px;top:408px;width:330px">
+        <strong>Dores</strong>
+        <p>Emoções negativas, custos e riscos que ele enfrenta antes, durante e depois da tarefa.</p>
+      </div>
+    </div>
+  </article>
+</div>
+<script>
+  const slide=document.querySelector('.slide');function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);slide.style.transform=`translate(-50%, -50%) scale(${s})`}addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>

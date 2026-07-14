@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>35 · Círculos concêntricos</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* TAM/SAM/SOM: coluna editorial à esquerda (título serif + 3 definições
+     empilhadas + chip ICP) e três círculos aninhados à direita, tangentes
+     na base — que sangra levemente para fora do canvas (bottom 916 > 900).
+
+     Geometria (todos tangentes na base y=916 · eixo x=1180):
+       externo Ø560 → left 1180−280 = 900 · top 916−560 = 356 · right 1460 < 1504 ✓
+       médio   Ø400 → left 980  · top 916−400 = 516
+       interno Ø250 → left 1055 · top 916−250 = 666
+     Labels no topo interno de cada anel (centrados em x=1180):
+       TAM y 380 · SAM y 538 · SOM y 688 */
+
+  .col{position:absolute;left:var(--pad);top:118px;width:620px}
+  .col .eyebrow{margin-bottom:26px}
+  .col h1{font-size:64px;margin-bottom:44px}
+
+  .def{display:flex;gap:24px;align-items:baseline;
+    padding:22px 0;border-top:1px solid var(--border)}
+  .def:last-of-type{border-bottom:1px solid var(--border)}
+  .def .sig{font-family:var(--mono);font-size:13px;font-weight:500;
+    letter-spacing:.16em;color:var(--gold);width:56px;flex:none}
+  .def .body{font-size:16px}
+
+  .col .chip{margin-top:34px}
+
+  .disc{position:absolute;border-radius:50%}
+  .disc--tam{left:900px;top:356px;width:560px;height:560px;
+    background:rgba(230,238,243,.03);border:1px solid var(--border-2)}
+  .disc--sam{left:980px;top:516px;width:400px;height:400px;
+    background:rgba(230,238,243,.06);border:1px solid var(--border)}
+  .disc--som{left:1055px;top:666px;width:250px;height:250px;
+    background:var(--gold-dim);border:1px solid var(--gold-border)}
+
+  .ring-label{position:absolute;left:1180px;transform:translateX(-50%);
+    text-align:center;white-space:nowrap}
+  .ring-label .tag{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);display:block}
+  .ring-label .num{font-size:28px;display:block;margin-top:6px}
+  .ring-label--som .tag{color:var(--gold)}
+  .ring-label--som .num{color:var(--gold)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <aside class="col">
+      <div class="eyebrow">Lorem · dolor sit amet elit</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit. Amet est <em>elit.</em></h1>
+
+      <div class="def">
+        <span class="sig">TAM</span>
+        <p class="body">Lorem ipsum dolor sit amet consectetur 50 adipiscing elit sed do tempor incididunt magna.</p>
+      </div>
+      <div class="def">
+        <span class="sig">SAM</span>
+        <p class="body">Lorem ipsum dolor consectetur dentro do ipsum sed do tempor de labore da Magna.</p>
+      </div>
+      <div class="def">
+        <span class="sig">SOM</span>
+        <p class="body">Lorem ipsum dolor sit amet consectetur elit ad minim 24 meses, sed do labore.</p>
+      </div>
+
+      <span class="chip chip--gold"><span class="dot"></span>Lorem · ipsum de R$ 10–200M</span>
+    </aside>
+
+    <div class="disc disc--tam" aria-hidden="true"></div>
+    <div class="disc disc--sam" aria-hidden="true"></div>
+    <div class="disc disc--som" aria-hidden="true"></div>
+
+    <div class="ring-label" style="top:380px">
+      <span class="tag">TAM</span>
+      <span class="num">R$ 8,4B</span>
+    </div>
+    <div class="ring-label" style="top:538px">
+      <span class="tag">SAM</span>
+      <span class="num">R$ 1,9B</span>
+    </div>
+    <div class="ring-label ring-label--som" style="top:688px">
+      <span class="tag">SOM</span>
+      <span class="num">R$ 240M</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

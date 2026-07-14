@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>60 · Perfil + quote</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Perfil + quote (misto, 3 colunas):
+     argumentos light à esquerda · retrato full-height ao centro · painel navy com citação à direita.
+
+     Somas de px (horizontal):
+       coluna esquerda  x 96 → 560   (464px úteis)
+       respiro          560 → 600    (40px)
+       retrato          600 → 1020   (420px · sangria y 0→900, exceção intencional)
+       painel navy      1020 → 1600  (580px · sangria y 0→900, exceção intencional)
+       96 + 464 + 40 + 420 + 580 = 1600 ✓
+
+     Vertical (coluna esquerda):
+       head  top 140 · eyebrow ~18 + margin 26 + título 2 linhas 50px·1.08 = ~108 → termina ~292
+       args  top 400 · height 390 (400 → 790, dentro de y=804) ✓ · space-between distribui os 3 blocos */
+
+  /* ── coluna esquerda (light) ─────────────────────────────── */
+  .head{position:absolute;left:var(--pad);top:140px;width:464px}
+  .head .eyebrow{margin-bottom:26px}
+  .head h1{font-size:50px}
+
+  .args{position:absolute;left:var(--pad);top:400px;width:464px;height:390px;
+    display:flex;flex-direction:column;justify-content:space-between}
+  .arg{border-left:3px solid var(--border-2);padding-left:22px}
+  .arg .mono-label{display:block;margin-bottom:9px}
+  .arg .body{max-width:430px}
+  /* protagonista gold do slide: só o 2º argumento */
+  .arg--lead{border-left-color:var(--gold)}
+  .arg--lead .mono-label{color:var(--gold)}
+  .arg--lead .body{color:var(--text-1)}
+
+  /* ── retrato central (sangria full-height 600→1020) ─────── */
+  /* para usar foto real: substitua o conteúdo do .portrait por
+     <img src="assets/retrato-mentor.jpg" alt="…" style="width:100%;height:100%;object-fit:cover">
+     e remova .portrait .initials / .portrait .tag */
+  .portrait{position:absolute;left:600px;top:0;width:420px;height:900px;
+    background:linear-gradient(160deg,#2A3F52 0%,#0E1E2C 100%);overflow:hidden}
+  .portrait .initials{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
+    font-family:var(--serif);font-weight:500;font-size:120px;line-height:1;
+    letter-spacing:.02em;color:rgba(230,238,243,.26)}
+  .portrait .tag{position:absolute;left:0;right:0;bottom:36px;text-align:center;
+    color:rgba(230,238,243,.42)}
+
+  /* ── painel navy da citação (1020→1600 full-height) ─────── */
+  .quote-panel{position:absolute;left:1020px;top:0;width:580px;height:900px;
+    background:var(--navy-700);padding:72px;
+    display:flex;flex-direction:column;justify-content:center}
+  .quote-panel blockquote{font-family:var(--serif);font-style:italic;font-weight:400;
+    font-size:32px;line-height:1.42;letter-spacing:-.01em;color:var(--text-1)}
+  .quote-panel .rule{width:40px;height:1px;background:var(--gold);opacity:.8;margin:40px 0 18px}
+  .quote-panel .attr-name{color:var(--text-2);letter-spacing:.18em}
+  .quote-panel .attr-role{margin-top:7px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum dolor</div>
+      <h1 class="h-serif">Lorem ipsum<br>sit amet elit</h1>
+    </header>
+
+    <div class="args">
+      <div class="arg">
+        <span class="mono-label">Lorem</span>
+        <p class="body">Lorem ipsum dolor sit amet consectetur adipiscing elit — sed tempor incididunt magna.</p>
+      </div>
+      <div class="arg arg--lead">
+        <span class="mono-label">Adipiscing</span>
+        <p class="body">Dolor sit amet consectetur: adipiscing elit sed do eiusmod tempor incididunt labore magna aliqua.</p>
+      </div>
+      <div class="arg">
+        <span class="mono-label">Incididunt</span>
+        <p class="body">Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor magna.</p>
+      </div>
+    </div>
+
+    <figure class="portrait" aria-label="Espaço reservado para retrato do mentor">
+      <span class="initials" aria-hidden="true">LI</span>
+      <span class="mono-label tag">[ Lorem · 840×1800 · object-fit cover ]</span>
+    </figure>
+
+    <aside class="quote-panel mode-dark">
+      <blockquote>“Lorem ipsum dolor sit amet. Consectetur adipiscing elit sed eiusmod tempor. Ut labore et dolore magna.”</blockquote>
+      <div class="rule" aria-hidden="true"></div>
+      <div class="mono-label attr-name">Lorem Ipsum</div>
+      <div class="mono-label attr-role">Consectetur · Adipiscing</div>
+    </aside>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

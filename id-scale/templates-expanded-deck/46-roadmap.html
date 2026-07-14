@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>46 · Roadmap</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Roadmap de 3 fases em colunas altas com marcos; fase atual gold.
+     Conectores de seta fina em mono entre as colunas. */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:96px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:56px;max-width:780px}
+  .head .read{max-width:380px;padding-bottom:6px}
+
+  /* geometria: 3 × 424px + 2 gaps de 68px = 1272 + 136 = 1408 ✓
+     left: 96 · 588 · 1080 — top 320, bottom 88 → altura 492 */
+  .fase{position:absolute;top:320px;height:492px;width:424px;
+    padding:36px 36px 32px;display:flex;flex-direction:column}
+  .fase--1{left:96px}
+  .fase--2{left:588px}
+  .fase--3{left:1080px}
+
+  .fase .chip{align-self:flex-start;margin-bottom:22px}
+  .fase h2{font-family:var(--num);font-weight:600;font-size:24px;
+    letter-spacing:-.01em;color:var(--text-1);margin-bottom:8px}
+  .fase .tag{margin-bottom:26px}
+
+  .marco{display:flex;align-items:flex-start;gap:14px;
+    padding:15px 0;border-top:1px solid var(--border)}
+  .marco:first-of-type{border-top:none;padding-top:0}
+  .marco .dot{flex:none;width:8px;height:8px;border-radius:50%;
+    background:var(--text-3);opacity:.55;margin-top:6px}
+  .fase--1 .marco .dot{background:var(--gold);opacity:1}
+  .marco .small{color:var(--text-2)}
+
+  /* conectores: centrados nos gaps 520..588 e 1012..1080 */
+  .arrow{position:absolute;top:540px;width:68px;text-align:center;
+    font-family:var(--mono);font-size:34px;font-weight:400;
+    color:var(--text-3);line-height:1}
+  .arrow--1{left:520px}
+  .arrow--2{left:1012px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Lorem ipsum dolor</div>
+        <h1 class="h-serif">Lorem ipsum <em>dolor sit amet elit.</em></h1>
+      </div>
+      <p class="body read">Lorem ipsum dolor sit amet, consectetur adipiscing elit — sed tempor incididunt labore magna.</p>
+    </header>
+
+    <section class="fase surface surface--gold fase--1">
+      <span class="chip chip--gold"><span class="dot"></span>Lorem</span>
+      <h2>Lorem ipsum</h2>
+      <p class="mono-label tag">Lorem 01 · Jul–Set 2026</p>
+      <div class="marco"><span class="dot" aria-hidden="true"></span><p class="small">Lorem ipsum 5 dolor sit amet consectetur adipiscing elit</p></div>
+      <div class="marco"><span class="dot" aria-hidden="true"></span><p class="small">Dolor sit 3 amet consectetur adipiscing elit sed tempor</p></div>
+      <div class="marco"><span class="dot" aria-hidden="true"></span><p class="small">Lorem ipsum 20 dolor sit amet consectetur elit</p></div>
+      <div class="marco"><span class="dot" aria-hidden="true"></span><p class="small">Lorem ipsum dolor sit amet consectetur elit</p></div>
+    </section>
+
+    <div class="arrow arrow--1" aria-hidden="true">→</div>
+
+    <section class="fase surface surface--flat fase--2">
+      <span class="chip">Consectetur elit</span>
+      <h2>Consectetur adipiscing</h2>
+      <p class="mono-label tag">Lorem 02 · Out–Dez 2026</p>
+      <div class="marco"><span class="dot" aria-hidden="true"></span><p class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit</p></div>
+      <div class="marco"><span class="dot" aria-hidden="true"></span><p class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit sed</p></div>
+      <div class="marco"><span class="dot" aria-hidden="true"></span><p class="small">Lorem ipsum 6 dolor sit — amet de 60% consectetur elit</p></div>
+      <div class="marco"><span class="dot" aria-hidden="true"></span><p class="small">Lorem ipsum dolor sit amet consectetur adipiscing</p></div>
+    </section>
+
+    <div class="arrow arrow--2" aria-hidden="true">→</div>
+
+    <section class="fase surface surface--flat fase--3">
+      <span class="chip">2027</span>
+      <h2>Tempor incididunt</h2>
+      <p class="mono-label tag">Lorem 03 · Sit amet</p>
+      <div class="marco"><span class="dot" aria-hidden="true"></span><p class="small">Lorem ipsum dolor sit amet consectetur elit</p></div>
+      <div class="marco"><span class="dot" aria-hidden="true"></span><p class="small">Lorem ipsum dolor sit amet consectetur adipiscing</p></div>
+      <div class="marco"><span class="dot" aria-hidden="true"></span><p class="small">Dolor sit amet consectetur adipiscing elit tempor</p></div>
+      <div class="marco"><span class="dot" aria-hidden="true"></span><p class="small">Lorem ipsum dolor: sit amet consectetur adipiscing elit</p></div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

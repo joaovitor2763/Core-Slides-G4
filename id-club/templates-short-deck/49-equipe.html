@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>49 · Equipe</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Time/mentores dark: título serif à esquerda-topo, fileira de 4 cards
+     surface--flat com avatar circular de iniciais (padrão do 04-quote).
+     O fundador ganha avatar em gradiente gold. Glow sutil atrás da grade. */
+
+
+  .head{position:absolute;left:var(--pad);top:96px;max-width:1100px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:64px}
+
+  /* grade 4×1: left 96 + 4×331 + 3×28 = 96 + 1324 + 84 = 1504 → +96 = 1600 ✓
+     vertical: top 320 → bottom 96 = 484px de altura ✓ */
+  .team{position:absolute;left:var(--pad);right:var(--pad);top:320px;bottom:96px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+
+  .card{padding:44px 32px 36px;display:flex;flex-direction:column;align-items:flex-start}
+
+  .avatar{width:72px;height:72px;border-radius:50%;
+    background:var(--gold-dim);border:1px solid var(--gold-border);
+    display:grid;place-items:center;
+    font-family:var(--serif);font-weight:500;font-size:24px;
+    letter-spacing:.02em;color:var(--gold)}
+  .avatar--founder{background:linear-gradient(160deg,var(--gold-300),var(--gold-700));
+    border-color:transparent;color:var(--on-gold)}
+
+  .card .name{margin-top:26px;font-family:var(--num);font-weight:600;
+    font-size:20px;letter-spacing:-.01em;color:var(--text-1);line-height:1.25}
+  .card .role{margin-top:8px;font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);line-height:1.6}
+  .card .bio{margin-top:14px}
+  .card .cred{margin-top:auto}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Quem ensina">
+
+
+
+    <header class="head">
+      <div class="eyebrow">Mentores · turma 07</div>
+      <h1 class="h-serif">Quem já rodou <em>o playbook</em> na própria operação.</h1>
+    </header>
+
+    <section class="team">
+
+      <div class="card surface surface--flat">
+        <span class="avatar avatar--founder" aria-hidden="true">TB</span>
+        <div class="name">Tallis Barreto</div>
+        <div class="role">Fundador · G4 Educação</div>
+        <p class="small bio">Escalou 3 operações até a saída. Hoje treina os times que vêm depois.</p>
+        <span class="chip chip--gold cred"><span class="dot"></span>2 exits</span>
+      </div>
+
+      <div class="card surface surface--flat">
+        <span class="avatar" aria-hidden="true">CV</span>
+        <div class="name">Carla Vasques</div>
+        <div class="role">Head de operações · varejo</div>
+        <p class="small bio">Automatizou o back-office de 210 lojas sem trocar o ERP.</p>
+        <span class="chip cred">−38% custo operacional</span>
+      </div>
+
+      <div class="card surface surface--flat">
+        <span class="avatar" aria-hidden="true">DM</span>
+        <div class="name">Diego Miranda</div>
+        <div class="role">CRO · SaaS B2B</div>
+        <p class="small bio">Montou a máquina de vendas assistida por IA que dobrou o pipeline.</p>
+        <span class="chip cred">R$ 40M ARR</span>
+      </div>
+
+      <div class="card surface surface--flat">
+        <span class="avatar" aria-hidden="true">LF</span>
+        <div class="name">Luiza Ferraz</div>
+        <div class="role">Diretora de dados · saúde</div>
+        <p class="small bio">Levou governança de IA a 12 hospitais — com auditoria passando.</p>
+        <span class="chip cred">LGPD-first</span>
+      </div>
+
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

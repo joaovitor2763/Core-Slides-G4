@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>108 · Funil horizontal</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* 108 · Funil horizontal — split misto: rail editorial light + painel dark
+     com funil de 3 estágios (trapézios afunilando →) e seta de base.
+
+     GEOMETRIA (canvas 1600×900):
+     · Rail light:  x 96–500 (404px) · gutter 60 até o painel ✓ (500+60=560)
+     · Painel dark: x 560–1600 (1040px) · y 0–900 · padding 64 → conteúdo x 624–1536
+     · Trapézios (um único SVG, viewBox deslocado "560 0 1040 900" = janela do
+       painel, então as coords do canvas valem direto):
+         T1 (624,200)(910,240)(910,520)(624,560)   — boca 360px → 280px
+         T2 (930,240)(1216,280)(1216,480)(930,520) — 280px → 200px
+         T3 (1236,280)(1512,300)(1512,460)(1236,480) — 200px → 160px
+       gaps de 20px: 910→930 · 1216→1236 · 624+888=1512 ≤ 1536 ✓
+     · Centros dos trapézios: T1 (767,380) · T2 (1073,380) · T3 (1374,380)
+     · Borda superior interpolada nos centros: T1 y=220 · T2 y=260 · T3 y=290
+     · Pills de programa h=32 · tops 152/192/222 → stems verticais
+       187→220 · 227→260 · 257→290 (dot r3 na pill, r5 na borda EXATA)
+     · Seta de base: corpo y 632–688 (56px) de x624 a x1452 ·
+       cabeça (1452,620)(1512,660)(1452,700) → ponta em 1512 ≤ 1536 ✓
+     · Coords painel-relativas = canvas − 560 (labels e pills em HTML). */
+
+  /* ---- rail esquerdo (light) ---- */
+  .rail{position:absolute;left:var(--pad);width:404px;top:190px}      /* 96+404=500 ✓ */
+  .rail h1{font-size:42px;line-height:1.12}
+  .rail .body{margin-top:34px}
+  .rail .body b{color:var(--text-1);font-weight:600}
+  .rail .kicker{display:block;margin-top:46px}
+  .rail .chip{margin-top:18px}
+
+  /* ---- painel dark ---- */
+  .panel{position:absolute;left:560px;top:0;width:1040px;height:900px;
+    background:var(--navy-700);padding:64px}
+  .panel .kicker-top{position:absolute;left:64px;top:120px}           /* canvas (624,120) */
+
+  .funnel{position:absolute;inset:0;pointer-events:none}
+  .funnel .trap{fill:rgba(255,255,255,.05);stroke:var(--border-2);stroke-width:1.2}
+  .funnel .stem{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .funnel .dot{fill:var(--text-3)}
+
+  /* label de estágio dentro do trapézio — 2 linhas 14px lh1.5 ≈ 42px → top = 380−21 */
+  .stage-label{position:absolute;text-align:center;
+    font-family:var(--num);font-weight:600;font-size:14px;letter-spacing:.08em;
+    text-transform:uppercase;line-height:1.5;color:var(--text-2)}
+  .sl1{left:64px;top:359px;width:286px}    /* canvas x 624–910 */
+  .sl2{left:370px;top:359px;width:286px}   /* canvas x 930–1216 */
+  .sl3{left:676px;top:359px;width:276px}   /* canvas x 1236–1512 */
+
+  /* pill de programa (gold-dim = apoio; o único gold forte é o em do título) */
+  .prog{position:absolute;height:32px;display:inline-flex;align-items:center;
+    padding:0 18px;border-radius:var(--r-pill);white-space:nowrap;
+    background:var(--gold-dim);border:1px solid var(--gold-border);
+    font-family:var(--num);font-weight:600;font-size:13px;
+    letter-spacing:.01em;color:var(--gold);transform:translateX(-50%)}
+  .p1{left:207px;top:152px}   /* centro canvas x767 */
+  .p2{left:513px;top:192px}   /* centro canvas x1073 */
+  .p3{left:814px;top:222px}   /* centro canvas x1374 */
+  .prog--base{left:auto;right:88px;top:570px;transform:none}  /* borda direita canvas x1512 · 20px acima da seta (620) */
+
+  /* label DENTRO da seta clara — corpo x624–1452 → painel 64–892 (w=828) */
+  .base-label{position:absolute;left:64px;top:632px;width:828px;height:56px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.2em;
+    text-transform:uppercase;
+    color:#0F1419}  /* texto escuro sobre a seta clara #E6EEF3 — exceção documentada */
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <!-- RAIL ESQUERDO · texto editorial -->
+    <div class="rail">
+      <!-- ex.: "Soluções para desenvolvimento de áreas" — o em gold é o protagonista -->
+      <h1 class="h-serif">Lorem ipsum dolor sit amet <em>consectetur</em> elit sed.</h1>
+      <!-- ex.: parágrafo institucional — como a jornada conecta demanda, conversão e expansão -->
+      <p class="body">Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis <b>nostrud ullamco</b> laboris nisi ut aliquip commodo consequat.</p>
+      <!-- ex.: "jornada de desenvolvimento" -->
+      <span class="mono-label kicker">Lorem ipsum · dolor sit</span>
+      <!-- ex.: formato "In-company · 12 meses" -->
+      <span class="chip"><span class="dot"></span>Lorem · 12 meses</span>
+    </div>
+
+    <!-- PAINEL DARK · funil horizontal -->
+    <div class="panel mode-dark">
+
+      <!-- ex.: "arquitetura da jornada · 3 estágios" -->
+      <span class="mono-label kicker-top">Lorem ipsum dolor · 03 sit</span>
+
+      <!-- funil: viewBox "560 0 1040 900" = janela do painel → coords do canvas valem direto -->
+      <svg class="funnel" viewBox="560 0 1040 900" aria-hidden="true">
+        <!-- T1 (624,200)(910,240)(910,520)(624,560) -->
+        <polygon class="trap" points="624,200 910,240 910,520 624,560"/>
+        <!-- T2 (930,240)(1216,280)(1216,480)(930,520) -->
+        <polygon class="trap" points="930,240 1216,280 1216,480 930,520"/>
+        <!-- T3 (1236,280)(1512,300)(1512,460)(1236,480) -->
+        <polygon class="trap" points="1236,280 1512,300 1512,460 1236,480"/>
+
+        <!-- stems pill→trapézio · dot r3 na pill, r5 na borda superior EXATA -->
+        <circle class="dot" cx="767" cy="187" r="3"/>
+        <line class="stem" x1="767" y1="187" x2="767" y2="220"/>
+        <circle class="dot" cx="767" cy="220" r="5"/>   <!-- borda T1 em x767: y=220 -->
+        <circle class="dot" cx="1073" cy="227" r="3"/>
+        <line class="stem" x1="1073" y1="227" x2="1073" y2="260"/>
+        <circle class="dot" cx="1073" cy="260" r="5"/>  <!-- borda T2 em x1073: y=260 -->
+        <circle class="dot" cx="1374" cy="257" r="3"/>
+        <line class="stem" x1="1374" y1="257" x2="1374" y2="290"/>
+        <circle class="dot" cx="1374" cy="290" r="5"/>  <!-- borda T3 em x1374: y=290 -->
+
+        <!-- seta de base: corpo 56px (y632–688) + cabeça (1452,620)(1512,660)(1452,700)
+             fill #E6EEF3 (= navy-50, seta clara sobre navy · label interno #0F1419) -->
+        <polygon points="624,632 1452,632 1452,620 1512,660 1452,700 1452,688 624,688" fill="#E6EEF3"/>
+      </svg>
+
+      <!-- labels de estágio (dentro dos trapézios) -->
+      <!-- ex.: "geração de demanda" -->
+      <div class="stage-label sl1">Lorem ipsum<br>dolor</div>
+      <!-- ex.: "conversão" -->
+      <div class="stage-label sl2">Sit amet<br>consectetur</div>
+      <!-- ex.: "expansão" -->
+      <div class="stage-label sl3">Sed tempor<br>incididunt</div>
+
+      <!-- pills de programa (acima de cada estágio) -->
+      <!-- ex.: nome do programa que gera demanda -->
+      <span class="prog p1">Lorem Ipsum</span>
+      <!-- ex.: nome do programa de conversão -->
+      <span class="prog p2">Dolor Amet</span>
+      <!-- ex.: nome do programa de expansão -->
+      <span class="prog p3">Sed Tempor</span>
+
+      <!-- ex.: "pessoas · cultura · liderança" — base transversal da jornada -->
+      <div class="base-label">Lorem · Ipsum · Dolor</div>
+      <!-- ex.: "programa transversal" -->
+      <span class="prog prog--base">Elit Aliqua</span>
+
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>68 · Biblioteca · leituras</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Biblioteca de leituras (light): ESTANTE — 4 capas de livro em pé sobre
+     uma linha de prateleira, cada uma com cor própria (a recomendada em
+     gradiente gold) + coluna direita "como usar esta lista".
+
+     Geometria (pad 96 · conteúdo x 96–1504 = 1408):
+       capas: 4 × 250 + 3 × 24 gap = 1072 → lefts 96 · 370 · 644 · 918
+              fim da fileira: 918 + 250 = 1168
+       capas y 300 → 650 (350 de altura) · prateleira 2px em y 650 (x 96–1190)
+       chips de tipo: y 672 (sob cada capa)
+       coluna direita: x 1240 → 1504 (264) · passos y 300.. · nota final
+       espinha do livro: banda interna de 10px no lado esquerdo da capa
+       (::before com rgba escura — dá volume de lombada) */
+
+  .head{position:absolute;left:var(--pad);top:96px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:48px}
+
+  /* ── capas ── */
+  .book{position:absolute;top:300px;width:250px;height:350px;
+    border-radius:10px;box-shadow:var(--shadow-md);
+    padding:30px 26px 24px 34px;display:flex;flex-direction:column;
+    overflow:hidden}
+  .book::before{content:'';position:absolute;left:0;top:0;bottom:0;width:10px;
+    background:rgba(0,0,0,.22)} /* lombada */
+  .book .title{font-family:var(--serif);font-weight:500;font-size:23px;
+    line-height:1.2;letter-spacing:-.01em}
+  .book .meta{margin-top:auto;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.1em;text-transform:uppercase;line-height:1.7;opacity:.75}
+
+  .book--1{left:96px;background:var(--navy-700);color:#E6EEF3}
+  .book--2{left:370px;background:var(--navy-500);color:#E6EEF3}
+  .book--3{left:644px;background:linear-gradient(170deg,var(--gold-300),var(--gold-700));
+    color:var(--on-gold)} /* a recomendada */
+  .book--4{left:918px;background:var(--navy-200);color:#0F1419} /* texto escuro sobre painel claro — hex fixo */
+
+  /* prateleira */
+  .shelf{position:absolute;left:96px;top:650px;width:1094px;height:2px;
+    background:var(--border-2)}
+
+  /* chips de tipo sob cada capa */
+  .type{position:absolute;top:672px}
+
+  /* ── coluna direita ── */
+  .use{position:absolute;left:1240px;top:300px;width:264px}
+  .use .k{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+  .use .step{border-top:1px solid var(--border);margin-top:22px;padding-top:20px;
+    display:grid;grid-template-columns:30px 1fr;column-gap:12px}
+  .use .n{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--gold-700)}
+  .use .note{margin-top:30px;font-style:italic}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum sit</div>
+      <h1 class="h-serif">Lorem sit <span class="dim">amet dolor.</span></h1>
+    </header>
+
+    <!-- ══ estante ══ -->
+    <div class="book book--1">
+      <span class="title">Ipsum dolor sit amet</span>
+      <span class="meta">Lorem Ipsum<br>224 págs · ed. 2025</span>
+    </div>
+    <div class="book book--2">
+      <span class="title">Lorem ipsum dolor amet</span>
+      <span class="meta">Dolor Sit<br>Lorem ipsum · 12 min</span>
+    </div>
+    <div class="book book--3">
+      <span class="title">Amet elit dolor</span>
+      <span class="meta">Amet Elit<br>6 módulos · 4h30</span>
+    </div>
+    <div class="book book--4">
+      <span class="title">Sed tempor incididunt</span>
+      <span class="meta">Sed Tempor<br>ep. 47 · 52 min</span>
+    </div>
+
+    <div class="shelf" aria-hidden="true"></div>
+
+    <span class="chip type" style="left:96px">lorem</span>
+    <span class="chip type" style="left:370px">ipsum</span>
+    <span class="chip chip--gold type" style="left:644px"><span class="dot"></span>dolor · sit amet elit</span>
+    <span class="chip type" style="left:918px">labore</span>
+
+    <!-- ══ como usar ══ -->
+    <aside class="use">
+      <span class="k">Lorem ipsum dolor sit</span>
+      <div class="step">
+        <span class="n">1.</span>
+        <p class="small">Lorem ipsum, dolor sit amet — consectetur adipiscing elit; sed tempor magna.</p>
+      </div>
+      <div class="step">
+        <span class="n">2.</span>
+        <p class="small">Lorem ipsum 1 página dolor sit amet. Consectetur elit, sed tempor magna aliqua.</p>
+      </div>
+      <div class="step">
+        <span class="n">3.</span>
+        <p class="small">Lorem ipsum dolor sit amet: consectetur adipiscing elit ut labore magna aliqua.</p>
+      </div>
+      <p class="small note">Lorem ipsum dolor sit amet elit.</p>
+    </aside>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

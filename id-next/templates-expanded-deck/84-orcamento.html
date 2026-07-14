@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>84 · Orçamento por área</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Orçamento 2026 por área (light): topo com eyebrow + título serif 44px
+     à esquerda e total R$ 42M (.num 40px) à direita; barra 100% horizontal
+     de 5 segmentos (x 96–1504 · y 300–364 · pill nas pontas via overflow);
+     grade de 5 colunas com dot da cor do segmento, valor, chip vs 2025 e a
+     principal aposta; rodapé com premissas em mono.
+
+     Segmentos (34/26/18/14/8% de 1408px):
+       Produto   34% → 479px (gold gradient · protagonista)
+       Comercial 26% → 366px (rgba(0,31,53,.30))
+       Marketing 18% → 253px (rgba(0,31,53,.22))
+       G&A       14% → 197px (rgba(0,31,53,.15))
+       Dados      8% → 113px (rgba(0,31,53,.09))
+       479 + 366 + 253 + 197 + 113 = 1408 ✓ (divisórias por inset shadow,
+       não somam largura)
+
+     Valores: 14,3 + 10,9 + 7,6 + 5,9 + 3,3 = R$ 42,0M ✓
+     Grid: 5 colunas de (1408 − 4·24) / 5 = 262,4px + 4 gaps de 24 = 1408 ✓
+     Y: head 104–238 · barra 300–364 · grid 430–740 · rodapé 752–784 ≤ 804 ✓ */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:104px;
+    display:flex;align-items:flex-start;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:44px;max-width:620px}  /* quebra após "fatia;" — sem viúva */
+  .total{text-align:right;flex:0 0 auto;padding-top:6px}
+  .total .num{display:block;font-size:40px}
+  .total .mono-label{display:block;margin-top:8px}
+
+  /* barra 100%: y 300 + 64 = 364 · larguras comentadas acima */
+  .bar{position:absolute;left:var(--pad);right:var(--pad);top:300px;height:64px;
+    display:flex;border-radius:var(--r-pill);overflow:hidden;box-shadow:var(--shadow-sm)}
+  .seg{height:100%;display:flex;align-items:center;padding-left:22px}
+  .seg + .seg{box-shadow:inset 2px 0 0 var(--bg)}   /* divisória sem somar px */
+  .seg .num{font-size:14px}
+  .seg--1{width:479px;background:linear-gradient(90deg,var(--gold-300),var(--gold-500))}
+  .seg--2{width:366px;background:rgba(0,31,53,.30)}
+  .seg--3{width:253px;background:rgba(0,31,53,.22)}
+  .seg--4{width:197px;background:rgba(0,31,53,.15)}
+  .seg--5{width:113px;background:rgba(0,31,53,.09)}
+  .seg--1 .num{color:var(--on-gold)}
+  .seg--2 .num{color:#F5F4F3}   /* paper sobre o rgba .30 — legibilidade */
+  .seg--3 .num,.seg--4 .num,.seg--5 .num{color:var(--text-2)}
+
+  /* grade: 5 colunas de 262,4px + 4 gaps de 24 = 1408 ✓ */
+  .cols{position:absolute;left:var(--pad);right:var(--pad);top:430px;height:310px;
+    display:grid;grid-template-columns:repeat(5,1fr);gap:24px;align-items:start}
+  .col{border-top:1px solid var(--border-2);padding-top:26px}
+  .col--lead{border-top:2px solid var(--gold);padding-top:25px}  /* compensa 1px extra */
+
+  .tag{display:flex;align-items:center;gap:10px;font-family:var(--mono);
+    font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--text-2)}
+  .tag .dot{width:10px;height:10px;border-radius:50%;flex:none}
+  .dot--1{background:linear-gradient(135deg,var(--gold-300),var(--gold-500))}
+  .dot--2{background:rgba(0,31,53,.30)}
+  .dot--3{background:rgba(0,31,53,.22)}
+  .dot--4{background:rgba(0,31,53,.15)}
+  .dot--5{background:rgba(0,31,53,.09);border:1px solid var(--border-2)}
+
+  .val{display:block;font-size:30px;margin-top:24px}
+  .col--lead .val{color:var(--gold)}
+  .delta{display:flex;align-items:center;gap:10px;margin-top:18px}
+  .delta .vs{font-family:var(--mono);font-size:10px;font-weight:500;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
+  .bet{margin-top:24px;max-width:250px}
+
+  /* rodapé: 752 + 18 padding + ~14 de texto = 784 ≤ 804 ✓ */
+  .foot{position:absolute;left:var(--pad);right:var(--pad);top:752px;
+    padding-top:18px;border-top:1px solid var(--border);
+    display:flex;justify-content:space-between;gap:40px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Adipiscing 2026</div>
+        <h1 class="h-serif">Lorem ipsum dolor sit <em>amet;</em> elit, sed magna aliqua.</h1>
+      </div>
+      <div class="total">
+        <span class="num">R$ 42M</span>
+        <span class="mono-label">Lorem ipsum dolor amet</span>
+      </div>
+    </header>
+
+    <div class="bar" role="img" aria-label="Distribuição do orçamento: Produto 34%, Comercial 26%, Marketing 18%, G&A 14%, Dados 8%">
+      <div class="seg seg--1"><span class="num">34%</span></div>
+      <div class="seg seg--2"><span class="num">26%</span></div>
+      <div class="seg seg--3"><span class="num">18%</span></div>
+      <div class="seg seg--4"><span class="num">14%</span></div>
+      <div class="seg seg--5"><span class="num">8%</span></div>
+    </div>
+
+    <section class="cols">
+      <div class="col col--lead">
+        <div class="tag"><span class="dot dot--1"></span>Laborum</div>
+        <span class="num val">R$ 14,3M</span>
+        <div class="delta"><span class="chip chip--green">+18%</span><span class="vs">vs 2025</span></div>
+        <p class="small bet">Lorem ipsum dolor sit amet consectetur adipiscing.</p>
+      </div>
+      <div class="col">
+        <div class="tag"><span class="dot dot--2"></span>Excepteur</div>
+        <span class="num val">R$ 10,9M</span>
+        <div class="delta"><span class="chip chip--green">+9%</span><span class="vs">vs 2025</span></div>
+        <p class="small bet">Sed do eiusmod tempor incididunt ut labore magna.</p>
+      </div>
+      <div class="col">
+        <div class="tag"><span class="dot dot--3"></span>Voluptate</div>
+        <span class="num val">R$ 7,6M</span>
+        <div class="delta"><span class="chip chip--red">−4%</span><span class="vs">vs 2025</span></div>
+        <p class="small bet">Ullamco laboris nisi ut aliquip ex ea commodo duis.</p>
+      </div>
+      <div class="col">
+        <div class="tag"><span class="dot dot--4"></span>Sed</div>
+        <span class="num val">R$ 5,9M</span>
+        <div class="delta"><span class="chip chip--green">+2%</span><span class="vs">vs 2025</span></div>
+        <p class="small bet">Duis aute irure dolor in reprehenderit.</p>
+      </div>
+      <div class="col">
+        <div class="tag"><span class="dot dot--5"></span>Dolor</div>
+        <span class="num val">R$ 3,3M</span>
+        <div class="delta"><span class="chip chip--green">+35%</span><span class="vs">vs 2025</span></div>
+        <p class="small bet">Excepteur sint occaecat cupidatat non.</p>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span class="mono-label">Laborum: tempor R$ 5,40 · eiusmod 6% ut maio</span>
+      <span class="mono-label">Lorem ipsum R$ milhões · dolor sit</span>
+    </footer>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

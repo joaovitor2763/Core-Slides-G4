@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>18 · Gráfico radar</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Radar (dark): spider de 5 eixos em SVG solto à esquerda, 2 séries
+     (hoje em ice discreto, meta 12m protagonista gold). À direita, a
+     leitura editorial: h-serif + 2 parágrafos + chip do maior gap.
+     Armilar gravura sangrando embaixo-esquerda, bordas fora do canvas. */
+
+  .armilar--soft{width:980px;height:551px;left:-340px;bottom:-260px;opacity:.14;transform:scaleX(-1)}
+
+  /* radar: left 96 + 560 = 656 · top 168 + 520 = 688 · legenda abaixo */
+  .radar{position:absolute;left:var(--pad);top:168px;width:560px;height:520px}
+  /* legenda logo abaixo do desenho (labels inferiores terminam ~y 610) */
+  .radar-legend{position:absolute;left:var(--pad);top:668px;display:flex;gap:12px;
+    justify-content:center;width:560px}
+
+  .axis-label{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;fill:var(--text-3)}
+
+  /* leitura: left 760 · 760 + 744 = 1504 = 1600 − 96 ✓ */
+  .read{position:absolute;left:760px;right:var(--pad);top:250px}
+  .read .eyebrow{margin-bottom:24px}
+  .read h1{font-size:40px;margin-bottom:30px}
+  .read p{margin-bottom:22px;max-width:640px}
+  .read .chip{margin-top:10px}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Diagnóstico comercial">
+
+    <div class="armilar armilar--engraving armilar--soft" aria-hidden="true"></div>
+
+    <!-- Geometria: centro (280,270) · R máx 180 · eixos a -90°+k·72°
+         vetores unitários: A0(0,-1) A1(.951,-.309) A2(.588,.809)
+                            A3(-.588,.809) A4(-.951,-.309)
+         níveis da grade: R=180 / 120 / 60 · labels em R≈207 -->
+    <svg class="radar" viewBox="0 0 560 520" role="img"
+         aria-label="Radar de 5 competências comerciais: hoje versus meta em 12 meses">
+
+      <!-- spokes (centro → ponta, R=180) -->
+      <g stroke="var(--border)" stroke-width="1">
+        <line x1="280" y1="270" x2="280" y2="90"/>
+        <line x1="280" y1="270" x2="451" y2="214"/>
+        <line x1="280" y1="270" x2="386" y2="416"/>
+        <line x1="280" y1="270" x2="174" y2="416"/>
+        <line x1="280" y1="270" x2="109" y2="214"/>
+      </g>
+
+      <!-- grade pentagonal · 3 níveis -->
+      <g fill="none" stroke="var(--border-2)" stroke-width="1">
+        <!-- R=180 -->
+        <polygon points="280,90 451,214 386,416 174,416 109,214"/>
+        <!-- R=120 -->
+        <polygon points="280,150 394,233 351,367 209,367 166,233"/>
+        <!-- R=60 -->
+        <polygon points="280,210 337,252 315,319 245,319 223,252"/>
+      </g>
+
+      <!-- série HOJE · 62/48/35/41/28 (R = 1,8·valor)
+           62→(280,158) 48→(362,243) 35→(317,321) 41→(237,330) 28→(232,254) -->
+      <polygon points="280,158 362,243 317,321 237,330 232,254"
+               fill="rgba(230,238,243,.08)" stroke="var(--text-3)"
+               stroke-width="1.5" stroke-linejoin="round"/>
+
+      <!-- série META 12M · 90/85/88/70/80
+           90→(280,108) 85→(426,223) 88→(373,398) 70→(206,372) 80→(143,226) -->
+      <polygon points="280,108 426,223 373,398 206,372 143,226"
+               fill="var(--gold-dim)" stroke="var(--gold)"
+               stroke-width="2.5" stroke-linejoin="round"/>
+      <g fill="var(--gold)">
+        <circle cx="280" cy="108" r="5"/>
+        <circle cx="426" cy="223" r="5"/>
+        <circle cx="373" cy="398" r="5"/>
+        <circle cx="206" cy="372" r="5"/>
+        <circle cx="143" cy="226" r="5"/>
+      </g>
+
+      <!-- labels dos eixos · R≈207 -->
+      <text class="axis-label" x="280" y="58"  text-anchor="middle">Prospecção</text>
+      <text class="axis-label" x="469" y="206" text-anchor="start">Proposta</text>
+      <text class="axis-label" x="398" y="442" text-anchor="start">Follow-up</text>
+      <text class="axis-label" x="162" y="442" text-anchor="end">Análise</text>
+      <text class="axis-label" x="91"  y="206" text-anchor="end">Relatórios</text>
+    </svg>
+
+    <div class="radar-legend">
+      <span class="chip"><span class="dot"></span>Hoje</span>
+      <span class="chip chip--gold"><span class="dot"></span>Meta 12 meses</span>
+    </div>
+
+    <div class="read">
+      <div class="eyebrow">Time de vendas · 5 competências</div>
+      <h1 class="h-serif">O time é bom onde a IA<br><em>ainda não entrou.</em></h1>
+      <p class="body">Prospecção e proposta já rodam com copiloto — por isso puxam o pentágono para cima. Follow-up e relatórios continuam artesanais: cada vendedor faz do seu jeito, quando lembra.</p>
+      <p class="body">A meta de 12 meses não pede heroísmo individual. Pede fluxo: cadência de follow-up automática e relatório que se escreve sozinho ao fim de cada call.</p>
+      <span class="chip chip--gold"><span class="dot"></span>Follow-up · maior gap: +53 pts</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

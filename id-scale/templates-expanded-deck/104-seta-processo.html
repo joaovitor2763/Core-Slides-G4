@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>104 · Processo em seta</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Dark · processo contínuo numa SETA horizontal gigante.
+     TOPO-ESQUERDA: eyebrow + título serif 54px (2 linhas, acento .dim —
+     o protagonista gold é o disco da etapa atual) + lede 2 linhas.
+
+     SETA (um único SVG viewBox 0 0 1600 900, path único corpo+cabeça):
+       corpo  x 96 → 1360 · y 520 → 640 (altura 120, eixo central y=580)
+       cabeça x 1360 → 1470 · pontas em y 480 / 680, bico em (1470,580)
+       fill var(--gold-dim) · stroke var(--gold-border) 1.5
+
+     DISCOS · 6 × Ø64 centrados no eixo y=580:
+       centros x 200 → 1250 · passo = (1250−200)/5 = 210
+       → x = 200 · 410 · 620 · 830 · 1040 · 1250
+       left do disco = x−32 → 168 · 378 · 588 · 798 · 1008 · 1218
+       top = 580−32 = 548 · base do disco = 580+32 = 612
+       disco 1 = etapa atual (gradiente gold, numeral --on-gold) — protagonista.
+
+     STEM tracejado sob cada disco: y 612 → 660 (48px), na vertical do centro x.
+     LABEL mono centrado: top 680 · largura 150 → left = x−75
+       → 125 · 335 · 545 · 755 · 965 · 1175
+       label 6 termina em 1175+150 = 1325 < 1360 (início da cabeça) ✓
+       labels y 680 → ~713 < 804 ✓ */
+
+  .head{position:absolute;left:var(--pad);top:120px;width:900px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:54px;max-width:780px}
+  .head .lede{margin-top:22px;max-width:660px}
+
+  /* seta: SVG cobre o canvas inteiro, 1 unidade = 1px */
+  .arrow{position:absolute;inset:0;width:1600px;height:900px;z-index:1}
+  .arrow path{fill:var(--gold-dim);stroke:var(--gold-border);stroke-width:1.5}
+
+  /* discos das etapas (Ø64, centrados no eixo y=580) */
+  .disc{position:absolute;top:548px;width:64px;height:64px;border-radius:50%;
+    background:var(--navy-600);border:1px solid var(--border-2);
+    display:flex;align-items:center;justify-content:center;z-index:2}
+  .disc .num{font-size:20px;color:var(--text-2)}
+  /* etapa atual — único protagonista gold do slide */
+  .disc--now{background:linear-gradient(135deg,var(--gold-300),var(--gold-500));
+    border-color:var(--gold-border);box-shadow:var(--shadow-md)}
+  .disc--now .num{color:var(--on-gold)}
+
+  /* stem tracejado: y 612 → 660, alinhado ao centro x do disco */
+  .stem{position:absolute;top:612px;height:48px;width:0;
+    border-left:1px dashed var(--border-2);z-index:1}
+
+  /* label mono: 150px centrados no x do disco, até 2 linhas */
+  .lbl{position:absolute;top:680px;width:150px;text-align:center;line-height:1.6}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <!-- ===== TOPO-ESQUERDA · eyebrow + título + lede ===== -->
+    <header class="head">
+      <!-- ex.: "Método · processo contínuo" -->
+      <div class="eyebrow">Lorem · ipsum dolor</div>
+      <!-- ex.: "Qual é o seu desafio hoje?" — pergunta que situa a plateia na etapa -->
+      <h1 class="h-serif">Lorem ipsum dolor sit amet, <em class="dim">consectetur elit?</em></h1>
+      <!-- ex.: "O processo não termina no reconhecimento — cada volta recomeça no diagnóstico do desafio atual." -->
+      <p class="lede">Sed tempor incididunt ut labore et dolore magna aliqua, quis nostrud ullamco nisi commodo duis aute irure voluptate.</p>
+    </header>
+
+    <!-- ===== SETA · path único corpo+cabeça
+         corpo (96,520)→(1360,520) e (96,640)→(1360,640) · cabeça (1360,480)→(1470,580)→(1360,680) ===== -->
+    <svg class="arrow" viewBox="0 0 1600 900" aria-hidden="true">
+      <path d="M96,520 L1360,520 L1360,480 L1470,580 L1360,680 L1360,640 L96,640 Z"/>
+    </svg>
+
+    <!-- ===== ETAPAS · 6 discos Ø64 no eixo y=580 · centros x 200…1250 (passo 210) ===== -->
+
+    <!-- etapa 1 · x=200 · ATUAL (gold) · ex.: "diagnóstico" -->
+    <div class="disc disc--now" style="left:168px"><span class="num">01</span></div>
+    <span class="stem" style="left:200px" aria-hidden="true"></span>
+    <div class="lbl mono-label" style="left:125px">Consectetur</div>
+
+    <!-- etapa 2 · x=410 · ex.: "problema" -->
+    <div class="disc" style="left:378px"><span class="num">02</span></div>
+    <span class="stem" style="left:410px" aria-hidden="true"></span>
+    <div class="lbl mono-label" style="left:335px">Pariatur</div>
+
+    <!-- etapa 3 · x=620 · ex.: "plano" -->
+    <div class="disc" style="left:588px"><span class="num">03</span></div>
+    <span class="stem" style="left:620px" aria-hidden="true"></span>
+    <div class="lbl mono-label" style="left:545px">Lorem</div>
+
+    <!-- etapa 4 · x=830 · ex.: "rituais" -->
+    <div class="disc" style="left:798px"><span class="num">04</span></div>
+    <span class="stem" style="left:830px" aria-hidden="true"></span>
+    <div class="lbl mono-label" style="left:755px">Laborum</div>
+
+    <!-- etapa 5 · x=1040 · ex.: "acompanhamento" -->
+    <div class="disc" style="left:1008px"><span class="num">05</span></div>
+    <span class="stem" style="left:1040px" aria-hidden="true"></span>
+    <div class="lbl mono-label" style="left:965px">Ullamco labore</div>
+
+    <!-- etapa 6 · x=1250 · ex.: "reconhecimento" -->
+    <div class="disc" style="left:1218px"><span class="num">06</span></div>
+    <span class="stem" style="left:1250px" aria-hidden="true"></span>
+    <div class="lbl mono-label" style="left:1175px">Sint occaecat</div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

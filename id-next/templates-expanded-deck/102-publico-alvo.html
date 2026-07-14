@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>102 · Público-alvo</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Público-alvo / ICP ("eu sou a audiência ideal?"), light.
+     FAIXA decorativa navy na borda esquerda: x 0 → 56 (56px) · y 0 → 900 (sangria intencional).
+     ESQUERDA (texto): x 140 → 620 (480px) · y a partir de 150 —
+       eyebrow + título serif 54px em 2 linhas + 2 parágrafos .body (max-width 460).
+       Vão esquerda→grade: 700 − 620 = 80px ✓
+     DIREITA (grade 2×2 de tiles dark): x 700 → 1504 (804px) · y 150 → 680 (530px)
+       Colunas: (804 − 24) / 2 = 390px cada ✓ · Linhas: (530 − 24) / 2 = 253px cada ✓
+       Tile: navy-600 + ícone 28px gold + label .num 16px; faixa de 10px colada na
+       base (radius só embaixo) — tile 1 em gradiente gold = ÚNICO protagonista;
+       tiles 2–4 em gold-dim.
+     RODAPÉ (nota de alerta): x 140 → 1504 (1364px) · top 716 ·
+       altura natural = 22 + 2×21 (small lh 1.5) + 22 = 86px → base em 802 ≤ 804 ✓ */
+
+  /* faixa navy decorativa — mode-dark re-escopa tokens (aqui só cor de fundo) */
+  .edge{position:absolute;left:0;top:0;width:56px;height:900px;background:var(--navy-700)}
+
+  .intro{position:absolute;left:140px;top:150px;width:480px}
+  .intro .eyebrow{margin-bottom:26px}
+  .intro h1{font-size:54px;max-width:480px}
+  .intro .body{max-width:460px;margin-top:28px}
+  .intro .body + .body{margin-top:16px}
+
+  .grid{position:absolute;left:700px;top:150px;width:804px;height:530px;
+    display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:24px}
+
+  /* tile dark: navy-600 + conteúdo centrado; overflow esconde a faixa nas quinas */
+  .tile{position:relative;background:var(--navy-600);border-radius:var(--r-lg);
+    overflow:hidden;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:18px;padding-bottom:10px}
+  .tile svg{width:28px;height:28px;color:var(--gold)}
+  .tile .label{font-size:16px;text-align:center}
+
+  /* faixa de 10px colada na base — radius só embaixo, acompanhando o card.
+     gold-dim puro some no navy; o fio superior gold-border (mesmo par dos chips)
+     faz a faixa ler como intenção, não como sombra */
+  .band{position:absolute;left:0;right:0;bottom:0;height:10px;
+    background:var(--gold-dim);border-top:1px solid var(--gold-border);
+    border-radius:0 0 var(--r-lg) var(--r-lg)}
+  .tile--hero .band{background:linear-gradient(90deg,var(--gold-300),var(--gold-500));
+    border-top-color:transparent}
+
+  /* rodapé outline com marcador tipográfico de alerta */
+  .note{position:absolute;left:140px;top:716px;width:1364px;
+    border:1px solid var(--border-2);border-radius:var(--r-lg);
+    padding:22px 30px;display:flex;align-items:center;gap:18px}
+  .note .mark{flex:none;width:22px;height:22px;border-radius:50%;
+    background:var(--gold-dim);border:1px solid var(--gold-border);
+    display:grid;place-items:center;
+    font-family:var(--mono);font-size:12px;font-weight:500;color:var(--gold)}
+  .note p{font-style:italic;max-width:1080px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <!-- faixa decorativa navy na borda esquerda (x 0 → 56) -->
+    <div class="edge mode-dark" aria-hidden="true"></div>
+
+    <!-- coluna de texto: pergunta de qualificação do ICP -->
+    <header class="intro">
+      <div class="eyebrow">Lorem ipsum</div> <!-- ex.: "Para quem é" -->
+      <!-- ex.: "Eu sou a audiência ideal para este programa?" -->
+      <h1 class="h-serif">Lorem ipsum dolor <span class="dim">sit amet elit?</span></h1>
+      <!-- ex.: descrição do ICP — perfil de empresa, momento e dor típica -->
+      <p class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.</p>
+      <!-- ex.: para quem NÃO é / condição de melhor aproveitamento -->
+      <p class="body">Duis aute irure dolor in voluptate velit esse cillum fugiat nulla pariatur, excepteur sint occaecat cupidatat proident sunt in culpa.</p>
+    </header>
+
+    <!-- grade 2×2 de critérios do ICP — tiles dark com faixa na base -->
+    <section class="grid">
+
+      <!-- tile 1 · protagonista (faixa em gradiente gold) · ex.: "Fundadores" -->
+      <div class="tile mode-dark tile--hero">
+        <!-- ícone: pessoa / fundador -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="8" r="3.4"/>
+          <path d="M5.2 20c.9-3.6 3.6-5.4 6.8-5.4s5.9 1.8 6.8 5.4"/>
+        </svg>
+        <div class="num label">Lorem ipsum</div>
+        <span class="band" aria-hidden="true"></span>
+      </div>
+
+      <!-- tile 2 · ex.: "Faturamento" -->
+      <div class="tile mode-dark">
+        <!-- ícone: cédula / receita -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2.8" y="7" width="18.4" height="10" rx="2"/>
+          <circle cx="12" cy="12" r="2.6"/>
+          <path d="M6.2 12h.01M17.8 12h.01"/>
+        </svg>
+        <div class="num label">Dolor sit</div>
+        <span class="band" aria-hidden="true"></span>
+      </div>
+
+      <!-- tile 3 · ex.: "Decisores" -->
+      <div class="tile mode-dark">
+        <!-- ícone: hierarquia / quem decide -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="5.5" r="2.5"/>
+          <path d="M12 8v3.2M6.5 14.6v-1a1.6 1.6 0 0 1 1.6-1.6h7.8a1.6 1.6 0 0 1 1.6 1.6v1"/>
+          <circle cx="6.5" cy="17.5" r="2.5"/>
+          <circle cx="17.5" cy="17.5" r="2.5"/>
+        </svg>
+        <div class="num label">Amet elit</div>
+        <span class="band" aria-hidden="true"></span>
+      </div>
+
+      <!-- tile 4 · ex.: "Estágio" -->
+      <div class="tile mode-dark">
+        <!-- ícone: degraus / estágio de crescimento -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3.5 20h4.2v-4.2h4.2v-4.2h4.2V7.4h4.4"/>
+        </svg>
+        <div class="num label">Sed tempor</div>
+        <span class="band" aria-hidden="true"></span>
+      </div>
+
+    </section>
+
+    <!-- rodapé: nota de recomendação · ex.: sugerir que lideranças participem junto -->
+    <footer class="note">
+      <span class="mark" aria-hidden="true">!</span>
+      <p class="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit — sed tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ullamco nisi commodo, duis aute irure dolor in voluptate velit esse cillum fugiat nulla pariatur excepteur sint.</p>
+    </footer>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

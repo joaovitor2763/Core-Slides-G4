@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>92 · Posicionamento</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Posicionamento competitivo (light, pitch): scatter preço × profundidade
+     à esquerda, leitura editorial à direita. SEM wash de quadrante —
+     diferença deliberada vs slide 86.
+     ── Geometria ──
+     Header: left 96 · top 96 (eyebrow) · título 44px em 1 linha (~y126–172 < 230 ✓)
+     Plano (envelope x96–980 · y230–780):
+       eixo Y em x=132 · y 230→744 (altura 514) · seta p/ cima
+       eixo X em y=744 · x 132→980 (largura 848) · seta p/ direita
+       label Y rotacionado: centro (104, 487) → extensão x 96–112 ≥ 96 ✓
+       label X centrado sob o eixo: top 762 · base ~779 ≤ 780 ✓
+       gridlines dashed: verticais x=344/556/768 · horizontais y=358/487/616
+     Mapa: preço cresce p/ direita (x132→980) · profundidade cresce p/ cima (y744→230)
+     Discos concorrentes Ø44 (raio 22) → left/top = centro − 22:
+       CW curso online          preço baixo  / prof. baixa       centro (238, 660)
+       BC bootcamp              preço médio− / prof. baixa−média centro (404, 588)
+       CM comunidade            preço baixo+ / prof. média       centro (316, 462)
+       MT mentoria avulsa       preço médio  / prof. média+      centro (566, 384)
+       MB MBA executivo         preço alto   / prof. média−      centro (712, 522)
+       CN consultoria tradic.   preço máximo / prof. média+      centro (884, 434)
+     Nosso disco Ø64 (raio 32) → quadrante superior-direito:
+       G4                       preço alto   / prof. máxima      centro (856, 306)
+       anel decorativo Ø96 (raio 48): left/top = centro − 48 = (808, 258)
+     Coluna direita: left 1040 + width 464 = 1504 = 1600 − 96 ✓ · top 268
+     Gap plano→coluna: 1040 − 980 = 60 ✓ */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:96px}
+  .head .eyebrow{margin-bottom:18px}
+  .head h1{font-size:44px}
+
+  /* eixos-seta (padrão 20-matriz) */
+  .axis-y{position:absolute;left:132px;top:230px;width:2px;height:514px;
+    background:var(--text-3);border-radius:2px}
+  .axis-y::before{content:'';position:absolute;top:-9px;left:-4px;
+    border-left:5px solid transparent;border-right:5px solid transparent;
+    border-bottom:9px solid var(--text-3)}
+  .axis-y-label{position:absolute;left:104px;top:487px;white-space:nowrap;
+    transform:translate(-50%,-50%) rotate(-90deg)}
+  .axis-x{position:absolute;left:132px;top:744px;width:848px;height:2px;
+    background:var(--text-3);border-radius:2px}
+  .axis-x::after{content:'';position:absolute;right:-9px;top:-4px;
+    border-top:5px solid transparent;border-bottom:5px solid transparent;
+    border-left:9px solid var(--text-3)}
+  .axis-x-label{position:absolute;left:132px;width:848px;top:762px;text-align:center}
+
+  /* gridlines sutis dashed */
+  .gl-v{position:absolute;top:230px;height:514px;width:0;
+    border-left:1px dashed var(--border-2)}
+  .gl-h{position:absolute;left:132px;width:848px;height:0;
+    border-top:1px dashed var(--border-2)}
+
+  /* discos concorrentes Ø44 */
+  .disc{position:absolute;width:44px;height:44px;border-radius:50%;
+    display:grid;place-items:center;z-index:2}
+  .disc .num{font-size:13px}
+
+  /* labels ao lado dos discos — fundo paper mascara a gridline atrás do texto */
+  .dlabel{position:absolute;background:var(--bg);padding:0 5px;
+    white-space:nowrap;z-index:1}
+
+  /* protagonista: disco G4 Ø64 gradiente gold + anel decorativo Ø96 */
+  .us{position:absolute;left:824px;top:274px;width:64px;height:64px;border-radius:50%;
+    background:linear-gradient(155deg,var(--gold-300),var(--gold-700));
+    box-shadow:var(--shadow-md);display:grid;place-items:center;z-index:3}
+  .us .num{font-size:20px;font-weight:700;color:var(--on-gold)}
+  .us-ring{position:absolute;left:808px;top:258px;width:96px;height:96px;
+    border-radius:50%;border:1px solid var(--ring);z-index:2}
+
+  /* leitura editorial à direita */
+  .read{position:absolute;left:1040px;width:464px;top:268px}
+  .read .lede{margin-bottom:34px}
+  .point{position:relative;padding-left:22px;margin-bottom:20px}
+  .point::before{content:'';position:absolute;left:0;top:7px;width:7px;height:7px;
+    border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold-border)}
+  .read .mono-label{display:block;margin-top:36px;padding-top:22px;
+    border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <div class="head">
+      <div class="eyebrow">Lorem ipsum dolor sit</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet. Consectetur adipiscing <em>elit.</em></h1>
+    </div>
+
+    <!-- plano: gridlines + eixos -->
+    <div class="gl-v" style="left:344px" aria-hidden="true"></div>
+    <div class="gl-v" style="left:556px" aria-hidden="true"></div>
+    <div class="gl-v" style="left:768px" aria-hidden="true"></div>
+    <div class="gl-h" style="top:358px" aria-hidden="true"></div>
+    <div class="gl-h" style="top:487px" aria-hidden="true"></div>
+    <div class="gl-h" style="top:616px" aria-hidden="true"></div>
+    <div class="axis-y" aria-hidden="true"></div>
+    <span class="mono-label axis-y-label">Lorem dolor sit consectetur →</span>
+    <div class="axis-x" aria-hidden="true"></div>
+    <span class="mono-label axis-x-label">Lorem →</span>
+
+    <!-- concorrentes (fictícios) · left/top = centro − 22 (centros comentados no topo) -->
+    <!-- CW curso online · centro (238,660) -->
+    <div class="disc surface surface--flat" style="left:216px;top:638px"><span class="num">CW</span></div>
+    <span class="small dlabel" style="left:272px;top:650px">Lorem ipsum</span>
+    <!-- BC bootcamp · centro (404,588) -->
+    <div class="disc surface surface--flat" style="left:382px;top:566px"><span class="num">BC</span></div>
+    <span class="small dlabel" style="left:438px;top:578px">Dolor sit</span>
+    <!-- CM comunidade · centro (316,462) -->
+    <div class="disc surface surface--flat" style="left:294px;top:440px"><span class="num">CM</span></div>
+    <span class="small dlabel" style="left:350px;top:452px">Adipiscing</span>
+    <!-- MT mentoria avulsa · centro (566,384) -->
+    <div class="disc surface surface--flat" style="left:544px;top:362px"><span class="num">MT</span></div>
+    <span class="small dlabel" style="left:600px;top:374px">Consectetur elit</span>
+    <!-- MB MBA executivo · centro (712,522) -->
+    <div class="disc surface surface--flat" style="left:690px;top:500px"><span class="num">MB</span></div>
+    <span class="small dlabel" style="left:746px;top:512px">Labore aliqua</span>
+    <!-- CN consultoria tradicional · centro (884,434) · label à esquerda (perto da borda direita) -->
+    <div class="disc surface surface--flat" style="left:862px;top:412px"><span class="num">CN</span></div>
+    <span class="small dlabel" style="left:690px;width:160px;text-align:right;top:424px">Consectetur adipiscing</span>
+
+    <!-- nós · centro (856,306) · quadrante superior-direito -->
+    <div class="us-ring" aria-hidden="true"></div>
+    <div class="us"><span class="num">G4</span></div>
+
+    <!-- leitura -->
+    <div class="read">
+      <p class="lede">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed tempor — incididunt labore magna.</p>
+      <p class="small point">Lorem ipsum dolor sit amet adipiscing; consectetur elit sed tempor. Incididunt labore magna aliqua enim minim veniam quis.</p>
+      <p class="small point">Lorem ipsum, dolor consectetur adipiscing elit, sed tempor incididunt: labore magna aliqua enim minim.</p>
+      <span class="mono-label">Lorem: ipsum dolor 120 consectetur B2B · 2025</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

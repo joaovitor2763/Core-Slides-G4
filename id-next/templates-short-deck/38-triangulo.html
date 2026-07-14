@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>38 · Triângulo</title>
+<link rel="stylesheet" href="style.css?v=next1">
+<style>
+  /* Triângulo estratégico (dark): coluna editorial à esquerda, triângulo
+     equilátero em SVG à direita com callouts nos vértices conectados por
+     linha fina + dot (padrão 23-ciclo), labels de aresta rotacionados e
+     label serif itálico no baricentro.
+
+     Geometria do triângulo (SVG viewBox 1600×900, lado 560):
+       ápice        (990, 190)
+       base-esq     (710, 675)   base-dir (1270, 675)
+       altura = 560·√3/2 ≈ 485 → 190+485 = 675 ✓ · 1270 < 1504 ✓
+       baricentro   (990, (190+675+675)/3 ≈ 513)
+       midpoints das arestas: esq (850, 432) · dir (1130, 432) · base (990, 675)
+       labels de aresta deslocados 24px pela normal externa:
+         esq (829, 420) rot −60° · dir (1151, 420) rot 60° · base (990, 707)
+     Conectores vértice → callout:
+       ápice (990,190) → (1056,142) · base-esq (710,675) → (636,732) ·
+       base-dir (1270,675) → (1316,730) */
+
+
+  .col{position:absolute;left:var(--pad);top:150px;width:560px}
+  .col .eyebrow{margin-bottom:24px}
+  .col h1{font-size:64px;margin-bottom:44px}
+  .col .li{display:flex;gap:14px;align-items:flex-start;margin-bottom:22px;max-width:480px}
+  .col .li::before{content:'';flex:0 0 auto;width:7px;height:7px;border-radius:50%;
+    background:var(--gold);margin-top:9px}
+
+  .diagram{position:absolute;inset:0;pointer-events:none}
+  .diagram .tri{fill:rgba(230,238,243,.05);stroke:var(--border-2);stroke-width:1.5}
+  .diagram .vertex{fill:var(--gold)}                       /* dots 12px → r=6 */
+  .diagram line{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .diagram .dot-co{fill:var(--text-3);opacity:.7}
+  .diagram .edge{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;fill:var(--text-3)}
+  .diagram .center{font-family:var(--serif);font-style:italic;font-weight:400;
+    font-size:30px;letter-spacing:-.01em;fill:var(--text-2)}
+
+  .co{position:absolute;width:260px}
+  .co .name{font-family:var(--num);font-weight:600;font-size:20px;
+    letter-spacing:-.01em;color:var(--gold);margin-bottom:6px}
+
+  .src{position:absolute;left:990px;top:844px;transform:translateX(-50%);
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text-3)}
+  .armilar--deco{width:1000px;height:563px;left:-300px;bottom:-240px;opacity:.16;transform:scaleX(-1)}
+</style>
+<meta id="acfifjfajpekbmhmjppnmmjgmhjkildl"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Estratégia">
+
+
+
+
+    <aside class="col">
+      <div class="eyebrow">Trade-offs · fundador</div>
+      <h1 class="h-serif">Crescimento, liquidez, controle: <em>escolha dois.</em></h1>
+      <div class="li"><p class="body">Crescer rápido consome caixa e dilui o fundador — os vértices se puxam em direções opostas.</p></div>
+      <div class="li"><p class="body">Cada rodada de captação compra crescimento vendendo um pedaço de controle.</p></div>
+      <div class="li"><p class="body">A escolha certa muda por fase. O erro fatal é fingir que não há escolha.</p></div>
+    </aside>
+
+    <svg class="diagram" viewBox="0 0 1600 900" aria-hidden="true">
+      <!-- triângulo equilátero · lado 560 -->
+      <polygon class="tri" points="990,190 710,675 1270,675"></polygon>
+
+      <!-- labels das arestas, rotacionados ao longo de cada lado -->
+      <text class="edge" x="829" y="420" text-anchor="middle" transform="rotate(-60 829 420)">crescimento × liquidez</text>
+      <text class="edge" x="1151" y="420" text-anchor="middle" transform="rotate(60 1151 420)">crescimento × controle</text>
+      <text class="edge" x="990" y="711" text-anchor="middle">liquidez × controle</text>
+
+      <!-- baricentro (990, 513) -->
+      <text class="center" x="990" y="523" text-anchor="middle">Escolha 2</text>
+
+      <!-- conectores vértice → callout (linha fina + dot terminal) -->
+      <line x1="990" y1="190" x2="1056" y2="142"></line>
+      <circle class="dot-co" cx="1056" cy="142" r="3"></circle>
+      <line x1="710" y1="675" x2="636" y2="732"></line>
+      <circle class="dot-co" cx="636" cy="732" r="3"></circle>
+      <line x1="1270" y1="675" x2="1316" y2="730"></line>
+      <circle class="dot-co" cx="1316" cy="730" r="3"></circle>
+
+      <!-- dots gold 12px nos vértices -->
+      <circle class="vertex" cx="990" cy="190" r="6"></circle>
+      <circle class="vertex" cx="710" cy="675" r="6"></circle>
+      <circle class="vertex" cx="1270" cy="675" r="6"></circle>
+    </svg>
+
+    <!-- callout · ápice -->
+    <div class="co" style="left:1076px;top:104px">
+      <div class="name">Crescimento</div>
+      <p class="small">Receita dobrando, time contratando — e o caixa pagando a conta da velocidade.</p>
+    </div>
+
+    <!-- callout · base esquerda -->
+    <div class="co" style="left:496px;top:742px;width:250px">
+      <div class="name">Liquidez</div>
+      <p class="small">Caixa livre e distribuição hoje, ao custo de crescer no ritmo do próprio bolso.</p>
+    </div>
+
+    <!-- callout · base direita -->
+    <div class="co" style="left:1256px;top:742px;width:248px">
+      <div class="name">Controle</div>
+      <p class="small">Decisão na mão do fundador — enquanto ele aceitar capital mais caro e escasso.</p>
+    </div>
+
+    <div class="src">HBR · Banyan Global</div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+
+
+</body></html>

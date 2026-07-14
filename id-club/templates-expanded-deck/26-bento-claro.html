@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>26 · Bento claro</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Bento 4 células assimétrico em paper. Título serif compacto fora
+     do bento, no topo à esquerda.
+     Horizontal: colunas 833 + 20 (gap) + 555 = 1408 = 1600−192 ✓
+     Vertical: título top 96→~196 · bento top 236, bottom 90 →
+     altura 574 · linhas 190 + 20 + 168 + 20 + 176 = 574 ✓ */
+
+  .top{position:absolute;left:var(--pad);top:96px;max-width:900px}
+  .top h1{font-size:40px;line-height:1.1}
+
+  .bento{position:absolute;left:var(--pad);right:var(--pad);top:236px;bottom:90px;
+    display:grid;grid-template-columns:833px 555px;
+    grid-template-rows:190px 168px 176px;gap:20px}
+
+  /* célula hero — ~60% da largura, altura total */
+  .hero{grid-column:1;grid-row:1 / 4;padding:52px 56px;display:flex;flex-direction:column}
+  .hero .eyebrow{margin-bottom:24px}
+  .hero h2{font-size:44px;max-width:640px}
+  .hero ul{list-style:none;margin-top:auto;display:flex;flex-direction:column;gap:16px}
+  .hero li{display:flex;gap:14px;font-size:16px;line-height:1.5;color:var(--text-2);max-width:620px}
+  .hero li::before{content:'+';font-family:var(--mono);font-weight:500;color:var(--gold);flex:none}
+
+  /* coluna direita — 3 células empilhadas */
+  .cell{padding:30px 34px;display:flex;flex-direction:column;justify-content:center}
+  .cell--num .num{font-size:56px;line-height:1}
+  .cell--num .lbl{margin-top:10px}
+  .cell--gold .chip{align-self:flex-start;margin-bottom:16px}
+  .cell--gold p{font-size:22px;line-height:1.35;font-weight:500;color:var(--text-1)}
+  .cell--meta .chips{display:flex;gap:10px;margin-bottom:16px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="top">
+      <h1 class="h-serif">Lorem ipsum dolor sit amet consectetur adipiscing.</h1>
+    </header>
+
+    <section class="bento">
+
+      <div class="hero surface">
+        <div class="eyebrow">Lorem ipsum dolor</div>
+        <h2 class="h-serif">Lorem ipsum <em>dolor</em> sit amet consectetur elit.</h2>
+        <ul>
+          <li>Lorem ipsum dolor sit amet consectetur adipiscing elit — 68% tempor incididunt ut labore magna.</li>
+          <li>Lorem ipsum dolor sit amet consectetur elit, sed tempor incididunt ut labore magna aliqua.</li>
+          <li>Lorem ipsum dolor sit amet consectetur, elit sed do eiusmod tempor.</li>
+        </ul>
+      </div>
+
+      <div class="cell cell--num surface">
+        <div class="num">R$ 38k</div>
+        <div class="small lbl">lorem ipsum dolor sit amet consectetur — adipiscing sed 12 tempor incididunt</div>
+      </div>
+
+      <div class="cell cell--gold surface surface--gold">
+        <span class="chip chip--gold"><span class="dot"></span>Lorem</span>
+        <p>Lorem ipsum dolor sit amet consectetur — elit sed tempor labore.</p>
+      </div>
+
+      <div class="cell cell--meta surface">
+        <div class="chips">
+          <span class="chip">90 dias lorem ipsum</span>
+          <span class="chip chip--green"><span class="dot"></span>Lorem 71</span>
+        </div>
+        <p class="small">Lorem ipsum dolor: sit amet consectetur elit, sed tempor incididunt ut labore magna.</p>
+      </div>
+
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

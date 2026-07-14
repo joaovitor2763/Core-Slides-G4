@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>50 · Provas</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Prova social (light): 3 mini-quotes lado a lado em surfaces, cada uma
+     com aspa serif no topo, autor com avatar de iniciais (padrão do 04)
+     e chip verde com o resultado medido. A do meio em surface--gold.
+     Rodapé mono central com a régua de medição. */
+
+  .head{position:absolute;left:var(--pad);top:92px;max-width:1100px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:56px}
+
+  /* grade: left 96 + 448 + 32 + 448 + 32 + 448 = 1504 → +96 = 1600 ✓
+     vertical: top 280 → bottom 120 = 500px de altura;
+     rodapé em bottom 56 (folga de ~40px sob os cards) ✓ */
+  .wall{position:absolute;left:var(--pad);right:var(--pad);top:280px;bottom:120px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+
+  .q{padding:34px 36px 32px;display:flex;flex-direction:column}
+  .q .mark{font-family:var(--serif);font-size:60px;line-height:.7;color:var(--gold);
+    opacity:.45}
+  .q blockquote{margin-top:18px;font-size:17px;line-height:1.6;font-style:italic;
+    color:var(--text-2)}
+  .q .rule{height:1px;background:var(--border);margin:20px 0 18px}
+
+  .who{display:flex;align-items:center;gap:14px}
+  .avatar{width:44px;height:44px;border-radius:50%;flex:0 0 44px;
+    background:var(--gold-dim);border:1px solid var(--gold-border);
+    display:grid;place-items:center;
+    font-family:var(--num);font-weight:600;font-size:15px;color:var(--gold)}
+  .who .name{font-size:14px;font-weight:600;color:var(--text-1)}
+  .who .org{margin-top:3px;font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+  .q .chip{margin-top:auto;align-self:flex-start}
+
+  .foot{position:absolute;left:0;right:0;bottom:56px;text-align:center}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum · dolor 05 e 06</div>
+      <h1 class="h-serif">Lorem ipsum dolor. <em>Sit amet dolor elit.</em></h1>
+    </header>
+
+    <section class="wall">
+
+      <figure class="q surface">
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <blockquote>Lorem ipsum dolor sit amet consectetur adipiscing elit sed. Do eiusmod tempor incididunt; ut labore et dolore magna.</blockquote>
+        <div class="rule" aria-hidden="true"></div>
+        <div class="who">
+          <span class="avatar" aria-hidden="true">LI</span>
+          <div>
+            <div class="name">Lorem Ipsum</div>
+            <div class="org">Sed · lorem ipsum, 480 pessoas</div>
+          </div>
+        </div>
+        <span class="chip chip--green"><span class="dot"></span>−11h/sem de lorem</span>
+      </figure>
+
+      <figure class="q surface surface--gold">
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <blockquote>Lorem ipsum dolor consectetur adipiscing elit. Sed eiusmod tempor incididunt ut labore magna — aliqua enim ad minim.</blockquote>
+        <div class="rule" aria-hidden="true"></div>
+        <div class="who">
+          <span class="avatar" aria-hidden="true">DS</span>
+          <div>
+            <div class="name">Dolor Sit</div>
+            <div class="org">Dolor · sit amet consectetur</div>
+          </div>
+        </div>
+        <span class="chip chip--green"><span class="dot"></span>−92% no lorem ipsum dolor</span>
+      </figure>
+
+      <figure class="q surface">
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <blockquote>Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do tempor; incididunt ut labore et dolore magna aliqua.</blockquote>
+        <div class="rule" aria-hidden="true"></div>
+        <div class="who">
+          <span class="avatar" aria-hidden="true">AE</span>
+          <div>
+            <div class="name">Amet Elit</div>
+            <div class="org">Lorem ipsum · dolor sit</div>
+          </div>
+        </div>
+        <span class="chip chip--green"><span class="dot"></span>3,4× lorem ipsum dolor</span>
+      </figure>
+
+    </section>
+
+    <footer class="foot">
+      <span class="mono-label">lorem ipsum dolor em 90 dias de sit · amet consectetur adipiscing elit</span>
+    </footer>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>76 · Linha do case</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Case study · linha do tempo da intervenção (light).
+     TOPO: eyebrow + título serif 46px à esquerda; chip mono do período à direita.
+     TRILHO horizontal em y=500 (linha 2px de x96 a x1504); 5 dots r7 nos
+     meses M0/M2/M4/M7/M9, espaçamento PROPORCIONAL aos meses.
+     Cards de 250px centrados no dot, alternando acima/abaixo do trilho.
+     Último dot (M9) gold com halo = protagonista; card final .surface + chip verde.
+
+     Geometria X · trilho 96 → 1504 (width 1408).
+     Escala dos dots: para o card centrado (250px) caber no pad,
+     M0 fica em x=221 (card 221−125 = 96 = pad ✓) e M9 em x=1379
+     (card 1379+125 = 1504 = 1600−96 ✓). Span 1379−221 = 1158px / 9 meses
+     = 128,67 px/mês:
+       M0 = 221 · M2 = 221+257 = 478 · M4 = 221+515 = 736 ·
+       M7 = 221+901 = 1122 · M9 = 221+1158 = 1379
+     Dots 14px (r7): left = x−7 → 214 / 471 / 729 / 1115 / 1372.
+     Cards left = x−125 → 96 / 353 / 611 / 997 / 1254 (sem sobreposição:
+     acima 96–346, 611–861, 1254–1504 · abaixo 353–603, 997–1247 ✓).
+
+     Geometria Y · head top 104 · trilho 499–501 · dots 493–507 ·
+     halo M9 até 487/513 · tags do mês top 518 (fundo --bg quebra o
+     conector que desce) · cards acima: borda inferior y=430 (bottom:470) ·
+     cards abaixo: top 556, altura ~118 → fim ~674 · nota 764 < 804 ✓.
+
+     Conectores (SVG 1600×900): linha vertical stroke var(--text-3) 1.2
+     opacity .55 no x do dot; circle r3 na borda EXATA do card; a outra
+     ponta ancora na borda do próprio dot do trilho (y=493 acima / 507
+     abaixo — inclusive no M9: o halo é translúcido, então a linha vai
+     até a borda do anel para não parecer solta). */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:104px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:18px}
+  .head h1{font-size:46px;max-width:940px}
+  .head .chip{flex:none;margin-bottom:8px}
+
+  .trail{position:absolute;left:var(--pad);top:499px;width:1408px;height:2px;
+    border-radius:2px;background:var(--border-2)}
+
+  .tdot{position:absolute;top:493px;width:14px;height:14px;border-radius:50%;
+    background:var(--bg);border:3px solid var(--text-3);z-index:3}
+  .tdot--gold{border-color:var(--gold);box-shadow:0 0 0 6px var(--gold-dim)}
+
+  /* tag do mês SOB o dot: fundo --bg (invisível sobre o fundo) abre a
+     janela por onde o conector dos cards de baixo passa sem cruzar texto */
+  .mtag{position:absolute;top:518px;width:120px;text-align:center;z-index:2;
+    font-family:var(--mono);font-size:10.5px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);
+    background:var(--bg);padding:3px 0}
+  .mtag--gold{color:var(--gold)}
+
+  .card{position:absolute;width:250px;padding:17px 20px 15px;
+    border-radius:var(--r-md)}
+  .card .tag{display:block;font-family:var(--mono);font-size:10px;
+    font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--text-3);margin-bottom:7px}
+  .card h3{font-family:var(--num);font-weight:600;font-size:17px;
+    letter-spacing:-.01em;color:var(--text-1);margin-bottom:6px}
+  .card .small{font-size:13.5px;line-height:1.45}
+  .c-up{bottom:470px}     /* borda inferior em y = 900−470 = 430 */
+  .c-down{top:556px}
+
+  /* card final: neutro (sem surface--gold) — o protagonista é o dot M9;
+     a ênfase do card vem do .surface elevado + chip verde */
+  .card--final .chip{margin-bottom:9px}
+
+  .links{position:absolute;inset:0;z-index:1;pointer-events:none}
+
+  .note{position:absolute;left:var(--pad);top:764px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Lorem ipsum sit</div>
+        <h1 class="h-serif">Lorem ipsum dolor sit <em>amet consectetur.</em></h1>
+      </div>
+      <span class="chip">jan–set 2025 · 9 meses</span>
+    </header>
+
+    <!-- trilho -->
+    <div class="trail" aria-hidden="true"></div>
+
+    <!-- conectores card ↔ dot (linha 1.2 + r3 na borda do card;
+         a outra ponta encosta na borda do dot do trilho) -->
+    <svg class="links" viewBox="0 0 1600 900" aria-hidden="true">
+      <g stroke="var(--text-3)" fill="var(--text-3)" stroke-width="1.2" opacity=".55">
+        <line x1="221"  y1="430" x2="221"  y2="493"/><circle cx="221"  cy="430" r="3" stroke="none"/>
+        <line x1="478"  y1="507" x2="478"  y2="556"/><circle cx="478"  cy="556" r="3" stroke="none"/>
+        <line x1="736"  y1="430" x2="736"  y2="493"/><circle cx="736"  cy="430" r="3" stroke="none"/>
+        <line x1="1122" y1="507" x2="1122" y2="556"/><circle cx="1122" cy="556" r="3" stroke="none"/>
+        <line x1="1379" y1="430" x2="1379" y2="493"/><circle cx="1379" cy="430" r="3" stroke="none"/>
+      </g>
+    </svg>
+
+    <!-- M0 · jan · x=221 · card acima -->
+    <span class="tdot" style="left:214px"></span>
+    <span class="mtag" style="left:161px">m0 · jan</span>
+    <div class="card surface surface--flat c-up" style="left:96px">
+      <span class="tag">nostrud</span>
+      <h3>Lorem ipsum dolor sit</h3>
+      <p class="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed.</p>
+    </div>
+
+    <!-- M2 · mar · x=478 · card abaixo -->
+    <span class="tdot" style="left:471px"></span>
+    <span class="mtag" style="left:418px">m2 · mar</span>
+    <div class="card surface surface--flat c-down" style="left:353px">
+      <span class="tag">commodo</span>
+      <h3>Lorem ipsum dolor sit</h3>
+      <p class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit sed.</p>
+    </div>
+
+    <!-- M4 · mai · x=736 · card acima -->
+    <span class="tdot" style="left:729px"></span>
+    <span class="mtag" style="left:676px">m4 · mai</span>
+    <div class="card surface surface--flat c-up" style="left:611px">
+      <span class="tag">labore</span>
+      <h3>12 lorem ipsum</h3>
+      <p class="small">Lorem ipsum dolor sit amet consectetur adipiscing.</p>
+    </div>
+
+    <!-- M7 · ago · x=1122 · card abaixo -->
+    <span class="tdot" style="left:1115px"></span>
+    <span class="mtag" style="left:1062px">m7 · ago</span>
+    <div class="card surface surface--flat c-down" style="left:997px">
+      <span class="tag">officia</span>
+      <h3>74 lorem</h3>
+      <p class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do.</p>
+    </div>
+
+    <!-- M9 · set · x=1379 · dot GOLD com halo (protagonista) · card final acima -->
+    <span class="tdot tdot--gold" style="left:1372px"></span>
+    <span class="mtag mtag--gold" style="left:1319px">m9 · set</span>
+    <div class="card card--final surface c-up" style="left:1254px">
+      <span class="tag">excepteur</span>
+      <span class="chip chip--green"><span class="dot"></span>tempor +4,1 pts</span>
+      <p class="small">lorem ipsum dolor dez/2024, sit amet consectetur elit.</p>
+    </div>
+
+    <p class="small note italic">Lorem ipsum dolor sit amet elit · consectetur adipiscing de set/2025.</p>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

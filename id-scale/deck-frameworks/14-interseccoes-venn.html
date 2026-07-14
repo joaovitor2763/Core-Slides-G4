@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>14 · Interseções (Venn)</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Framework 14 · seis círculos translúcidos em flor (dark); interseções
+     A–F nomeadas; o círculo 01 é o único gold. Flor centrada em (800,490). */
+  .head{position:absolute;left:96px;top:64px}
+  .head .eyebrow{margin-bottom:16px}.head h1{font-size:42px}
+  .halo{position:absolute;left:465px;top:155px;width:670px;height:670px;border-radius:50%;border:1.4px dashed var(--ring)}
+  .vc{position:absolute;width:270px;height:270px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14)}
+  .vc--gold{background:rgba(201,160,92,.16);border-color:var(--gold-border)}
+  .xchip{position:absolute;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.10);display:grid;place-items:center;
+    font:600 12.5px var(--num);color:var(--text-1);z-index:2}
+  .xchip--gold{background:var(--gold);color:var(--on-gold)}
+  .clabel{position:absolute;width:150px;text-align:center;z-index:2}
+  .clabel .idx{display:block;font:500 10px var(--mono);letter-spacing:.15em;color:var(--text-3);margin-bottom:4px}
+  .clabel strong{font:600 15px var(--num);letter-spacing:-.01em;color:var(--text-1)}
+  .note{position:absolute;width:320px}
+  .note--r{text-align:right}
+  .note strong{display:block;font:600 17px var(--num);letter-spacing:-.01em;color:var(--text-1);margin-bottom:7px}
+  .note strong em{font-style:normal;color:var(--gold)}
+  .note p{font:13.5px/1.55 var(--sans);color:var(--text-3)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Frameworks · interseções">
+    <header class="head"><div class="eyebrow">Framework · sistema integrado</div><h1 class="h-serif">O valor está <em>nas interseções.</em></h1></header>
+
+    <div class="halo" aria-hidden="true"></div>
+    <div class="vc vc--gold" style="left:665px;top:215px" aria-hidden="true"></div>
+    <div class="vc" style="left:786px;top:285px" aria-hidden="true"></div>
+    <div class="vc" style="left:786px;top:425px" aria-hidden="true"></div>
+    <div class="vc" style="left:665px;top:495px" aria-hidden="true"></div>
+    <div class="vc" style="left:544px;top:425px" aria-hidden="true"></div>
+    <div class="vc" style="left:544px;top:285px" aria-hidden="true"></div>
+
+    <span class="xchip xchip--gold" style="left:859px;top:344px">A</span>
+    <span class="xchip" style="left:934px;top:474px">B</span>
+    <span class="xchip" style="left:859px;top:604px">C</span>
+    <span class="xchip" style="left:709px;top:604px">D</span>
+    <span class="xchip" style="left:634px;top:474px">E</span>
+    <span class="xchip" style="left:709px;top:344px">F</span>
+
+    <div class="clabel" style="left:725px;top:246px"><span class="idx">01</span><strong>Produto</strong></div>
+    <div class="clabel" style="left:920px;top:360px"><span class="idx">02</span><strong>Growth</strong></div>
+    <div class="clabel" style="left:920px;top:586px"><span class="idx">03</span><strong>Vendas</strong></div>
+    <div class="clabel" style="left:725px;top:700px"><span class="idx">04</span><strong>Operação</strong></div>
+    <div class="clabel" style="left:530px;top:586px"><span class="idx">05</span><strong>Dados</strong></div>
+    <div class="clabel" style="left:530px;top:360px"><span class="idx">06</span><strong>Cultura</strong></div>
+
+    <div class="note note--r" style="left:96px;top:300px"><strong><em>F</em> · Marca viva</strong><p>Cultura moldando produto: o jeito da casa vira a experiência que o cliente sente.</p></div>
+    <div class="note note--r" style="left:96px;top:566px"><strong><em>D–E</em> · Decisão com dado</strong><p>Operação e cultura alimentadas por evidência, não por opinião.</p></div>
+    <div class="note" style="left:1184px;top:300px"><strong><em>A–B</em> · Máquina de aquisição</strong><p>Produto, growth e vendas dividindo as mesmas hipóteses e métricas.</p></div>
+    <div class="note" style="left:1184px;top:566px"><strong><em>C</em> · Receita previsível</strong><p>Vendas promete o que a operação consegue sustentar — e renova.</p></div>
+  </article>
+</div>
+<script>
+  const slide=document.querySelector('.slide');function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);slide.style.transform=`translate(-50%, -50%) scale(${s})`}addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>

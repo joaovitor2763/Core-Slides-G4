@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>83 · Curva de caixa</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Curva de caixa acumulado cruzando o zero (light).
+     TOPO: eyebrow + título serif 44px (x96, y104–184).
+     CHART: card .surface x96→1080 (984px), y230→790 (560px), padding 44
+       → interior 984−88 = 896px × 560−88 = 472px (header mono + SVG 896×436).
+     DIREITA: coluna x1140→1504 (364px), y280→740 (460px), 3 métricas
+       empilhadas com border-top (grid 3 linhas ≈ 153px cada).
+     Soma horizontal: 984 (card) + 60 (gap) + 364 (coluna) = 1408 = 1600−192 ✓
+     Verticais: card bottom 790 ≤ 804 ✓ · coluna 280/740 = respiro 50px
+     simétrico em relação ao card (230/790) ✓ */
+
+  .head{position:absolute;left:var(--pad);top:104px}
+  .head .eyebrow{margin-bottom:18px}
+  .head h1{font-size:44px}
+
+  .panel{position:absolute;left:var(--pad);top:230px;width:984px;height:560px;
+    padding:44px;display:flex;flex-direction:column}
+  .panel-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+
+  .chart-svg{display:block;width:896px;height:436px}
+  .zero-line{stroke:var(--border-2);stroke-width:1.5;stroke-dasharray:5 7}
+  .axis-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;fill:var(--text-3)}
+  .tick{stroke:var(--border-2);stroke-width:1}
+  .line{fill:none;stroke:var(--gold);stroke-width:3;stroke-linecap:round}
+  .dot-end{fill:#FFFFFF;stroke:var(--gold);stroke-width:2.5}
+  .break-label{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.12em;text-transform:uppercase;fill:var(--gold)}
+
+  /* coluna de métricas: números .num 34px, todos em text-1 —
+     o dot gold do breakeven no chart é o único protagonista gold */
+  .metrics{position:absolute;left:1140px;top:280px;width:364px;height:460px;
+    display:grid;grid-template-rows:1fr 1fr 1fr}
+  .metric{border-top:1px solid var(--border);padding-top:26px}
+  .metric .num{font-size:34px;line-height:1}
+  .metric .mono-label{display:block;margin-top:12px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem · ipsum 24 meses</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet.</h1>
+    </header>
+
+    <section class="panel surface">
+      <div class="panel-top">
+        <span class="mono-label">Lorem ipsum sit · R$ milhões · dolor sit amet elit</span>
+        <span class="mono-label">M0 → M24</span>
+      </div>
+
+      <!--
+        Conversão valor → coordenada (SVG 896 × 436):
+        · eixo Y — 40px por R$ 1M ⇒ y = 210 (zero) − valor·40
+            extremos anotados: +4,2M → y=42 (topo) · −3,4M → y=346 (vale) · 0 → y=210
+        · eixo X — 34px por mês ⇒ x = 40 + mês·34
+            M0=40 · M6=244 · M8=312 (vale) · M12=448 · M14=516 (breakeven) · M18=652 · M24=856
+        · curvas C com controles horizontais a ±90px dos pontos;
+          no breakeven (516,210) a tangente é oblíqua — controles colineares
+          (426,265) → (606,155), a curva CRUZA o zero, não encosta nele
+        · ticks do eixo X: y=370→378 · labels y=400
+      -->
+      <svg class="chart-svg" viewBox="0 0 896 436" aria-label="Caixa acumulado: desce até R$ −3,4 milhões no mês 8, cruza o zero no mês 14 e chega a R$ +4,2 milhões no mês 24">
+        <defs>
+          <linearGradient id="fill-gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="rgba(185,145,91,.24)"/>
+            <stop offset="1" stop-color="rgba(185,145,91,0)"/>
+          </linearGradient>
+        </defs>
+
+        <!-- área ANTES do breakeven: entre a curva e o zero, consumo de caixa
+             (fecha em linha reta de 516,210 de volta a 40,210 pelo próprio zero).
+             rgba(132,46,32,.12) — red-dim (.08) era invisível no paper; comentado -->
+        <path fill="rgba(132,46,32,.12)" d="M40,210
+          C130,210 222,346 312,346
+          C402,346 426,265 516,210 Z"/>
+        <!-- rótulo da fase de queima, dentro do vale -->
+        <text class="axis-label" x="290" y="300" text-anchor="middle">lorem ipsum dolor sit</text>
+
+        <!-- área DEPOIS do breakeven: gradiente gold → transparente até o zero -->
+        <path fill="url(#fill-gold)" d="M516,210
+          C606,155 766,42 856,42
+          L856,210 Z"/>
+
+        <!-- linha do zero (tracejada) -->
+        <line class="zero-line" x1="40" y1="210" x2="856" y2="210"/>
+        <text class="axis-label" x="24" y="214" text-anchor="end">0</text>
+
+        <!-- curva do caixa acumulado -->
+        <path class="line" d="M40,210
+          C130,210 222,346 312,346
+          C402,346 426,265 516,210
+          C606,155 766,42 856,42"/>
+
+        <!-- ponto final M24 (discreto — o protagonista é o breakeven) -->
+        <circle class="dot-end" cx="856" cy="42" r="6"/>
+
+        <!-- BREAKEVEN · M14: halo gold-dim atrás + dot gold r7 -->
+        <circle cx="516" cy="210" r="22" fill="var(--gold-dim)"/>
+        <circle cx="516" cy="210" r="7" fill="var(--gold)" stroke="#FFFFFF" stroke-width="3"/>
+        <text class="break-label" x="540" y="248">cupidatat · mês 14</text>
+
+        <!-- eixo X: ticks + labels mono -->
+        <line class="tick" x1="40"  y1="370" x2="40"  y2="378"/>
+        <line class="tick" x1="244" y1="370" x2="244" y2="378"/>
+        <line class="tick" x1="448" y1="370" x2="448" y2="378"/>
+        <line class="tick" x1="652" y1="370" x2="652" y2="378"/>
+        <line class="tick" x1="856" y1="370" x2="856" y2="378"/>
+        <text class="axis-label" x="40"  y="400" text-anchor="middle">M0</text>
+        <text class="axis-label" x="244" y="400" text-anchor="middle">M6</text>
+        <text class="axis-label" x="448" y="400" text-anchor="middle">M12</text>
+        <text class="axis-label" x="652" y="400" text-anchor="middle">M18</text>
+        <text class="axis-label" x="856" y="400" text-anchor="middle">M24</text>
+      </svg>
+    </section>
+
+    <aside class="metrics">
+      <div class="metric">
+        <div class="num">R$ −3,4M</div>
+        <span class="mono-label">Lorem ipsum dolores · M8</span>
+      </div>
+      <div class="metric">
+        <div class="num">M14</div>
+        <span class="mono-label">Consectetur adipiscing</span>
+      </div>
+      <div class="metric">
+        <div class="num">R$ +4,2M</div>
+        <span class="mono-label">Lorem ipsum dolor · M24</span>
+      </div>
+    </aside>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

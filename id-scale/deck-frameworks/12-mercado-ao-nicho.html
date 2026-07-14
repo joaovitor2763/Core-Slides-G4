@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>12 · Do mercado ao nicho</title>
+<link rel="stylesheet" href="style.css?v=scale2">
+<style>
+  /* Framework 12 · três círculos aninhados ancorados na base:
+     mercado total → segmento endereçável → nicho dominável (gold). */
+  .read{position:absolute;left:96px;top:150px;width:560px}
+  .read .eyebrow{margin-bottom:22px}.read h1{font-size:54px;margin-bottom:26px}.read .lede{margin-bottom:34px}
+  .levels{display:grid;gap:0;border-top:1px solid var(--border-2)}
+  .level{display:grid;grid-template-columns:42px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--border)}
+  .level .n{font:600 13px var(--num);color:var(--gold)}
+  .level strong{font:600 16.5px var(--num);color:var(--text-1)}
+  .level p{font:14px/1.5 var(--sans);color:var(--text-3);margin-top:4px}
+  .circle{position:absolute;border-radius:50%}
+  .c-outer{left:870px;top:230px;width:540px;height:540px;background:var(--surface-2);border:1px solid var(--border)}
+  .c-mid{left:955px;top:400px;width:370px;height:370px;background:rgba(0,31,53,.06);border:1px solid var(--border-2)}
+  .c-inner{left:1040px;top:570px;width:200px;height:200px;background:var(--gold-dim);border:1px solid var(--gold-border);
+    box-shadow:0 0 0 6px rgba(185,145,91,.08);display:grid;place-items:center;text-align:center;padding:30px}
+  .c-inner strong{font:600 17px/1.25 var(--num);letter-spacing:-.01em;color:var(--text-1)}
+  .clabel{position:absolute;width:280px;text-align:center;font:500 10.5px var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--text-3)}
+</style>
+<meta id="acfifjfajpekbmhmjppnmmjgmhjkildl"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Frameworks · mercado">
+    <aside class="read" style="position: absolute; margin: 0px; inset: 222px auto auto 144px; width: 560px; min-width: 0px; height: 511px; z-index: 20;">
+      <div class="eyebrow">Framework · foco de mercado</div>
+      <h1 class="h-serif">Do mercado <em>ao nicho.</em></h1>
+      <p class="lede">Quanto mais perto do centro, menor o território — e maior a sua chance de dominar a conversa. Comece onde você vence com folga.</p>
+      <div class="levels">
+        <div class="level"><span class="n">01</span><div><strong>Mercado total</strong><p>Todo mundo que tem o problema que você resolve.</p></div></div>
+        <div class="level"><span class="n">02</span><div><strong>Segmento endereçável</strong><p>Quem você consegue alcançar e atender hoje.</p></div></div>
+        <div class="level"><span class="n">03</span><div><strong>Nicho dominável</strong><p>Onde a sua proposta é imbatível — o ponto de partida.</p></div></div>
+      </div>
+    </aside>
+
+    <div class="circle c-outer" aria-hidden="true"></div>
+    <div class="circle c-mid" aria-hidden="true"></div>
+    <div class="circle c-inner"><strong>Nicho<br>dominável</strong></div>
+    <span class="clabel" style="left:1000px;top:296px">01 · Mercado total</span>
+    <span class="clabel" style="left:1000px;top:462px">02 · Segmento endereçável</span>
+  </article>
+</div>
+<script>
+  const slide=document.querySelector('.slide');function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);slide.style.transform=`translate(-50%, -50%) scale(${s})`}addEventListener('resize',fit);fit();
+</script>
+
+
+</body></html>

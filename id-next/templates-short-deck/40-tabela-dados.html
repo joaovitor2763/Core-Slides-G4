@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>40 · Tabela de dados</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Tabela de dados densa (light): surface grande com tabela real de
+     5 colunas × 6 áreas + linha TOTAL. Zebra sutil, números em Space
+     Grotesk alinhados à direita, coluna "custo evitado" em gold,
+     tendência em chips mini.
+
+     Somas validadas: skills 9+7+6+5+3+4 = 34 · horas 176+142+118+97+41+63
+     = 637 · custo 84,4+58,9+71,2+46,8+33,5+27,0 = 321,8
+     Geometria Y: header 96–192 · surface 240 → 812 (bottom 88) · dentro:
+     header 46 + 6 linhas ×68 = 408 + TOTAL 74 = 528 + padding ≈ 552 ≤ 572 ✓ */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:96px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:48px}
+  .head .eyebrow{margin-bottom:18px}
+  .head h1{font-size:54px}
+  .head .chip{margin-bottom:10px;flex:0 0 auto}
+
+  .panel{position:absolute;left:var(--pad);right:var(--pad);top:240px;bottom:88px;
+    padding:12px 48px 16px}
+
+  table{width:100%;border-collapse:collapse}
+  th{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text-3);text-align:right;
+    padding:18px 0 14px;border-bottom:1px solid var(--border-2)}
+  th:first-child{text-align:left}
+  td{padding:0 0;height:68px;text-align:right;vertical-align:middle;
+    border-bottom:1px solid var(--border)}
+  td:first-child{text-align:left}
+  tbody tr:nth-child(even){background:rgba(0,31,53,.025)}
+  tbody tr:last-child td{border-bottom:none}
+
+  .area{font-size:17px;font-weight:600;color:var(--text-1)}
+  .area .sub{display:block;font-family:var(--mono);font-size:10px;font-weight:400;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-top:3px}
+  td .num{font-size:20px}
+  td.cost .num{color:var(--gold)}
+  .chip--mini{padding:4px 11px;font-size:10px;letter-spacing:.08em}
+
+  tfoot td{height:74px;border-top:2px solid var(--border-2);border-bottom:none}
+  tfoot .area{font-size:15px;font-family:var(--mono);font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-2)}
+  tfoot td .num{font-size:22px}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Resultados">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Dashboard · junho 2026</div>
+        <h1 class="h-serif">Onde a IA já <em>paga a conta.</em></h1>
+      </div>
+      <span class="chip chip--green"><span class="dot"></span>+8% custo evitado m/m</span>
+    </header>
+
+    <section class="panel surface">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%">Área</th>
+            <th style="width:15%">Skills ativas</th>
+            <th style="width:17%">Horas-mês</th>
+            <th style="width:22%">Custo evitado · R$ mil</th>
+            <th style="width:16%">Tendência</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="area">Vendas<span class="sub">SDR · propostas · follow-up</span></td>
+            <td><span class="num">9</span></td>
+            <td><span class="num">176</span></td>
+            <td class="cost"><span class="num">84,4</span></td>
+            <td><span class="chip chip--green chip--mini">+12%</span></td>
+          </tr>
+          <tr>
+            <td class="area">Marketing<span class="sub">conteúdo · CRM · mídia</span></td>
+            <td><span class="num">7</span></td>
+            <td><span class="num">142</span></td>
+            <td class="cost"><span class="num">58,9</span></td>
+            <td><span class="chip chip--green chip--mini">+9%</span></td>
+          </tr>
+          <tr>
+            <td class="area">Financeiro<span class="sub">conciliação · cobrança</span></td>
+            <td><span class="num">6</span></td>
+            <td><span class="num">118</span></td>
+            <td class="cost"><span class="num">71,2</span></td>
+            <td><span class="chip chip--green chip--mini">+15%</span></td>
+          </tr>
+          <tr>
+            <td class="area">Operações<span class="sub">logística · atendimento</span></td>
+            <td><span class="num">5</span></td>
+            <td><span class="num">97</span></td>
+            <td class="cost"><span class="num">46,8</span></td>
+            <td><span class="chip chip--green chip--mini">+6%</span></td>
+          </tr>
+          <tr>
+            <td class="area">Jurídico<span class="sub">contratos · compliance</span></td>
+            <td><span class="num">3</span></td>
+            <td><span class="num">41</span></td>
+            <td class="cost"><span class="num">33,5</span></td>
+            <td><span class="chip chip--red chip--mini">−2%</span></td>
+          </tr>
+          <tr>
+            <td class="area">RH<span class="sub">recrutamento · onboarding</span></td>
+            <td><span class="num">4</span></td>
+            <td><span class="num">63</span></td>
+            <td class="cost"><span class="num">27,0</span></td>
+            <td><span class="chip chip--green chip--mini">+4%</span></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="area">Total</td>
+            <td><span class="num">34</span></td>
+            <td><span class="num">637</span></td>
+            <td class="cost"><span class="num">321,8</span></td>
+            <td><span class="chip chip--green chip--mini">+8%</span></td>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

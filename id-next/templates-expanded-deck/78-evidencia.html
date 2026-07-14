@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>78 · Evidência · documento</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Evidência documental (light): "print" de um documento anotado à esquerda,
+     callouts numerados à direita, ligados por linhas finas de anotação.
+     ─ Geometria horizontal ─
+       zona esquerda x96–880 · card doc 640px centrado: left 96+(784−640)/2 = 168
+       → 168+640 = 808 · vão 808→960 = 152px (as linhas atravessam — ok)
+       coluna direita left 960 + 544 = 1504 = 1600−96 ✓
+     ─ Geometria vertical ─
+       zona esquerda y180–800 · card 540px centrado: top 180+(620−540)/2 = 220
+       → 220+540 = 760 · rotação −1.2° desloca cantos ≤7px → y máx ~767 < 800 ✓
+     ─ Interno do documento (coords relativas ao card) ─
+       barra de título 0–52 (+1 border) · corpo padding 32/36 → 1ª linha y85
+       linhas fake: 10px alto + 20 margem = pitch 30
+       ln1 85 · ln2 115 · ln3 145 · ln4 175 (fim de parágrafo: margem 34)
+       DESTAQUE gold-dim y219–249 (30px) · margem 34
+       ln5 283 · ln6 313 · ln7 343 · ln8 373 · ln9 403 · ln10 433–443 ✓ (<540)
+     ─ Âncoras dos conectores (rotação −1.2° em torno do centro 488,490;
+       x' = cx + dx·cos − dy·sin · y' = cy + dx·sin + dy·cos ·
+       cos(−1.2°)=0.9998 · sin(−1.2°)=−0.0209) ─
+       fim direito do DESTAQUE (card 604,234 → slide 772,454): dx284 dy−36
+         → (771, 448)
+       BARRA: dot na borda DIREITA do card, na altura média da barra
+         (card 640,26): dx320 dy−244 → (803, 239) — linha não invade o card
+       callout 01 centro: top 360 + 34 pad + 21 (meio de 42px) = (944, 415)
+       callout 02 centro: 360 + 110 + 55 = (944, 525)  */
+
+  /* ── documento fake ─────────────────────────────────────────── */
+  .doc{position:absolute;left:168px;top:220px;width:640px;height:540px;
+    transform:rotate(-1.2deg);
+    overflow:hidden} /* recorta no radius — necessário p/ o swap por <img> */
+
+  .doc-bar{height:52px;display:flex;align-items:center;gap:7px;
+    padding:0 24px;border-bottom:1px solid var(--border)}
+  .doc-bar i{width:10px;height:10px;border-radius:50%;background:var(--border-2)}
+  .doc-bar .file{margin-left:14px;
+    text-transform:none;letter-spacing:.06em;font-size:12px} /* nome de arquivo: minúsculas legíveis */
+
+  .doc-body{padding:32px 36px 0}
+  /* linhas de texto fake — larguras: 92 · 78 · 88 · 61 % (parágrafo 1)
+     e 84 · 92 · 70 · 88 · 76 · 55 % (parágrafo 2) */
+  .ln{height:10px;border-radius:5px;background:var(--surface-2);margin-bottom:20px}
+  .ln.p-end{margin-bottom:34px}
+  /* linhas de "tabela": par rótulo (esq) + valor (dir), mesmo pitch de 30px */
+  .tbl{display:flex;justify-content:space-between;align-items:flex-start}
+  .tbl .ln:last-child{background:rgba(0,31,53,.14)} /* valor levemente mais escuro */
+  .tbl.p-end2 .ln{margin-bottom:34px}
+
+  /* a linha que interessa — único gold do slide */
+  .hl{height:30px;border-radius:6px;margin-bottom:34px;
+    background:var(--gold-dim);border:1px solid var(--gold-border);
+    display:flex;align-items:center;padding:0 14px}
+  .hl .num{font-size:14px;letter-spacing:0}
+
+  .doc-foot{position:absolute;left:36px;bottom:22px;font-size:10px}
+
+  /* ── coluna direita ─────────────────────────────────────────── */
+  .head{position:absolute;left:960px;top:186px;width:544px}
+  .head .eyebrow{margin-bottom:24px}
+  .head h1{font-size:42px;line-height:1.12}
+
+  .callouts{position:absolute;left:960px;top:360px;width:544px}
+  .co{border-top:1px solid var(--border);padding:34px 0; /* 34+42+34 = 110px por callout · 3×110 = 330 → bloco 360–690 */
+    display:grid;grid-template-columns:56px 1fr;column-gap:20px;align-items:start}
+  .co .n{font-family:var(--mono);font-size:13px;font-weight:500;
+    letter-spacing:.12em;color:var(--text-3);line-height:21px} /* alinha com a 1ª linha do .small */
+  .co .small{line-height:21px} /* 2 linhas = 42px exatos → centro previsível p/ âncora */
+
+  /* ── conectores (overlay 1600×900) ──────────────────────────── */
+  .wires{position:absolute;inset:0;width:1600px;height:900px;
+    pointer-events:none;z-index:3}
+  .wires line{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .wires circle{fill:var(--text-3);opacity:.75}
+
+  /* ── rodapé ─────────────────────────────────────────────────── */
+  .foot{position:absolute;right:var(--pad);bottom:96px;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <!-- Para usar o print real: substitua todo o conteúdo interno de .doc por
+         <img src="assets/seu-print.png" style="width:100%;height:100%;object-fit:cover;object-position:top">
+         (o overflow:hidden do .doc já recorta no radius) e reposicione as âncoras
+         dos conectores no SVG .wires conforme a região destacada do print. -->
+    <figure class="doc surface" aria-label="Documento de fechamento — página com margem destacada">
+      <div class="doc-bar" aria-hidden="true">
+        <i></i><i></i><i></i>
+        <span class="mono-label file">consectetur-elit-set25.pdf</span>
+      </div>
+      <div class="doc-body" aria-hidden="true">
+        <div class="ln" style="width:92%"></div>
+        <div class="ln" style="width:78%"></div>
+        <div class="ln" style="width:88%"></div>
+        <div class="ln p-end" style="width:61%"></div>
+        <div class="hl"><span class="num">lorem ipsum consectetur: 26,5% (+4,1 pts)</span></div>
+        <!-- bloco de "tabela" (pares rótulo + valor) — sugere demonstrativo -->
+        <div class="tbl"><div class="ln" style="width:42%"></div><div class="ln" style="width:15%"></div></div>
+        <div class="tbl"><div class="ln" style="width:34%"></div><div class="ln" style="width:12%"></div></div>
+        <div class="tbl p-end2"><div class="ln" style="width:46%"></div><div class="ln" style="width:17%"></div></div>
+        <div class="ln" style="width:88%"></div>
+        <div class="ln" style="width:76%"></div>
+        <div class="ln" style="width:55%"></div>
+      </div>
+      <span class="mono-label doc-foot">pág. 03 · consectetur adipiscing elit</span>
+    </figure>
+
+    <div class="head">
+      <div class="eyebrow">Adipiscing</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet.</h1>
+    </div>
+
+    <div class="callouts">
+      <div class="co">
+        <span class="n">01</span>
+        <p class="small"><b>Lorem ipsum:</b> dolor sit amet de setembro consectetur adipiscing elit — sed do eiusmod tempor incididunt labore magna.</p>
+      </div>
+      <div class="co">
+        <span class="n">02</span>
+        <p class="small"><b>Lorem sit:</b> ipsum dolor sit consectetur adipiscing 3º tri. Elit sed eiusmod outubro, tempor incididunt.</p>
+      </div>
+      <div class="co">
+        <span class="n">03</span>
+        <p class="small"><b>Lorem ipsum sit:</b> dolor sit amet — Sit › Adipiscing › 2025 — elit sed do tempor sit.</p>
+      </div>
+    </div>
+
+    <!-- linhas de anotação SEM cruzamento: callout 01 (alto) → barra de título
+         (alto) · callout 02 (baixo) → linha destacada (meio). Âncoras no
+         comentário do topo (rotação −1.2°): barra (803,239) · destaque (771,448)
+         · co-01 (944,415) · co-02 (944,525). -->
+    <svg class="wires" viewBox="0 0 1600 900" aria-hidden="true">
+      <line x1="944" y1="415" x2="803" y2="239"/>
+      <circle cx="944" cy="415" r="3"/>
+      <circle cx="803" cy="239" r="5"/>
+      <line x1="944" y1="525" x2="771" y2="448"/>
+      <circle cx="944" cy="525" r="3"/>
+      <circle cx="771" cy="448" r="5"/>
+    </svg>
+
+    <span class="chip foot">lorem ipsum dolor · out/2025</span>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

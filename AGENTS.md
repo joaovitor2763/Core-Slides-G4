@@ -2,7 +2,9 @@
 
 > **Três decks, uma linguagem.** Para a geração ATUAL — **`templates-short-deck/` (52)**, **`templates-expanded-deck/` (109)** e **`deck-frameworks/` (biblioteca especializada)**, todos na linguagem visual "Órbita" — a source of truth dos tokens, padrões de código, catálogo e QA é a `GUIA.md` de cada pasta. Este `AGENTS.md` continua sendo a referência firme para regras compartilhadas + acervo legacy.
 >
-> **Localização dos templates**: `templates-short-deck/`, `templates-expanded-deck/` e `deck-frameworks/` vão no `git clone` (são bibliotecas oficiais). `templates-legacy/` e `templates-column/` são gitignored (acervo congelado / skin opcional, local-only). Veja `README.md` → *The three official decks*.
+> **Variantes de identidade**: `id-next/`, `id-scale/` e `id-club/` clonam as três coleções oficiais e aplicam, respectivamente, as identidades G4 Next, G4 Scale e G4 Club. A geometria e a finalidade dos templates continuam equivalentes; mudam tokens, tipografia, logos, backgrounds, motivos gráficos e alguns overrides locais. Para editar uma variante, preserve o conjunto da própria pasta (`HTML + style.css + assets`) e leia primeiro o `README.md` daquele `id-*`.
+>
+> **Localização dos templates**: `templates-short-deck/`, `templates-expanded-deck/`, `deck-frameworks/` e as três pastas `id-*` vão no `git clone`. `templates-legacy/` e `templates-column/` são gitignored (acervo congelado / skin opcional, local-only). Veja `README.md` → *The three official decks* e *Identity variants*.
 
 > **Source of truth** para construção e edição de slides HTML G4 — aulas, apresentações, pitches e frameworks.
 > Reúne o que foi aprendido em: `260614-awake-grove` (20 templates), `260615-sunny-dolphin` (29 slides Academia de IA), `260615-awake-creek` (PDF export) e `260623-misty-lake` (29 slides Gestão e Estratégia).
@@ -330,6 +332,7 @@ artifacts/
 - **Catálogo canônico de 52 templates Órbita (curto)**: `templates-short-deck/` (local — vide README) + [`templates-short-deck/GUIA.md`](templates-short-deck/GUIA.md)
 - **Catálogo canônico de 109 templates Órbita (expandido)**: `templates-expanded-deck/` (local — vide README) + [`templates-expanded-deck/GUIA.md`](templates-expanded-deck/GUIA.md)
 - **Biblioteca especializada de frameworks Órbita**: `deck-frameworks/` + [`deck-frameworks/GUIA.md`](deck-frameworks/GUIA.md)
+- **Variantes completas de identidade**: [`id-next/README.md`](id-next/README.md), [`id-scale/README.md`](id-scale/README.md) e [`id-club/README.md`](id-club/README.md)
 - **Acervo v4 (48 templates hairline, congelado)**: `templates-legacy/`
 - **Catálogo navegável** (grid com filtro por categoria + toggle light/dark): `examples/catalog.html` — abrir via servidor local (`python3 -m http.server` na raiz) por causa dos iframes
 - **Playbook narrativo** (prosa + exemplos): `playbook.md` (mesma pasta)

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>98 · Arquitetura · como funciona</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Dark · arquitetura do produto em 3 faixas horizontais (entrada → motor → saída).
+     Labels mono rotacionados à esquerda de cada faixa (centro x=150); as faixas
+     vivem entre x200 e x1504. O motor (G4 OS Core) é o protagonista gold.
+
+     Geometria X das faixas 1 e 3 (pills):
+       3 × 408 + 2 × 40 gap = 1224 + 80 = 1304 = 1504 − 200 ✓
+       lefts: 200 · 648 · 1096 → centros: 404 · 852 · 1300 · 1096+408 = 1504 ✓
+     Card central (faixa 2): x420 → x1180 = 760 de largura (centro x=800).
+     Geometria Y:
+       faixa 1: top 270, h 90 → base 360
+       faixa 2: top 430, h 160 → base 590   (respiro 430−360 = 70)
+       faixa 3: top 660, h 90 → base 750    (respiro 660−590 = 70) · 750 < 804 ✓
+
+     Setas (SVG viewBox 1600×900, stroke var(--text-3) 1.2 + dot r3 na origem
+     + chevron pequeno na ponta — curvas com tangentes verticais):
+       junção 1 — das pills da faixa 1 (base y360, dot y363) até a borda
+       superior do card (y430). Pousos no topo do card: 556 · 852 · 1148
+       (simétricos ao centro das pills, 852 ± 296 → dentro de 420–1180 ✓)
+       junção 2 — da borda inferior do card (y590, dot y593) até o topo
+       das pills da faixa 3 (y660), origens 556 · 852 · 1148 espelhadas. */
+
+  .head{position:absolute;left:var(--pad);top:96px}
+  .head .eyebrow{margin-bottom:18px}
+  .head h1{font-size:44px}
+
+  /* labels rotacionados: caixa de 28px centrada em x=150 (left 136 + 14) */
+  .band-label{position:absolute;left:136px;width:28px;z-index:2;
+    display:flex;align-items:center;justify-content:center;
+    writing-mode:vertical-rl;transform:rotate(180deg);
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--text-3)}
+
+  .pill{position:absolute;height:90px;z-index:2;border-radius:var(--r-pill);
+    display:flex;align-items:center;justify-content:center}
+  .pill .name{font-family:var(--num);font-weight:600;font-size:18px;
+    letter-spacing:-.01em;color:var(--text-1)}
+
+  /* motor central — único protagonista gold do slide */
+  .core{position:absolute;left:420px;top:430px;width:760px;height:160px;
+    z-index:2;border-color:var(--gold-border);
+    display:flex;align-items:center;padding:0 48px}
+  .core .title-row{display:flex;align-items:center;gap:14px}
+  .core .gdot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+  .core .name{font-size:22px}
+  .core .mods{display:flex;gap:12px;margin-left:auto}
+
+  .wires{position:absolute;inset:0;z-index:1;pointer-events:none}
+  .wires path{fill:none;stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .wires circle{fill:var(--text-3);opacity:.55}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Dolor sit amet</div>
+      <h1 class="h-serif">Lorem ipsum sit, <span class="dim">dolor amet.</span></h1>
+    </header>
+
+    <!-- labels de faixa (rotacionados, lêem de baixo para cima) -->
+    <div class="band-label" style="top:270px;height:90px">Tempor</div>
+    <div class="band-label" style="top:430px;height:160px">Lorem</div>
+    <div class="band-label" style="top:660px;height:90px">Ipsum</div>
+
+    <!-- setas verticais · junção 1: pills → card (363→430) · junção 2: card → pills (593→660) -->
+    <svg class="wires" viewBox="0 0 1600 900" aria-hidden="true">
+      <!-- junção 1 · origens nos centros das pills: 404 · 852 · 1300 -->
+      <circle cx="404" cy="363" r="3"/>
+      <circle cx="852" cy="363" r="3"/>
+      <circle cx="1300" cy="363" r="3"/>
+      <!-- (404,363) → (556,430): tangentes verticais -->
+      <path d="M404,363 C404,398 556,395 556,430"/>
+      <path d="M852,363 L852,430"/>
+      <!-- (1300,363) → (1148,430) -->
+      <path d="M1300,363 C1300,398 1148,395 1148,430"/>
+      <!-- chevrons na borda superior do card (y=430) -->
+      <path d="M551,423 L556,430 L561,423"/>
+      <path d="M847,423 L852,430 L857,423"/>
+      <path d="M1143,423 L1148,430 L1153,423"/>
+
+      <!-- junção 2 · origens na base do card: 556 · 852 · 1148 -->
+      <circle cx="556" cy="593" r="3"/>
+      <circle cx="852" cy="593" r="3"/>
+      <circle cx="1148" cy="593" r="3"/>
+      <!-- (556,593) → (404,660) -->
+      <path d="M556,593 C556,628 404,625 404,660"/>
+      <path d="M852,593 L852,660"/>
+      <!-- (1148,593) → (1300,660) -->
+      <path d="M1148,593 C1148,628 1300,625 1300,660"/>
+      <!-- chevrons no topo das pills da faixa 3 (y=660) -->
+      <path d="M399,653 L404,660 L409,653"/>
+      <path d="M847,653 L852,660 L857,653"/>
+      <path d="M1295,653 L1300,660 L1305,653"/>
+    </svg>
+
+    <!-- faixa 1 · entrada · lefts 200 / 648 / 1096 -->
+    <div class="pill surface surface--flat" style="left:200px;top:270px;width:408px">
+      <span class="name">Lorem ipsum</span>
+    </div>
+    <div class="pill surface surface--flat" style="left:648px;top:270px;width:408px">
+      <span class="name">Lorem ipsum dolor</span>
+    </div>
+    <div class="pill surface surface--flat" style="left:1096px;top:270px;width:408px">
+      <span class="name">Consectetur adipiscing</span>
+    </div>
+
+    <!-- faixa 2 · motor · x420–1180 -->
+    <div class="core surface">
+      <div class="title-row">
+        <span class="gdot" aria-hidden="true"></span>
+        <span class="name num">Lorem Ipsum</span>
+      </div>
+      <div class="mods">
+        <span class="chip">adipiscing</span>
+        <span class="chip">tempor</span>
+        <span class="chip">incididunt labore</span>
+      </div>
+    </div>
+
+    <!-- faixa 3 · saída · lefts 200 / 648 / 1096 -->
+    <div class="pill surface surface--flat" style="left:200px;top:660px;width:408px">
+      <span class="name">Consectetur ipsum</span>
+    </div>
+    <div class="pill surface surface--flat" style="left:648px;top:660px;width:408px">
+      <span class="name">Adipiscing tempor</span>
+    </div>
+    <div class="pill surface surface--flat" style="left:1096px;top:660px;width:408px">
+      <span class="name">Consectetur velit</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

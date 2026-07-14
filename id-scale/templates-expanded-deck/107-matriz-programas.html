@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>107 · Matriz de programas</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Matriz de programas (light) — reinterpretação Órbita do sunburst
+     "Programas para implementação de projetos": áreas × horizonte,
+     com badge-pill de programa recomendado por linha, conectado à
+     borda direita da matriz. Badge da linha 1 = único protagonista gold.
+
+     Geometria X: labels de área 96→240 (144px, text-align right) ·
+       grade 260→1180 (920px): 3 col × 298.67 + 2 gaps × 12 = 896 + 24 = 920 ✓
+         (via repeat(3,1fr) · lefts ≈ 260 · 570.67 · 881.33)
+       conector 1180→1217 (37px) · badges a partir de x1220 (máx 1504 = 1600−96) ✓
+     Geometria Y: head 96 · headers de horizonte 248→264 (centro ≈252) ·
+       grade 280→760 (480px): 4 lin × 111 + 3 gaps × 12 = 444 + 36 = 480 ✓
+         centros de linha: 280+55.5 = 335.5 · 458.5 · 581.5 · 704.5
+       legenda 784→~800 ≤ 804 ✓ */
+
+  .head{position:absolute;left:var(--pad);top:96px;width:1060px}
+  .head .eyebrow{margin-bottom:16px}
+  .head h1{font-size:44px}
+
+  /* headers de horizonte — mono, centrados sobre cada coluna (centro ≈ y252) */
+  .horizons{position:absolute;left:260px;top:248px;width:920px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .horizons span{font-family:var(--mono);font-size:11.5px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);
+    text-align:center;line-height:16px}
+
+  /* labels de área — coluna 96→240, alinhadas à direita, centradas na linha */
+  .areas{position:absolute;left:var(--pad);top:280px;width:144px;height:480px;
+    display:grid;grid-template-rows:repeat(4,1fr);row-gap:12px}
+  .areas span{font-family:var(--mono);font-size:11.5px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);
+    text-align:right;align-self:center;line-height:17px}
+
+  /* a matriz — células surface--flat, 2 linhas de .small cada */
+  .grid{position:absolute;left:260px;top:280px;width:920px;height:480px;
+    display:grid;grid-template-columns:repeat(3,1fr);
+    grid-template-rows:repeat(4,1fr);gap:12px}
+  .cell{border-radius:var(--r-md);display:flex;align-items:center;
+    padding:0 26px}
+  .cell .small{line-height:1.5;color:var(--text-2)}
+
+  /* conectores linha → badge (SVG cobre o canvas inteiro)
+     r5 na borda direita EXATA da matriz (x=1180) · r3 encostado no badge
+     (cx=1217 · raio 3 → toca x=1220, borda esquerda do badge) */
+  .links{position:absolute;inset:0;width:1600px;height:900px;pointer-events:none}
+  .links line{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .links circle{fill:var(--text-3);opacity:.55}
+
+  /* badges-pill de programa — x1220, centro vertical = centro da linha */
+  .badge{position:absolute;left:1220px;transform:translateY(-50%);
+    display:inline-flex;align-items:center;
+    padding:10px 18px;border-radius:var(--r-pill);
+    background:var(--gold-dim);border:1px solid var(--gold-border);
+    font-family:var(--num);font-size:13px;font-weight:600;
+    letter-spacing:.04em;color:var(--text-1);white-space:nowrap}
+  .badge--1{top:335.5px}
+  .badge--2{top:458.5px}
+  .badge--3{top:581.5px}
+  .badge--4{top:704.5px}
+  /* protagonista — ÚNICO gradiente gold do slide */
+  .badge--lead{background:linear-gradient(160deg,var(--gold-300),var(--gold-500));
+    border-color:var(--gold-border);color:var(--on-gold)}
+
+  /* legenda — alinhada à borda esquerda da matriz */
+  .legend{position:absolute;left:260px;top:784px;letter-spacing:.1em}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <!-- topo · ex.: eyebrow "programas · implementação" + título "Programas para implementação de projetos" -->
+    <header class="head">
+      <div class="eyebrow">lorem · ipsum dolor</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit <em>amet consectetur.</em></h1>
+    </header>
+
+    <!-- headers de horizonte · ex.: estratégico / tático / operacional -->
+    <div class="horizons">
+      <span>lorem</span><span>ipsum</span><span>dolor</span>
+    </div>
+
+    <!-- labels de área · ex.: gestão / marketing + vendas / financeiro / pessoas -->
+    <div class="areas">
+      <span>lorem</span>
+      <span>ipsum dolor</span>
+      <span>amet</span>
+      <span>elit sed</span>
+    </div>
+
+    <!-- matriz 4 áreas × 3 horizontes · cada célula = a entrega daquela
+         área naquele horizonte · ex.: "Diagnóstico de maturidade e desenho
+         dos OKRs anuais com o board" -->
+    <section class="grid">
+      <!-- linha 1 · ex.: gestão -->
+      <div class="cell surface surface--flat"><p class="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit tempor.</p></div>
+      <div class="cell surface surface--flat"><p class="small">Sed do tempor incididunt ut labore et dolore magna aliqua enim.</p></div>
+      <div class="cell surface surface--flat"><p class="small">Ut enim ad minim veniam, quis nostrud ullamco laboris nisi ut.</p></div>
+
+      <!-- linha 2 · ex.: marketing + vendas -->
+      <div class="cell surface surface--flat"><p class="small">Duis aute irure dolor in voluptate velit esse cillum dolore eu.</p></div>
+      <div class="cell surface surface--flat"><p class="small">Excepteur sint occaecat cupidatat non proident, sunt in culpa.</p></div>
+      <div class="cell surface surface--flat"><p class="small">Deserunt mollit anim id est laborum, lorem ipsum dolor sit amet.</p></div>
+
+      <!-- linha 3 · ex.: financeiro -->
+      <div class="cell surface surface--flat"><p class="small">Nulla pariatur excepteur sint occaecat cupidatat proident culpa.</p></div>
+      <div class="cell surface surface--flat"><p class="small">Officia deserunt mollit anim laborum sed tempor incididunt ut.</p></div>
+      <div class="cell surface surface--flat"><p class="small">Magna aliqua enim ad minim veniam quis nostrud ullamco nisi ea.</p></div>
+
+      <!-- linha 4 · ex.: pessoas -->
+      <div class="cell surface surface--flat"><p class="small">Voluptate velit esse cillum fugiat nulla pariatur excepteur sint.</p></div>
+      <div class="cell surface surface--flat"><p class="small">Cupidatat proident sunt in culpa qui officia deserunt mollit.</p></div>
+      <div class="cell surface surface--flat"><p class="small">Anim id est laborum, lorem ipsum dolor sit amet consectetur.</p></div>
+    </section>
+
+    <!-- conectores linha → badge · centros de linha y = 335.5 · 458.5 · 581.5 · 704.5
+         r5 em x1180 (borda direita exata da matriz) · r3 em x1217 (encosta no badge x1220) -->
+    <svg class="links" viewBox="0 0 1600 900" aria-hidden="true">
+      <line x1="1180" y1="335.5" x2="1217" y2="335.5"/>
+      <circle cx="1180" cy="335.5" r="5"/><circle cx="1217" cy="335.5" r="3"/>
+
+      <line x1="1180" y1="458.5" x2="1217" y2="458.5"/>
+      <circle cx="1180" cy="458.5" r="5"/><circle cx="1217" cy="458.5" r="3"/>
+
+      <line x1="1180" y1="581.5" x2="1217" y2="581.5"/>
+      <circle cx="1180" cy="581.5" r="5"/><circle cx="1217" cy="581.5" r="3"/>
+
+      <line x1="1180" y1="704.5" x2="1217" y2="704.5"/>
+      <circle cx="1180" cy="704.5" r="5"/><circle cx="1217" cy="704.5" r="3"/>
+    </svg>
+
+    <!-- badges de programa por linha · o da linha 1 é o protagonista gold -->
+    <span class="badge badge--1 badge--lead">Lorem ipsum</span>   <!-- ex.: "G4 Sprint de Gestão" -->
+    <span class="badge badge--2">Dolor sit</span>                 <!-- ex.: "G4 Traction" -->
+    <span class="badge badge--3">Amet elit</span>                 <!-- ex.: "G4 Finanças na Prática" -->
+    <span class="badge badge--4">Sed tempor</span>                <!-- ex.: "G4 Gente & Cultura" -->
+
+    <!-- legenda · ex.: "cada badge indica o programa G4 recomendado para a área" -->
+    <footer class="mono-label legend">lorem ipsum dolor · sit amet consectetur elit</footer>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>24 · Framework de camadas</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Dark · pirâmide moderna: 4 camadas pill empilhadas com larguras
+     crescentes (480 → 680 → 880 → 1080), centradas no eixo x=640.
+     Base em gradiente gold (fundação). Rótulo mono vertical à direita
+     da pilha, esfera armilar atrás.
+
+     Geometria X (eixo 640): 480 → left 400 · 680 → 300 · 880 → 200 ·
+     1080 → 100. Base: 100+1080 = 1180 < 1504 ✓
+     Geometria Y: tops 372 / 488 / 604 / 720 (h 92 + gap 24 = passo 116).
+     Base termina em 720+92 = 812 < 900 ✓ */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:96px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:58px;max-width:800px}
+  .head .read{max-width:400px;padding-bottom:8px}
+
+
+  .layer{position:absolute;height:92px;border-radius:46px;z-index:2;
+    display:flex;align-items:center;padding:0 44px;gap:24px}
+  .layer .name{font-family:var(--num);font-weight:600;font-size:22px;
+    letter-spacing:-.01em;color:var(--text-1)}
+  .layer .tag{margin-left:auto;font-family:var(--mono);font-size:10.5px;
+    font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+
+  /* camada base: fundação em gradiente gold */
+  .layer--gold{background:var(--gold);
+    border:1px solid var(--gold-border);box-shadow:var(--shadow-lg)}
+  .layer--gold .name{color:var(--on-gold)}
+  .layer--gold .tag{color:var(--on-gold);opacity:.72}
+
+  /* rótulo lateral vertical (lê de cima para baixo, junto da pilha) */
+  .axis{position:absolute;left:1224px;top:372px;height:440px;z-index:2;
+    display:flex;align-items:center;justify-content:center;
+    writing-mode:vertical-rl;
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--text-3)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Lorem ipsum</div>
+        <h1 class="h-serif">Lorem ipsum dolor, <em>sit amet elit.</em></h1>
+      </div>
+      <p class="body read">Lorem ipsum dolor sit amet consectetur adipiscing. Sed do eiusmod tempor incididunt — ut labore et dolore magna aliqua.</p>
+    </header>
+
+    <!-- topo · 480px · left 400 -->
+    <div class="layer surface" style="left:400px;top:372px;width:480px">
+      <span class="name">Consectetur &amp; adipiscing</span>
+      <span class="tag">Adipiscing</span>
+    </div>
+
+    <!-- 680px · left 300 -->
+    <div class="layer surface" style="left:300px;top:488px;width:680px">
+      <span class="name">Tempor &amp; labore</span>
+      <span class="tag">Tempor · 40+ laborum</span>
+    </div>
+
+    <!-- 880px · left 200 -->
+    <div class="layer surface" style="left:200px;top:604px;width:880px">
+      <span class="name">Lorem Ipsum Sit</span>
+      <span class="tag">Dolor · consectetur</span>
+    </div>
+
+    <!-- base · 1080px · left 100 · fundação gold -->
+    <div class="layer layer--gold" style="left:100px;top:720px;width:1080px">
+      <span class="name">Ipsum &amp; laborum</span>
+      <span class="tag">Deserunt · sed · elit · cupidatat</span>
+    </div>
+
+    <div class="axis">← dolor sit amet ad consectetur</div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

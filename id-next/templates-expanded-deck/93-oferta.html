@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>93 · A oferta</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Oferta com âncora de valor (dark, pitch/vendas):
+     ESQUERDA — lista editorial de 6 entregas com valor de referência à direita
+     e linha final "valor somado" (a âncora: R$ 114k);
+     DIREITA — card surface--gold, único protagonista, com o investimento real.
+     Colunas: 96 (pad) + 724 (lista) + 60 (gap) + 624 (card) + 96 (pad) = 1600 ✓
+     Vertical: header y 96 → ~196 · conteúdo y 250 → 780 (530px de altura)
+     Lista: 7 linhas (6 itens + total) × flex:1 = 530/7 ≈ 75,7px cada
+     Âncora fecha: 36+24+18+12+9+15 = 114 ✓ */
+
+  .head{position:absolute;left:var(--pad);top:96px}
+  .head .eyebrow{margin-bottom:18px}
+  .head h1{font-size:46px}
+
+  /* lista esquerda: x 96 → 820 · y 250 → 780 */
+  .pack{position:absolute;left:var(--pad);top:250px;width:724px;height:530px;
+    display:flex;flex-direction:column}
+  .row{flex:1;display:flex;align-items:center;justify-content:space-between;
+    gap:28px;border-top:1px solid var(--border)}
+  .row .ref{font-size:18px;color:var(--text-3);flex:0 0 auto;
+    font-variant-numeric:tabular-nums}
+  .row--total{border-top:1px solid var(--border-2)}
+  .row--total .ref{font-size:24px}
+
+  /* card direito: x 880 → 1504 (624px) · y 250 → 780 (530px)
+     conteúdo fixo ≈ 255px → o grupo do preço centra entre kicker e ação
+     com margin:auto (2 respiros iguais de ~85px) */
+  .offer{position:absolute;left:880px;top:250px;width:624px;height:530px;
+    padding:54px 56px 50px;display:flex;flex-direction:column}
+  .offer .mid{margin:auto 0}
+  .offer .price{font-size:54px;line-height:1;color:var(--gold)}
+  .offer .price .per{font-size:14px;color:var(--text-3);margin-left:8px}
+  .offer .terms{margin-top:20px;max-width:330px;color:var(--text-2)}
+  .offer .avail{margin-top:20px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Adipiscing · elit 08</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet.</h1>
+    </header>
+
+    <section class="pack" aria-label="Entregas e valores de referência">
+      <div class="row">
+        <span class="body">12 lorem ipsum dolor sit amet</span>
+        <span class="ref num">R$ 36k</span>
+      </div>
+      <div class="row">
+        <span class="body">2 consectetur nostrud</span>
+        <span class="ref num">R$ 24k</span>
+      </div>
+      <div class="row">
+        <span class="body">consectetur adipiscing incididunt</span>
+        <span class="ref num">R$ 18k</span>
+      </div>
+      <div class="row">
+        <span class="body">amet sit consectetur sed 700 adipiscing</span>
+        <span class="ref num">R$ 12k</span>
+      </div>
+      <div class="row">
+        <span class="body">Lorem ipsum dolor amet 5 adipiscing</span>
+        <span class="ref num">R$ 9k</span>
+      </div>
+      <div class="row">
+        <span class="body">consectetur amet sed tempor</span>
+        <span class="ref num">R$ 15k</span>
+      </div>
+      <div class="row row--total">
+        <span class="mono-label">lorem ipsum</span>
+        <span class="ref num">R$ 114k</span>
+      </div>
+    </section>
+
+    <aside class="offer surface surface--gold">
+      <div class="mono-label">consectetur</div>
+      <div class="mid">
+        <div class="price num">R$ 84k<span class="small per">/ano</span></div>
+        <p class="small terms">Adipiscing sed 12&times;.<br>Lorem ipsum 5 dolor sed adipiscing.</p>
+      </div>
+      <div class="act"><span class="cta">Dolor sit amet &rarr;</span></div>
+      <div class="avail"><span class="chip">12 lorem · dolor sit 30/abr</span></div>
+    </aside>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

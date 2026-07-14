@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>29 · Quote com retrato</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Quote com retrato (dark): retrato placeholder 380×460 à esquerda com
+     armilar sutil sangrando atrás e chip--gold flutuando no canto; quote
+     serif grande à direita com atribuição e chip de resultado medido.
+     Inverte a mecânica do 03-mentor (foto à esquerda, texto à direita). */
+
+  /* armilar atrás do retrato, sangrando à esquerda */
+
+  /* retrato: left 96 + 380 = 476 · top 220 + 460 = 680 (dentro de 900) ✓ */
+  .portrait{position:absolute;left:var(--pad);top:220px;width:380px;height:460px;
+    border-radius:26px;overflow:hidden;
+    background:linear-gradient(165deg,var(--navy-600) 0%,var(--navy-800) 70%,var(--navy-900) 100%)}
+  .portrait .initials{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);
+    font-size:250px;line-height:1}
+  .portrait .tag{position:absolute;left:0;right:0;bottom:26px;text-align:center}
+
+  /* chip flutuando sobre o canto superior-direito do retrato:
+     retrato termina em x=476 → chip ancorado em left 400 (sobrepõe a borda) */
+  .float-chip{position:absolute;left:400px;top:202px;z-index:3;box-shadow:var(--shadow-sm)}
+
+  /* coluna da quote: left 572 + width 932 = 1504 = 1600 − 96 ✓ */
+  .quote-col{position:absolute;left:572px;top:238px;width:932px}
+  .quote-col blockquote{font-size:54px;line-height:1.18}
+
+  /* atribuição alinhada com a base do retrato (retrato termina em y=680) */
+  .attrib{position:absolute;left:572px;bottom:236px}
+  .attrib .name{font-family:var(--sans);font-weight:600;font-size:19px;color:var(--text-1)}
+  .attrib .role{margin-top:6px;font-family:var(--mono);font-size:11.5px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+  .attrib .chip{margin-top:24px}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Prova de campo">
+
+
+    <div class="portrait surface" aria-hidden="true">
+      <div class="ghost initials">RM</div>
+      <div class="mono-label tag">[ Retrato 3:4 ]</div>
+    </div>
+    <span class="chip chip--gold float-chip"><span class="dot"></span>Cliente G4</span>
+
+    <figure class="quote-col">
+      <blockquote class="h-serif">Parei de aprovar cada resposta da IA. Defini a régua, medi por 90 dias — e devolvi <em>o tempo ao time.</em></blockquote>
+    </figure>
+
+    <div class="attrib">
+      <div class="name">Renata Mota</div>
+      <div class="role">CEO · rede de clínicas, 340 colaboradores</div>
+      <span class="chip"><span class="dot"></span>−11h/semana · medido</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

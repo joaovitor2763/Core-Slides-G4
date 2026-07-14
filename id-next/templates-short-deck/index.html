@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Core Slides G4 · v5 Órbita</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy-700:#001525; --navy-600:#001A2D;
+    --gold:#C9A05C; --gold-dim:rgba(201,160,92,.14); --gold-border:rgba(201,160,92,.36);
+    --text-1:#F2F6F9; --text-2:#C3D3DD; --text-3:#7E99AB;
+    --border:rgba(255,255,255,.09); --border-2:rgba(255,255,255,.16);
+    --serif:'Playfair Display',Georgia,serif;
+    --sans:'IBM Plex Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --num:'Space Grotesk',var(--sans);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--navy-700);color:var(--text-1);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+
+  .wrap{max-width:1560px;margin:0 auto;padding:72px 56px 140px}
+  .head{display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:1px solid var(--border);padding-bottom:30px;margin-bottom:48px}
+  .head .brand{display:flex;align-items:center;gap:18px}
+  .head .brand img{height:36px}
+  .head h1{font-family:var(--serif);font-weight:500;font-size:44px;letter-spacing:-.02em;line-height:1}
+  .head h1 em{font-style:italic;color:var(--gold);font-weight:400}
+  .head .meta{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  @media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}}
+  .card{position:relative;border-radius:18px;overflow:hidden;cursor:pointer;
+    background:rgba(255,255,255,.04);border:1px solid var(--border);
+    transition:border-color .25s,transform .25s,box-shadow .25s;display:block;color:inherit;text-decoration:none}
+  .card:hover{border-color:var(--gold-border);transform:translateY(-4px);
+    box-shadow:0 26px 60px -30px rgba(0,0,0,.8),0 0 0 4px var(--gold-dim)}
+  .card .frame{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;background:#0d1116}
+  .card .frame iframe{width:1600px;height:900px;border:0;transform-origin:top left;pointer-events:none}
+  .card .info{padding:16px 20px;display:flex;align-items:center;gap:14px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .card .num{color:var(--gold)}
+  .card .name{color:var(--text-2);flex:1}
+  .card .open{color:var(--text-3)}
+
+  .present-btn{position:fixed;right:36px;bottom:36px;z-index:100;
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--gold);color:#1A1300;border:0;padding:16px 28px;border-radius:999px;
+    font-family:var(--num);font-size:15px;font-weight:600;letter-spacing:.02em;cursor:pointer;
+    box-shadow:0 16px 40px -14px var(--gold-border)}
+  .present-btn:hover{filter:brightness(1.08)}
+
+  .present{position:fixed;inset:0;background:#05080b;display:none;z-index:200}
+  body.presenting .present{display:block}
+  body.presenting{overflow:hidden}
+  .present iframe{position:absolute;top:50%;left:50%;width:1600px;height:900px;border:0;transform-origin:center}
+
+  .hud{position:fixed;left:0;right:0;bottom:0;height:70px;z-index:201;
+    background:linear-gradient(to top,rgba(0,0,0,.85),transparent);
+    display:none;gap:10px;align-items:flex-end;justify-content:center;padding:0 24px 16px;
+    opacity:0;transition:opacity .25s}
+  body.presenting .hud{display:flex}
+  body.presenting .hud:hover{opacity:1}
+  @media(hover:none){.hud{opacity:1}}
+  .hud button,.hud .counter{background:rgba(0,16,29,.85);border:1px solid var(--border-2);color:var(--text-1);
+    padding:10px 18px;border-radius:999px;font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.14em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(10px)}
+  .hud button:hover{border-color:var(--gold-border);color:var(--gold)}
+  .hud .counter{cursor:default}
+  .hud .counter b{color:var(--gold)}
+
+  /* Os dois modos convivem: apresentação simples e painel do apresentador. */
+  .present-actions{position:fixed;right:36px;bottom:36px;z-index:100;display:flex;gap:12px;align-items:center}
+  .present-actions .present-btn{position:static}
+  .presenter-btn{display:inline-flex;align-items:center;gap:10px;background:rgba(0,21,37,.94);color:var(--text-1);
+    border:1px solid var(--border-2);padding:15px 24px;border-radius:999px;font-family:var(--num);
+    font-size:15px;font-weight:600;letter-spacing:.02em;cursor:pointer;box-shadow:0 16px 40px -18px rgba(0,0,0,.9)}
+  .presenter-btn:hover{border-color:var(--gold-border);color:var(--gold)}
+
+  .presenter{position:fixed;inset:0;z-index:300;display:none;background:#05080b;color:var(--text-1);padding:24px}
+  body.presenter-mode{overflow:hidden}
+  body.presenter-mode .presenter{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,.8fr);
+    grid-template-rows:minmax(0,1fr) auto;gap:18px}
+  .presenter-main,.presenter-side,.presenter-controls{border:1px solid var(--border);background:rgba(0,21,37,.82);border-radius:18px}
+  .presenter-main{padding:18px;display:flex;flex-direction:column;min-height:0}
+  .presenter-side{padding:18px;display:grid;grid-template-rows:auto minmax(0,1fr);gap:18px;min-height:0}
+  .presenter-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
+  .presenter-current,.presenter-next{position:relative;overflow:hidden;background:#090d11;border:1px solid var(--border);border-radius:12px;aspect-ratio:16/9}
+  .presenter-current{flex:1;min-height:0}
+  .presenter-next iframe,.presenter-current iframe{position:absolute;left:0;top:0;width:1600px;height:900px;border:0;transform-origin:top left;pointer-events:none}
+  .presenter-next-wrap{min-height:0}
+  .presenter-note-wrap{display:flex;flex-direction:column;min-height:0}
+  .presenter-notes{width:100%;flex:1;min-height:150px;resize:none;border:1px solid var(--border);border-radius:12px;
+    padding:16px;background:rgba(255,255,255,.04);color:var(--text-1);font:16px/1.55 var(--sans);outline:none}
+  .presenter-notes:focus{border-color:var(--gold-border)}
+  .presenter-note-status{font:10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-top:8px}
+  .presenter-controls{grid-column:1/-1;display:flex;align-items:center;gap:10px;padding:12px 16px}
+  .presenter-controls button{background:rgba(255,255,255,.04);border:1px solid var(--border-2);color:var(--text-1);
+    padding:10px 16px;border-radius:999px;font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+  .presenter-controls button:hover{border-color:var(--gold-border);color:var(--gold)}
+  .presenter-controls .primary{background:var(--gold);border-color:var(--gold);color:#1A1300}
+  .presenter-controls .primary:hover{color:#1A1300;filter:brightness(1.08)}
+  .presenter-controls .spacer{flex:1}
+  .presenter-count{font:12px var(--mono);letter-spacing:.12em;color:var(--text-2)}
+  .presenter-count b{color:var(--gold)}
+  .presenter-timer{font:600 24px var(--num);font-variant-numeric:tabular-nums;min-width:82px;text-align:center}
+  .presenter-slide-name{font:500 15px var(--num);color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:320px}
+  @media(max-width:900px){
+    body.presenter-mode .presenter{grid-template-columns:1fr;grid-template-rows:minmax(260px,1fr) minmax(240px,.9fr) auto;padding:12px}
+    .presenter-side{grid-template-columns:220px 1fr;grid-template-rows:1fr}.presenter-controls{grid-column:1}.presenter-slide-name{display:none}
+    .present-actions{right:16px;bottom:16px;flex-direction:column;align-items:flex-end}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="head">
+    <div class="brand">
+      <img src="assets/g4next-logo.png" alt="G4">
+      <h1>Core Slides <em>Órbita</em></h1>
+    </div>
+    <div class="meta" id="meta">v5 · 16:9 · paper + navy + gold</div>
+  </header>
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="present-actions">
+  <button class="presenter-btn" id="presenterBtn" type="button">Modo apresentador</button>
+  <button class="present-btn" id="presentBtn" type="button">Apresentar →</button>
+</div>
+
+<div class="present" id="present"><iframe id="presentFrame" src=""></iframe></div>
+
+<nav class="hud" id="hud" aria-label="Controles">
+  <button id="prevBtn" type="button">← Anterior</button>
+  <span class="counter" id="counter"><b>01</b> / 52</span>
+  <button id="nextBtn" type="button">Próximo →</button>
+  <button id="closeBtn" type="button">Fechar (Esc)</button>
+</nav>
+
+<section class="presenter" id="presenter" aria-label="Modo apresentador">
+  <div class="presenter-main">
+    <div class="presenter-label">Slide atual · tela do público</div>
+    <div class="presenter-current" id="presenterCurrent"><iframe id="presenterCurrentFrame" title="Slide atual"></iframe></div>
+  </div>
+  <aside class="presenter-side">
+    <div class="presenter-next-wrap">
+      <div class="presenter-label">Próximo slide</div>
+      <div class="presenter-next" id="presenterNext"><iframe id="presenterNextFrame" title="Próximo slide"></iframe></div>
+    </div>
+    <div class="presenter-note-wrap">
+      <label class="presenter-label" for="presenterNotes">Notas do apresentador</label>
+      <textarea class="presenter-notes" id="presenterNotes" placeholder="Escreva as notas deste slide…"></textarea>
+      <div class="presenter-note-status" id="presenterNoteStatus">Salvas neste navegador</div>
+    </div>
+  </aside>
+  <nav class="presenter-controls" aria-label="Controles do apresentador">
+    <button id="presenterPrev" type="button">← Anterior</button>
+    <button class="primary" id="presenterNextBtn" type="button">Próximo →</button>
+    <span class="presenter-count" id="presenterCount"><b>01</b> / 01</span>
+    <span class="presenter-slide-name" id="presenterSlideName"></span>
+    <span class="spacer"></span>
+    <span class="presenter-timer" id="presenterTimer">00:00</span>
+    <button id="presenterTimerToggle" type="button">Pausar</button>
+    <button id="presenterTimerReset" type="button">Zerar</button>
+    <button id="audienceBtn" type="button">Tela do público</button>
+    <button id="presenterClose" type="button">Fechar (Esc)</button>
+  </nav>
+</section>
+
+<script>
+  const slides = [
+    { file:'01-capa.html',           name:'Capa' },
+    { file:'02-divisor.html',        name:'Divisor de capítulo' },
+    { file:'03-mentor.html',         name:'Mentor' },
+    { file:'04-quote.html',          name:'Quote editorial' },
+    { file:'05-agenda.html',         name:'Agenda' },
+    { file:'06-grafico-barras.html', name:'Gráfico de barras' },
+    { file:'07-grafico-linha.html',  name:'Gráfico de linha' },
+    { file:'08-donut.html',          name:'Donut / composição' },
+    { file:'09-stats.html',          name:'Stats' },
+    { file:'10-comparacao.html',     name:'Antes × depois' },
+    { file:'11-bento.html',          name:'Bento' },
+    { file:'12-passos.html',         name:'Método em passos' },
+    { file:'13-imagem.html',         name:'Imagem hero' },
+    { file:'14-tabela.html',         name:'Tabela de decisão' },
+    { file:'15-funil.html',          name:'Funil' },
+    { file:'16-encerramento.html',   name:'Encerramento' },
+    { file:'17-grafico-pizza.html',  name:'Pizza / composição' },
+    { file:'18-grafico-radar.html',  name:'Radar / capacidades' },
+    { file:'19-grafico-progresso.html', name:'Barras de progresso' },
+    { file:'20-matriz.html',         name:'Matriz 2×2' },
+    { file:'21-timeline.html',       name:'Timeline' },
+    { file:'22-fluxo.html',          name:'Fluxo ramificado' },
+    { file:'23-ciclo.html',          name:'Ciclo / loop' },
+    { file:'24-framework-camadas.html', name:'Framework de camadas' },
+    { file:'25-mockup.html',         name:'Mockup laptop' },
+    { file:'26-bento-claro.html',    name:'Bento claro' },
+    { file:'27-split.html',          name:'Split antes × depois' },
+    { file:'28-framework-venn.html', name:'Framework Venn' },
+    { file:'29-quote-foto.html',     name:'Quote com foto' },
+    { file:'30-quote-minima.html',   name:'Quote mínima' },
+    { file:'31-divisor-claro.html',  name:'Divisor claro' },
+    { file:'32-checklist.html',      name:'Checklist fazer × evitar' },
+    { file:'33-polos.html',          name:'Polos comparativos' },
+    { file:'34-ciclo-setas.html',    name:'Ciclo de setas' },
+    { file:'35-circulos-concentricos.html', name:'Círculos concêntricos' },
+    { file:'36-arvore.html',         name:'Árvore / hierarquia' },
+    { file:'37-cronograma.html',     name:'Cronograma multi-dia' },
+    { file:'38-triangulo.html',      name:'Triângulo estratégico' },
+    { file:'39-texto.html',          name:'Manifesto tipográfico' },
+    { file:'40-tabela-dados.html',   name:'Tabela de dados' },
+    { file:'41-barras-comparativas.html', name:'Barras comparativas' },
+    { file:'42-linhas-competindo.html',   name:'Linhas competindo' },
+    { file:'43-cards-icones.html',        name:'Cards com ícones' },
+    { file:'44-empilhadas.html',          name:'Empilhadas 100%' },
+    { file:'45-kpi-grid.html',            name:'Grid de KPIs' },
+    { file:'46-roadmap.html',             name:'Roadmap por fases' },
+    { file:'47-perguntas.html',           name:'Perguntas da aula' },
+    { file:'48-planos.html',              name:'Planos / pricing' },
+    { file:'49-equipe.html',              name:'Equipe' },
+    { file:'50-provas.html',              name:'Prova social' },
+    { file:'51-conceito-imagem.html',     name:'Conceito + imagem' },
+    { file:'52-exercicio.html',           name:'Exercício prático' },
+  ];
+
+  const grid = document.getElementById('grid');
+  slides.forEach((s, i) => {
+    const a = document.createElement('a');
+    a.className = 'card'; a.href = s.file;
+    a.addEventListener('click', (e) => { e.preventDefault(); openPresent(i); });
+    const frame = document.createElement('div'); frame.className = 'frame';
+    const ifr = document.createElement('iframe');
+    ifr.src = s.file; ifr.setAttribute('scrolling','no'); ifr.setAttribute('loading','lazy');
+    ifr.addEventListener('load', () => fitCard(frame, ifr));
+    frame.appendChild(ifr); a.appendChild(frame);
+    const info = document.createElement('div'); info.className = 'info';
+    info.innerHTML = `<span class="num">${String(i+1).padStart(2,'0')}</span>
+      <span class="name">${s.name}</span><span class="open">abrir ↗</span>`;
+    a.appendChild(info); grid.appendChild(a);
+  });
+  function fitCard(frame, ifr){
+    ifr.style.transform = `scale(${Math.min(frame.clientWidth/1600, frame.clientHeight/900)})`;
+  }
+  function fitAllCards(){
+    document.querySelectorAll('.card .frame').forEach(f => fitCard(f, f.querySelector('iframe')));
+  }
+  addEventListener('resize', fitAllCards);
+
+  // apresentação
+  const frame = document.getElementById('presentFrame');
+  const counter = document.getElementById('counter');
+  let idx = 0;
+  function fitPresent(){
+    const s = Math.min(innerWidth/1600, innerHeight/900);
+    frame.style.transform = `translate(-50%,-50%) scale(${s})`;
+  }
+  function load(i){
+    idx = (i + slides.length) % slides.length;
+    frame.src = slides[idx].file;
+    counter.innerHTML = `<b>${String(idx+1).padStart(2,'0')}</b> / ${slides.length}`;
+  }
+  function openPresent(i){ load(i); document.body.classList.add('presenting'); fitPresent(); }
+  addEventListener('resize', fitPresent);
+  frame.addEventListener('load', fitPresent);
+
+  document.getElementById('presentBtn').onclick = () => openPresent(0);
+  document.getElementById('nextBtn').onclick = () => load(idx+1);
+  document.getElementById('prevBtn').onclick = () => load(idx-1);
+  document.getElementById('closeBtn').onclick = closePresent;
+  function closePresent(){ document.body.classList.remove('presenting'); frame.src=''; }
+
+  document.getElementById('present').addEventListener('click', (e) => {
+    if (e.target.closest('.hud')) return;
+    load(idx+1);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!document.body.classList.contains('presenting')) return;
+    if (['ArrowRight',' ','PageDown','Enter'].includes(e.key)) { e.preventDefault(); load(idx+1); }
+    if (['ArrowLeft','PageUp','Backspace'].includes(e.key))    { e.preventDefault(); load(idx-1); }
+    if (e.key === 'Escape') closePresent();
+    if (e.key === 'Home') load(0);
+    if (e.key === 'End')  load(slides.length-1);
+  });
+
+
+  // modo apresentador: esta janela vira o painel; uma segunda janela exibe apenas o slide.
+  const presenterCurrentFrame = document.getElementById('presenterCurrentFrame');
+  const presenterNextFrame = document.getElementById('presenterNextFrame');
+  const presenterNotes = document.getElementById('presenterNotes');
+  const presenterCount = document.getElementById('presenterCount');
+  const presenterSlideName = document.getElementById('presenterSlideName');
+  const presenterTimer = document.getElementById('presenterTimer');
+  const presenterTimerToggle = document.getElementById('presenterTimerToggle');
+  const countDigits = String(slides.length).length;
+  let audienceWindow = null;
+  let audienceFrame = null;
+  let timerStartedAt = 0;
+  let timerElapsed = 0;
+  let timerRunning = false;
+  let timerInterval = null;
+
+  function slideUrl(i){ return new URL(slides[i].file, location.href).href; }
+  function fitPreview(box, ifr){
+    const scale = Math.min(box.clientWidth / 1600, box.clientHeight / 900);
+    ifr.style.transform = `scale(${scale})`;
+  }
+  function fitPresenter(){
+    fitPreview(document.getElementById('presenterCurrent'), presenterCurrentFrame);
+    fitPreview(document.getElementById('presenterNext'), presenterNextFrame);
+  }
+  function noteKey(){ return `g4-presenter-notes:${location.pathname}:${slides[idx].file}`; }
+  function loadNotes(){
+    let saved = '';
+    try { saved = localStorage.getItem(noteKey()) || ''; } catch (_) {}
+    presenterNotes.value = saved || slides[idx].notes || '';
+  }
+  presenterNotes.addEventListener('input', () => {
+    try { localStorage.setItem(noteKey(), presenterNotes.value); } catch (_) {}
+  });
+
+  function audienceDocument(){
+    return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Tela do público · Core Slides G4</title><style>
+      *{box-sizing:border-box;margin:0;padding:0}html,body{width:100%;height:100%;overflow:hidden;background:#05080b}
+      #audienceStage{position:fixed;inset:0}#audienceFrame{position:absolute;left:50%;top:50%;width:1600px;height:900px;border:0;transform-origin:center}
+      #fullscreen{position:fixed;right:20px;bottom:20px;z-index:2;padding:11px 17px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(0,21,37,.88);color:#F2F6F9;font:11px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;opacity:.18;transition:opacity .2s}
+      #fullscreen:hover{opacity:1}
+    </style></head><body><div id="audienceStage"><iframe id="audienceFrame" title="Apresentação"></iframe></div><button id="fullscreen" type="button">Tela cheia</button></body></html>`;
+  }
+  function fitAudience(){
+    if (!audienceWindow || audienceWindow.closed || !audienceFrame) return;
+    const scale = Math.min(audienceWindow.innerWidth / 1600, audienceWindow.innerHeight / 900);
+    audienceFrame.style.transform = `translate(-50%,-50%) scale(${scale})`;
+  }
+  function openAudienceWindow(){
+    if (audienceWindow && !audienceWindow.closed) { audienceWindow.focus(); syncAudience(); return true; }
+    audienceWindow = window.open('', 'g4-slides-audience', 'popup=yes,width=1280,height=720');
+    if (!audienceWindow) {
+      alert('O navegador bloqueou a tela do público. Libere pop-ups para este arquivo/site e tente novamente.');
+      return false;
+    }
+    audienceWindow.document.open();
+    audienceWindow.document.write(audienceDocument());
+    audienceWindow.document.close();
+    audienceFrame = audienceWindow.document.getElementById('audienceFrame');
+    audienceWindow.document.getElementById('fullscreen').addEventListener('click', () => {
+      audienceWindow.document.documentElement.requestFullscreen?.();
+    });
+    audienceWindow.addEventListener('resize', fitAudience);
+    audienceWindow.addEventListener('keydown', (e) => handlePresenterKey(e));
+    audienceWindow.document.getElementById('audienceStage').addEventListener('click', () => presenterLoad(idx + 1));
+    syncAudience();
+    audienceWindow.focus();
+    return true;
+  }
+  function syncAudience(){
+    if (!audienceWindow || audienceWindow.closed || !audienceFrame) return;
+    audienceFrame.src = slideUrl(idx);
+    fitAudience();
+  }
+  function presenterLoad(i){
+    idx = Math.max(0, Math.min(i, slides.length - 1));
+    const next = Math.min(idx + 1, slides.length - 1);
+    presenterCurrentFrame.src = slides[idx].file;
+    presenterNextFrame.src = slides[next].file;
+    presenterCount.innerHTML = `<b>${String(idx + 1).padStart(countDigits,'0')}</b> / ${slides.length}`;
+    presenterSlideName.textContent = slides[idx].name;
+    loadNotes();
+    syncAudience();
+    requestAnimationFrame(fitPresenter);
+  }
+  function openPresenter(i = 0){
+    closePresent();
+    if (!openAudienceWindow()) return;
+    document.body.classList.add('presenter-mode');
+    presenterLoad(i);
+    startTimer(true);
+    fitPresenter();
+  }
+  function closePresenter(){
+    document.body.classList.remove('presenter-mode');
+    presenterCurrentFrame.src = '';
+    presenterNextFrame.src = '';
+    if (audienceWindow && !audienceWindow.closed) audienceWindow.close();
+    audienceWindow = null; audienceFrame = null;
+    stopTimer();
+  }
+  function formatTimer(ms){
+    const total = Math.floor(ms / 1000);
+    return `${String(Math.floor(total / 60)).padStart(2,'0')}:${String(total % 60).padStart(2,'0')}`;
+  }
+  function updateTimer(){
+    const elapsed = timerElapsed + (timerRunning ? Date.now() - timerStartedAt : 0);
+    presenterTimer.textContent = formatTimer(elapsed);
+  }
+  function startTimer(reset = false){
+    if (reset) timerElapsed = 0;
+    if (!timerRunning) { timerStartedAt = Date.now(); timerRunning = true; }
+    clearInterval(timerInterval); timerInterval = setInterval(updateTimer, 500);
+    presenterTimerToggle.textContent = 'Pausar'; updateTimer();
+  }
+  function pauseTimer(){
+    if (!timerRunning) return;
+    timerElapsed += Date.now() - timerStartedAt; timerRunning = false;
+    presenterTimerToggle.textContent = 'Continuar'; updateTimer();
+  }
+  function stopTimer(){ clearInterval(timerInterval); timerInterval = null; timerRunning = false; }
+  function handlePresenterKey(e){
+    if (!document.body.classList.contains('presenter-mode')) return;
+    const tag = e.target?.tagName?.toLowerCase();
+    if (tag === 'textarea' || tag === 'input' || tag === 'select' || e.target?.isContentEditable) return;
+    if (['ArrowRight',' ','PageDown','Enter'].includes(e.key)) { e.preventDefault(); presenterLoad(idx + 1); }
+    if (['ArrowLeft','PageUp','Backspace'].includes(e.key)) { e.preventDefault(); presenterLoad(idx - 1); }
+    if (e.key === 'Home') { e.preventDefault(); presenterLoad(0); }
+    if (e.key === 'End') { e.preventDefault(); presenterLoad(slides.length - 1); }
+    if (e.key === 'Escape') { e.preventDefault(); closePresenter(); }
+  }
+
+  document.getElementById('presenterBtn').addEventListener('click', () => openPresenter(0));
+  document.getElementById('presenterPrev').addEventListener('click', () => presenterLoad(idx - 1));
+  document.getElementById('presenterNextBtn').addEventListener('click', () => presenterLoad(idx + 1));
+  document.getElementById('presenterClose').addEventListener('click', closePresenter);
+  document.getElementById('audienceBtn').addEventListener('click', openAudienceWindow);
+  document.getElementById('presenterTimerReset').addEventListener('click', () => startTimer(true));
+  presenterTimerToggle.addEventListener('click', () => timerRunning ? pauseTimer() : startTimer());
+  presenterCurrentFrame.addEventListener('load', fitPresenter);
+  presenterNextFrame.addEventListener('load', fitPresenter);
+  addEventListener('resize', fitPresenter);
+  document.addEventListener('keydown', handlePresenterKey);
+</script>
+</body>
+</html>

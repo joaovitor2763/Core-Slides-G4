@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>17 · Gráfico de pizza</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Pizza (light): fatias grossas via conic-gradient com furo pequeno
+     (120px) dentro de um surface à esquerda; total no centro. Legenda à
+     direita como linhas editorais (dot + label + valor + share) separadas
+     por border sutil — sem mini-cards, para diferir do 08-donut. */
+
+  .head{position:absolute;left:var(--pad);top:104px;max-width:1000px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:58px}
+
+  /* card da pizza: left 96 + 620 = 716 · top 288 + 516 = 804 = 900 − 96 ✓ */
+  .pie-card{position:absolute;left:var(--pad);top:288px;width:620px;height:516px;
+    display:grid;place-items:center}
+
+  /* fatias · total R$ 96M:
+     gold           0 → 46%   Automação comercial  R$ 44,2M
+     rgba(.16)     46 → 73%   Atendimento & CS     R$ 25,9M
+     rgba(.11)     73 → 90%   Back-office          R$ 16,3M
+     rgba(.07)     90 → 100%  Dados & P&D          R$  9,6M */
+  .pie{position:relative;width:440px;height:440px;border-radius:50%;
+    background:conic-gradient(
+      var(--gold-500)      0 46%,
+      rgba(0,31,53,.16)   46% 73%,
+      rgba(0,31,53,.11)   73% 90%,
+      rgba(0,31,53,.07)   90% 100%)}
+  /* furo pequeno: 440 − 2·160 = 120px de diâmetro */
+  .pie::after{content:'';position:absolute;inset:160px;border-radius:50%;
+    background:var(--surface);box-shadow:inset 0 2px 8px rgba(0,31,53,.06)}
+  .pie .center{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:4px}
+  .pie .center .num{font-size:24px}
+  .pie .center .mono-label{font-size:9px;letter-spacing:.12em}
+
+  /* legenda: 716 + 56 = 772 · 772 + 732 + 96 = 1600 ✓ · mesma altura do card */
+  .legend{position:absolute;left:772px;right:var(--pad);top:288px;height:516px;
+    display:flex;flex-direction:column}
+  .row{flex:1;display:flex;align-items:center;gap:18px;border-top:1px solid var(--border)}
+  .row:first-child{border-top:none}
+  .row .dot{width:13px;height:13px;border-radius:50%;flex:none}
+  .row .name{font-size:19px;font-weight:500;color:var(--text-1)}
+  .row .hint{display:block;margin-top:5px}
+  .row .end{margin-left:auto;display:flex;align-items:baseline;gap:18px}
+  .row .val{font-size:28px}
+  .row .share{width:86px;text-align:right}
+
+  .row--gold .dot{background:var(--gold-500)}
+  .row--gold .val{color:var(--gold)}
+  .d2{background:rgba(0,31,53,.16)}
+  .d3{background:rgba(0,31,53,.11)}
+  .d4{background:rgba(0,31,53,.07);border:1px solid var(--border-2)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Orçamento 2026">
+
+    <header class="head">
+      <div class="eyebrow">Investimento · IA na operação</div>
+      <h1 class="h-serif">Capital segue o <em>gargalo.</em></h1>
+    </header>
+
+    <section class="pie-card surface">
+      <div class="pie" role="img" aria-label="Automação comercial concentra 46% dos R$ 96 milhões investidos">
+        <div class="center">
+          <span class="num">R$ 96M</span>
+          <span class="mono-label">Total 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <aside class="legend">
+      <div class="row row--gold">
+        <span class="dot" aria-hidden="true"></span>
+        <div>
+          <span class="name">Automação comercial</span>
+          <span class="small hint">Prospecção, propostas e follow-up sem toque manual</span>
+        </div>
+        <div class="end">
+          <span class="num val">R$ 44,2M</span>
+          <span class="mono-label share">46%</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="dot d2" aria-hidden="true"></span>
+        <div><span class="name">Atendimento &amp; CS</span></div>
+        <div class="end">
+          <span class="num val">R$ 25,9M</span>
+          <span class="mono-label share">27%</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="dot d3" aria-hidden="true"></span>
+        <div><span class="name">Back-office</span></div>
+        <div class="end">
+          <span class="num val">R$ 16,3M</span>
+          <span class="mono-label share">17%</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="dot d4" aria-hidden="true"></span>
+        <div><span class="name">Dados &amp; P&amp;D</span></div>
+        <div class="end">
+          <span class="num val">R$ 9,6M</span>
+          <span class="mono-label share">10%</span>
+        </div>
+      </div>
+    </aside>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

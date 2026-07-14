@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>61 · Galeria de retratos</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Galeria de retratos (dark): painel editorial limpo à esquerda
+     (x 96–520 → 424px) com título serif 54px, e 3 cartões-retrato
+     verticais à direita, cada um com chip de categoria no topo e
+     nome/cargo sobre gradiente na base.
+
+     Somas de px (horizontal):
+       cartões em x 560 / 880 / 1200, largura 300px, gap 20px
+       3×300 + 2×20 = 940 · 560 + 940 = 1500 ✓ (≤ 1504)
+     Vertical: top 96 → bottom 804 = altura 708px ✓ */
+
+  /* painel esquerdo: 96 + 424 = 520 ✓ */
+  .panel{position:absolute;left:var(--pad);top:296px;width:424px}
+  .panel h1{font-size:54px}
+  .panel .note{margin-top:26px;max-width:360px}
+
+  /* cartão-retrato 300×708 */
+  .card{position:absolute;top:96px;width:300px;height:708px;
+    border-radius:var(--r-lg);overflow:hidden;margin:0;
+    border:1px solid var(--border-2);box-shadow:var(--shadow-lg)}
+  .card--1{left:560px}
+  .card--2{left:880px}   /* 560 + 300 + 20 = 880 ✓ */
+  .card--3{left:1200px}  /* 880 + 300 + 20 = 1200 · +300 = 1500 ✓ */
+
+  /* placeholder de retrato ocupando o cartão inteiro */
+  .ph{position:absolute;inset:0;
+    background:linear-gradient(180deg,#31465A 0%,#16283A 70%,#0B1926 100%)}
+  .ph .initials{position:absolute;left:50%;top:34%;transform:translate(-50%,-50%);
+    font-family:var(--serif);font-weight:500;font-size:72px;line-height:1;
+    letter-spacing:.02em;color:rgba(230,238,243,.25)}
+
+  /* chip de categoria centrado no topo do cartão */
+  .cat{position:absolute;top:24px;left:50%;transform:translateX(-50%);
+    white-space:nowrap;box-shadow:var(--shadow-sm)}
+
+  /* base do cartão: gradiente escurecendo para legibilidade do nome */
+  .foot{position:absolute;left:0;right:0;bottom:0;padding:130px 28px 30px;
+    background:linear-gradient(180deg,rgba(11,25,38,0) 0%,rgba(9,20,31,.62) 46%,rgba(5,13,21,.94) 100%)}
+  .foot .name{font-size:30px;line-height:1.16}
+  .foot .name .last{font-style:italic;font-weight:400}
+  .foot .role{margin-top:10px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <div class="panel">
+      <h1 class="h-serif">Lorem ipsum dolor <em>eiusmod</em> sed&nbsp;amet</h1>
+      <p class="small note">*Lorem ipsum dolor sit amet consectetur elit&nbsp;et&nbsp;sed.</p>
+    </div>
+
+    <!-- para usar foto real: substitua o div .ph por
+         <img src="assets/sua-foto.jpg" alt="Nome" style="width:100%;height:100%;object-fit:cover"> -->
+    <figure class="card card--1" aria-label="Misa Antonini, CEO do G4">
+      <div class="ph" aria-hidden="true"><span class="initials">LI</span></div>
+      <span class="chip cat">consectetur et labore</span>
+      <figcaption class="foot">
+        <div class="h-serif name">Lorem<br><span class="dim last">Ipsum</span></div>
+        <div class="small role">Lorem ipsum</div>
+      </figcaption>
+    </figure>
+
+    <figure class="card card--2" aria-label="João Vitor, CPTO do G4">
+      <div class="ph" aria-hidden="true"><span class="initials">DS</span></div>
+      <span class="chip cat">adipiscing consectetur</span>
+      <figcaption class="foot">
+        <div class="h-serif name">Dolor<br><span class="dim last">Sit</span></div>
+        <div class="small role">Amet ipsum</div>
+      </figcaption>
+    </figure>
+
+    <figure class="card card--3" aria-label="Francisco Bezerra, COO do G4">
+      <div class="ph" aria-hidden="true"><span class="initials">AE</span></div>
+      <span class="chip cat">incididunt labore</span>
+      <figcaption class="foot">
+        <div class="h-serif name">Amet<br><span class="dim last">Elit</span></div>
+        <div class="small role">Sed tempor</div>
+      </figcaption>
+    </figure>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

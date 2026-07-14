@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>33 · Polos</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Dois polos comparativos: círculo esquerdo discreto (.surface) vs
+     círculo direito em gradiente gold, cada um com 4 spokes radiais
+     (linha 1.2 + dot terminal + label mono). Entre eles, seta tracejada
+     horizontal com label do processo. Título serif no topo centro-esquerda.
+
+     Geometria dos círculos (Ø 300 · r 150):
+       esquerdo  → centro (430,555) · box left 280, top 405
+       direito   → centro (1170,555) · box left 1020, top 405
+       bottom 405+300 = 705 < 804 ✓ · right 1020+300 = 1320 < 1504 ✓
+
+     Spokes (ponto na borda = r150 · dot externo = r225 diag / r210 horiz):
+       ESQ θ=130° cos −.643 sin .766 → borda (430−96,555−115)=(334,440) · fim (285,383)
+       ESQ θ=165° cos −.966 sin .259 → borda (285,516) · fim r210 (227,501)
+       ESQ θ=195°                    → borda (285,594) · fim (227,609)
+       ESQ θ=230°                    → borda (334,670) · fim (285,727)
+       DIR θ= 50° cos .643 sin .766  → borda (1266,440) · fim (1315,383)
+       DIR θ= 15° cos .966 sin .259  → borda (1315,516) · fim r210 (1373,501)
+       DIR θ=−15°                    → borda (1315,594) · fim (1373,609)
+       DIR θ=−50°                    → borda (1266,670) · fim (1315,727)
+     Labels esq: right = 1600 − (x_dot − 12) · labels dir: left = x_dot + 12
+     Label mais à esquerda ("caixa de entrada" ≈112px): 1600−1385−112 = 103 ≥ 96 ✓ */
+
+  .head{position:absolute;left:var(--pad);top:84px}
+  .head .eyebrow{margin-bottom:26px}
+  .head h1{font-size:56px}
+
+  .pole{position:absolute;width:300px;height:300px;border-radius:50%;
+    display:grid;place-items:center;text-align:center}
+  .pole .name{font-family:var(--num);font-weight:600;font-size:26px;letter-spacing:-.01em}
+
+  .pole--off{left:280px;top:405px;background:var(--surface);border:1px solid var(--border-2)}
+  .pole--off .name{color:var(--text-2)}
+
+  .pole--on{left:1020px;top:405px;
+    background:linear-gradient(165deg,var(--gold-300),var(--gold-700));
+    box-shadow:var(--shadow-lg),0 0 0 6px var(--gold-dim)}
+  .pole--on .name{color:var(--on-gold)}
+
+  /* spokes + seta central */
+  .wires{position:absolute;inset:0;pointer-events:none}
+  .wires .spoke{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .wires .dot-ring{fill:var(--text-3)}
+  .wires .dot-tip{fill:var(--text-3);opacity:.7}
+  .wires .flow{stroke:var(--text-3);stroke-width:1.2;opacity:.55;stroke-dasharray:6 8}
+  .wires .flow-head{fill:var(--text-3);opacity:.7}
+
+  .spoke-label{position:absolute;transform:translateY(-50%);
+    font-family:var(--mono);font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--text-3);white-space:nowrap}
+  .spoke-label--l{text-align:right}
+
+  .flow-label{position:absolute;left:800px;top:523px;transform:translate(-50%,-50%);
+    font-family:var(--mono);font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text-3);white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Diagnóstico">
+
+    <header class="head">
+      <div class="eyebrow">Antes · depois</div>
+      <h1 class="h-serif">O mesmo time, <em>dois sistemas.</em></h1>
+    </header>
+
+    <!-- spokes: dot r5 ancora na borda do círculo · dot r3 junto ao texto -->
+    <svg class="wires" viewBox="0 0 1600 900" aria-hidden="true">
+      <!-- polo esquerdo · centro (430,555) r150 -->
+      <line class="spoke" x1="334" y1="440" x2="285" y2="383"/>
+      <circle class="dot-ring" cx="334" cy="440" r="5"/>
+      <circle class="dot-tip"  cx="285" cy="383" r="3"/>
+
+      <line class="spoke" x1="285" y1="516" x2="227" y2="501"/>
+      <circle class="dot-ring" cx="285" cy="516" r="5"/>
+      <circle class="dot-tip"  cx="227" cy="501" r="3"/>
+
+      <line class="spoke" x1="285" y1="594" x2="227" y2="609"/>
+      <circle class="dot-ring" cx="285" cy="594" r="5"/>
+      <circle class="dot-tip"  cx="227" cy="609" r="3"/>
+
+      <line class="spoke" x1="334" y1="670" x2="285" y2="727"/>
+      <circle class="dot-ring" cx="334" cy="670" r="5"/>
+      <circle class="dot-tip"  cx="285" cy="727" r="3"/>
+
+      <!-- polo direito · centro (1170,555) r150 -->
+      <line class="spoke" x1="1266" y1="440" x2="1315" y2="383"/>
+      <circle class="dot-ring" cx="1266" cy="440" r="5"/>
+      <circle class="dot-tip"  cx="1315" cy="383" r="3"/>
+
+      <line class="spoke" x1="1315" y1="516" x2="1373" y2="501"/>
+      <circle class="dot-ring" cx="1315" cy="516" r="5"/>
+      <circle class="dot-tip"  cx="1373" cy="501" r="3"/>
+
+      <line class="spoke" x1="1315" y1="594" x2="1373" y2="609"/>
+      <circle class="dot-ring" cx="1315" cy="594" r="5"/>
+      <circle class="dot-tip"  cx="1373" cy="609" r="3"/>
+
+      <line class="spoke" x1="1266" y1="670" x2="1315" y2="727"/>
+      <circle class="dot-ring" cx="1266" cy="670" r="5"/>
+      <circle class="dot-tip"  cx="1315" cy="727" r="3"/>
+
+      <!-- seta tracejada entre os polos · y 555 · x 612 → 968 -->
+      <line class="flow" x1="612" y1="555" x2="952" y2="555"/>
+      <polygon class="flow-head" points="950,546 968,555 950,564"/>
+    </svg>
+
+    <span class="flow-label">processo de decisão</span>
+
+    <!-- labels dos spokes esquerdos (right = 1600 − x_dot + 12) -->
+    <span class="spoke-label spoke-label--l" style="right:1327px;top:383px">achismo</span>
+    <span class="spoke-label spoke-label--l" style="right:1385px;top:501px">caixa de entrada</span>
+    <span class="spoke-label spoke-label--l" style="right:1385px;top:609px">retrabalho</span>
+    <span class="spoke-label spoke-label--l" style="right:1327px;top:727px">velocidade manual</span>
+
+    <!-- labels dos spokes direitos (left = x_dot + 12) -->
+    <span class="spoke-label" style="left:1327px;top:383px">dados</span>
+    <span class="spoke-label" style="left:1385px;top:501px">fila priorizada</span>
+    <span class="spoke-label" style="left:1385px;top:609px">gate humano</span>
+    <span class="spoke-label" style="left:1327px;top:727px">velocidade composta</span>
+
+    <div class="pole pole--off"><span class="name">Sem fluxo</span></div>
+    <div class="pole pole--on"><span class="name">Com fluxo</span></div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

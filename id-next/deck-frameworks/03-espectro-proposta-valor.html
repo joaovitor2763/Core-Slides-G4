@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>03 · Espectro de proposta de valor</title>
+<link rel="stylesheet" href="style.css?v=next1">
+<style>
+  /* Framework 03 · três níveis concêntricos: prospect, produto e processo.
+     Centro do diagrama (475,510). Raios 285/205/118. A fatia Prospect A
+     é o único destaque gold; perguntas à direita traduzem cada camada. */
+  .head{position:absolute;left:96px;top:76px}.head .eyebrow{margin-bottom:18px}.head h1{font-size:46px}
+  .diagram{position:absolute;left:112px;top:212px;width:726px;height:590px}
+  .rings{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .rings::before,.rings::after{display:none}
+  .rings .outer-band{fill:none;stroke:rgba(255,255,255,.07);stroke-width:68}
+  .rings .bead{fill:var(--bg)}
+  .mid{position:absolute;left:158px;top:90px;width:410px;height:410px;border-radius:50%;background:rgba(255,255,255,.035);border:2px solid var(--border-2)}
+  .guide{position:absolute;left:203px;top:135px;width:320px;height:320px;border-radius:50%;border:1px dashed var(--border)}
+  .leader{position:absolute;height:0;border-top:1.4px dashed var(--text-3);opacity:.65}
+  .anchor{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--text-3);opacity:.85}
+  .cwire{position:absolute;overflow:visible}
+  .cwire path{fill:none;stroke:var(--text-3);stroke-width:1.2;opacity:.5}
+  .cring{position:absolute;left:543px;top:445px;width:112px;height:112px;border-radius:50%;border:1.5px dashed var(--border-2)}
+  .cstep{position:absolute;width:26px;height:26px;border-radius:50%;background:var(--navy-600);border:1px solid var(--border-2);display:grid;place-items:center;font:600 11px var(--num);color:var(--text-2);z-index:2}
+  .conv-label{position:absolute;left:838px;top:687px;width:190px;font:500 11px/1.6 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+  .core{position:absolute;left:246px;top:171px;width:236px;height:236px;border-radius:50%;background:conic-gradient(from -30deg,var(--gold) 0 120deg,rgba(255,255,255,.17) 120deg 240deg,rgba(255,255,255,.10) 240deg 360deg);display:grid;place-items:center}
+  .core::after{content:'';position:absolute;inset:58px;border-radius:50%;background:var(--bg);border:1px solid var(--border-2)}
+  .core-label{position:relative;z-index:1;width:110px;text-align:center;font:600 18px/1.15 var(--num);color:var(--text-1)}
+  .sector{position:absolute;width:80px;text-align:center;font:500 9.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-2)}
+  .sector.a{left:122px;top:30px;color:var(--on-gold)}.sector.b{left:122px;top:182px}.sector.c{left:-11px;top:106px;transform:rotate(-90deg)}
+  .product{position:absolute;width:62px;height:62px;border-radius:50%;background:var(--navy-600);border:1px solid var(--border-2);display:grid;place-items:center;text-align:center;font:500 9.5px/1.15 var(--mono);color:var(--text-2)}
+  /* ofertas no anel r160 (a cada 45°), como na referência — dentro do disco, fora das contas */
+  .p1{left:332px;top:104px}.p2{left:445px;top:151px}.p3{left:492px;top:264px}.p4{left:445px;top:377px}.p5{left:332px;top:424px}.p6{left:219px;top:377px}.p7{left:172px;top:264px}.p8{left:219px;top:151px}
+  .level{position:absolute;left:0;width:116px;padding:8px 12px;border-radius:999px;border:1px solid var(--border-2);background:var(--surface);font:500 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);text-align:center}
+  .l1{top:72px}.l2{top:272px}.l3{top:326px}
+  .questions{position:absolute;left:920px;top:226px;width:584px;display:grid;gap:14px}
+  .q{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:19px 22px;border:1px solid var(--border);border-radius:16px;background:var(--surface)}
+  .q .n{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);font:600 13px var(--num);color:var(--text-3)}
+  .q strong{display:block;font:600 17px var(--num);color:var(--text-1);margin-bottom:4px}.q p{font-size:14px;line-height:1.45;color:var(--text-3)}
+  .q--gold{border-color:var(--gold-border);background:var(--gold-dim)}.q--gold .n{background:var(--gold);color:var(--on-gold)}
+</style>
+<meta id="acfifjfajpekbmhmjppnmmjgmhjkildl"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Frameworks · proposta de valor">
+    <header class="head"><div class="eyebrow">Framework · níveis de decisão</div><h1 class="h-serif">A proposta muda conforme <em>a distância do cliente.</em></h1></header>
+
+    <div class="diagram">
+      <svg class="rings" viewBox="0 0 726 590" aria-hidden="true">
+        <circle class="outer-band" cx="363" cy="295" r="239"></circle>
+        <g class="bead">
+          <circle cx="363.0" cy="56.0" r="21"></circle><circle cx="416.2" cy="62.0" r="21"></circle><circle cx="466.7" cy="79.7" r="21"></circle><circle cx="512.0" cy="108.1" r="21"></circle>
+          <circle cx="549.9" cy="146.0" r="21"></circle><circle cx="578.3" cy="191.3" r="21"></circle><circle cx="596.0" cy="241.8" r="21"></circle><circle cx="602.0" cy="295.0" r="21"></circle>
+          <circle cx="596.0" cy="348.2" r="21"></circle><circle cx="578.3" cy="398.7" r="21"></circle><circle cx="549.9" cy="444.0" r="21"></circle><circle cx="512.0" cy="481.9" r="21"></circle>
+          <circle cx="466.7" cy="510.3" r="21"></circle><circle cx="416.2" cy="528.0" r="21"></circle><circle cx="363.0" cy="534.0" r="21"></circle><circle cx="309.8" cy="528.0" r="21"></circle>
+          <circle cx="259.3" cy="510.3" r="21"></circle><circle cx="214.0" cy="481.9" r="21"></circle><circle cx="176.1" cy="444.0" r="21"></circle><circle cx="147.7" cy="398.7" r="21"></circle>
+          <circle cx="130.0" cy="348.2" r="21"></circle><circle cx="124.0" cy="295.0" r="21"></circle><circle cx="130.0" cy="241.8" r="21"></circle><circle cx="147.7" cy="191.3" r="21"></circle>
+          <circle cx="176.1" cy="146.0" r="21"></circle><circle cx="214.0" cy="108.1" r="21"></circle><circle cx="259.3" cy="79.7" r="21"></circle><circle cx="309.8" cy="62.0" r="21"></circle>
+        </g>
+      </svg>
+      <div class="mid" aria-hidden="true"></div>
+      <div class="guide" aria-hidden="true"></div>
+      <div class="leader" style="left:124px;top:88px;width:60px" aria-hidden="true"></div><div class="anchor" style="left:181px;top:86px" aria-hidden="true"></div>
+      <div class="leader" style="left:124px;top:288px;width:39px" aria-hidden="true"></div><div class="anchor" style="left:163px;top:286px" aria-hidden="true"></div>
+      <div class="leader" style="left:124px;top:342px;width:135px" aria-hidden="true"></div><div class="anchor" style="left:256px;top:340px" aria-hidden="true"></div>
+      <!-- etapas de conversão penduradas na Oferta 04 (pergunta 04) -->
+      <svg class="cwire" style="left:495px;top:425px" width="80" height="45" viewBox="0 0 80 45" aria-hidden="true"><path d="M3 3 Q45 16 72 37"/></svg>
+      <div class="cring" aria-hidden="true"></div>
+      <div class="leader" style="left:655px;top:500px;width:57px" aria-hidden="true"></div>
+      <span class="level l1">Processo</span><span class="level l2">Produto</span><span class="level l3">Prospect</span>
+      <div class="core" style="width: 236px; height: 236px; min-height: 0px;"><span class="core-label" style="position: absolute; margin: 0px; inset: 97px auto auto 63px; width: 110px; height: 41px; min-width: 0px;">Proposta<br>central</span><span class="sector a" style="position: absolute; margin: 0px; inset: 38px auto auto 106px; width: 80px; height: 12px; min-width: 0px; z-index: 20;">Prospect A</span><span class="sector b" style="position: absolute; margin: 0px; inset: 182px auto auto 122px; width: 80px; height: 12px; min-width: 0px;">Prospect B</span><span class="sector c" style="position: absolute; margin: 0px; inset: 74px auto auto 29px; width: 80px; height: 80px; min-width: 0px; z-index: 20;">Prospect C</span></div>
+      <span class="product p1">Oferta<br>01</span><span class="product p2">Oferta<br>02</span><span class="product p3">Oferta<br>03</span><span class="product p4">Oferta<br>04</span>
+      <span class="product p5">Oferta<br>05</span><span class="product p6">Oferta<br>06</span><span class="product p7">Oferta<br>07</span><span class="product p8">Oferta<br>08</span>
+      <span class="cstep" style="left:567px;top:457px">1</span>
+      <span class="cstep" style="left:587px;top:487px">2</span>
+      <span class="cstep" style="left:601px;top:517px">3</span>
+    </div>
+    <div class="conv-label">Etapas de conversão de uma oferta específica</div>
+
+    <aside class="questions">
+      <div class="q"><span class="n">01</span><div><strong>Nível do negócio</strong><p>Por que o cliente ideal compra de você — e não da alternativa?</p></div></div>
+      <div class="q q--gold"><span class="n">02</span><div><strong>Nível do prospect</strong><p>Por que este perfil específico deveria escolher sua tese central?</p></div></div>
+      <div class="q"><span class="n">03</span><div><strong>Nível do produto</strong><p>Por que esta oferta resolve melhor o trabalho que precisa ser feito?</p></div></div>
+      <div class="q"><span class="n">04</span><div><strong>Nível da conversão</strong><p>Por que cada mensagem e etapa merece o próximo clique?</p></div></div>
+    </aside>
+  </article>
+</div>
+<script>
+  const slide=document.querySelector('.slide');function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);slide.style.transform=`translate(-50%, -50%) scale(${s})`}addEventListener('resize',fit);fit();
+</script>
+
+
+</body></html>

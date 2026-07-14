@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>44 · Barras empilhadas 100%</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Composição 100% empilhada horizontal (light): 3 anos, cada linha é
+     um track de 1000px com segmentos lado a lado (pill nas pontas
+     externas via overflow do track). Manual escuro → assistido claro →
+     automatizado em gradiente gold, que cresce ano a ano. Ano em mono
+     à esquerda, % do segmento gold em .num à direita. */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:104px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:62px;max-width:800px}
+  .head .read{max-width:400px;padding-bottom:8px}
+
+  /* painel: 352 + 452 = 804 = 900 − 96 ✓ · interno 1408 − 128 = 1280 */
+  .panel{position:absolute;left:var(--pad);right:var(--pad);top:352px;bottom:96px;
+    padding:44px 64px 36px;display:flex;flex-direction:column}
+
+  .panel-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .legend{display:flex;gap:10px}
+  .legend .sw{width:10px;height:10px;border-radius:3px}
+  .sw--manual{background:rgba(0,31,53,.30)}
+  .sw--assist{background:rgba(0,31,53,.14)}
+  .sw--auto{background:linear-gradient(90deg,var(--gold-300),var(--gold-500))}
+
+  /* linhas: 140 (ano) + 24 + 1000 (track) + 24 + 92 (%) = 1280 ✓ */
+  .rows{flex:1;display:flex;flex-direction:column;justify-content:center;gap:38px}
+  .row{display:grid;grid-template-columns:140px 1000px 92px;column-gap:24px;align-items:center}
+  .row .yr{font-family:var(--mono);font-size:13px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+  .row .pct{font-family:var(--num);font-weight:600;font-size:30px;
+    letter-spacing:-.03em;color:var(--gold);text-align:right}
+
+  .track{display:flex;width:1000px;height:54px;border-radius:var(--r-pill);overflow:hidden}
+  .seg{height:100%}
+  .seg + .seg{margin-left:2px}
+  .seg--manual{background:rgba(0,31,53,.30)}
+  .seg--assist{background:rgba(0,31,53,.14)}
+  .seg--auto{background:linear-gradient(90deg,var(--gold-300),var(--gold-500))}
+
+  /* larguras pré-calculadas · track = 1000px (2 gaps internos de 2px
+     descontados do segmento maior de cada linha)
+     2024 · 72/23/5%  → 716 + 230 + 50  = 996 (+4 gap) = 1000 ✓
+     2025 · 48/34/18% → 476 + 340 + 180 = 996 (+4 gap) = 1000 ✓
+     2026 · 22/37/41% → 220 + 370 + 406 = 996 (+4 gap) = 1000 ✓ */
+  .w-2024-m{width:716px} .w-2024-a{width:230px} .w-2024-g{width:50px}
+  .w-2025-m{width:476px} .w-2025-a{width:340px} .w-2025-g{width:180px}
+  .w-2026-m{width:220px} .w-2026-a{width:370px} .w-2026-g{width:406px}
+
+  .note{margin-top:26px;padding-top:20px;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Trajetória">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Mix de execução</div>
+        <h1 class="h-serif">Cada ano, mais trabalho <em>roda sozinho.</em></h1>
+      </div>
+      <p class="body read">O volume total não muda — muda quem executa. Em dois anos, o automatizado sai de coadjuvante para quase metade da operação.</p>
+    </header>
+
+    <section class="panel surface">
+      <div class="panel-top">
+        <div class="legend">
+          <span class="chip"><span class="sw sw--manual"></span>Manual</span>
+          <span class="chip"><span class="sw sw--assist"></span>Assistido por IA</span>
+          <span class="chip chip--gold"><span class="sw sw--auto"></span>Automatizado</span>
+        </div>
+        <span class="mono-label">% do volume de entregas · operação</span>
+      </div>
+
+      <div class="rows">
+        <div class="row">
+          <span class="yr">2024</span>
+          <div class="track">
+            <div class="seg seg--manual w-2024-m"></div>
+            <div class="seg seg--assist w-2024-a"></div>
+            <div class="seg seg--auto w-2024-g"></div>
+          </div>
+          <span class="pct">5%</span>
+        </div>
+
+        <div class="row">
+          <span class="yr">2025</span>
+          <div class="track">
+            <div class="seg seg--manual w-2025-m"></div>
+            <div class="seg seg--assist w-2025-a"></div>
+            <div class="seg seg--auto w-2025-g"></div>
+          </div>
+          <span class="pct">18%</span>
+        </div>
+
+        <div class="row">
+          <span class="yr">2026</span>
+          <div class="track">
+            <div class="seg seg--manual w-2026-m"></div>
+            <div class="seg seg--assist w-2026-a"></div>
+            <div class="seg seg--auto w-2026-g"></div>
+          </div>
+          <span class="pct">41%</span>
+        </div>
+      </div>
+
+      <p class="small note">Composição estimada sobre o mesmo volume de entregas — o ganho vem da troca de executor, não de corte de escopo. 2026 = projeção com os fluxos já em produção.</p>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

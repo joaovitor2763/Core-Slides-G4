@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>05 · Agenda</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Agenda: título serif ancorado à esquerda (coluna de ~40%),
+     à direita 4 surfaces horizontais empilhadas com número mono ghost.
+     O bloco atual é surface--gold com chip "agora". */
+
+  /* coluna esquerda: x 96 → 656 (560px de largura, ~40% de 1600) */
+  .intro{position:absolute;left:var(--pad);top:150px;bottom:96px;width:560px;
+    display:flex;flex-direction:column;justify-content:center}
+  .intro .eyebrow{margin-bottom:26px}
+  .intro h1{font-size:76px}
+  .intro .note{margin-top:30px;max-width:420px}
+
+  /* coluna direita: x 720 → 1504 (784px) · y 150 → 804 (654px) */
+  .list{position:absolute;left:720px;right:var(--pad);top:150px;bottom:96px;
+    display:flex;flex-direction:column;gap:20px}
+
+  /* 4 itens · (654 − 3×20) / 4 = 148.5px cada (flex:1) */
+  .item{flex:1;border-radius:var(--r-md);padding:0 40px;
+    display:flex;align-items:center;gap:32px}
+  .item .idx{font-family:var(--mono);font-size:58px;font-weight:500;
+    letter-spacing:-.04em;color:var(--text-ghost);flex:0 0 88px}
+  .item .txt{min-width:0}
+  .item .name{font-family:var(--num);font-size:24px;font-weight:600;
+    letter-spacing:-.01em;color:var(--text-1);line-height:1.2}
+  .item .desc{margin-top:6px}
+  .item .side{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+
+  .item--now .idx{color:var(--gold);opacity:.45}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <div class="intro">
+      <div class="eyebrow">Lorem 02 · ipsum</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit <em>amet.</em></h1>
+      <p class="body note">Lorem ipsum dolor, sit amet consectetur adipiscing elit sed. Tempor incididunt labore magna aliqua — enim minim veniam quis nostrud.</p>
+    </div>
+
+    <section class="list">
+      <div class="item surface surface--flat">
+        <span class="idx num">01</span>
+        <div class="txt">
+          <div class="name">Lorem ipsum dolor sit amet elit</div>
+          <p class="small desc">Sed tempor incididunt labore — magna aliqua enim.</p>
+        </div>
+        <div class="side"><span class="chip">25 min</span></div>
+      </div>
+
+      <div class="item item--now surface surface--gold">
+        <span class="idx num">02</span>
+        <div class="txt">
+          <div class="name">Dolor sit amet consectetur elit</div>
+          <p class="small desc">Tempor sed incididunt: labore, magna aliqua, minim veniam.</p>
+        </div>
+        <div class="side">
+          <span class="chip chip--gold"><span class="dot"></span>lorem</span>
+          <span class="chip">40 min</span>
+        </div>
+      </div>
+
+      <div class="item surface surface--flat">
+        <span class="idx num">03</span>
+        <div class="txt">
+          <div class="name">Consectetur adipiscing elit sed</div>
+          <p class="small desc">Duis aute irure: voluptate velit cillum fugiat nulla.</p>
+        </div>
+        <div class="side"><span class="chip">55 min</span></div>
+      </div>
+
+      <div class="item surface surface--flat">
+        <span class="idx num">04</span>
+        <div class="txt">
+          <div class="name">Excepteur sint occaecat</div>
+          <p class="small desc">Quis nostrud, ullamco nisi, commodo duis aute.</p>
+        </div>
+        <div class="side"><span class="chip">20 min</span></div>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

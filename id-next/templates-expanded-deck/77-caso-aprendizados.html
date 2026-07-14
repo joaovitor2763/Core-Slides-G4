@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>77 · Aprendizados do case</title>
+<link rel="stylesheet" href="style.css?v=next1">
+<style>
+  /* Aprendizados do case (dark, palco editorial): eyebrow no topo-esquerda,
+     3 lições empilhadas — numeral ghost serif + frase serif itálica + linha
+     "na prática" em mono. Sem cards; o respiro é o layout. Armilar sutil.
+
+     Geometria X: pad 96 · região de conteúdo x 96–1400 → largura 1304.
+     Grid por lição: numeral 140px + gap 36px + texto 1128px
+       → 140 + 36 + 1128 = 1304 ✓ (frase com max-width 980 para quebra boa)
+     Geometria Y: eyebrow 104 · pilha 230–790 (altura 560) em 3 linhas de
+       1fr ≈ 186px cada, conteúdo centrado na linha (~92px de frase+label
+       por lição → ~94px de respiro por bloco). Nada além de y=790 ✓ */
+
+  .armilar--corner{width:780px;height:439px;right:-30px;bottom:-30px;opacity:.18}
+
+  .eyebrow--top{position:absolute;left:var(--pad);top:104px}
+
+  .lessons{position:absolute;left:var(--pad);top:230px;width:1304px;height:560px;
+    display:grid;grid-template-rows:repeat(3,1fr)}
+
+  .lesson{display:grid;grid-template-columns:140px 1128px;column-gap:36px;
+    align-items:start;align-self:center}
+
+  /* numeral ghost: 84px serif, quase invisível — âncora rítmica da coluna */
+  .lesson .n{font-size:84px;line-height:.92;margin-top:-7px}
+
+  .lesson .txt{font-family:var(--serif);font-style:italic;font-weight:400;
+    font-size:31px;line-height:1.32;letter-spacing:-.01em;
+    color:var(--text-1);max-width:980px}
+  .lesson .txt em{font-style:italic;color:var(--gold)}
+
+  .lesson .mono-label{display:block;margin-top:20px}
+</style>
+<meta id="acfifjfajpekbmhmjppnmmjgmhjkildl"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+
+
+    <div class="eyebrow eyebrow--top">Lorem ipsum</div>
+
+    <section class="lessons">
+
+      <div class="lesson">
+        <span class="ghost n" aria-hidden="true">01</span>
+        <div>
+          <p class="txt">Lorem ipsum dolor sit amet consectetur — adipiscing elit sed tempor.</p>
+          <span class="mono-label">lorem ipsum: dolor sit amet consectetur adipiscing, elit sed do eiusmod tempor magna 1</span>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <span class="ghost n" aria-hidden="true">02</span>
+        <div>
+          <p class="txt">Lorem ipsum dolor sit amet consectetur <em>adipiscing elit</em>.</p>
+          <span class="mono-label">lorem ipsum: 20 min dolor sit amet consectetur os 5 adipiscing elit sed do eiusmod</span>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <span class="ghost n" aria-hidden="true">03</span>
+        <div>
+          <p class="txt">Lorem ipsum dolor sit amet consectetur adipiscing do eiusmod.</p>
+          <span class="mono-label">lorem ipsum: dolor sit amet 8% consectetur adipiscing elit sed — do eiusmod tempor, incididunt magna</span>
+        </div>
+      </div>
+
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+
+
+</body></html>

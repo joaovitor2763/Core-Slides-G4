@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>53 · Programa dois dias</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Programa de encontro de 2 dias "Scale Meeting" (dark).
+     Topo-esquerda: eyebrow + título serif 50px (segunda parte .dim) + lede 1 linha
+     + fileira de 4 chips de pilares (1º gold ativo). Centro: card .surface com dois
+     círculos Ø220 ligados por 2 elipses tracejadas que se cruzam entre eles
+     (sugestão de lemniscata) e 3 labels-satélite mono por círculo (spokes com
+     dot nas 2 pontas). Laterais: agenda de cada dia em 3 mini-cards.
+
+     Geometria X: col esq 96→470 (374) · gap 50 · card 520→1080 (560) · gap 50 ·
+       col dir 1130→1504 (374) → 374+50+560+50+374 = 1408 = 1600−192 ✓
+     Geometria Y: head 76→~250 · chips 292 · labels de coluna 352 ·
+       card + colunas 380→790 → 790 ≤ 804 ✓
+
+     Círculos Ø220 (r110): Dia 1 centro (670,585) → box left 560, top 475 ·
+       Dia 2 centro (930,585) → box left 820, top 475 ·
+       gap entre círculos = 820−780 = 40px (região do cruzamento das elipses)
+
+     Elipses (rx146 ry124, rotação ±14°):
+       extensão x = √((146·cos14°)²+(124·sin14°)²) ≈ 144.8
+       → E1 cobre x 525–815 · E2 cobre x 785–1075 → cruzam em x≈800 (região
+         785–815), dentro do gap dos círculos (780–820) ✓ e do card (520–1080) ✓
+       extensão y ≈ √((146·sin14°)²+(124·cos14°)²) ≈ 125.4 → 460–710 ✓
+
+     Spokes (borda no círculo r110 → tip r158 · P = C + R·(sinθ, −cosθ)):
+       D1 θ=−35° sin −.574 cos .819 → borda (607,495) · tip (579,456)
+       D1 θ=  0°                    → borda (670,475) · tip (670,427)
+       D1 θ=205° sin −.423 cos −.906→ borda (624,685) · tip (603,728)
+       D2 θ=+35°                    → borda (993,495) · tip (1021,456)
+       D2 θ=  0°                    → borda (930,475) · tip (930,427)
+       D2 θ=155° sin .423 cos −.906 → borda (977,685) · tip (997,728) */
+
+  .head{position:absolute;left:var(--pad);top:76px}
+  .head .eyebrow{margin-bottom:16px}
+  .head h1{font-size:50px}
+  .head .lede{margin-top:14px}
+
+  /* pilares do encontro */
+  .pillars{position:absolute;left:var(--pad);top:292px;display:flex;gap:12px}
+
+  /* colunas laterais de agenda */
+  .col-label{position:absolute;top:352px;font-family:var(--mono);font-size:11px;
+    font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+  .col{position:absolute;top:380px;width:374px;height:410px;
+    display:flex;flex-direction:column;gap:20px}
+  .col--l{left:var(--pad)}
+  .col--r{left:1130px}
+  /* 3 mini-cards · (410 − 2×20) / 3 = 123.3px cada (flex:1) */
+  .mini{flex:1;padding:18px 20px;border-radius:var(--r-md);
+    display:flex;flex-direction:column;justify-content:center}
+  .mini .kick{font-family:var(--mono);font-size:10.5px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+  .mini p{margin-top:8px;color:var(--text-2)}
+
+  /* card central */
+  .stage-card{position:absolute;left:520px;top:380px;width:560px;height:410px}
+
+  /* círculos dos dias */
+  .disc{position:absolute;width:220px;height:220px;border-radius:50%;z-index:2;
+    display:grid;place-items:center;text-align:center}
+  .disc .lbl .name{font-family:var(--num);font-weight:600;font-size:20px;
+    letter-spacing:-.01em;display:block}
+  .disc .lbl .sub{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;display:block;margin-top:7px}
+  .disc--gold{left:560px;top:475px;
+    background:linear-gradient(165deg,var(--gold-300),var(--gold-700));
+    box-shadow:var(--shadow-lg)}
+  .disc--gold .name{color:var(--on-gold)}
+  .disc--gold .sub{color:var(--on-gold);opacity:.72}
+  .disc--plain{left:820px;top:475px;background:var(--surface);border:1px solid var(--border-2)}
+  .disc--plain .name{color:var(--text-1)}
+  .disc--plain .sub{color:var(--text-3)}
+
+  /* elipses + spokes */
+  .wires{position:absolute;inset:0;pointer-events:none;z-index:1}
+  .wires .orbit{fill:none;stroke:var(--text-3);stroke-width:1.2;opacity:.4;
+    stroke-dasharray:5 8}
+  .wires .spoke{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .wires .dot-ring{fill:var(--text-3)}
+  .wires .dot-tip{fill:var(--text-3);opacity:.7}
+
+  /* labels-satélite (centrados no x do tip) */
+  .sat{position:absolute;transform:translateX(-50%);z-index:2;text-align:center;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--text-3);white-space:nowrap;line-height:1.3}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum dolor</div>
+      <h1 class="h-serif">Lorem ipsum: <span class="dim">dolor sit, amet elit.</span></h1>
+      <p class="lede">Lorem ipsum dolor sit, consectetur adipiscing elit — sed do tempor incididunt.</p>
+    </header>
+
+    <!-- pilares do encontro -->
+    <div class="pillars">
+      <span class="chip chip--gold"><span class="dot"></span>consectetur adipiscing</span>
+      <span class="chip">sed do eiusmod</span>
+      <span class="chip">incididunt</span>
+      <span class="chip">reprehenderit</span>
+    </div>
+
+    <!-- card central com os dois dias -->
+    <div class="stage-card surface" aria-hidden="true"></div>
+
+    <svg class="wires" viewBox="0 0 1600 900" aria-hidden="true">
+      <!-- lemniscata sugerida: 2 elipses tracejadas cruzando em x≈800 -->
+      <ellipse class="orbit" cx="670" cy="585" rx="146" ry="124" transform="rotate(-14 670 585)"/>
+      <ellipse class="orbit" cx="930" cy="585" rx="146" ry="124" transform="rotate(14 930 585)"/>
+
+      <!-- Dia 1 · centro (670,585) r110 -->
+      <line class="spoke" x1="607" y1="495" x2="579" y2="456"/>
+      <circle class="dot-ring" cx="607" cy="495" r="5"/>
+      <circle class="dot-tip"  cx="579" cy="456" r="3"/>
+
+      <line class="spoke" x1="670" y1="475" x2="670" y2="427"/>
+      <circle class="dot-ring" cx="670" cy="475" r="5"/>
+      <circle class="dot-tip"  cx="670" cy="427" r="3"/>
+
+      <line class="spoke" x1="624" y1="685" x2="603" y2="728"/>
+      <circle class="dot-ring" cx="624" cy="685" r="5"/>
+      <circle class="dot-tip"  cx="603" cy="728" r="3"/>
+
+      <!-- Dia 2 · centro (930,585) r110 -->
+      <line class="spoke" x1="993" y1="495" x2="1021" y2="456"/>
+      <circle class="dot-ring" cx="993" cy="495" r="5"/>
+      <circle class="dot-tip"  cx="1021" cy="456" r="3"/>
+
+      <line class="spoke" x1="930" y1="475" x2="930" y2="427"/>
+      <circle class="dot-ring" cx="930" cy="475" r="5"/>
+      <circle class="dot-tip"  cx="930" cy="427" r="3"/>
+
+      <line class="spoke" x1="977" y1="685" x2="997" y2="728"/>
+      <circle class="dot-ring" cx="977" cy="685" r="5"/>
+      <circle class="dot-tip"  cx="997" cy="728" r="3"/>
+    </svg>
+
+    <!-- labels-satélite · Dia 1 -->
+    <span class="sat" style="left:579px;top:432px">consectetur</span>
+    <span class="sat" style="left:670px;top:404px">eiusmod</span>
+    <span class="sat" style="left:603px;top:742px">voluptate</span>
+
+    <!-- labels-satélite · Dia 2 -->
+    <span class="sat" style="left:1021px;top:416px">sit amet<br>dolorem</span>
+    <span class="sat" style="left:930px;top:404px">consequat</span>
+    <span class="sat" style="left:997px;top:740px">laborum<br>exercitation</span>
+
+    <!-- círculos dos dias · Ø220 -->
+    <div class="disc disc--gold">
+      <span class="lbl"><span class="name">Sit 1</span><span class="sub">dolor sit amet</span></span>
+    </div>
+    <div class="disc disc--plain">
+      <span class="lbl"><span class="name">Sit 2</span><span class="sub">sed do eiusmod</span></span>
+    </div>
+
+    <!-- agenda · Dia 1 -->
+    <span class="col-label" style="left:96px">lorem · ipsum 1</span>
+    <section class="col col--l">
+      <div class="mini surface surface--flat">
+        <div class="kick">dolor</div>
+        <p class="small">Lorem ipsum dolor sit amet consectetur: adipiscing elit sed.</p>
+      </div>
+      <div class="mini surface surface--flat">
+        <div class="kick">ipsum</div>
+        <p class="small">Ipsum dolor sit amet consequat, adipiscing elit sed do labore.</p>
+      </div>
+      <div class="mini surface surface--flat">
+        <div class="kick">sed do amet</div>
+        <p class="small">Consectetur dolor sit amet elit sed do eiusmod magna.</p>
+      </div>
+    </section>
+
+    <!-- agenda · Dia 2 -->
+    <span class="col-label" style="left:1130px">lorem · ipsum 2</span>
+    <section class="col col--r">
+      <div class="mini surface surface--flat">
+        <div class="kick">dolor</div>
+        <p class="small">Lorem ipsum dolor: sit amet consectetur, elit sed do labore.</p>
+      </div>
+      <div class="mini surface surface--flat">
+        <div class="kick">ipsum</div>
+        <p class="small">Consectetur adipiscing elit sed do eiusmod tempor magna.</p>
+      </div>
+      <div class="mini surface surface--flat">
+        <div class="kick">sed do amet</div>
+        <p class="small">Voluptate reprehenderit sed do eiusmod tempor labore.</p>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

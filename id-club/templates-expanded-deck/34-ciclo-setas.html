@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>34 · Ciclo de setas</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Ciclo de 4 arcos perseguindo-se (sentido horário): anel Ø460 em SVG,
+     stroke 34, cada arco ~70° com gap de 30° onde vive a ponta de seta.
+     Centro com claim em 3 linhas. Callouts nas diagonais conectados por
+     linha fina + dots (padrão do 23-ciclo).
+
+     Geometria do anel: centro (800,462) · raio do traço r = (460−34)/2 = 213
+     Raio externo 213+17 = 230 → anel ocupa x 570–1030 · y 232–692 < 804 ✓
+     Ponto no círculo (φ horário a partir das 12h):
+       x = 800 + 213·sin φ · y = 462 − 213·cos φ
+       φ= 10° (837,252) · φ= 80° (1010,425)
+       φ=100° (1010,499) · φ=170° (837,672)
+       φ=190° (763,672) · φ=260° (590,499)
+       φ=280° (590,425) · φ=350° (763,252)
+     Arcos (sweep=1, large-arc=0): 10→80 · 100→170 · 190→260 · 280→350
+     Seta no FIM de cada arco: triângulo translate(fim) rotate(φ_fim)
+     (tangente horária em φ = direção (cos φ, sin φ) → rotate(φ)).
+
+     Âncoras dos conectores no raio externo r230 (dentro de cada arco):
+       φ= 45° (963,299) · φ=135° (963,625) · φ=225° (637,625) · φ=315° (637,299) */
+
+  .arcs{position:absolute;inset:0;pointer-events:none}
+  .arcs path{stroke:none}
+  .a1{fill:var(--gold)}
+  .a2{fill:rgba(230,238,243,.25)}
+  .a3{fill:var(--gold-300)}
+  .a4{fill:rgba(230,238,243,.4)}
+  .h1{fill:var(--gold)}
+  .h2{fill:rgba(230,238,243,.25)}
+  .h3{fill:var(--gold-300)}
+  .h4{fill:rgba(230,238,243,.4)}
+
+  .core{position:absolute;left:650px;top:362px;width:300px;height:200px;
+    display:grid;place-items:center;text-align:center}
+  .core .claim{font-family:var(--num);font-weight:600;font-size:24px;
+    line-height:1.3;letter-spacing:-.01em;color:var(--text-1)}
+  .core .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--text-3);margin-top:12px}
+
+  /* conectores callout → arco: linha fina + dot nas duas pontas */
+  .links{position:absolute;inset:0;pointer-events:none}
+  .links line{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .links .dot-ring{fill:var(--text-3)}
+  .links .dot-co{fill:var(--text-3);opacity:.7}
+
+  .co{position:absolute;width:300px}
+  .co .idx{font-family:var(--mono);font-size:12px;font-weight:500;
+    letter-spacing:.16em;color:var(--text-3);display:block;margin-bottom:8px}
+  .co h3{font-family:var(--num);font-weight:600;font-size:20px;
+    letter-spacing:-.01em;color:var(--text-1);margin-bottom:6px}
+  .co--r{text-align:right}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <svg class="arcs" viewBox="0 0 1600 900" aria-hidden="true">
+      <path class="a1" d="M839.9 235.5 A230 230 0 0 1 1026.5 422.1 L1042.3 419.3 L1013.0 458.3 L977.3 430.7 L993.0 428.0 A196 196 0 0 0 834.0 269.0 Z"/>
+      <path class="a2" d="M1026.5 501.9 A230 230 0 0 1 839.9 688.5 L842.7 704.3 L803.7 675.0 L831.3 639.3 L834.0 655.0 A196 196 0 0 0 993.0 496.0 Z"/>
+      <path class="a3" d="M760.1 688.5 A230 230 0 0 1 573.5 501.9 L557.7 504.7 L587.0 465.7 L622.7 493.3 L607.0 496.0 A196 196 0 0 0 766.0 655.0 Z"/>
+      <path class="a4" d="M573.5 422.1 A230 230 0 0 1 760.1 235.5 L757.3 219.7 L796.3 249.0 L768.7 284.7 L766.0 269.0 A196 196 0 0 0 607.0 428.0 Z"/>
+    </svg>
+
+    <div class="core">
+      <div>
+        <div class="claim">Lorem<br>ipsum dolor<br>sit amet sed</div>
+        <div class="sub">Lorem ipsum dolor sit</div>
+      </div>
+    </div>
+
+    <!-- conectores: âncoras no raio externo r230 · dots r5 (arco) e r3 (callout) -->
+    <svg class="links" viewBox="0 0 1600 900" aria-hidden="true">
+      <line x1="1188" y1="200" x2="963" y2="299"/>
+      <circle class="dot-co"   cx="1188" cy="200" r="3"/>
+      <circle class="dot-ring" cx="963"  cy="299" r="5"/>
+
+      <line x1="1188" y1="724" x2="963" y2="625"/>
+      <circle class="dot-co"   cx="1188" cy="724" r="3"/>
+      <circle class="dot-ring" cx="963"  cy="625" r="5"/>
+
+      <line x1="412" y1="724" x2="637" y2="625"/>
+      <circle class="dot-co"   cx="412" cy="724" r="3"/>
+      <circle class="dot-ring" cx="637" cy="625" r="5"/>
+
+      <line x1="412" y1="200" x2="637" y2="299"/>
+      <circle class="dot-co"   cx="412" cy="200" r="3"/>
+      <circle class="dot-ring" cx="637" cy="299" r="5"/>
+    </svg>
+
+    <!-- 01 · topo-direita (arco gold) -->
+    <div class="co" style="left:1204px;top:118px">
+      <span class="idx">01</span>
+      <h3>Lorem ipsum sit</h3>
+      <p class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit — sed do eiusmod.</p>
+    </div>
+
+    <!-- 02 · baixo-direita -->
+    <div class="co" style="left:1204px;top:664px">
+      <span class="idx">02</span>
+      <h3>Dolor sit amet</h3>
+      <p class="small">Lorem ipsum, dolor sit amet consectetur adipiscing elit sed tempor.</p>
+    </div>
+
+    <!-- 03 · baixo-esquerda -->
+    <div class="co co--r" style="left:96px;top:664px">
+      <span class="idx">03</span>
+      <h3>Amet elit sed</h3>
+      <p class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit magna.</p>
+    </div>
+
+    <!-- 04 · topo-esquerda -->
+    <div class="co co--r" style="left:96px;top:118px">
+      <span class="idx">04</span>
+      <h3>Sed do tempor</h3>
+      <p class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do.</p>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

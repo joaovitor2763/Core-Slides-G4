@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>15 · Funil</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Conversão (dark): 4 estágios como barras horizontais decrescentes
+     com radius pill à esquerda; a última em gradiente gold. Taxas em
+     mono entre as barras. Card gold à direita com a leitura. */
+
+  .head{position:absolute;left:var(--pad);top:104px;max-width:1100px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:56px}
+
+  /* barras: y = 320 / 448 / 576 / 704 · altura 84 → base 788 < 804 ✓
+     larguras pré-calculadas: 100% = 980px · 46% → 451px ·
+     18% → 176px · 6,5% → 64px (elevado a 120px de piso visual)  (96 + 980 = 1076 < 1240 do card ✓) */
+  .stage-row{position:absolute;left:var(--pad);height:84px;display:flex;align-items:center}
+  .r1{top:320px} .r2{top:448px} .r3{top:576px} .r4{top:704px}
+
+  .bar{height:84px;border-radius:42px 14px 14px 42px;
+    display:flex;align-items:center;padding-left:34px;flex:none}
+  .r1 .bar{width:980px}
+  .r2 .bar{width:451px}
+  .r3 .bar{width:176px;padding-left:28px}
+  .r4 .bar{width:120px;padding-left:0}
+
+  .bar .stage-name{font-family:var(--mono);font-size:11.5px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-2)}
+  .bar--gold{background:linear-gradient(90deg,var(--gold-300),var(--gold-500));
+    border:none;box-shadow:0 18px 44px -16px var(--gold-border)}
+
+  .after-bar{margin-left:22px;display:flex;align-items:baseline;gap:12px}
+  .after-bar .val{font-size:26px}
+  .after-bar .stage-name-out{font-family:var(--mono);font-size:11.5px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+
+  /* taxas entre barras: centros dos vãos em y = 404 / 532 / 660 */
+  .rate{position:absolute;left:132px;height:44px;display:flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--text-3)}
+  .rate .arrow{color:var(--gold);opacity:.8}
+  .t1{top:404px} .t2{top:532px} .t3{top:660px}
+
+  /* card de leitura: 1240 + 264 = 1504 = 1600 − 96 ✓ · 320 → 788 ✓ */
+  .takeaway{position:absolute;left:1240px;right:var(--pad);top:320px;height:468px;
+    padding:40px 30px;display:flex;flex-direction:column;justify-content:flex-end;gap:16px}
+  .takeaway .big{font-size:84px;letter-spacing:-.04em;color:var(--gold);line-height:1}
+  .takeaway .label{margin-bottom:auto}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Aquisição">
+
+    <header class="head">
+      <div class="eyebrow">Funil · últimos 12 meses</div>
+      <h1 class="h-serif">O funil que paga a <em>máquina.</em></h1>
+    </header>
+
+    <div class="stage-row r1">
+      <div class="bar surface"><span class="stage-name">Leads qualificáveis</span></div>
+      <div class="after-bar"><span class="num val">48.000</span></div>
+    </div>
+
+    <div class="rate t1"><span class="arrow">↓</span>×0,46 · diagnóstico respondido</div>
+
+    <div class="stage-row r2">
+      <div class="bar surface"><span class="stage-name">MQLs</span></div>
+      <div class="after-bar"><span class="num val">22.080</span></div>
+    </div>
+
+    <div class="rate t2"><span class="arrow">↓</span>×0,39 · reunião agendada</div>
+
+    <div class="stage-row r3">
+      <div class="bar surface"><span class="stage-name">Reuniões</span></div>
+      <div class="after-bar"><span class="num val">8.640</span></div>
+    </div>
+
+    <div class="rate t3"><span class="arrow">↓</span>×0,36 · matrícula fechada</div>
+
+    <div class="stage-row r4">
+      <div class="bar bar--gold" aria-hidden="true"></div>
+      <div class="after-bar">
+        <span class="num val">3.120</span>
+        <span class="stage-name-out">Alunos</span>
+      </div>
+    </div>
+
+    <aside class="takeaway surface surface--gold">
+      <span class="mono-label label">Lead → aluno</span>
+      <span class="num big">6,5%</span>
+      <p class="small">Cada ponto de conversão a mais vale R$ 4,1M em receita anual. Por isso o funil é o primeiro processo a ganhar uma skill — não o último.</p>
+    </aside>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

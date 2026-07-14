@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>05 · Builder de proposta de valor</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Framework 05 · builder circular de seis partes.
+     Diagrama local 740×620 em x96..836; anel Ø430, centro local (370,320).
+     Segmento 01 Market é o único gold. Leitura x940..1504. */
+  .diagram{position:absolute;left:96px;top:112px;width:740px;height:680px}
+  /* anel em "chasing arrows": 6 segmentos anulares (r110..215) com ponta de seta
+     no sentido horário, como na referência — sem setas externas. */
+  .arcs .seg{stroke:none}
+  .arcs .s1{fill:var(--gold)}
+  .arcs .s2{fill:rgba(0,31,53,.48)}.arcs .s3{fill:rgba(0,31,53,.36)}
+  .arcs .s4{fill:rgba(0,31,53,.27)}.arcs .s5{fill:rgba(0,31,53,.20)}.arcs .s6{fill:rgba(0,31,53,.13)}
+  .center{position:absolute;left:260px;top:210px;width:220px;height:220px;border-radius:50%;background:var(--bg);border:1px solid var(--border-2);display:grid;place-items:center;text-align:center;padding:34px;z-index:2}
+  .center strong{font:600 25px/1.15 var(--num);letter-spacing:-.025em;color:var(--text-1)}
+  .numdot{position:absolute;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:1px solid var(--border-2);font:600 14px var(--num);color:var(--text-2);z-index:3}
+  .d1{left:346px;top:137px;border-color:var(--gold);color:var(--gold)}.d2{left:488px;top:216px}.d3{left:491px;top:378px}.d4{left:352px;top:461px}.d5{left:210px;top:382px}.d6{left:207px;top:221px}
+  .co{position:absolute;width:190px}.co strong{display:block;font:600 17px var(--num);color:var(--text-1);margin-bottom:5px}.co p{font:13px/1.4 var(--sans);color:var(--text-3)}
+  .c1{left:275px;top:5px;text-align:center}.c2{left:596px;top:150px}.c3{left:596px;top:440px}.c4{left:275px;top:565px;text-align:center}.c5{left:-24px;top:440px;text-align:right}.c6{left:-24px;top:150px;text-align:right}
+  .arcs{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .read{position:absolute;left:940px;top:128px;width:564px}.read .eyebrow{margin-bottom:22px}.read h1{font-size:52px;margin-bottom:26px}.read .lede{margin-bottom:30px}
+  .principles{display:grid;gap:0;border-top:1px solid var(--border-2)}
+  .principle{display:grid;grid-template-columns:42px 1fr;gap:14px;padding:17px 0;border-bottom:1px solid var(--border)}
+  .principle .n{font:600 13px var(--num);color:var(--gold)}.principle strong{font:600 16px var(--num);color:var(--text-1)}.principle p{font:14px/1.45 var(--sans);color:var(--text-3);margin-top:3px}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Frameworks · proposta de valor">
+    <div class="diagram">
+      <svg class="arcs" viewBox="0 0 740 680" aria-hidden="true">
+        <path class="seg s1" d="M262.5 133.8 A215 215 0 0 1 470.9 130.2 L463.2 186.9 L421.6 222.9 A110 110 0 0 0 315.0 224.7 L306.5 170.4 Z"/>
+        <path class="seg s2" d="M477.5 133.8 A215 215 0 0 1 584.9 312.5 L531.9 334.2 L479.9 316.2 A110 110 0 0 0 425.0 224.7 L467.8 190.2 Z"/>
+        <path class="seg s3" d="M585.0 320.0 A215 215 0 0 1 483.9 502.3 L438.7 467.3 L428.3 413.3 A110 110 0 0 0 480.0 320.0 L531.3 339.8 Z"/>
+        <path class="seg s4" d="M477.5 506.2 A215 215 0 0 1 269.1 509.8 L276.8 453.1 L318.4 417.1 A110 110 0 0 0 425.0 415.3 L433.5 469.6 Z"/>
+        <path class="seg s5" d="M262.5 506.2 A215 215 0 0 1 155.1 327.5 L208.1 305.8 L260.1 323.8 A110 110 0 0 0 315.0 415.3 L272.2 449.8 Z"/>
+        <path class="seg s6" d="M155.0 320.0 A215 215 0 0 1 256.1 137.7 L301.3 172.7 L311.7 226.7 A110 110 0 0 0 260.0 320.0 L208.7 300.2 Z"/>
+      </svg>
+      <div class="center"><strong>Proposta<br>de valor</strong></div>
+      <span class="numdot d1">1</span><span class="numdot d2">2</span><span class="numdot d3">3</span><span class="numdot d4">4</span><span class="numdot d5">5</span><span class="numdot d6">6</span>
+      <div class="co c1"><strong>Mercado</strong><p>Para quem a proposta existe.</p></div>
+      <div class="co c2"><strong>Valor</strong><p>Benefício percebido menos custo.</p></div>
+      <div class="co c3"><strong>Oferta</strong><p>O que será entregue e vendido.</p></div>
+      <div class="co c4"><strong>Benefícios</strong><p>Resultados concretos para o cliente.</p></div>
+      <div class="co c5"><strong>Diferenciação</strong><p>Por que você vence a alternativa.</p></div>
+      <div class="co c6"><strong>Prova</strong><p>Evidência que reduz o risco.</p></div>
+    </div>
+
+    <aside class="read">
+      <div class="eyebrow">Framework · construção</div>
+      <h1 class="h-serif">Value proposition <em>builder.</em></h1>
+      <p class="lede">Uma boa proposta conecta contexto, promessa e evidência. Construa no sentido horário e só avance quando a parte anterior estiver clara.</p>
+      <div class="principles">
+        <div class="principle"><span class="n">01</span><div><strong>Comece estreito</strong><p>Um mercado específico produz uma promessa mais nítida.</p></div></div>
+        <div class="principle"><span class="n">02</span><div><strong>Traduza recurso em resultado</strong><p>O cliente compra a mudança, não o mecanismo.</p></div></div>
+        <div class="principle"><span class="n">03</span><div><strong>Feche com prova</strong><p>Cases, dados e método transformam promessa em confiança.</p></div></div>
+      </div>
+    </aside>
+  </article>
+</div>
+<script>
+  const slide=document.querySelector('.slide');function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);slide.style.transform=`translate(-50%, -50%) scale(${s})`}addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>

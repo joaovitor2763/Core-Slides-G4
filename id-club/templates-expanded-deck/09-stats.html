@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>09 · Stats</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* 4 métricas: título serif topo-esquerda com linha-eco ghost abaixo
+     (padrão rox: linha 1 em text-1, linha 2 completa em ghost).
+     Grid 4×1 de surfaces; UMA protagonista em surface--gold. */
+
+  .head{position:absolute;left:var(--pad);top:112px}
+  .head .eyebrow{margin-bottom:24px}
+  .head h1{font-size:68px}
+  .head .echo{font-size:68px;margin-top:4px}
+
+  /* grid: x 96 → 1504 (1408px) · y 430 → 804 (374px)
+     4 colunas · (1408 − 3×24) / 4 = 334px cada */
+  .grid{position:absolute;left:var(--pad);right:var(--pad);top:430px;bottom:96px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+
+  .stat{padding:40px 36px 34px;display:flex;flex-direction:column}
+  .stat .figure{font-size:64px;line-height:1;letter-spacing:-.04em}
+  .stat .figure small{font-size:30px;font-weight:600;letter-spacing:-.02em}
+  .stat .label{margin-top:16px}
+  .stat .trend{margin-top:auto;align-self:flex-start}
+
+  .stat--hero .figure{color:var(--gold)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem sed tempor</div>
+      <h1 class="h-serif">Lorem ipsum dolor</h1>
+      <div class="ghost echo">sit amet consectetur.</div>
+    </header>
+
+    <section class="grid">
+      <div class="stat surface">
+        <div class="num figure">214</div>
+        <div class="mono-label label">Lorem ipsum dolor sit amet</div>
+        <span class="chip chip--green trend"><span class="dot"></span>+38% sed tempor</span>
+      </div>
+
+      <div class="stat stat--hero surface surface--gold">
+        <div class="num figure">22<small>min</small></div>
+        <div class="mono-label label">Sed tempor incididunt labore magna</div>
+        <span class="chip chip--green trend"><span class="dot"></span>−74% vs. ipsum</span>
+      </div>
+
+      <div class="stat surface">
+        <div class="num figure">68<small>%</small></div>
+        <div class="mono-label label">Duis aute irure dolor elit</div>
+        <span class="chip chip--green trend"><span class="dot"></span>+12% sit sed</span>
+      </div>
+
+      <div class="stat surface">
+        <div class="num figure">4,1<small>%</small></div>
+        <div class="mono-label label">Velit cillum fugiat sed 24h</div>
+        <span class="chip chip--red trend"><span class="dot"></span>−8 pts sit laborum</span>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

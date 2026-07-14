@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>95 · Mockup celular</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Mockup mobile (dark): celular 100% CSS à direita com UI fake de chat,
+     leitura editorial + 3 features empilhadas à esquerda.
+
+     Geometria horizontal: coluna texto left 96 + width 824 = 920 ✓ ·
+     gap 100 · celular left 1020 + 380 = 1400 ✓ (dentro de 1504 = 1600−96).
+     Geometria vertical: copy top 148 → chip ~370 · features top 440 +
+     3×120 = 800 ✓ (< 804). Celular top 190 + 740 = 930 → a base SANGRA
+     30px além de y=900 DE PROPÓSITO (o overflow:hidden do .slide recorta;
+     lê como "o produto continua além do slide"). */
+
+  /* ── coluna esquerda ── */
+  .copy{position:absolute;left:var(--pad);top:148px;width:824px}
+  .copy .eyebrow{margin-bottom:26px}
+  .copy h1{font-size:54px;max-width:600px}
+  .copy .chips{margin-top:32px;display:flex;gap:12px}
+
+  /* features: top 440 · 3 linhas × 120px = 360 → termina em 800 ✓ */
+  .features{position:absolute;left:var(--pad);top:440px;width:824px}
+  .feat{height:120px;border-top:1px solid var(--border);
+    display:grid;grid-template-columns:48px 1fr auto;gap:26px;align-items:center}
+  .feat .disc{width:48px;height:48px;border-radius:50%;
+    background:var(--surface-2);border:1px solid var(--border);
+    display:grid;place-items:center;color:var(--text-2)}
+  .feat .disc svg{width:24px;height:24px}
+  .feat h2{font-family:var(--num);font-weight:600;font-size:18px;
+    letter-spacing:-.01em;color:var(--text-1);margin-bottom:7px}
+  .feat .small{max-width:560px}
+  .feat .idx{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    color:var(--text-3);align-self:center}
+  /* feature 2 = protagonista gold do slide (disco em gradiente) */
+  .feat--hero .disc{background:linear-gradient(135deg,var(--gold-300),var(--gold-700));
+    border:none;color:var(--on-gold)}
+
+  /* ── celular ─────────────────────────────────────────────
+     Moldura 380×740 (border-box): border 10px → viewport interno 360×720.
+     radius externo 54 → interno 44 (54−10). Botões laterais ficam FORA
+     da moldura (left/right −14px), por isso o overflow:hidden vive só
+     na .screen, não na .phone. */
+  .phone{position:absolute;left:1020px;top:190px;width:380px;height:740px;
+    border-radius:54px;border:10px solid var(--navy-800);
+    background:var(--navy-900);
+    box-shadow:0 0 0 1px var(--border),var(--shadow-lg)}
+  /* filhos absolutos ancoram no PADDING box (dentro da borda de 10px) →
+     a aresta EXTERNA da moldura fica em x=−10; com left/right:−14px o
+     botão (4px) protrude 4px além dela e encosta flush na moldura */
+  .phone .key{position:absolute;width:4px;background:var(--navy-800)}
+  .phone .key--v1{left:-14px;top:150px;height:52px;border-radius:3px 0 0 3px}
+  .phone .key--v2{left:-14px;top:214px;height:52px;border-radius:3px 0 0 3px}
+  .phone .key--pw{right:-14px;top:196px;height:84px;border-radius:0 3px 3px 0}
+
+  .screen{position:absolute;inset:0;border-radius:44px;overflow:hidden}
+  .notch{position:absolute;left:50%;transform:translateX(-50%);top:12px;
+    width:120px;height:26px;border-radius:var(--r-pill);
+    background:var(--navy-800);z-index:2}
+
+  /* ── UI fake de chat ──
+     PARA USAR SCREENSHOT REAL: apague o conteúdo da .screen (mantenha só
+     a .notch) e coloque no lugar
+       <img src="assets/seu-screenshot.png"
+            style="width:100%;height:100%;object-fit:cover;object-position:top">
+     — o overflow:hidden da .screen já recorta no radius. */
+  .app-head{position:absolute;top:0;left:0;right:0;z-index:1;
+    padding:54px 24px 15px;display:flex;align-items:center;gap:9px;
+    border-bottom:1px solid var(--border)}
+  .app-head .st{width:8px;height:8px;border-radius:50%;background:var(--green)}
+  .app-head b{font-family:var(--mono);font-size:12px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-2)}
+
+  /* mensagens ancoradas embaixo (como num chat real); stamp sobe p/ o topo.
+     região do chat: interior y 96 → 624 (16px acima da barra de input) */
+  .chat{position:absolute;top:96px;bottom:96px;left:0;right:0;
+    padding:16px 18px 0;display:flex;flex-direction:column;
+    justify-content:flex-end;gap:12px}
+  .chat .stamp{align-self:center;margin-bottom:2px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text-3)}
+  .bub{max-width:78%;padding:11px 14px;border-radius:16px;
+    font-size:14px;line-height:1.5;color:var(--text-1)}
+  .bub--me{align-self:flex-end;background:var(--surface-2);
+    border-bottom-right-radius:5px}
+  .bub--ai{align-self:flex-start;background:var(--gold-dim);
+    border-bottom-left-radius:5px}
+  /* número no corpo da bolha: grotesk, sem gold (o protagonista é o disco 02) */
+  .bub--ai em{font-style:normal;font-family:var(--num);font-weight:600;color:var(--text-1)}
+
+  /* card-resposta anexado pelo agente */
+  .reply{align-self:flex-start;width:82%;padding:14px 16px 13px;
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:16px;border-top-left-radius:6px}
+  .reply .mono-label{font-size:9.5px;display:block;margin-bottom:8px}
+  .reply .num{font-size:32px;line-height:1}
+  .reply .delta{display:block;margin-top:7px;font-family:var(--mono);
+    font-size:10.5px;letter-spacing:.08em;color:var(--green)}
+
+  /* agente digitando (3 pontos estáticos) */
+  .typing{align-self:flex-start;padding:13px 15px;border-radius:16px;
+    border-bottom-left-radius:5px;background:var(--gold-dim);
+    display:flex;gap:5px}
+  .typing i{width:6px;height:6px;border-radius:50%;background:var(--text-3)}
+  .typing i:nth-child(2){opacity:.65}
+  .typing i:nth-child(3){opacity:.35}
+
+  /* barra de input: interior y 640 → 686 (visível; a sangria corta só a
+     base vazia da moldura) */
+  .inputbar{position:absolute;left:16px;right:16px;bottom:34px;height:46px;
+    border-radius:var(--r-pill);background:var(--surface);
+    border:1px solid var(--border);
+    display:flex;align-items:center;gap:10px;padding:0 7px 0 18px}
+  .inputbar span{flex:1;font-size:13px;color:var(--text-3)}
+  .inputbar .mic{width:32px;height:32px;border-radius:50%;flex:none;
+    background:var(--surface-2);border:1px solid var(--border);
+    display:grid;place-items:center;color:var(--text-2)}
+  .inputbar .mic svg{width:15px;height:15px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="copy">
+      <div class="eyebrow">dolor sit · amet</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet consectetur elit.</h1>
+      <div class="chips">
+        <span class="chip"><span class="dot"></span>lorem ipsum · dolor sit amet</span>
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feat">
+        <div class="disc" aria-hidden="true">
+          <!-- sino -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18.2 15.5H5.8c1.2-1.3 1.8-2.6 1.8-4.7V9.3A4.4 4.4 0 0 1 12 4.9a4.4 4.4 0 0 1 4.4 4.4v1.5c0 2.1.6 3.4 1.8 4.7z"/>
+            <path d="M10.2 18.6a1.9 1.9 0 0 0 3.6 0"/>
+          </svg>
+        </div>
+        <div>
+          <h2>Lorem ipsum dolor sit amet elit</h2>
+          <p class="small">Lorem ipsum, dolor sit amet consectetur elit — sed tempor incididunt labore magna aliqua enim minim veniam quis nostrud.</p>
+        </div>
+        <span class="idx">01</span>
+      </div>
+
+      <div class="feat feat--hero">
+        <div class="disc" aria-hidden="true">
+          <!-- microfone -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="3" width="6" height="10.5" rx="3"/>
+            <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"/>
+            <path d="M12 18v3M8.8 21h6.4"/>
+          </svg>
+        </div>
+        <div>
+          <h2>Lorem ipsum dolor sit amet veniam</h2>
+          <p class="small">“Lorem ipsum dolor sit amet?” — consectetur adipiscing elit sed tempor incididunt labore magna.</p>
+        </div>
+        <span class="idx">02</span>
+      </div>
+
+      <div class="feat">
+        <div class="disc" aria-hidden="true">
+          <!-- check em caixa -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="16" rx="4.5"/>
+            <path d="M8.4 12.3l2.4 2.4 4.8-5.2"/>
+          </svg>
+        </div>
+        <div>
+          <h2>Lorem ipsum dolor amet</h2>
+          <p class="small">Lorem ipsum, dolor sit amet consectetur adipiscing elit — sed tempor incididunt labore magna aliqua.</p>
+        </div>
+        <span class="idx">03</span>
+      </div>
+    </div>
+
+    <!-- celular CSS puro · a base sangra além de y=900 de propósito -->
+    <div class="phone">
+      <span class="key key--v1" aria-hidden="true"></span>
+      <span class="key key--v2" aria-hidden="true"></span>
+      <span class="key key--pw" aria-hidden="true"></span>
+      <div class="screen">
+        <div class="notch" aria-hidden="true"></div>
+        <!-- UI fake — troque por <img> de screenshot real (ver comentário no CSS) -->
+        <div class="app-head">
+          <span class="st" aria-hidden="true"></span><b>Lorem</b>
+        </div>
+        <div class="chat">
+          <span class="stamp">lorem · 07:41</span>
+          <div class="bub bub--me">Lorem ipsum dolor?</div>
+          <div class="bub bub--ai">Lorem ipsum dolor sit consectetur. Dolor <em>23,4%</em>, +1,8 pt vs velit. Enim minim veniam quis?</div>
+          <div class="reply">
+            <span class="mono-label">lorem ipsum dolor · mar/26</span>
+            <span class="num">23,4%</span>
+            <span class="delta">+1,8 pt vs velit · 12 lorem</span>
+          </div>
+          <div class="bub bub--me">Lorem. Ipsum dolor sit.</div>
+          <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
+        </div>
+        <div class="inputbar" aria-hidden="true">
+          <span>Lorem ipsum dolor amet…</span>
+          <span class="mic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="3" width="6" height="10.5" rx="3"/>
+              <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"/>
+              <path d="M12 18v3M8.8 21h6.4"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

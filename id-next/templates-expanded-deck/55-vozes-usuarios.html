@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>55 · Vozes de usuários</title>
+<link rel="stylesheet" href="style.css?v=next1">
+<style>
+  /* Vozes de usuários (dark) — split assimétrico:
+     ESQ (x96–600 · 504px): eyebrow + título serif 52px + retrato placeholder
+       360×450 (top 320 → bottom 770 ≤ 804 ✓) com 2 anéis var(--ring) atrás.
+     DIR (x700–1504 · 804px): trilho vertical de 4 depoimentos.
+     Colunas: 504 + gutter 100 + 804 = 1408 = 1600 − 2×96 ✓
+     Trilho: itens de 56px em tops 215 · 385 · 555 · 725 (passo UNIFORME de 170px);
+       centro dos discos y = top+28 → 243 · 413 · 583 · 753; último bottom 781 ≤ 804 ✓
+     Linha tracejada em x = 700+28 = 728 (centro dos discos), de y243 a y753,
+       por TRÁS dos discos (discos opacificados com var(--bg) por baixo). */
+
+  /* ── coluna esquerda ── */
+  .head{position:absolute;left:var(--pad);top:118px;width:504px}
+  .head .eyebrow{margin-bottom:24px}
+  .head h1{font-size:52px;line-height:1.16}
+
+  /* anéis decorativos ATRÁS do retrato (vêm antes no DOM):
+     A — 320px sólido: x282–602 · y252–572, escapa pelo canto sup-direito do retrato
+     B — 190px tracejado: x26–216 · y610–800, escapa pelo canto inf-esquerdo
+     (x26 < pad é sangria decorativa intencional; nada passa de y=804) */
+  .ring{position:absolute;border-radius:50%;border:1px solid var(--ring);pointer-events:none}
+  .ring--a{left:282px;top:252px;width:320px;height:320px}
+  .ring--b{left:26px;top:610px;width:190px;height:190px;border-style:dashed}
+
+  /* retrato placeholder 360×450 · x96–456 · y320–770 */
+  .portrait{position:absolute;left:var(--pad);top:320px;width:360px;height:450px;
+    border-radius:var(--r-lg);border:1px solid var(--border-2);
+    background:linear-gradient(165deg,var(--navy-800) 0%,var(--navy-500) 100%);
+    box-shadow:var(--shadow-lg);overflow:hidden}
+  .portrait .initials{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);
+    font-family:var(--serif);font-weight:500;font-size:90px;line-height:1;color:var(--text-3)}
+  .portrait .tag{position:absolute;left:0;right:0;bottom:26px;text-align:center}
+
+  /* ── trilho de depoimentos (direita) ── */
+  .rail-line{position:absolute;inset:0;width:1600px;height:900px;pointer-events:none}
+  .rail-line line{stroke:var(--text-3);stroke-width:1.5;stroke-dasharray:5 9;opacity:.35}
+
+  .voice{position:absolute;left:700px;width:804px;height:56px;
+    display:flex;align-items:center;gap:28px}
+  .voice--1{top:215px}
+  .voice--2{top:385px}
+  .voice--3{top:555px}
+  .voice--4{top:725px}
+
+  /* disco 56px — fundo com var(--bg) por baixo do surface translúcido,
+     para a linha tracejada não vazar através dele */
+  .disc{flex:none;width:56px;height:56px;border-radius:50%;
+    background-color:var(--bg);
+    background-image:linear-gradient(var(--surface-2),var(--surface-2));
+    border:1px solid var(--border-2);color:var(--text-2);
+    display:grid;place-items:center}
+  .disc svg{width:24px;height:24px}
+  /* protagonista gold: só o 1º disco */
+  .voice--1 .disc{background:linear-gradient(180deg,var(--gold-300),var(--gold-500));
+    border-color:var(--gold-border);color:var(--on-gold)}
+
+  .voice .claim{font-size:20px;letter-spacing:-.01em;color:var(--text-1)}
+  .voice .why{margin-top:6px;font-style:italic}
+</style>
+<meta id="acfifjfajpekbmhmjppnmmjgmhjkildl"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <div class="ring ring--a" aria-hidden="true"></div>
+    <div class="ring ring--b" aria-hidden="true"></div>
+
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum dolor sit</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet <em>elit sed?</em></h1>
+    </header>
+
+    <div class="portrait" aria-hidden="true" style="position: absolute; margin: 0px; inset: 380px auto auto 96px; width: 360px; min-width: 0px; height: 390px; z-index: 20;">
+      <!-- para usar foto/ilustração real: substitua o conteúdo deste div por
+           <img src="…" style="width:100%;height:100%;object-fit:cover"> -->
+      <div class="initials">LI</div>
+      <div class="mono-label tag">[ lorem ipsum dolor sit amet · 4:5 ]</div>
+    </div>
+
+    <!-- linha tracejada unindo os centros dos 4 discos (x728 · y243→753) -->
+    <svg class="rail-line" viewBox="0 0 1600 900" aria-hidden="true">
+      <line x1="728" y1="243" x2="728" y2="753"></line>
+    </svg>
+
+    <div class="voice voice--1">
+      <div class="disc" aria-hidden="true">
+        <!-- laptop -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4.5" y="5.5" width="15" height="10" rx="1.6"></rect>
+          <path d="M2.5 18.5h19"></path>
+        </svg>
+      </div>
+      <div class="txt">
+        <div class="num claim">“Lorem ipsum”</div>
+        <p class="body why">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do.</p>
+      </div>
+    </div>
+
+    <div class="voice voice--2">
+      <div class="disc" aria-hidden="true">
+        <!-- robô / circuito -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="9" width="14" height="9.5" rx="2.2"></rect>
+          <path d="M12 9V6.2"></path>
+          <circle cx="12" cy="4.8" r="1.3"></circle>
+          <path d="M9.2 12.8v2.4M14.8 12.8v2.4"></path>
+          <path d="M5 13.6H2.8M21.2 13.6H19"></path>
+        </svg>
+      </div>
+      <div class="txt">
+        <div class="num claim">“Lorem ipsum dolor”</div>
+        <p class="body why">Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor magna.</p>
+      </div>
+    </div>
+
+    <div class="voice voice--3">
+      <div class="disc" aria-hidden="true">
+        <!-- aperto de mão -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2.5 12.5 7.2 7.8l4.2 1.4 4.2-2 5.4 5.2"></path>
+          <path d="M11.4 9.2 8.1 12.5a1.7 1.7 0 0 0 2.4 2.4l1-1"></path>
+          <path d="M17.6 14.6 14.2 11.2M15.6 16.7l-2.5-2.5"></path>
+        </svg>
+      </div>
+      <div class="txt">
+        <div class="num claim">“Lorem ipsum dolor sit”</div>
+        <p class="body why">Lorem ipsum dolor sit amet: consectetur, adipiscing e elit tempor do amet.</p>
+      </div>
+    </div>
+
+    <div class="voice voice--4">
+      <div class="disc" aria-hidden="true">
+        <!-- grupo de pessoas -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="8.5" r="3"></circle>
+          <path d="M3.5 19c.6-3.2 2.9-5 5.5-5s4.9 1.8 5.5 5"></path>
+          <path d="M15.5 6.2a3 3 0 1 1 .9 5.8"></path>
+          <path d="M17.6 14.3c1.8.6 3 2.1 3.4 4.2"></path>
+        </svg>
+      </div>
+      <div class="txt">
+        <div class="num claim">“Lorem ipsum dolor sit”</div>
+        <p class="body why">Lorem ipsum dolor sit amet consectetur adipiscing — elit sed do tempor incididunt labore.</p>
+      </div>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+
+
+</body></html>

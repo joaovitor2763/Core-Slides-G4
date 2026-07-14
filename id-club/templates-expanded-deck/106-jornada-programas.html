@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>106 · Jornada × programas</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Jornada × programas (dark): estágios de maturidade no tempo com
+     programas mapeados por faixa de estágio (recria a referência
+     "Soluções para o desenvolvimento do empreendedor").
+
+     RAIL esquerdo (x 96–420 · 324px): eyebrow + título serif 40px
+     (3 linhas, em itálico .dim — o gold do slide é a barra-âncora) +
+     2 parágrafos .body.
+
+     ÁREA (x 470–1504 · 1034px) · 6 colunas de estágio:
+       largura = (1504−470)/6 = 172,33px
+       fronteiras (arredondadas): 470 · 642 · 815 · 987 · 1159 · 1332 · 1504
+       centros: 556 · 728 · 901 · 1073 · 1245 · 1418
+     Separadores verticais dashed nas 5 fronteiras internas, y 230–560
+     (h 330), cor var(--border).
+
+     EIXO horizontal y=560 (1.5px var(--border-2), seta em x≈1504) com
+     6 pills mono de estágio centradas nos centros de coluna
+     (bg var(--bg) para mascarar a linha atrás).
+
+     CURVA de crescimento (SVG canvas 1600×900): sobe de (470,540) a
+     (1504,260) em 3 segmentos C, controles a ±100–130px dos pontos —
+     stroke var(--text-3) 1.5 dasharray 6 8 (discreta, atrás de tudo).
+
+     PROGRAMAS · 4 barras pill h=40 (radius 999) · régua de 172,33px:
+       linha 1 · y610 · cols 1–2 → left 470 · fim 815  → width 345
+       linha 2 · y660 · cols 2–4 → left 642 · fim 1159 → width 517
+       linha 3 · y710 · cols 3–5 → left 815 · fim 1332 → width 517 ← GOLD (âncora)
+       linha 4 · y760 · cols 4–6 → left 987 · fim 1504 → width 517
+     bottom da última barra = 760+40 = 800 ≤ 804 ✓
+
+     Labels mono de eixo: vertical rotacionado −90° centrado em
+     (440, 395 = meio de 230–560) e horizontal no fim do eixo (y578). */
+
+  /* ── rail esquerdo ─────────────────────────────────────────── */
+  .rail{position:absolute;left:var(--pad);top:150px;width:324px}
+  .rail .eyebrow{margin-bottom:20px}
+  .rail h1{font-size:40px}
+  .rail .body{margin-top:24px}
+  .rail .body + .body{margin-top:16px}
+
+  /* ── colunas de estágio ────────────────────────────────────── */
+  /* separador dashed vertical: y 230–560 · h 330 · var(--border) */
+  .sep{position:absolute;top:230px;width:1px;height:330px;z-index:0;
+    background:repeating-linear-gradient(180deg,var(--border) 0 6px,transparent 6px 13px)}
+
+  /* micro-bullets no topo de cada coluna: left = fronteira+16 · width = 172−32 = 140 */
+  .col{position:absolute;top:236px;width:140px;z-index:1;
+    display:flex;flex-direction:column;gap:6px}
+  .col .small{font-size:13px;line-height:1.4;display:flex;gap:8px}
+  .col .small::before{content:'·';flex:none;color:var(--text-3)}
+
+  /* ── eixo + pills de estágio ───────────────────────────────── */
+  .diagram{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .axis{stroke:var(--border-2);stroke-width:1.5;fill:none;stroke-linecap:round}
+  .curve{stroke:var(--text-3);stroke-width:1.5;fill:none;stroke-linecap:round;
+    stroke-dasharray:6 8;opacity:.7}
+
+  /* pill de estágio: centrada no centro da coluna, sobre o eixo y560 */
+  .stage-pill{position:absolute;top:560px;transform:translate(-50%,-50%);z-index:2;
+    font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text-2);white-space:nowrap;
+    padding:8px 15px;border:1px solid var(--border-2);border-radius:var(--r-pill);
+    background:var(--bg)}
+
+  /* labels mono do eixo */
+  .axis-y{position:absolute;left:440px;top:395px;white-space:nowrap;
+    transform:translate(-50%,-50%) rotate(-90deg)}
+  .axis-x{position:absolute;right:var(--pad);top:578px}
+
+  /* ── barras de programa ────────────────────────────────────── */
+  .prog{position:absolute;height:40px;border-radius:var(--r-pill);z-index:1;
+    background:rgba(255,255,255,.07);border:1px solid var(--border-2);
+    display:flex;align-items:center;padding:0 22px}
+  .prog .num{font-size:13px}
+  .prog--gold{background:linear-gradient(180deg,var(--gold-300),var(--gold-500));
+    border:1px solid var(--gold-border)}
+  .prog--gold .num{color:var(--on-gold)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <!-- ══ RAIL · x 96–420 ═══════════════════════════════════════
+         ex.: "Soluções para o desenvolvimento do empreendedor" —
+         título com a palavra-chave em itálico muted (.dim) + contexto -->
+    <header class="rail">
+      <div class="eyebrow">Lorem · ipsum</div>   <!-- ex.: "Jornada do empreendedor" -->
+      <h1 class="h-serif">Lorem ipsum dolor sit <em class="dim">consectetur.</em></h1>
+      <!-- ex.: por que cada estágio da empresa pede um programa diferente -->
+      <p class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do <b>eiusmod tempor</b> incididunt ut labore magna.</p>
+      <!-- ex.: como o programa-âncora conecta as faixas de estágio -->
+      <p class="body">Ut enim ad minim veniam, quis nostrud ullamco laboris nisi ut aliquip commodo consequat.</p>
+    </header>
+
+    <!-- ══ SEPARADORES de coluna · fronteiras internas 642/815/987/1159/1332 ══ -->
+    <div class="sep" style="left:642px"  aria-hidden="true"></div>
+    <div class="sep" style="left:815px"  aria-hidden="true"></div>
+    <div class="sep" style="left:987px"  aria-hidden="true"></div>
+    <div class="sep" style="left:1159px" aria-hidden="true"></div>
+    <div class="sep" style="left:1332px" aria-hidden="true"></div>
+
+    <!-- ══ EIXO y560 + seta + CURVA de crescimento ═══════════════
+         curva: (470,540) → (1504,260), 3 segmentos C, controles
+         horizontais a ±100–130px — crescimento composto, discreto -->
+    <svg class="diagram" viewBox="0 0 1600 900" aria-hidden="true">
+      <path class="curve" d="M470,540
+        C600,534 720,516 840,482
+        C960,448 1080,394 1200,348
+        C1280,317 1390,290 1504,260"/>
+      <line class="axis" x1="470" y1="560" x2="1500" y2="560"/>
+      <polyline class="axis" points="1492,554 1504,560 1492,566"/>  <!-- seta → -->
+    </svg>
+
+    <!-- labels mono do eixo · ex.: "resultado" (vertical) e "tempo" -->
+    <span class="mono-label axis-y">lorem →</span>
+    <span class="mono-label axis-x">ipsum →</span>
+
+    <!-- ══ MICRO-BULLETS por estágio · topo das colunas (y236) ═══
+         ex.: 2 características/dores de cada estágio, 2–4 palavras
+         lefts = fronteira + 16 → 486/658/831/1003/1175/1348 -->
+    <div class="col" style="left:486px">              <!-- estágio 1 -->
+      <span class="small">Lorem ipsum dolor</span>
+      <span class="small">Sit amet elit</span>
+    </div>
+    <div class="col" style="left:658px">              <!-- estágio 2 -->
+      <span class="small">Sed do eiusmod</span>
+      <span class="small">Tempor incididunt</span>
+    </div>
+    <div class="col" style="left:831px">              <!-- estágio 3 -->
+      <span class="small">Ut labore dolore</span>
+      <span class="small">Magna aliqua enim</span>
+    </div>
+    <div class="col" style="left:1003px">             <!-- estágio 4 -->
+      <span class="small">Minim veniam quis</span>
+      <span class="small">Nostrud ullamco</span>
+    </div>
+    <div class="col" style="left:1175px">             <!-- estágio 5 -->
+      <span class="small">Nisi ut aliquip</span>
+      <span class="small">Commodo consequat</span>
+    </div>
+    <div class="col" style="left:1348px">             <!-- estágio 6 -->
+      <span class="small">Duis aute irure</span>
+      <span class="small">Velit esse</span>
+    </div>
+
+    <!-- ══ PILLS de estágio · centros 556/728/901/1073/1245/1418 ══
+         ex.: ideação / sobrevivência / tração / escala / maturidade / sucessão -->
+    <span class="stage-pill" style="left:556px">lorem</span>
+    <span class="stage-pill" style="left:728px">ipsum</span>
+    <span class="stage-pill" style="left:901px">dolor</span>
+    <span class="stage-pill" style="left:1073px">amet</span>
+    <span class="stage-pill" style="left:1245px">elit</span>
+    <span class="stage-pill" style="left:1418px">tempor</span>
+
+    <!-- ══ PROGRAMAS · barras pill h40 por faixa de estágio ══════
+         ex.: portfólio de programas — o terceiro é o âncora (gold) -->
+    <!-- programa 1 · cols 1–2 · left 470 · fim 815 → w 345 · ex.: programa de entrada -->
+    <div class="prog" style="left:470px;top:610px;width:345px">
+      <span class="num">Lorem ipsum</span>
+    </div>
+    <!-- programa 2 · cols 2–4 · left 642 · fim 1159 → w 517 · ex.: comunidade/rede -->
+    <div class="prog" style="left:642px;top:660px;width:517px">
+      <span class="num">Dolor sit</span>
+    </div>
+    <!-- programa 3 · cols 3–5 · left 815 · fim 1332 → w 517 · ÂNCORA (gold) · ex.: imersão principal -->
+    <div class="prog prog--gold" style="left:815px;top:710px;width:517px">
+      <span class="num">Amet consectetur</span>
+    </div>
+    <!-- programa 4 · cols 4–6 · left 987 · fim 1504 → w 517 · ex.: conselho/board -->
+    <div class="prog" style="left:987px;top:760px;width:517px">
+      <span class="num">Tempor incididunt</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

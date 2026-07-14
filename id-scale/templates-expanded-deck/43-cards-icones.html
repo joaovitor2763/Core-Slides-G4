@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>43 · Cards com ícones</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Três cards densos lado a lado, cada um com disco-ícone SVG stroke,
+     título grotesk, parágrafo longo, hairline e rodapé mono.
+     Card do meio protagonista gold. Header: serif à esquerda, body à direita. */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:96px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:58px;max-width:740px}
+  .head .read{max-width:400px;padding-bottom:6px}
+
+  /* geometria: 3 × 448px + 2 × 32px gap = 1408 = 1600 − 2×96 ✓
+     left: 96 · 576 · 1056 — top 330, bottom 88 → altura 482 */
+  .card{position:absolute;top:330px;height:482px;width:448px;
+    padding:40px 40px 36px;display:flex;flex-direction:column}
+  .card--1{left:96px}
+  .card--2{left:576px}
+  .card--3{left:1056px}
+
+  .disc{width:48px;height:48px;border-radius:50%;background:var(--surface-2);
+    border:1px solid var(--border);display:grid;place-items:center;
+    color:var(--text-2);margin-bottom:26px}
+  .disc svg{width:24px;height:24px}
+  .card--2 .disc{background:var(--gold-dim);border-color:var(--gold-border);color:var(--gold)}
+
+  .card h2{font-family:var(--num);font-weight:600;font-size:24px;
+    letter-spacing:-.01em;color:var(--text-1);margin-bottom:14px}
+  .card .body{flex:1}
+
+  .card .hair{height:1px;background:var(--border);margin:24px 0 18px}
+  .card .foot{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+    color:var(--text-3);line-height:1.6}
+  .card .foot b{color:var(--gold);font-weight:500}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Lorem ipsum dolor</div>
+        <h1 class="h-serif">Lorem ipsum dolor sit amet <em>adipiscing.</em></h1>
+      </div>
+      <p class="body read">Lorem ipsum dolor sit amet consectetur adipiscing elit — sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+    </header>
+
+    <section class="card surface card--1">
+      <div class="disc" aria-hidden="true">
+        <!-- raio -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2.5 5 13.5h6l-1 8 8-11h-6l1-8z"/>
+        </svg>
+      </div>
+      <h2>Adipiscing</h2>
+      <p class="body">Lorem ipsum dolor sit amet consectetur adipiscing. Elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud — exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+      <div class="hair" aria-hidden="true"></div>
+      <p class="foot">→ lorem ipsum: dolor sit amet consectetur 3 dias sed do <b>40 min</b>.</p>
+    </section>
+
+    <section class="card surface surface--gold card--2">
+      <div class="disc" aria-hidden="true">
+        <!-- engrenagem simplificada -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3.2"/>
+          <path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.5 5.5l1.8 1.8M16.7 16.7l1.8 1.8M18.5 5.5l-1.8 1.8M7.3 16.7l-1.8 1.8"/>
+        </svg>
+      </div>
+      <h2>Consectetur</h2>
+      <p class="body">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor. Incididunt ut labore et dolore magna aliqua: enim ad minim veniam quis nostrud exercitation ullamco laboris nisi, ut aliquip ex ea commodo.</p>
+      <div class="hair" aria-hidden="true"></div>
+      <p class="foot">→ lorem ipsum: dolor sit amet consectetur adipiscing sed de 40% elit <b>&lt; 8%</b>.</p>
+    </section>
+
+    <section class="card surface card--3">
+      <div class="disc" aria-hidden="true">
+        <!-- escudo -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3 5 5.8v5.4c0 4.4 2.9 7.6 7 9 4.1-1.4 7-4.6 7-9V5.8L12 3z"/>
+          <path d="M9.2 12l2 2 3.6-4"/>
+        </svg>
+      </div>
+      <h2>Reprehenderit</h2>
+      <p class="body">Lorem ipsum dolor sit amet consectetur adipiscing elit: sed do, eiusmod tempor, incididunt labore. Dolore magna aliqua enim ad minim — veniam quis nostrud exercitation ullamco laboris nisi aliquip commodo.</p>
+      <div class="hair" aria-hidden="true"></div>
+      <p class="foot">→ lorem ipsum: dolor sit amet consectetur de 2 semanas sed <b>1 tarde</b>.</p>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

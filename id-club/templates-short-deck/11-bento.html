@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>11 · Bento</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Bento dark orgânico: hero 2×2 (número 140px gold + claim serif)
+     + coluna de 3 células menores. Glow atrás da hero.
+     Nota: hero ocupa 2 colunas × 2 linhas; a 3ª coluna foi subdividida
+     em 3 células para caber os três indicadores de apoio. */
+
+
+  /* área útil: x 96 → 1504 (1408px) · y 150 → 804 (654px) · gap 20px
+     colunas de (1408 − 2×20) / 3 = 456px */
+
+  /* hero: 2 col + gap = 932px · altura total 654px */
+  .hero{position:absolute;left:var(--pad);top:150px;width:932px;height:654px;
+    padding:64px 72px;display:flex;flex-direction:column;z-index:1}
+  .hero .kicker{margin-bottom:auto}
+  .hero .figure{font-size:140px;line-height:.95;letter-spacing:-.05em;color:var(--gold)}
+  .hero .claim{font-size:34px;margin-top:28px;max-width:640px;line-height:1.25}
+
+  /* coluna direita: x 1048 → 1504 (456px) · 3 células
+     (654 − 2×20) / 3 ≈ 205 + 205 + 204 */
+  .cell{position:absolute;left:1048px;width:456px;padding:30px 36px;
+    display:flex;flex-direction:column;z-index:1}
+  .cell-1{top:150px;height:205px}
+  .cell-2{top:375px;height:205px}
+  .cell-3{top:600px;height:204px}
+
+  .cell .value{font-size:44px;line-height:1;letter-spacing:-.03em;margin-top:14px;
+    display:flex;align-items:baseline;gap:14px}
+  .cell .value small{font-size:22px;font-weight:600;letter-spacing:-.01em}
+  .cell .caption{margin-top:auto}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Impacto no comercial">
+
+
+
+    <section class="hero surface">
+      <div class="eyebrow kicker">Após 2 trimestres de fluxo</div>
+      <div class="num figure">3,4&times;</div>
+      <p class="h-serif claim">mais propostas por vendedor — com <em>o mesmo time.</em></p>
+    </section>
+
+    <div class="cell cell-1 surface">
+      <span class="mono-label">Ciclo de venda</span>
+      <div class="num value">19 dias <span class="chip chip--green"><span class="dot"></span>&minus;44%</span></div>
+      <p class="small caption">De 34 para 19 dias com follow-up automático.</p>
+    </div>
+
+    <div class="cell cell-2 surface">
+      <span class="mono-label">Adoção do playbook</span>
+      <div class="num value">91<small>%</small></div>
+      <p class="small caption">Do comercial rodando os fluxos toda semana.</p>
+    </div>
+
+    <div class="cell cell-3 surface">
+      <span class="mono-label">Payback</span>
+      <div class="num value">5 <small>meses</small></div>
+      <p class="small caption">Do investimento total em automação e treino.</p>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

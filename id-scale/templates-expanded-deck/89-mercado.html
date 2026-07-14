@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>89 · Mercado · TAM SAM SOM</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Mercado TAM/SAM/SOM (light): 3 barras horizontais ANINHADAS alinhadas
+     à esquerda — alternativa ao 35 (círculos). Sigla + valor dentro da
+     barra; definição em mono-label fora, à direita. Card "por que agora"
+     no canto inferior direito. Rodapé com fontes.
+
+     BARRAS · x 96 · y 330 / 450 / 570 · altura 84 · gap 36 · radius r-md
+       TAM 1200px → borda direita 1296 · label externo em 1296+28 = 1324
+                    (1324 + 180 de largura = 1504 = 1600−96 ✓)
+       SAM  760px → borda direita  856 · label em 884
+       SOM  420px → borda direita  516 · label em 544
+     Larguras ILUSTRATIVAS, não lineares (anotado no slide): na escala
+     linear SAM (R$ 2,1B = 25% do TAM) daria 300px e SOM (R$ 480M = 5,7%)
+     daria 69px — ilegível. Visual: TAM 1200 (100%) · SAM 760 (~63% visual
+     para 25% real) · SOM 420 (~35% visual para 5,7% real).
+
+     CARD · left 1150 + 354 = 1504 ✓ · top 560 + 220 = 780 < 804 ✓
+       (sem colisão: SOM ocupa y 570–654 mas termina em x 813 com o label)
+       Interno: 220 − 2·24 = 172 ≈ kicker 15 + 3 bullets 2 linhas (~44) + 3 gaps 12
+       → respiro simétrico topo/base (com gap 14 + padding 28 o conteúdo
+       invadia o padding inferior: 31px em cima vs 14px embaixo).
+     RODAPÉ · x 96 · y 780 → ~796 < 804 ✓ */
+
+  .head{position:absolute;left:var(--pad);top:110px;max-width:1100px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:46px}
+
+  .row{position:absolute;left:var(--pad);height:84px;display:flex;align-items:center}
+  .row--tam{top:330px} .row--sam{top:450px} .row--som{top:570px}
+
+  .bar{height:84px;border-radius:var(--r-md);flex:none;
+    display:flex;align-items:center;padding-left:28px}
+  .bar .inner{display:flex;align-items:baseline;gap:14px}
+  .bar .sig{font-size:20px;color:var(--text-3)}
+  .bar .val{font-size:26px}
+
+  .bar--tam{width:1200px;background:rgba(0,31,53,.08)}
+  .bar--sam{width:760px;background:rgba(0,31,53,.16)}
+  .bar--som{width:420px;
+    background:linear-gradient(90deg,var(--gold-300),var(--gold-500));
+    box-shadow:0 18px 44px -16px var(--gold-border)}
+  .bar--som .sig{color:var(--on-gold);opacity:.75}
+  .bar--som .val{color:var(--on-gold)}
+
+  .def{margin-left:28px}
+  .row--tam .def{width:180px;line-height:1.7}   /* quebra em 2 linhas dentro de 1324–1504 */
+
+  /* card "por que agora" — 3 bullets com dot gold de apoio */
+  .why{position:absolute;left:1150px;right:var(--pad);top:560px;height:220px;
+    padding:24px 30px;display:flex;flex-direction:column;gap:12px}
+  .why .bullet{display:flex;gap:12px;align-items:flex-start}
+  .why .bullet::before{content:'';flex:none;width:5px;height:5px;border-radius:50%;
+    background:var(--gold);margin-top:7px}
+  .why .small{color:var(--text-2)}
+
+  .sources{position:absolute;left:var(--pad);top:780px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit, <em>consectetur</em> elit.</h1>
+    </header>
+
+    <!-- larguras ilustrativas, não lineares — proporção real: SAM = 25% do TAM · SOM = 5,7% do TAM -->
+    <div class="row row--tam">
+      <div class="bar bar--tam">
+        <div class="inner"><span class="num sig">Sed</span><span class="num val">R$ 8,4B</span></div>
+      </div>
+      <span class="mono-label def">lorem ipsum dolor sit amet</span>
+    </div>
+
+    <div class="row row--sam">
+      <div class="bar bar--sam">
+        <div class="inner"><span class="num sig">Sit</span><span class="num val">R$ 2,1B</span></div>
+      </div>
+      <span class="mono-label def">consectetur R$ 10–300M dolor sit</span>
+    </div>
+
+    <div class="row row--som">
+      <div class="bar bar--som">
+        <div class="inner"><span class="num sig">Amet</span><span class="num val">R$ 480M</span></div>
+      </div>
+      <span class="mono-label def">consectetur · dolor sit R$ 60k</span>
+    </div>
+
+    <aside class="why surface surface--flat">
+      <span class="mono-label">Dolor sit amet</span>
+      <div class="bullet"><p class="small">Lorem ipsum dolor sit amet consectetur adipiscing.</p></div>
+      <div class="bullet"><p class="small">Lorem ipsum dolor sit — amet consectetur adipiscing elit.</p></div>
+      <div class="bullet"><p class="small">Consectetur adipiscing elit sed tempor amet.</p></div>
+    </aside>
+
+    <span class="mono-label sources">lorem: Ipsum · Dolor · consectetur elit 2025</span>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

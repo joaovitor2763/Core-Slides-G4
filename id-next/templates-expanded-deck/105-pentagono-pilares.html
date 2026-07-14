@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>105 · Pentágono de pilares</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* 105 · Pentágono de pilares (light)
+     Cabeçalho topo-esquerda + pentágono conceitual central (3 anéis
+     aninhados) + dot central gold — o pilar TRANSVERSAL, único gold do
+     slide — + 6 callouts (3 por lado) presos por conectores cotovelo.
+
+     ── Colunas ──
+     callouts esq x 96..396 (largura 300) · callouts dir x 1204..1504 (300)
+     1204 + 300 = 1504 = 1600 − 96 ✓ · diagrama vive entre 396 e 1204.
+
+     ── Pentágono (SVG único cobrindo o canvas 1600×900) ──
+     centro C = (870,510) · vértice k em θ = −90° + 72k
+     ponto = C + R·(cos θ, sin θ):
+       k=0 θ=−90° (cos 0,     sin −1   ) → topo
+       k=1 θ=−18° (cos .951,  sin −.309) → dir-sup
+       k=2 θ= 54° (cos .588,  sin  .809) → dir-inf
+       k=3 θ=126° (cos −.588, sin  .809) → esq-inf
+       k=4 θ=198° (cos −.951, sin −.309) → esq-sup
+     R=200 → (870,310) (1060,448) (988,672) (752,672) (680,448)
+     R=145 → (870,365) (1008,465) (955,627) (785,627) (732,465)
+     R= 90 → (870,420) ( 956,482) (923,583) (817,583) (784,482)
+     limite inferior: 672 + dot r7 = 679 < 804 ✓
+
+     ── Callouts ──
+     pill fixa 184×36 → centro vertical do pill = top + 18
+     tops 250/430/620 → y de ancoragem 268 / 448 / 638
+     dot r3 na pill: esq x = 96+184 = 280 · dir x = 1204 (borda esquerda)
+     rotas dos cotovelos comentadas junto de cada <path>. */
+
+  .head{position:absolute;left:var(--pad);top:84px}
+  .head .eyebrow{margin-bottom:24px}
+  .head h1{font-size:46px;max-width:600px}
+
+  /* diagrama: um SVG só, coordenadas = coordenadas do canvas */
+  .penta{position:absolute;inset:0;pointer-events:none}
+  .penta .spoke{stroke:var(--border-2);stroke-width:1}
+  .penta .ring{stroke:var(--gold-border);stroke-width:1}
+  .penta .wire{fill:none;stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .penta .dot-co{fill:var(--text-3);opacity:.7}       /* r3 · ponta na pill */
+  .penta .dot-node{fill:var(--text-3)}                /* r5 · no vértice/centro exato */
+  .penta .vdot{fill:var(--surface);stroke:var(--text-3);stroke-width:1.5}
+
+  /* callout: pill outline + parágrafo small de 3 linhas */
+  .co{position:absolute;width:300px}
+  .co .pill{display:flex;align-items:center;justify-content:center;gap:10px;
+    width:184px;height:36px;border:1px solid var(--border-2);
+    border-radius:var(--r-pill);background:transparent}
+  .co .pill .idx{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;color:var(--text-3)}
+  .co .pill .name{font-family:var(--num);font-weight:600;font-size:15px;
+    letter-spacing:-.01em;color:var(--text-1)}
+  .co p{margin-top:12px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <!-- cabeçalho topo-esquerda · ex.: eyebrow "Método G4 · fundamentos"
+         + título "Por que esses cinco pilares são importantes" -->
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum · dolor</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet <span class="dim">consectetur elit.</span></h1>
+    </header>
+
+    <!-- pentágono + conectores · geometria no comentário do topo -->
+    <svg class="penta" viewBox="0 0 1600 900" aria-hidden="true">
+      <defs>
+        <!-- gradiente do dot central (pilar transversal · único gold) -->
+        <linearGradient id="dot-gold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" style="stop-color:var(--gold-300)"/>
+          <stop offset="1" style="stop-color:var(--gold-700)"/>
+        </linearGradient>
+      </defs>
+
+      <!-- linhas finas centro (870,510) → vértices R200 -->
+      <g class="spoke">
+        <line x1="870" y1="510" x2="870"  y2="310"/>
+        <line x1="870" y1="510" x2="1060" y2="448"/>
+        <line x1="870" y1="510" x2="988"  y2="672"/>
+        <line x1="870" y1="510" x2="752"  y2="672"/>
+        <line x1="870" y1="510" x2="680"  y2="448"/>
+      </g>
+
+      <!-- 3 pentágonos aninhados · fills se somam do anel externo ao miolo -->
+      <g class="ring">
+        <polygon fill="rgba(185,145,91,.07)"
+                 points="870,310 1060,448 988,672 752,672 680,448"/>   <!-- R=200 -->
+        <polygon fill="rgba(185,145,91,.12)"
+                 points="870,365 1008,465 955,627 785,627 732,465"/>   <!-- R=145 -->
+        <polygon fill="rgba(185,145,91,.18)"
+                 points="870,420 956,482 923,583 817,583 784,482"/>    <!-- R=90 -->
+      </g>
+
+      <!-- conectores cotovelo · dot r3 na pill · dot r5 no vértice/centro EXATO
+           (os nós r7/r15 são desenhados por cima — a linha morre na borda deles) -->
+
+      <!-- 01 topo: pill (1204,268) → cotovelo (870,268) → vértice (870,310) -->
+      <path class="wire" d="M1204 268 H870 V310"/>
+      <circle class="dot-co"   cx="1204" cy="268" r="3"/>
+      <circle class="dot-node" cx="870"  cy="310" r="5"/>
+
+      <!-- 02 dir-sup: pill (1204,448) alinhada ao vértice (1060,448) → reto -->
+      <path class="wire" d="M1204 448 H1060"/>
+      <circle class="dot-co"   cx="1204" cy="448" r="3"/>
+      <circle class="dot-node" cx="1060" cy="448" r="5"/>
+
+      <!-- 03 dir-inf: pill (1204,638) → (1080,638) → (1080,672) → vértice (988,672) -->
+      <path class="wire" d="M1204 638 H1080 V672 H988"/>
+      <circle class="dot-co"   cx="1204" cy="638" r="3"/>
+      <circle class="dot-node" cx="988"  cy="672" r="5"/>
+
+      <!-- 04 esq-inf: pill (280,638) → (600,638) → (600,672) → vértice (752,672) -->
+      <path class="wire" d="M280 638 H600 V672 H752"/>
+      <circle class="dot-co"   cx="280" cy="638" r="3"/>
+      <circle class="dot-node" cx="752" cy="672" r="5"/>
+
+      <!-- 05 esq-sup: pill (280,268) → cotovelo (680,268) → vértice (680,448) -->
+      <path class="wire" d="M280 268 H680 V448"/>
+      <circle class="dot-co"   cx="280" cy="268" r="3"/>
+      <circle class="dot-node" cx="680" cy="448" r="5"/>
+
+      <!-- 06 TRANSVERSAL: pill (280,448) → (440,448) → (440,510) → centro (870,510)
+           a reta final ATRAVESSA os anéis de propósito — o pilar transversal
+           (ex.: inteligência artificial) permeia todos os outros pilares -->
+      <path class="wire" d="M280 448 H440 V510 H870"/>
+      <circle class="dot-co"   cx="280" cy="448" r="3"/>
+      <circle class="dot-node" cx="870" cy="510" r="5"/>
+
+      <!-- dots dos vértices · r7 -->
+      <g class="vdot">
+        <circle cx="870"  cy="310" r="7"/>
+        <circle cx="1060" cy="448" r="7"/>
+        <circle cx="988"  cy="672" r="7"/>
+        <circle cx="752"  cy="672" r="7"/>
+        <circle cx="680"  cy="448" r="7"/>
+      </g>
+
+      <!-- dot central r15 em gradiente gold + anel gold-dim (protagonista) -->
+      <circle cx="870" cy="510" r="21" fill="var(--gold-dim)"/>
+      <circle cx="870" cy="510" r="15" fill="url(#dot-gold)"/>
+    </svg>
+
+    <!-- ── callouts esquerda · x96 · tops 250/430/620 ── -->
+
+    <!-- pilar 05 · ex.: nome "Cultura" + frase de por que o pilar importa -->
+    <div class="co" style="left:96px;top:250px">
+      <div class="pill"><span class="idx">05</span><span class="name">Magna aliqua</span></div>
+      <p class="small">Quis nostrud ullamco nisi commodo consectetur adipiscing elit, sed tempor incididunt labore magna aliqua enim.</p>
+    </div>
+
+    <!-- pilar 06 · TRANSVERSAL, liga ao dot central gold
+         ex.: "Inteligência artificial — permeia todos os pilares" -->
+    <div class="co" style="left:96px;top:430px">
+      <div class="pill"><span class="idx">06</span><span class="name">Duis aute</span></div>
+      <p class="small">Lorem ipsum dolor sit amet consectetur — adipiscing elit sed tempor incididunt labore magna aliqua veniam.</p>
+    </div>
+
+    <!-- pilar 04 · ex.: nome "Finanças" + frase de por que o pilar importa -->
+    <div class="co" style="left:96px;top:620px">
+      <div class="pill"><span class="idx">04</span><span class="name">Sed tempor</span></div>
+      <p class="small">Excepteur sint occaecat cupidatat proident, culpa officia deserunt mollit anim laborum lorem ipsum dolor sit.</p>
+    </div>
+
+    <!-- ── callouts direita · x1204 · tops 250/430/620 ── -->
+
+    <!-- pilar 01 · ex.: nome "Estratégia" + frase de por que o pilar importa -->
+    <div class="co" style="left:1204px;top:250px">
+      <div class="pill"><span class="idx">01</span><span class="name">Lorem ipsum</span></div>
+      <p class="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed tempor incididunt labore magna aliqua enim veniam.</p>
+    </div>
+
+    <!-- pilar 02 · ex.: nome "Pessoas" + frase de por que o pilar importa -->
+    <div class="co" style="left:1204px;top:430px">
+      <div class="pill"><span class="idx">02</span><span class="name">Dolor sit</span></div>
+      <p class="small">Sed tempor incididunt labore magna aliqua, quis nostrud ullamco nisi commodo duis aute irure voluptate velit.</p>
+    </div>
+
+    <!-- pilar 03 · ex.: nome "Processos" + frase de por que o pilar importa -->
+    <div class="co" style="left:1204px;top:620px">
+      <div class="pill"><span class="idx">03</span><span class="name">Amet elit</span></div>
+      <p class="small">Duis aute irure voluptate velit cillum fugiat nulla pariatur, excepteur sint occaecat cupidatat proident culpa.</p>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

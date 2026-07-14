@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>81 · Ponte · waterfall</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Ponte (waterfall) financeira — light.
+     TOPO: eyebrow + título serif 44px (y104–200).
+     CHART: card .surface x96–1100 (left 96 + width 1004 = 1100 ✓),
+       y240–790 (top 240 + height 550 = 790 < 804 ✓), padding 40
+       → interno 924 × 470 (1004−80 · 550−80).
+       panel-top 30px (label 14 + margin 16) → .chart = 470 − 30 = 440px.
+     COLUNAS: 6 × 124px + 5 gaps × 36px = 744 + 180 = 924 ✓
+       offsets left: 0 · 160 · 320 · 480 · 640 · 800 (+124 = 924 ✓).
+     VERTICAL do chart (de baixo p/ cima): labels 0–32 · baseline 32–34
+       (::after 2px var(--border-2)) · base das barras B = 34.
+     ESCALA: 1M = 15px.
+       18,2M → 273px · +2,4 → 36px · +3,1 → 46,5px · −1,9 → 28,5px · 24,9M → 373,5px
+       Acumulado (px acima de B): 18,2→273 · 20,6→309 · 23,7→355,5 · 21,8→327 · 24,9→373,5
+       A conta fecha: 18,2 + 2,4 + 3,1 − 1,9 + 3,1 = 24,9 ✓
+     Barras (bottom/height em px no .chart):
+       c1 bottom 34  h 273    (topo 307)
+       c2 bottom 307 h 36     (topo 343)   — flutua sobre 18,2
+       c3 bottom 343 h 46,5   (topo 389,5) — flutua sobre 20,6
+       c4 bottom 361 h 28,5   (topo 389,5) — DESCE de 23,7 p/ 21,8
+       c5 bottom 361 h 46,5   (topo 407,5) — flutua sobre 21,8
+       c6 bottom 34  h 373,5  (topo 407,5)
+     Conectores tracejados (nível acumulado, ligando topo/bordas exatas,
+       atravessam o gap de 36px entre colunas):
+       k1 bottom 307   x 124→160 (topo c1 → base c2)
+       k2 bottom 343   x 284→320 (topo c2 → base c3)
+       k3 bottom 389,5 x 444→480 (topo c3 → TOPO c4, negativa)
+       k4 bottom 361   x 604→640 (base c4 → base c5)
+       k5 bottom 407,5 x 764→800 (topo c5 → topo c6)
+     Valores .num 16px acima das barras: bottom = topo + 7.
+     DIREITA: leitura executiva x1160–1504 (1160 + 344 = 1504 ✓), y280–~690. */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:104px}
+  .head .eyebrow{margin-bottom:16px}
+  .head h1{font-size:44px;max-width:1000px}
+
+  /* ---------- card do gráfico ---------- */
+  .panel{position:absolute;left:96px;width:1004px;top:240px;height:550px;
+    padding:40px;display:flex;flex-direction:column}
+  .panel-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+
+  .chart{position:relative;flex:1} /* 440px */
+  .chart::after{content:'';position:absolute;left:0;right:0;bottom:32px;height:2px;
+    border-radius:2px;background:var(--border-2)}
+
+  .bar{position:absolute;width:124px;z-index:1}
+  .bar--full{border-radius:10px 10px 0 0}
+  .bar--start{background:var(--navy-500)}
+  .bar--end{background:linear-gradient(180deg,var(--gold-300),var(--gold-500))}
+  .bar--up{background:var(--green-dim);border:1px solid var(--green);border-radius:6px}
+  .bar--down{background:var(--red-dim);border:1px solid var(--red);border-radius:6px}
+
+  /* posições · ver tabela no comentário de topo */
+  .b1{left:0;bottom:34px;height:273px}
+  .b2{left:160px;bottom:307px;height:36px}
+  .b3{left:320px;bottom:343px;height:46.5px}
+  .b4{left:480px;bottom:361px;height:28.5px}
+  .b5{left:640px;bottom:361px;height:46.5px}
+  .b6{left:800px;bottom:34px;height:373.5px}
+
+  /* conectores: 1.5px tracejado fino no nível acumulado exato */
+  .link{position:absolute;width:36px;height:0;
+    border-top:1.5px dashed var(--text-3);opacity:.55}
+  .k1{left:124px;bottom:307px}
+  .k2{left:284px;bottom:343px}
+  .k3{left:444px;bottom:389.5px}
+  .k4{left:604px;bottom:361px}
+  .k5{left:764px;bottom:407.5px}
+
+  /* valores acima das barras */
+  .val{position:absolute;width:124px;text-align:center;
+    font-family:var(--num);font-weight:600;font-size:16px;letter-spacing:-.02em}
+  .v1{left:0;bottom:314px;color:var(--text-1)}
+  .v2{left:160px;bottom:350px;color:var(--green)}
+  .v3{left:320px;bottom:396.5px;color:var(--green)}
+  .v4{left:480px;bottom:396.5px;color:var(--red)}
+  .v5{left:640px;bottom:414.5px;color:var(--green)}
+  .v6{left:800px;bottom:414.5px;color:var(--gold)}
+
+  /* categorias abaixo da baseline (topo 414 = 6px sob a baseline) */
+  .cat{position:absolute;top:414px;width:124px;text-align:center;
+    font-family:var(--mono);font-size:10px;font-weight:500;line-height:1.3;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+  .cat--strong{color:var(--text-2)}
+  .x1{left:0} .x2{left:160px} .x3{left:320px} .x4{left:480px} .x5{left:640px} .x6{left:800px}
+
+  /* ---------- leitura executiva ---------- */
+  .aside{position:absolute;left:1160px;width:344px;top:280px}
+  .aside .lede{margin-top:18px}
+  .aside .bullets{margin-top:28px;padding-top:24px;border-top:1px solid var(--border);
+    display:flex;flex-direction:column;gap:16px}
+  .aside .bullets p{position:relative;padding-left:24px}
+  .aside .bullets p::before{content:'';position:absolute;left:2px;top:7px;
+    width:6px;height:6px;border-radius:50%;background:var(--gold)}
+  .aside .chip{margin-top:28px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum dolor sit amet</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet consectetur <em>elit.</em></h1>
+    </header>
+
+    <section class="panel surface">
+      <div class="panel-top">
+        <span class="mono-label">Lorem ipsum dolor · R$ milhões</span>
+        <span class="mono-label">2025 → 2026</span>
+      </div>
+
+      <div class="chart">
+        <!-- valores -->
+        <span class="val v1">18,2</span>
+        <span class="val v2">+2,4</span>
+        <span class="val v3">+3,1</span>
+        <span class="val v4">−1,9</span>
+        <span class="val v5">+3,1</span>
+        <span class="val v6">24,9</span>
+
+        <!-- barras -->
+        <div class="bar bar--full bar--start b1"></div>
+        <div class="bar bar--up b2"></div>
+        <div class="bar bar--up b3"></div>
+        <div class="bar bar--down b4"></div>
+        <div class="bar bar--up b5"></div>
+        <div class="bar bar--full bar--end b6"></div>
+
+        <!-- conectores no nível acumulado -->
+        <div class="link k1"></div>
+        <div class="link k2"></div>
+        <div class="link k3"></div>
+        <div class="link k4"></div>
+        <div class="link k5"></div>
+
+        <!-- categorias abaixo da baseline -->
+        <span class="cat cat--strong x1">Lorem 25</span>
+        <span class="cat x2">+ Ipsum</span>
+        <span class="cat x3">+ Dolor</span>
+        <span class="cat x4">− Amet dolor sit</span>
+        <span class="cat x5">+ Sit amet dolor</span>
+        <span class="cat cat--strong x6">Lorem 26</span>
+      </div>
+    </section>
+
+    <aside class="aside">
+      <span class="mono-label">Lorem ipsum dolor</span>
+      <p class="lede">Sed R$ 18,2M amet R$ 24,9M — dolor sit consectetur adipiscing elit.</p>
+      <div class="bullets">
+        <p class="small">Lorem ipsum dolor sit +R$ 5,5M elit — consectetur adipiscing sed, do eiusmod tempor labore.</p>
+        <p class="small">Lorem ipsum dolor sit amet +R$ 3,1M consectetur adipiscing elit sed do eiusmod tempor labore (−R$ 1,9M).</p>
+      </div>
+      <span class="chip chip--green"><span class="dot"></span>+37% a/a</span>
+    </aside>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

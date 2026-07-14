@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>02 · Divisor de capítulo</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Divisor de capítulo — radicalmente simples: número GIGANTE em ghost
+     serif sangrando DE PROPÓSITO fora do canvas à direita, título serif
+     ancorado à esquerda-centro, anéis discretos, chip de contexto.
+     O sangramento do ghost é intencional (overflow:hidden corta). */
+
+  .armilar--corner{width:780px;height:439px;right:-30px;bottom:-30px;opacity:.28}
+
+  /* ghost: 380px · largura estimada ~700px, ancorado a right:-190px
+     → sangra ~190px para fora do canvas (proposital) */
+  .chapter-ghost{
+    position:absolute;right:-60px;top:50%;transform:translateY(-54%);
+    font-size:330px;line-height:1;white-space:nowrap;
+  }
+
+  /* bloco de título: left 96px, vertical ~centro
+     chip (33px) + gap 34px + h1 (2 linhas × ~92px = 184px) + gap 30px
+     + hairline ≈ 282px de altura → top 312px centraliza bem */
+  .block{position:absolute;left:var(--pad);top:312px;max-width:900px}
+  .block .chip{margin-bottom:34px}
+  .block h1{font-size:88px}
+  .block .rule{margin-top:44px;width:120px;height:1px;background:var(--gold);opacity:.6}
+  /* id-next-clean: fundo orgânico dispensa armilar e letra fantasma */
+  .armilar,.ghost,.g-ghost,.watermark,.letter{display:none!important}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-next-bg style="background:#121722 url('assets/bg-club-ghost-v.png') center/cover no-repeat" data-section="Lorem · ipsum">
+
+    <div class="armilar armilar--engraving armilar--corner" aria-hidden="true"></div>
+    <div class="ghost chapter-ghost" aria-hidden="true">02</div>
+
+    <div class="block">
+      <span class="chip chip--gold"><span class="dot"></span>Lorem 02 · Ipsum</span>
+      <h1 class="h-serif">Lorem ipsum dolor elit<br>sed tempor <em>sit amet.</em></h1>
+      <div class="rule" aria-hidden="true"></div>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

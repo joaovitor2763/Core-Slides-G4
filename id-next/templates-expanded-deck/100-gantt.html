@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>100 · Plano de trabalho · gantt</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Plano de trabalho estilo gantt (light): 4 frentes × 12 semanas.
+     Topo: eyebrow + título serif à esquerda, chip mono de período à direita.
+     Régua de semanas S01–S12 + gridlines verticais dashed; barras pill por
+     frente; barra "piloto" (fase atual) em gradiente gold com chip "agora";
+     losango de milestone no fim de cada barra; linha "hoje" tracejada.
+
+     Geometria X · labels das frentes 96–250 (154px, text-align right) ·
+     1 semana = 103px · grade a partir de x260 · 12×103 = 1236 ·
+     260+1236 = 1496 ≤ 1504 ✓ · fronteiras (13 gridlines):
+     260 363 466 569 672 775 878 981 1084 1187 1290 1393 1496
+     (em x878 a gridline neutra é omitida — a linha "hoje" assume a fronteira).
+
+     Barras (left = 260+(a−1)×103 · width = (b−a+1)×103):
+       descoberta S1–S3 → left 260 · width 309 · fim 569
+       construção S2–S7 → left 363 · width 618 · fim 981
+       piloto     S6–S9 → left 775 · width 412 · fim 1187
+       rollout    S9–S12→ left 1084 · width 412 · fim 1496
+     Linha "hoje" na fronteira de S07 → x = 260 + 6×103 = 878.
+
+     Geometria Y · head 72 · tag hoje 232 · labels S01–S12 258 ·
+     régua (hairline) 290 · gridlines 290–740 · linhas de frente
+     340/440/540/640 (h 56) · barras h 40 → tops 348/448/548/648 ·
+     losangos (12px, centro da barra) tops 362/462/562/662 ·
+     chip "agora" 508 (acima da barra piloto) · rodapé 780 < 804 ✓ */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:72px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:16px}
+  .head h1{font-size:44px;max-width:980px}
+  .head .chip{flex:none;margin-bottom:8px}
+
+  /* régua de semanas */
+  .wk{position:absolute;top:258px;width:103px;text-align:center;
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+  .ruler{position:absolute;left:260px;top:290px;width:1236px;height:1px;
+    background:var(--border-2)}
+  .grid{position:absolute;top:290px;width:1px;height:450px;z-index:0;
+    background:repeating-linear-gradient(180deg,var(--border-2) 0 5px,transparent 5px 12px)}
+
+  /* frentes */
+  .front{position:absolute;left:var(--pad);width:154px;height:56px;
+    display:flex;align-items:center;justify-content:flex-end;text-align:right;
+    font-family:var(--mono);font-size:12px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+  .front--now{color:var(--text-1)}
+
+  /* barras */
+  .bar{position:absolute;height:40px;border-radius:var(--r-pill);z-index:1;
+    background:rgba(0,31,53,.12);border:1px solid var(--border-2)}
+  .bar--gold{background:linear-gradient(180deg,var(--gold-300),var(--gold-500));
+    border:1px solid var(--gold-border)}
+
+  /* milestone: losango 12px no fim da barra (centro da barra = top+20) */
+  .mile{position:absolute;width:12px;height:12px;z-index:2;
+    background:var(--text-2);transform:rotate(45deg)}
+
+  /* linha "hoje" na fronteira de S07 (x 878) */
+  .today{position:absolute;left:878px;top:254px;height:486px;width:0;z-index:3;
+    border-left:1.5px dashed var(--gold-border)}
+  .today-tag{position:absolute;left:878px;top:232px;transform:translateX(-50%);
+    font-family:var(--mono);font-size:10.5px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+
+  /* chip "agora" flutuando acima da barra piloto (centro da barra = x 981) */
+  .now-chip{position:absolute;left:981px;top:508px;transform:translateX(-50%);z-index:4}
+
+  .foot{position:absolute;left:var(--pad);top:780px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Lorem ipsum adipiscing</div>
+        <h1 class="h-serif">Lorem ipsum dolor sit amet <em>tempor magna.</em></h1>
+      </div>
+      <span class="chip">abr–jun · 12 semanas</span>
+    </header>
+
+    <!-- gridlines verticais (13 fronteiras de semana) -->
+    <div class="grid" style="left:260px" aria-hidden="true"></div>
+    <div class="grid" style="left:363px" aria-hidden="true"></div>
+    <div class="grid" style="left:466px" aria-hidden="true"></div>
+    <div class="grid" style="left:569px" aria-hidden="true"></div>
+    <div class="grid" style="left:672px" aria-hidden="true"></div>
+    <div class="grid" style="left:775px" aria-hidden="true"></div>
+    <!-- fronteira x878 sem gridline neutra: a linha "hoje" (gold) ocupa esse x;
+         sobrepor os dois tracejados criava padrão bicolor sujo -->
+    <div class="grid" style="left:981px" aria-hidden="true"></div>
+    <div class="grid" style="left:1084px" aria-hidden="true"></div>
+    <div class="grid" style="left:1187px" aria-hidden="true"></div>
+    <div class="grid" style="left:1290px" aria-hidden="true"></div>
+    <div class="grid" style="left:1393px" aria-hidden="true"></div>
+    <div class="grid" style="left:1496px" aria-hidden="true"></div>
+
+    <!-- régua de semanas: labels centrados em cada coluna de 103px -->
+    <span class="wk" style="left:260px">S01</span>
+    <span class="wk" style="left:363px">S02</span>
+    <span class="wk" style="left:466px">S03</span>
+    <span class="wk" style="left:569px">S04</span>
+    <span class="wk" style="left:672px">S05</span>
+    <span class="wk" style="left:775px">S06</span>
+    <span class="wk" style="left:878px">S07</span>
+    <span class="wk" style="left:981px">S08</span>
+    <span class="wk" style="left:1084px">S09</span>
+    <span class="wk" style="left:1187px">S10</span>
+    <span class="wk" style="left:1290px">S11</span>
+    <span class="wk" style="left:1393px">S12</span>
+    <div class="ruler" aria-hidden="true"></div>
+
+    <!-- linha "hoje" -->
+    <span class="today-tag">lorem</span>
+    <div class="today" aria-hidden="true"></div>
+
+    <!-- frente 1 · descoberta · S1–S3 -->
+    <div class="front" style="top:340px">adipiscing</div>
+    <div class="bar" style="left:260px;top:348px;width:309px"></div>   <!-- S1–S3: 3×103 -->
+    <div class="mile" style="left:563px;top:362px" aria-hidden="true"></div>  <!-- fim 569 −6 -->
+
+    <!-- frente 2 · construção · S2–S7 -->
+    <div class="front" style="top:440px">incididunt</div>
+    <div class="bar" style="left:363px;top:448px;width:618px"></div>   <!-- S2–S7: 6×103 -->
+    <div class="mile" style="left:975px;top:462px" aria-hidden="true"></div>  <!-- fim 981 −6 -->
+
+    <!-- frente 3 · piloto · S6–S9 · fase atual (gold) -->
+    <div class="front front--now" style="top:540px">labore</div>
+    <div class="bar bar--gold" style="left:775px;top:548px;width:412px"></div> <!-- S6–S9: 4×103 -->
+    <div class="mile" style="left:1181px;top:562px" aria-hidden="true"></div>  <!-- fim 1187 −6 -->
+    <span class="chip chip--gold now-chip"><span class="dot"></span>Lorem</span>
+
+    <!-- frente 4 · rollout · S9–S12 -->
+    <div class="front" style="top:640px">ullamco</div>
+    <div class="bar" style="left:1084px;top:648px;width:412px"></div>  <!-- S9–S12: 4×103 -->
+    <div class="mile" style="left:1490px;top:662px" aria-hidden="true"></div>  <!-- fim 1496 −6 -->
+
+    <p class="mono-label foot">lorem: adipiscing · Lorem — incididunt · Ipsum — labore · Dolor — ullamco · Sit</p>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>10 · Comparação</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Antes × Depois: dois surfaces grandes lado a lado, o "depois"
+     em surface--gold elevado (translateY −8px), seta em pill 56px
+     flutuando entre os dois. */
+
+  .head{position:absolute;left:var(--pad);top:104px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:60px;max-width:980px}
+
+  /* cards: y 320 → 790 (470px)
+     antes:  x 96 → 756 (660px)
+     depois: x 844 → 1504 (660px) · gap central de 88px */
+  .card{position:absolute;top:320px;height:470px;width:660px;padding:48px 56px;
+    display:flex;flex-direction:column}
+
+  .card--before{left:var(--pad)}
+  .card--before .figure{font-size:96px;line-height:1;letter-spacing:-.04em;color:var(--text-3);opacity:.55}
+  .card--before .desc{margin-top:26px;max-width:440px;color:var(--text-3)}
+
+  .card--after{left:844px;transform:translateY(-8px)}
+  .card--after .figure{font-size:120px;line-height:1;letter-spacing:-.04em;color:var(--gold)}
+
+  .card .tag{align-self:flex-start;margin-bottom:30px}
+  .card .figure small{font-size:44px;font-weight:600;letter-spacing:-.02em}
+
+  .gains{margin-top:30px;list-style:none;display:flex;flex-direction:column;gap:14px}
+  .gains li{display:flex;gap:14px;align-items:baseline;font-size:17px;line-height:1.45;color:var(--text-2)}
+  .gains li::before{content:'+';font-family:var(--mono);font-size:15px;font-weight:500;color:var(--gold)}
+
+  /* seta: 56px, centro do vão (x 772 → 828) · y 527 → 583 */
+  .swap{position:absolute;left:772px;top:527px;width:56px;height:56px;
+    border-radius:var(--r-pill);box-shadow:var(--shadow-lg);
+    display:grid;place-items:center;z-index:3;
+    font-family:var(--num);font-size:22px;font-weight:600;color:var(--text-1)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Caso · comercial">
+
+    <header class="head">
+      <div class="eyebrow">Proposta comercial B2B</div>
+      <h1 class="h-serif">O mesmo trabalho, <em>sem o trabalho.</em></h1>
+    </header>
+
+    <section class="card surface surface--flat card--before">
+      <span class="chip tag">antes · manual</span>
+      <div class="num figure">6<small>h</small></div>
+      <p class="body desc">Vendedor caça dados no CRM, copia a última proposta parecida, ajusta preço no olho e manda para o gerente revisar. Duas idas e voltas, em média.</p>
+    </section>
+
+    <section class="card surface surface--gold card--after">
+      <span class="chip chip--gold tag"><span class="dot"></span>depois · fluxo com IA</span>
+      <div class="num figure">22<small>min</small></div>
+      <ul class="gains">
+        <li>Dados do CRM entram sozinhos — zero copia-e-cola</li>
+        <li>Pricing validado por regra, não por feeling</li>
+        <li>Revisão humana em um único passo, no final</li>
+      </ul>
+    </section>
+
+    <div class="swap surface" aria-hidden="true">&rarr;</div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

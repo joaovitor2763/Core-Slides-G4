@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>72 · Abertura de caso</title>
+<link rel="stylesheet" href="style.css?v=scale2">
+<style>
+  /* Abertura de estudo de caso — dark, arquitetura de capa:
+     hero à esquerda + FAIXA DE STATS ancorando a base (hairline + 3 números
+     espalhados na largura toda, como rodapé editorial).
+
+     TOPO (y76): logo 34px + gap 20 + eyebrow na mesma linha.
+     HERO: nome da empresa serif 96px em y264 (1 linha ≈ 100px)
+       + lede (max-width 640px, 2 linhas ≈ 66px) → bloco termina ~y470.
+     CHIPS (y524): 4 chips neutros, gap 12.
+     FAIXA DE STATS: hairline 1px em y652 (x 96–1504) ·
+       3 colunas de 469px: lefts 96 · 565 · 1034 · conteúdo y 682
+       (num 36px + label mono → base ~756 < 804 ✓)
+     Armilar corner atrás da faixa (opacity .2) + grain. */
+
+  .top{position:absolute;left:var(--pad);top:76px;display:flex;align-items:center;gap:20px}
+
+  .hero{position:absolute;left:var(--pad);top:264px}
+  .hero h1{font-size:96px}
+  .hero .lede{margin-top:36px;max-width:640px}
+
+  .chips{position:absolute;left:var(--pad);top:524px;display:flex;gap:12px}
+
+  /* faixa de stats na base */
+  .statband{position:absolute;left:var(--pad);right:var(--pad);top:652px;
+    border-top:1px solid var(--border)}
+  .stat{position:absolute;top:30px;width:440px}
+  .stat .num{font-size:36px;line-height:1}
+  .stat .mono-label{display:block;margin-top:10px}
+
+  .armilar--corner{width:780px;height:439px;right:-30px;bottom:-30px;opacity:.2}
+</style>
+<meta id="acfifjfajpekbmhmjppnmmjgmhjkildl"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <div class="grain" aria-hidden="true"></div>
+
+
+    <div class="top">
+      <img class="logo" src="assets/g4scale-logo-light.png" alt="G4 Scale">
+      <div class="eyebrow">Lorem ipsum dolor · sit amet</div>
+    </div>
+
+    <div class="hero">
+      <h1 class="h-serif">Lorem <em>Ipsum</em></h1>
+      <p class="lede">Lorem ipsum dolor sit amet 74 consectetur adipiscing elit sed tempor.</p>
+    </div>
+
+    <div class="chips">
+      <span class="chip">lorem ipsum dolor</span>
+      <span class="chip">R$ 240M/ano</span>
+      <span class="chip">1.800 pessoas</span>
+      <span class="chip">lorem ipsum 9 meses</span>
+    </div>
+
+    <div class="statband">
+      <div class="stat" style="left:0">
+        <span class="num">74</span>
+        <span class="mono-label">Lorem ipsum sit · 5 estados</span>
+      </div>
+      <div class="stat" style="left:469px">
+        <span class="num">0,8 pt</span>
+        <span class="mono-label">Lorem ipsum dolor sit amet consectetur elit</span>
+      </div>
+      <div class="stat" style="left:938px">
+        <span class="num">31</span>
+        <span class="mono-label">Lorem ipsum dolor sit amet elit</span>
+      </div>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+
+
+</body></html>

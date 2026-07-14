@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>47 · Perguntas da aula</title>
+<link rel="stylesheet" href="style.css?v=scale2">
+<style>
+  /* Dark: quatro perguntas empilhadas — numeral mono gold, pergunta serif
+     itálica grande, resposta-síntese em uma linha. A pergunta em foco
+     ganha bloco gold-dim. Armilar sutil sangrando no canto. */
+
+  .armilar--corner{width:780px;height:439px;right:-30px;bottom:-30px;opacity:.20}
+
+  .head{position:absolute;left:var(--pad);top:88px;max-width:900px}
+  .head .eyebrow{margin-bottom:18px}
+  .head h1{font-size:48px}
+
+  /* lista: left 96 · right 1504 · top 264 — 4 linhas de ~144px ≈ 840 */
+  .list{position:absolute;left:var(--pad);right:var(--pad);top:264px}
+
+  .q{display:grid;grid-template-columns:88px 1fr;align-items:center;
+    column-gap:24px;padding:30px 28px;border-top:1px solid var(--border)}
+  .q:first-child{border-top:none}
+  .q .idx{font-family:var(--mono);font-size:13px;font-weight:500;
+    letter-spacing:.16em;color:var(--gold)}
+  .q .txt{font-family:var(--serif);font-style:italic;font-weight:400;
+    font-size:34px;line-height:1.2;letter-spacing:-.01em;color:var(--text-1)}
+  .q .ans{grid-column:2;font-size:16px;line-height:1.5;
+    color:var(--text-3);margin-top:10px}
+
+  .q--focus{background:var(--gold-dim);border-radius:16px;border-top:none}
+  .q--focus + .q{border-top:none}
+</style>
+<meta id="acfifjfajpekbmhmjppnmmjgmhjkildl"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-section="Abertura">
+
+
+
+    <header class="head">
+      <div class="eyebrow">O contrato da aula</div>
+      <h1 class="h-serif">As perguntas que esta aula <em>responde.</em></h1>
+    </header>
+
+    <section class="list">
+      <div class="q">
+        <span class="idx">Q1</span>
+        <p class="txt">Por que 80% dos pilotos de IA morrem antes de virar processo?</p>
+        <p class="ans">Porque nascem sem dono, sem baseline e sem caminho para produção — entusiasmo não é método.</p>
+      </div>
+      <div class="q q--focus">
+        <span class="idx">Q2</span>
+        <p class="txt">Onde a IA paga primeiro dentro da minha operação?</p>
+        <p class="ans">Nos processos de alto volume e baixa variação — vamos mapear os seus com um critério objetivo, ainda hoje.</p>
+      </div>
+      <div class="q">
+        <span class="idx">Q3</span>
+        <p class="txt">Como escalar sem perder controle sobre qualidade e dados?</p>
+        <p class="ans">Governança embutida no fluxo: skill versionada, dono nomeado e trilha de auditoria desde o primeiro dia.</p>
+      </div>
+      <div class="q">
+        <span class="idx">Q4</span>
+        <p class="txt">Que número eu levo para o conselho no fim do trimestre?</p>
+        <p class="ans">Horas devolvidas e custo evitado — as duas métricas que traduzem IA para a língua do board.</p>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+
+
+</body></html>

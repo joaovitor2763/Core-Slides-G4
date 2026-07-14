@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>62 · Plano anual</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Plano anual (misto): faixa navy em cima com o CALENDÁRIO do programa
+     (trilho de 12 meses + 2 pistas: sessões mensais e boards trimestrais,
+     com o fim do ano destacado em gold) + faixa paper embaixo com os
+     3 pilares do programa em cards.
+
+     FAIXA SUPERIOR · div.mode-dark x 0–1600 · y 0–520 · navy-700
+       header: eyebrow left 96 y72 · título serif 44 left 96 y104 (assimétrico)
+               chip "plano anual · 12 meses" à direita (right 96, y112)
+       trilho de meses: left 96 · top 208 · 1408×52
+         grid 12 col → 1408/12 = 117,33px por célula
+         centros: x_i = 96 + 117,33·(i−0,5)
+         → 155 · 272 · 389 · 507 · 624 · 741 · 859 · 976 · 1093 · 1211 · 1328 · 1445
+       PISTA A (sessões individuais · mensais):
+         label mono left 96 y292 · linha tracejada y336 x140–1500 · dots r4.5 nos 12 centros
+       PISTA B (boards trimestrais):
+         label mono left 96 y388 · losangos 12px nos centros de M03/M06/M09/M12
+         → x 389 · 741 · 1093 · 1445 · y centro 432
+       RETÂNGULO GOLD (protagonista único): envolve M10–M12 nas duas pistas
+         left 1211−48 = 1163 · right 1445+48 = 1493 → 330 de largura
+         top 312 · bottom 456 → 144 de altura · radius 18
+       conector: dot r5 na borda inferior do retângulo (x1328,y456) → linha
+         vertical → dot r3 no callout (x1328,y478); callout chip--gold
+         centrado no x1328, y486 (bottom ≈ 517 < 520 ✓)
+
+     FAIXA INFERIOR · paper · y 520–900
+       kicker mono central? NÃO — 3 cards .surface--flat:
+       3 × 448 + 2 × 32 = 1408 ✓ · left 96 / 576 / 1056 · top 596 · height 224
+       (bottom 820 — sangria de 16px sobre y804 evitada: height 208 → bottom 804 ✓)
+       label mono da faixa: left 96 · y 556 */
+
+  /* ── faixa superior (navy) ── */
+  .band{position:absolute;left:0;top:0;width:1600px;height:520px;
+    background:var(--navy-700)}
+  .band .eyebrow{position:absolute;left:96px;top:72px}
+  .band h1{position:absolute;left:96px;top:104px;font-size:44px}
+  .chip-plan{position:absolute;right:96px;top:112px}
+
+  /* trilho de meses */
+  .track{position:absolute;left:96px;top:208px;width:1408px;height:52px;
+    display:grid;grid-template-columns:repeat(12,1fr);
+    background:rgba(255,255,255,.05);border:1px solid var(--border);
+    border-radius:var(--r-md);overflow:hidden}
+  .track span{display:grid;place-items:center;
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.12em;color:var(--text-3);
+    border-left:1px solid var(--border)}
+  .track span:first-child{border-left:0}
+
+  /* labels das pistas */
+  .lane-label{position:absolute;left:96px;
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+
+  /* SVG das pistas (linha, dots, losangos, retângulo gold, conector) */
+  .lanes{position:absolute;inset:0;pointer-events:none}
+  .lanes .rail{stroke:var(--text-3);stroke-width:1.2;opacity:.4;stroke-dasharray:5 7}
+  .lanes .dot{fill:var(--text-2)}
+  .lanes .diam{fill:var(--gold-dim);stroke:var(--text-3);stroke-width:1}
+  .lanes .focus{fill:none;stroke:var(--gold-border);stroke-width:1.5}
+  .lanes .co{stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .lanes .co-a{fill:var(--gold)}
+  .lanes .co-b{fill:var(--text-3)}
+
+  .callout{position:absolute;left:1328px;top:482px;transform:translateX(-50%);
+    white-space:nowrap}
+
+  /* ── faixa inferior (paper) ── */
+  .pillars-label{position:absolute;left:96px;top:552px;
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+  .pillar{position:absolute;top:596px;width:448px;height:208px;
+    padding:30px 34px;display:flex;flex-direction:column;gap:12px}
+  .pillar--1{left:96px}
+  .pillar--2{left:576px}
+  .pillar--3{left:1056px}
+  .pillar .k{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--gold-700)}
+  .pillar .t{font-family:var(--num);font-weight:600;font-size:18px;
+    letter-spacing:-.01em;color:var(--text-1)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <!-- ══ faixa navy: o calendário do programa ══ -->
+    <div class="band mode-dark">
+      <div class="eyebrow">Lorem ipsum · dolor sit</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit, <span class="dim">amet elit.</span></h1>
+      <span class="chip chip-plan">lorem ipsum · 12 meses</span>
+
+      <div class="track" aria-hidden="true">
+        <span>M01</span><span>M02</span><span>M03</span><span>M04</span><span>M05</span><span>M06</span>
+        <span>M07</span><span>M08</span><span>M09</span><span>M10</span><span>M11</span><span>M12</span>
+      </div>
+
+      <span class="lane-label" style="top:292px">Lorem ipsum dolor · sit amet</span>
+      <span class="lane-label" style="top:388px">Lorem ipsum dolor</span>
+
+      <svg class="lanes" viewBox="0 0 1600 520" aria-hidden="true">
+        <!-- pista A: linha tracejada y336 + 12 dots nos centros das células -->
+        <line class="rail" x1="140" y1="336" x2="1500" y2="336"/>
+        <circle class="dot" cx="155"  cy="336" r="4.5"/>
+        <circle class="dot" cx="272"  cy="336" r="4.5"/>
+        <circle class="dot" cx="389"  cy="336" r="4.5"/>
+        <circle class="dot" cx="507"  cy="336" r="4.5"/>
+        <circle class="dot" cx="624"  cy="336" r="4.5"/>
+        <circle class="dot" cx="741"  cy="336" r="4.5"/>
+        <circle class="dot" cx="859"  cy="336" r="4.5"/>
+        <circle class="dot" cx="976"  cy="336" r="4.5"/>
+        <circle class="dot" cx="1093" cy="336" r="4.5"/>
+        <circle class="dot" cx="1211" cy="336" r="4.5"/>
+        <circle class="dot" cx="1328" cy="336" r="4.5"/>
+        <circle class="dot" cx="1445" cy="336" r="4.5"/>
+
+        <!-- pista B: losangos 12px (rects rotacionados) em M03/M06/M09/M12 · y432 -->
+        <line class="rail" x1="140" y1="432" x2="1500" y2="432"/>
+        <rect class="diam" x="383" y="426"  width="12" height="12" transform="rotate(45 389 432)"/>
+        <rect class="diam" x="735" y="426"  width="12" height="12" transform="rotate(45 741 432)"/>
+        <rect class="diam" x="1087" y="426" width="12" height="12" transform="rotate(45 1093 432)"/>
+        <rect class="diam" x="1439" y="426" width="12" height="12" transform="rotate(45 1445 432)"/>
+
+        <!-- retângulo gold M10–M12 (as duas pistas) + conector ao callout -->
+        <rect class="focus" x="1163" y="312" width="330" height="144" rx="18"/>
+        <circle class="co-a" cx="1328" cy="456" r="5"/>
+        <line class="co" x1="1328" y1="456" x2="1328" y2="478"/>
+        <circle class="co-b" cx="1328" cy="478" r="3"/>
+      </svg>
+
+      <span class="chip chip--gold callout"><span class="dot"></span>lorem ipsum: 1 dolor sit amet consectetur adipiscing elit</span>
+    </div>
+
+    <!-- ══ faixa paper: os 3 pilares do programa ══ -->
+    <span class="pillars-label">Lorem ipsum dolor sit</span>
+
+    <div class="pillar surface surface--flat pillar--1">
+      <span class="k">Lorem ipsum dolor amet</span>
+      <span class="t">Lorem ipsum dolor sit amet elit</span>
+      <p class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit — sed tempor incididunt labore magna aliqua.</p>
+    </div>
+
+    <div class="pillar surface surface--flat pillar--2">
+      <span class="k">Lorem ipsum dolor sit amet</span>
+      <span class="t">Lorem ipsum dolor, sit amet elit dolor</span>
+      <p class="small">Lorem ipsum dolor sit amet consectetur elit de R$ 10 mi a R$ 1 bi de tempor — incididunt labore magna aliqua.</p>
+    </div>
+
+    <div class="pillar surface surface--flat pillar--3">
+      <span class="k">Dolor sit amet ipsum</span>
+      <span class="t">3.500 lorem ipsum dolor sit amet</span>
+      <p class="small">Lorem ipsum, dolor sit amet consectetur adipiscing elit — sed do tempor incididunt labore magna.</p>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

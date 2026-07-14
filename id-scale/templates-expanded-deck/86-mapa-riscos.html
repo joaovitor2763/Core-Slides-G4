@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>86 · Mapa de riscos</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Mapa de riscos probabilidade × impacto (dark).
+     TOPO: eyebrow + título serif 44px em x96, y100–182.
+     PLANO à esquerda: container x96..940 (844px), y230..780 (550px).
+       · eixo Y em x local 36 (global 132), altura 0..520; seta CSS no topo
+       · eixo X em y local 520 (global 750), x local 36..844 (808px); seta à direita
+       · label 'impacto →' abaixo da linha (y local 534 → global 764, termina ~778 < 804 ✓)
+       · label 'probabilidade →' rotacionado writing-mode em x local 0..14 (global 96..110)
+       · plot útil: x local 36..844 · y local 0..520 · meios: x 440 / y 260
+       · WASH zona crítica = quadrante sup-direito do plot: local (440,0) 404×260, gold-dim sem borda
+     DISCOS Ø40 (left/top = centro − 20), coords locais do plano (centro):
+       R1 (596,326) impacto alto · prob média      → local left 576 top 306
+       R2 (672,132) impacto alto · prob alta       → DENTRO da zona · gold (protagonista)
+       R3 (330,110) impacto médio · prob alta      → local left 310 top 90
+       R4 (760,420) impacto alto · prob baixa      → local left 740 top 400
+       R5 (470,320) impacto médio · prob média     → local left 450 top 300
+       R6 (180,450) impacto baixo · prob baixa     → local left 160 top 430
+     LISTA à direita: x1000..1504 (504px), top 230; 6 itens × ~91px = ~549 → termina ~779 < 790 ✓ */
+
+  .head{position:absolute;left:var(--pad);top:100px}
+  .head .eyebrow{margin-bottom:18px}
+  .head h1{font-size:44px}
+
+  /* ---- plano ---- */
+  .plane{position:absolute;left:var(--pad);top:230px;width:844px;height:550px}
+
+  .wash{position:absolute;left:440px;top:0;width:404px;height:260px;
+    background:var(--gold-dim);border-radius:var(--r-md)}
+  .wash .mono-label{position:absolute;top:16px;right:18px;color:var(--gold)}
+
+  .axis-y{position:absolute;left:36px;top:0;width:2px;height:520px;
+    background:var(--border-2);border-radius:2px}
+  .axis-y::before{content:'';position:absolute;top:-9px;left:-4px;
+    border-left:5px solid transparent;border-right:5px solid transparent;
+    border-bottom:9px solid var(--border-2)}
+  .axis-x{position:absolute;left:36px;top:520px;width:808px;height:2px;
+    background:var(--border-2);border-radius:2px}
+  .axis-x::after{content:'';position:absolute;right:-9px;top:-4px;
+    border-top:5px solid transparent;border-bottom:5px solid transparent;
+    border-left:9px solid var(--border-2)}
+  .axis-x-label{position:absolute;right:0;top:534px}
+  .axis-y-label{position:absolute;left:0;top:160px;
+    writing-mode:vertical-rl;transform:rotate(180deg)}
+
+  .disc{position:absolute;width:40px;height:40px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--surface);border:1px solid var(--border-2)}
+  .disc .num{font-size:13px;color:var(--text-2)}
+  .disc--lead{background:linear-gradient(135deg,var(--gold-300),var(--gold-500));
+    border:none;box-shadow:var(--shadow-sm)}
+  .disc--lead .num{color:var(--on-gold)}
+
+  /* ---- registro à direita ---- */
+  .register{position:absolute;left:1000px;top:230px;width:504px}
+  .risk{display:grid;grid-template-columns:46px 1fr;align-items:baseline;
+    padding:20px 18px 18px;border-top:1px solid var(--border)}
+  .risk .rcode{font-family:var(--mono);font-size:12px;font-weight:500;
+    letter-spacing:.12em;color:var(--text-3)}
+  .risk .rname{color:var(--text-1)}
+  .risk .rmit{color:var(--text-3);margin-top:4px}
+  .risk--lead{background:var(--gold-dim);border-radius:var(--r-sm);
+    border-top-color:transparent}
+  .risk--lead .rcode{color:var(--gold)}
+  .risk--lead + .risk{border-top-color:transparent}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <div class="head">
+      <div class="eyebrow">Lorem ipsum · dolor sit amet</div>
+      <h1 class="h-serif">Lorem ipsum dolor amet, <em>consectetur elit.</em></h1>
+    </div>
+
+    <div class="plane" aria-label="Mapa de riscos: probabilidade por impacto">
+      <div class="wash" aria-hidden="true">
+        <span class="mono-label">Lorem ipsum</span>
+      </div>
+
+      <div class="axis-y" aria-hidden="true"></div>
+      <div class="axis-x" aria-hidden="true"></div>
+      <span class="mono-label axis-x-label">Ipsum →</span>
+      <span class="mono-label axis-y-label">Consectetur →</span>
+
+      <!-- centro (596,326) -->
+      <div class="disc" style="left:576px;top:306px"><span class="num">R1</span></div>
+      <!-- centro (672,132) · dentro da zona crítica -->
+      <div class="disc disc--lead" style="left:652px;top:112px"><span class="num">R2</span></div>
+      <!-- centro (330,110) -->
+      <div class="disc" style="left:310px;top:90px"><span class="num">R3</span></div>
+      <!-- centro (760,420) -->
+      <div class="disc" style="left:740px;top:400px"><span class="num">R4</span></div>
+      <!-- centro (470,320) -->
+      <div class="disc" style="left:450px;top:300px"><span class="num">R5</span></div>
+      <!-- centro (180,450) -->
+      <div class="disc" style="left:160px;top:430px"><span class="num">R6</span></div>
+    </div>
+
+    <section class="register" aria-label="Registro de riscos e mitigações">
+      <div class="risk">
+        <span class="rcode">R1</span>
+        <div>
+          <div class="body rname">Lorem ipsum de 1 dolor amet</div>
+          <div class="small rmit">Consectetur: adipiscing 2º dolor sit Q3</div>
+        </div>
+      </div>
+      <div class="risk risk--lead">
+        <span class="rcode">R2</span>
+        <div>
+          <div class="body rname">Lorem ipsum do dolor amet sit</div>
+          <div class="small rmit">Consectetur: dolor sit amet consectetur em 90 dias</div>
+        </div>
+      </div>
+      <div class="risk">
+        <span class="rcode">R3</span>
+        <div>
+          <div class="body rname">Lorem ipsum sit</div>
+          <div class="small rmit">Consectetur: dolor sit de 60% do amet elit</div>
+        </div>
+      </div>
+      <div class="risk">
+        <span class="rcode">R4</span>
+        <div>
+          <div class="body rname">Lorem ipsum dolor</div>
+          <div class="small rmit">Consectetur: dolor sit 2 + amet elit incididunt</div>
+        </div>
+      </div>
+      <div class="risk">
+        <span class="rcode">R5</span>
+        <div>
+          <div class="body rname">Lorem do ipsum amet</div>
+          <div class="small rmit">Consectetur: dolor sit as 8 amet consectetur</div>
+        </div>
+      </div>
+      <div class="risk">
+        <span class="rcode">R6</span>
+        <div>
+          <div class="body rname">Lorem ipsum sit amet</div>
+          <div class="small rmit">Consectetur: adipiscing elit incididunt sit</div>
+        </div>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

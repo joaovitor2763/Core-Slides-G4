@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>74 · Desafio → intervenção</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Case study "o nó × as frentes": card do diagnóstico à esquerda,
+     pill-pivot com seta na divisa, pilha de 3 frentes à direita
+     costurada por uma linha vertical (visível só nos vãos, com dots).
+
+     Larguras: nó 504 (x 96→600) + vão 100 + frentes 804 (x 700→1504)
+               = 504+100+804 = 1408 ✓ (=1600−192)
+     Nó:      y 300→780 (480px)
+     Frentes: h 158 · gap 22 · tops 280 / 460 / 640 → base 640+158 = 798 < 804 ✓
+     Pivot:   64px · centro do vão x = (600+700)/2 = 650 → left 650−32 = 618
+              centro do nó y = (300+780)/2 = 540 → top 540−32 = 508 */
+
+  .head{position:absolute;left:var(--pad);top:96px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:46px;max-width:1300px}
+
+  /* ── coluna do nó ── */
+  .knot{position:absolute;left:var(--pad);top:300px;width:504px;height:480px;
+    padding:44px 48px;display:flex;flex-direction:column;align-items:flex-start}
+  .knot .claim{margin-top:28px;font-family:var(--serif);font-weight:500;
+    font-size:30px;line-height:1.32;letter-spacing:-.015em;color:var(--text-1)}
+  .symptoms{margin-top:auto;list-style:none;width:100%}
+  .symptoms li{display:flex;gap:16px;align-items:baseline;
+    padding:15px 0;border-top:1px solid var(--border)}
+  .symptoms li::before{content:'—';font-family:var(--mono);font-size:13px;
+    font-weight:500;color:var(--red);flex:none}
+  .symptoms li .small{color:var(--text-2)}
+
+  /* ── pivot na divisa ── */
+  .pivot{position:absolute;left:618px;top:508px;width:64px;height:64px;
+    border-radius:var(--r-pill);box-shadow:var(--shadow-lg);z-index:3;
+    display:grid;place-items:center}
+  .pivot .num{font-size:24px;color:var(--text-1)}
+
+  /* ── pilha de frentes ── */
+  .front{position:absolute;left:700px;width:804px;height:158px;z-index:2;
+    padding:0 44px;display:flex;flex-direction:column;justify-content:center}
+  .front .row{display:flex;align-items:center;gap:16px}
+  .front .row .chip{margin-left:auto}
+  .front .body{margin-top:12px;max-width:620px;color:var(--text-2)}
+  .front--gold .mono-label{color:var(--gold)}
+
+  /* costura vertical: linha x=752 do centro da frente 01 (y 280+79=359)
+     ao centro da frente 03 (y 640+79=719), atrás dos cards (z-index 1) —
+     aparece só nos vãos 438→460 e 618→640; dots nos centros dos vãos
+     (752,449) e (752,629). Adaptação da regra 6 p/ pilha: um dot por vão. */
+  .stitch{position:absolute;inset:0;z-index:1;pointer-events:none}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Dolor sit amet</div>
+      <h1 class="h-serif">Lorem ipsum est. <span class="dim">Dolor sit amet consectetur elit.</span></h1>
+    </header>
+
+    <!-- diagnóstico: o nó -->
+    <section class="knot surface surface--flat">
+      <span class="chip chip--red"><span class="dot"></span>amet</span>
+      <p class="claim">Lorem ipsum dolor sit amet — sed do eiusmod labore.</p>
+      <ul class="symptoms">
+        <li><span class="small">Lorem ipsum dolor sit amet consectetur adipiscing — sed eiusmod tempor labore magna.</span></li>
+        <li><span class="small">Dolor sit amet consectetur adipiscing elit — sed do eiusmod tempor incididunt ut.</span></li>
+        <li><span class="small">Lorem ipsum dolor sit amet consectetur elit; sed do eiusmod tempor ut labore.</span></li>
+      </ul>
+    </section>
+
+    <!-- pivot: do diagnóstico à intervenção -->
+    <div class="pivot surface" aria-hidden="true"><span class="num">&rarr;</span></div>
+
+    <!-- costura vertical da pilha (ver conta no comentário do CSS) -->
+    <svg class="stitch" viewBox="0 0 1600 900" aria-hidden="true">
+      <line x1="752" y1="359" x2="752" y2="719" stroke="var(--text-3)" stroke-width="1.2" opacity=".55"/>
+      <circle cx="752" cy="449" r="3" fill="var(--text-3)"/>
+      <circle cx="752" cy="629" r="3" fill="var(--text-3)"/>
+    </svg>
+
+    <!-- frente 01 · top 280 -->
+    <section class="front surface" style="top:280px">
+      <div class="row">
+        <span class="mono-label">lorem 01 · consectetur</span>
+        <span class="chip">adipiscing</span>
+      </div>
+      <p class="body">Lorem ipsum dolor sit amet consectetur D+1 — sed do eiusmod tempor incididunt labore, ut enim aliqua.</p>
+    </section>
+
+    <!-- frente 02 · top 460 · a decisiva (único gold do slide) -->
+    <section class="front surface surface--gold front--gold" style="top:460px">
+      <div class="row">
+        <span class="mono-label">lorem 02 · tempor</span>
+        <span class="chip">sed do eiusmod</span>
+      </div>
+      <p class="body">Lorem ipsum dolor sit amet consectetur adipiscing: sed do eiusmod tempor incididunt ut labore magna aliqua enim.</p>
+    </section>
+
+    <!-- frente 03 · top 640 -->
+    <section class="front surface" style="top:640px">
+      <div class="row">
+        <span class="mono-label">lorem 03 · labore</span>
+        <span class="chip">commodo</span>
+      </div>
+      <p class="body">Consectetur adipiscing elit sed do eiusmod — tempor incididunt, ut labore et magna aliqua enim ad.</p>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>45 · Grid de KPIs</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Painel dark: coluna estreita de título à esquerda + grid 2×2 de KPIs
+     grandes à direita. Célula protagonista gold (horas devolvidas). */
+
+  /* geometria: col 96..476 (380px) · gap 44 · grid 520..1504 (984px)
+     células: 2 × 480px + 24px gap = 984 ✓
+     vertical: top 120 · 2 × 318px + 24px gap = 660 · bottom 120 ✓ */
+
+  .intro{position:absolute;left:var(--pad);top:120px;width:380px}
+  .intro .eyebrow{margin-bottom:24px}
+  .intro h1{font-size:54px}
+  .intro .body{margin-top:26px;max-width:340px}
+  .intro .note{margin-top:36px;padding-top:24px;border-top:1px solid var(--border)}
+
+  .cell{position:absolute;width:480px;height:318px;
+    padding:34px 38px 30px;display:flex;flex-direction:column}
+  .cell--a{left:520px;top:120px}
+  .cell--b{left:1024px;top:120px}
+  .cell--c{left:520px;top:462px}
+  .cell--d{left:1024px;top:462px}
+
+  .cell .label{margin-bottom:auto}
+  .cell .big{font-size:72px;line-height:1;margin:14px 0 16px}
+  .cell .big small{font-size:36px;font-weight:600;letter-spacing:-.02em}
+  .cell--a .big{color:var(--gold)}
+  .cell .row{display:flex;align-items:center;gap:14px}
+  .cell .ctx{margin-top:14px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <div class="intro">
+      <div class="eyebrow">Lorem · Q2 2026</div>
+      <h1 class="h-serif">Lorem ipsum <em>dolor sit amet.</em></h1>
+      <p class="body">Lorem ipsum dolor 90 dias sit amet consectetur adipiscing, elit sed do eiusmod tempor incididunt — ut labore dolore magna.</p>
+      <p class="small note">Lorem: 12 ipsum · 214 dolor sit amet. Consectetur adipiscing elit sed tempor.</p>
+    </div>
+
+    <section class="cell surface surface--gold cell--a">
+      <span class="mono-label label">Lorem ipsum dolor amet</span>
+      <div class="num big">1.240<small>h</small></div>
+      <div class="row">
+        <span class="chip chip--green"><span class="dot"></span>+412h vs Q1</span>
+      </div>
+      <p class="small ctx">Lorem ipsum a 7 dolor sit amet consectetur — adipiscing elit sed do eiusmod tempor, ut labore dolore.</p>
+    </section>
+
+    <section class="cell surface cell--b">
+      <span class="mono-label label">Lorem ipsum</span>
+      <div class="num big"><small>R$</small> 321<small>k</small></div>
+      <div class="row">
+        <span class="chip chip--green"><span class="dot"></span>+38% vs Q1</span>
+      </div>
+      <p class="small ctx">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt labore.</p>
+    </section>
+
+    <section class="cell surface cell--c">
+      <span class="mono-label label">Lorem ipsum dolor sit amet</span>
+      <div class="num big">34</div>
+      <div class="row">
+        <span class="chip chip--green"><span class="dot"></span>+9 lorem dolor</span>
+      </div>
+      <p class="small ctx">Lorem ipsum dolor sit amet consectetur adipiscing — elit sed do eiusmod tempor incididunt.</p>
+    </section>
+
+    <section class="cell surface cell--d">
+      <span class="mono-label label">Lorem ipsum sit</span>
+      <div class="num big">68<small>%</small></div>
+      <div class="row">
+        <span class="chip chip--red"><span class="dot"></span>−7 pts vs elit</span>
+      </div>
+      <p class="small ctx">Lorem ipsum dolor sit amet consectetur adipiscing — elit sed do eiusmod tempor para o Q3.</p>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>90 · Modelo de receita</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Modelo de receita (light): pitch de três motores + unit economics.
+     TOPO   — eyebrow + título serif 44px à esquerda, leitura à direita.
+     FLUXO  (y 270–540) — pill origem "Cliente G4" à esquerda, 3 curvas
+       bézier até 3 pills de oferta empilhadas (a do meio, "Assinatura
+       anual", é a protagonista gold-dim), e de cada oferta uma linha até
+       um mini-card de mix (% da receita + ticket).
+     FAIXA  (y 600–800) — 4 mini-cards flat de unit economics.
+
+     Geometria horizontal (conteúdo 96..1504 = 1408):
+       origem   left:96  w:240 → borda direita 336 · cy 405
+       ofertas  left:500 w:300 → borda direita 800
+       mix      left:960 w:340 → borda direita 1300 (respiro 204 à direita)
+       gaps de conexão: 336→500 = 164 · 800→960 = 160
+     Geometria vertical do fluxo (banda 270..540 = 270):
+       ofertas/mix: 3 × h78 + 2 × gap18 = 270 ✓
+       tops 270 / 366 / 462 → centros (top+39) = 309 / 405 / 501
+       origem: top 358 h 94 → centro 405 = centro da pill do meio ✓
+     Faixa inferior: 4 × 334 + 3 × 24 = 1408 ✓ · lefts 96/454/812/1170
+       top 600 + h 200 = 800 ≤ 804 ✓ */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:96px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:18px}
+  .head h1{font-size:44px;max-width:760px}
+  .head .read{max-width:370px;padding-bottom:4px}
+
+  /* legendas mono das 3 colunas do fluxo, y 238 (acima da banda 270) */
+  .col-cap{position:absolute;top:238px;font-family:var(--mono);font-size:10.5px;
+    font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+
+  .wires{position:absolute;inset:0;z-index:1;pointer-events:none}
+  .wires path{stroke:var(--text-3);stroke-width:1.2;fill:none;opacity:.55}
+  .wires circle{fill:var(--text-3);opacity:.7}
+
+  .pill{position:absolute;z-index:2;border-radius:var(--r-pill);
+    display:flex;flex-direction:column;justify-content:center;padding:0 28px}
+  .pill .name{font-family:var(--num);font-weight:600;font-size:16px;
+    letter-spacing:-.01em;color:var(--text-1)}
+  .pill .tag{font-family:var(--mono);font-size:10px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-top:5px}
+
+  .origem{left:96px;top:358px;width:240px;height:94px}
+  .offer{left:500px;width:300px;height:78px}
+  /* protagonista gold do slide: a oferta recorrente */
+  .offer--gold{background:var(--gold-dim);border-color:var(--gold-border)}
+
+  /* mini-cards de mix: % à esquerda, ticket mono à direita */
+  .mix{position:absolute;z-index:2;left:960px;width:340px;height:78px;
+    display:flex;align-items:center;padding:0 26px}
+  .mix .pct{display:flex;flex-direction:column;gap:3px}
+  .mix .pct .num{font-size:24px;line-height:1}
+  .mix .pct .of{font-family:var(--mono);font-size:9.5px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+  .mix .ticket{margin-left:auto}
+  .mix--gold .num{color:var(--gold)}
+
+  /* faixa de unit economics */
+  .u-cap{position:absolute;left:var(--pad);right:var(--pad);top:556px;
+    display:flex;align-items:center;gap:20px}
+  .u-cap .rule{flex:1;height:1px;background:var(--border)}
+  .u-card{position:absolute;top:600px;width:334px;height:200px;
+    padding:26px 30px 24px;display:flex;flex-direction:column}
+  /* números dos 4 cards na MESMA altura: label (12) + 26px fixos */
+  .u-card .u-num{font-size:28px;line-height:1;margin-top:26px}
+  .u-card .u-num small{font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .u-card .chiprow{margin-top:14px}
+  .u-card .ctx{font-size:13px;line-height:1.5;color:var(--text-3);margin-top:auto}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Lorem ipsum dolor</div>
+        <h1 class="h-serif">Lorem ipsum, <span class="dim">amet dolor.</span></h1>
+      </div>
+      <p class="body read">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt — ut labore et dolore magna aliqua enim ad minim.</p>
+    </header>
+
+    <!-- legendas das colunas -->
+    <span class="col-cap" style="left:96px">Lorem</span>
+    <span class="col-cap" style="left:500px">Lorem ipsum dolor</span>
+    <span class="col-cap" style="left:960px">Lorem ipsum sit · FY26E</span>
+
+    <!-- conectores: curvas bézier saindo horizontal da origem (336,405)
+         e chegando horizontal nas ofertas (500, 309/405/501);
+         depois linhas suaves oferta (800,cy) → mix (960,cy).
+         Dots nas duas pontas, ancorados na borda exata das pills. -->
+    <svg class="wires" viewBox="0 0 1600 900" aria-hidden="true">
+      <!-- origem (336,405) → imersão (500,309) -->
+      <path d="M336,405 C406,405 430,309 500,309"/>
+      <!-- origem (336,405) → assinatura (500,405) -->
+      <path d="M336,405 C390,405 446,405 500,405"/>
+      <!-- origem (336,405) → advisory (500,501) -->
+      <path d="M336,405 C406,405 430,501 500,501"/>
+      <!-- ofertas → mix (horizontais, controles a ±55px) -->
+      <path d="M800,309 C855,309 905,309 960,309"/>
+      <path d="M800,405 C855,405 905,405 960,405"/>
+      <path d="M800,501 C855,501 905,501 960,501"/>
+      <!-- dots: saída da origem + entradas/saídas de cada linha -->
+      <circle cx="336" cy="405" r="4"/>
+      <circle cx="500" cy="309" r="3"/>
+      <circle cx="500" cy="405" r="3"/>
+      <circle cx="500" cy="501" r="3"/>
+      <circle cx="800" cy="309" r="3"/>
+      <circle cx="800" cy="405" r="3"/>
+      <circle cx="800" cy="501" r="3"/>
+      <circle cx="960" cy="309" r="3"/>
+      <circle cx="960" cy="405" r="3"/>
+      <circle cx="960" cy="501" r="3"/>
+    </svg>
+
+    <!-- origem -->
+    <div class="pill surface origem">
+      <span class="name">Lorem Ipsum</span>
+      <span class="tag">Lorem · ipsum dolor</span>
+    </div>
+
+    <!-- ofertas (tops 270 / 366 / 462) -->
+    <div class="pill surface offer" style="top:270px">
+      <span class="name">Lorem ipsum dolor</span>
+      <span class="tag">Lorem 01 · adipiscing</span>
+    </div>
+    <div class="pill surface offer offer--gold" style="top:366px">
+      <span class="name">Lorem ipsum sit</span>
+      <span class="tag">Lorem 02 · consectetur</span>
+    </div>
+    <div class="pill surface offer" style="top:462px">
+      <span class="name">Lorem sit amet</span>
+      <span class="tag">Lorem 03 · eiusmod</span>
+    </div>
+
+    <!-- mix (mesmos tops das ofertas) -->
+    <div class="mix surface surface--flat" style="top:270px">
+      <div class="pct"><span class="num">28%</span><span class="of">lorem</span></div>
+      <span class="mono-label ticket">Lorem R$ 25k</span>
+    </div>
+    <div class="mix surface surface--flat mix--gold" style="top:366px">
+      <div class="pct"><span class="num">54%</span><span class="of">lorem</span></div>
+      <span class="mono-label ticket">Lorem R$ 60k/ano</span>
+    </div>
+    <div class="mix surface surface--flat" style="top:462px">
+      <div class="pct"><span class="num">18%</span><span class="of">lorem</span></div>
+      <span class="mono-label ticket">Lorem R$ 120k</span>
+    </div>
+
+    <!-- unit economics -->
+    <div class="u-cap">
+      <span class="mono-label">Lorem ipsum sit · FY26E</span>
+      <span class="rule"></span>
+    </div>
+
+    <section class="u-card surface surface--flat" style="left:96px">
+      <span class="mono-label">Lorem ipsum</span>
+      <div class="num u-num"><small>R$</small> 58k</div>
+      <p class="ctx">Lorem ipsum dolor sit amet consectetur — adipiscing elit sed do eiusmod tempor.</p>
+    </section>
+
+    <section class="u-card surface surface--flat" style="left:454px">
+      <span class="mono-label">Sed</span>
+      <div class="num u-num"><small>R$</small> 9,2k</div>
+      <p class="ctx">Lorem ipsum dolor sit amet — consectetur adipiscing elit sed do.</p>
+    </section>
+
+    <section class="u-card surface surface--flat" style="left:812px">
+      <span class="mono-label">Sit</span>
+      <div class="num u-num"><small>R$</small> 174k</div>
+      <div class="chiprow"><span class="chip chip--green"><span class="dot"></span>Lorem 18,9×</span></div>
+      <p class="ctx">3× lorem ipsum dolor, sit amet consectetur adipiscing elit.</p>
+    </section>
+
+    <section class="u-card surface surface--flat" style="left:1170px">
+      <span class="mono-label">Laborum</span>
+      <div class="num u-num">5,1 <small>meses</small></div>
+      <p class="ctx">Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

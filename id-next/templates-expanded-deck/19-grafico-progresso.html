@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>19 · Barras de progresso</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Progresso (light): 5 barras horizontais de adoção por área dentro de
+     um surface grande. Label mono em coluna fixa, track pill em surface-2,
+     fill pill com px pré-calculado — só a líder em gradiente gold.
+     Nota de leitura no rodapé do card. */
+
+  .head{position:absolute;left:var(--pad);top:104px;max-width:980px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:58px}
+
+  /* card: 96 + 1408 + 96 = 1600 ✓ · top 336 + 468 = 804 = 900 − 96 ✓ */
+  .panel{position:absolute;left:var(--pad);right:var(--pad);top:336px;bottom:96px;
+    padding:44px 56px 36px;display:flex;flex-direction:column}
+
+  .panel-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+
+  .rows{flex:1;display:flex;flex-direction:column;justify-content:space-around}
+
+  /* linha: 220 (label) + 934 (track) + 142 (coluna do valor) = 1296
+     = 1408 − 2·56 de padding ✓ */
+  .prow{display:grid;grid-template-columns:220px 934px 1fr;column-gap:0;
+    align-items:center}
+  .prow .lab{width:220px;padding-right:28px}
+  .prow .track{width:934px;height:30px;border-radius:var(--r-pill);
+    background:var(--surface-2);overflow:hidden}
+  .prow .fill{height:30px;border-radius:var(--r-pill);background:rgba(0,31,53,.14)}
+  .prow .val{font-size:26px;text-align:right;color:var(--text-2)}
+
+  .prow--lead .fill{background:linear-gradient(90deg,var(--gold-300),var(--gold-500))}
+  .prow--lead .val{color:var(--gold)}
+
+  /* larguras pré-calculadas · 100% = 934px
+     78% = 728px · 61% = 570px · 52% = 486px · 34% = 318px · 19% = 177px */
+  .f1{width:728px} .f2{width:570px} .f3{width:486px} .f4{width:318px} .f5{width:177px}
+
+  .footnote{margin-top:26px;padding-top:20px;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem · 6 meses</div>
+      <h1 class="h-serif">Lorem ipsum non dolorem. <em>Sed tempor.</em></h1>
+    </header>
+
+    <section class="panel surface">
+      <div class="panel-top">
+        <span class="mono-label">% lorem ipsum dolor sit amet elit · junho 2026</span>
+        <span class="chip chip--green"><span class="dot"></span>+24 pts lorem ipsum</span>
+      </div>
+
+      <div class="rows">
+        <div class="prow prow--lead">
+          <span class="mono-label lab">Voluptate</span>
+          <div class="track"><div class="fill f1"></div></div>
+          <span class="num val">78%</span>
+        </div>
+        <div class="prow">
+          <span class="mono-label lab">Excepteur</span>
+          <div class="track"><div class="fill f2"></div></div>
+          <span class="num val">61%</span>
+        </div>
+        <div class="prow">
+          <span class="mono-label lab">Adipiscing</span>
+          <div class="track"><div class="fill f3"></div></div>
+          <span class="num val">52%</span>
+        </div>
+        <div class="prow">
+          <span class="mono-label lab">Incididunt</span>
+          <div class="track"><div class="fill f4"></div></div>
+          <span class="num val">34%</span>
+        </div>
+        <div class="prow">
+          <span class="mono-label lab">Deserunt</span>
+          <div class="track"><div class="fill f5"></div></div>
+          <span class="num val">19%</span>
+        </div>
+      </div>
+
+      <p class="small footnote">Lorem: ipsum dolor sit amet 3+ consectetur adipiscing elit sed do eiusmod tempor incididunt, labore magna aliqua. Enim ad minim veniam quis nostrud ullamco laboris — nisi ut aliquip ex ea commodo consequat duis.</p>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

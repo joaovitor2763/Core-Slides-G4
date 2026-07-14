@@ -6,6 +6,27 @@
 
 **1 slide por vez.** Copia o template mais próximo, edita copy + dados + CSS local, valida visualmente, próximo.
 
+## Escolher a identidade antes de customizar
+
+A raiz contém a identidade padrão **Órbita**. Para decks de unidades específicas, use uma das variantes completas:
+
+| Unidade | Pasta | Guia |
+|---|---|---|
+| G4 Next | `id-next/` | [`id-next/README.md`](../id-next/README.md) |
+| G4 Scale | `id-scale/` | [`id-scale/README.md`](../id-scale/README.md) |
+| G4 Club | `id-club/` | [`id-club/README.md`](../id-club/README.md) |
+
+Depois de escolher a identidade, permaneça dentro dela: copie o HTML da coleção desejada e mantenha o `style.css` e os `assets/` da mesma pasta. Embora as variantes clonem os layouts oficiais, elas também contêm overrides por slide; trocar apenas a folha de estilo ou misturar assets entre identidades pode produzir contraste, logo e background incorretos.
+
+Exemplo:
+
+```bash
+# Deck curto com identidade G4 Scale
+cp id-scale/templates-short-deck/06-grafico-barras.html meu-slide.html
+cp id-scale/templates-short-deck/style.css style.css
+cp -R id-scale/templates-short-deck/assets assets
+```
+
 ## Padrões de customização
 
 ### Mudar copy e dados (90% dos casos)

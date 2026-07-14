@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>05 · Agenda</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Agenda: título serif ancorado à esquerda (coluna de ~40%),
+     à direita 4 surfaces horizontais empilhadas com número mono ghost.
+     O bloco atual é surface--gold com chip "agora". */
+
+  /* coluna esquerda: x 96 → 656 (560px de largura, ~40% de 1600) */
+  .intro{position:absolute;left:var(--pad);top:150px;bottom:96px;width:560px;
+    display:flex;flex-direction:column;justify-content:center}
+  .intro .eyebrow{margin-bottom:26px}
+  .intro h1{font-size:76px}
+  .intro .note{margin-top:30px;max-width:420px}
+
+  /* coluna direita: x 720 → 1504 (784px) · y 150 → 804 (654px) */
+  .list{position:absolute;left:720px;right:var(--pad);top:150px;bottom:96px;
+    display:flex;flex-direction:column;gap:20px}
+
+  /* 4 itens · (654 − 3×20) / 4 = 148.5px cada (flex:1) */
+  .item{flex:1;border-radius:var(--r-md);padding:0 40px;
+    display:flex;align-items:center;gap:32px}
+  .item .idx{font-family:var(--mono);font-size:58px;font-weight:500;
+    letter-spacing:-.04em;color:var(--text-ghost);flex:0 0 88px}
+  .item .txt{min-width:0}
+  .item .name{font-family:var(--num);font-size:24px;font-weight:600;
+    letter-spacing:-.01em;color:var(--text-1);line-height:1.2}
+  .item .desc{margin-top:6px}
+  .item .side{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+
+  .item--now .idx{color:var(--gold);opacity:.45}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Abertura">
+
+    <div class="intro">
+      <div class="eyebrow">Aula 02 · roteiro</div>
+      <h1 class="h-serif">O que a gente constrói <em>hoje.</em></h1>
+      <p class="body note">Quatro blocos, do diagnóstico ao fluxo rodando. Saímos daqui com um processo automatizado — não com uma lista de ideias.</p>
+    </div>
+
+    <section class="list">
+      <div class="item surface surface--flat">
+        <span class="idx num">01</span>
+        <div class="txt">
+          <div class="name">Diagnóstico do funil de adoção</div>
+          <p class="small desc">Onde a IA já entrou — e onde ela morreu na praia.</p>
+        </div>
+        <div class="side"><span class="chip">25 min</span></div>
+      </div>
+
+      <div class="item item--now surface surface--gold">
+        <span class="idx num">02</span>
+        <div class="txt">
+          <div class="name">Mapeando processos candidatos</div>
+          <p class="small desc">Critério de escolha: volume, regra clara, dor de verdade.</p>
+        </div>
+        <div class="side">
+          <span class="chip chip--gold"><span class="dot"></span>agora</span>
+          <span class="chip">40 min</span>
+        </div>
+      </div>
+
+      <div class="item surface surface--flat">
+        <span class="idx num">03</span>
+        <div class="txt">
+          <div class="name">Construindo o primeiro fluxo</div>
+          <p class="small desc">Mão na massa: da planilha ao processo que roda sozinho.</p>
+        </div>
+        <div class="side"><span class="chip">55 min</span></div>
+      </div>
+
+      <div class="item surface surface--flat">
+        <span class="idx num">04</span>
+        <div class="txt">
+          <div class="name">Governança e métricas</div>
+          <p class="small desc">Quem aprova, o que se mede, quando desligar.</p>
+        </div>
+        <div class="side"><span class="chip">20 min</span></div>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

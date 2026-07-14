@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>30 · Quote mínima</title>
+<link rel="stylesheet" href="style.css?v=next1">
+<style>
+  /* Quote mínima (dark): o slide mais respirado do deck. Aspa serif
+     gigante em ghost no topo, quote serif 84px em três linhas com
+     expressão em itálico gold, atribuição mono embaixo. Mais nada. */
+
+  .armilar--corner{width:780px;height:439px;right:-30px;bottom:-30px;opacity:.24}
+
+  /* aspa ghost: 300px, topo-esquerda, atrás da quote */
+  .mark{position:absolute;left:82px;top:56px;font-size:300px;line-height:1}
+
+  /* quote: left 96 + width 1360 = 1456 < 1504 (sobra respiro à direita)
+     3 linhas × ~96px = 288px · top 286 → termina ~574 */
+  .quote-col{position:absolute;left:var(--pad);top:286px;width:1360px}
+  .quote-col blockquote{font-size:84px;line-height:1.14}
+
+  .attrib{position:absolute;left:var(--pad);bottom:132px;
+    font-family:var(--mono);font-size:12px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--text-3)}
+  .attrib .sep{margin:0 14px;color:var(--gold);opacity:.7}
+</style>
+<meta id="acfifjfajpekbmhmjppnmmjgmhjkildl"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
+<body>
+<div class="stage">
+  <article class="slide mode-dark" data-next-bg style="background:#051D2C url('assets/bg-next-12.png') center/cover no-repeat" data-section="">
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="ghost mark" aria-hidden="true">“</div>
+
+    <figure class="quote-col">
+      <blockquote class="h-serif">Tecnologia não transforma empresa nenhuma. Quem transforma é gestor <em>com método.</em></blockquote>
+    </figure>
+
+    <div class="attrib">Tallis Gomes<span class="sep" aria-hidden="true">·</span>Fundador, G4 Educação</div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+
+
+</body></html>

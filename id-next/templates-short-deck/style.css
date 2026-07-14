@@ -1,0 +1,207 @@
+/* ════════════════════════════════════════════════════════════
+   Core Slides G4 · id-next "Órbita/Next"
+   Linguagem editorial-orgânica: serif display com itálico dourado,
+   superfícies suaves com radius + sombra em camadas, anéis orbitais,
+   grain, chips/pills. Menos hairline-quadrado, mais landing premium.
+   Paleta: paper + navy + gold (mesma da marca).
+   ════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  /* paleta crua (marca) */
+  --navy-50:#E6EEF3; --navy-100:#B3CCD9; --navy-200:#80AABF;
+  --navy-500:#001F35; --navy-600:#001A2D; --navy-700:#001525;
+  --navy-800:#00101D; --navy-900:#000B15;
+  --gold-300:#A96666; --gold-500:#7A3B3B; --gold-700:#5A2A2A;
+  --paper:#F5F4F3; --paper-2:#ECEAE6;
+  --green:#12693B; --red:#842E20;
+  --wine-300:#8D4949; --wine-500:#612525; --wine-700:#3A1616;
+  --wine:var(--wine-500);
+  --wine-dim:rgba(97,37,37,.12);
+  --wine-border:rgba(97,37,37,.35);
+  --wine-grad:linear-gradient(150deg,var(--wine-300),var(--wine-700));
+
+  /* tokens semânticos — LIGHT default */
+  --bg:var(--paper);
+  --surface:#FFFFFF;
+  --surface-2:#EFEDE9;
+  --text-1:#001F35;
+  --text-2:#1D3A4D;
+  --text-3:#5A7184;
+  --text-ghost:rgba(0,31,53,.13);
+  --border:rgba(0,31,53,.09);
+  --border-2:rgba(0,31,53,.16);
+  --gold:#7A3B3B;              /* id-next: accent = vinho */
+  --gold-brand:#B9915B;  /* gold real, só para logo/detalhes de marca */
+  --gold-dim:rgba(122,59,59,.12);
+  --gold-border:rgba(122,59,59,.35);
+  --green-dim:rgba(18,105,59,.10);
+  --red-dim:rgba(132,46,32,.08);
+  --shadow-lg:0 30px 80px -40px rgba(0,31,53,.30);
+  --shadow-md:0 18px 44px -26px rgba(0,31,53,.20);
+  --shadow-sm:0 6px 18px -8px rgba(0,31,53,.14);
+  --on-gold:#FFFFFF;
+  --ring:rgba(0,31,53,.10);
+
+  /* tipografia — 4 papéis */
+  --serif:'Libre Baskerville',Georgia,serif;      /* display editorial */
+  --sans:'Manrope',system-ui,sans-serif;   /* corpo */
+  --mono:'IBM Plex Mono',ui-monospace,monospace; /* labels, dados */
+  --num:'Manrope',var(--sans);             /* números hero */
+
+  /* canvas */
+  --w:1600px; --h:900px; --pad:96px;
+  --armilar-solid:url("assets/armilar-next.png");
+  --armilar-eng:url("assets/armilar-next.png");
+  --r-sm:10px; --r-md:16px; --r-lg:22px; --r-xl:30px; --r-pill:999px;
+}
+
+/* DARK — classe no <article class="slide"> */
+.mode-dark{
+  --bg:#051D2C;
+  --surface:rgba(255,255,255,.045);
+  --surface-2:rgba(255,255,255,.08);
+  --text-1:#F2F6F9;
+  --text-2:#C3D3DD;
+  --text-3:#7E99AB;
+  --text-ghost:rgba(230,238,243,.10);
+  --border:rgba(255,255,255,.09);
+  --border-2:rgba(255,255,255,.16);
+  --gold:#8D4949;
+  --gold-dim:rgba(141,73,73,.24);
+  --gold-border:rgba(141,73,73,.55);
+  --green:#4ADE80; --green-dim:rgba(74,222,128,.10);
+  --red:#F87171;   --red-dim:rgba(248,113,113,.09);
+  --shadow-lg:0 30px 80px -36px rgba(0,0,0,.8);
+  --shadow-md:0 18px 44px -22px rgba(0,0,0,.6);
+  --shadow-sm:0 6px 18px -8px rgba(0,0,0,.5);
+  --on-gold:#F7ECEC;
+  --ring:rgba(230,238,243,.13);
+  --armilar-solid:url("assets/armilar-next-gold.png");
+  --armilar-eng:url("assets/armilar-next-gold.png");
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* stage + canvas fixo 1600×900 (mesma mecânica da lib v4) */
+.stage{width:100vw;height:100vh;display:grid;place-items:center;background:#101418;overflow:hidden}
+.slide{
+  position:absolute;top:50%;left:50%;
+  width:var(--w);height:var(--h);
+  transform-origin:center;
+  background:var(--bg);color:var(--text-1);
+  font-family:var(--sans);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+
+/* data-section é só metadado (organização/busca) — NÃO renderiza nada.
+   O único kicker visível do slide é o .eyebrow do título. */
+.slide::before{content:none}
+
+/* ── DECORAÇÃO ────────────────────────────────────────────── */
+
+/* esfera armilar da marca — overlay decorativo (posicionar/escalar no slide).
+   PNGs pré-tingidos por modo (ice p/ navy, slate p/ paper) — CSS mask não
+   funciona via file://. Proporção nativa ≈ 16:9; ajuste opacity por slide. */
+.armilar{position:absolute;pointer-events:none;opacity:.3;
+  background:var(--armilar-solid) no-repeat center / contain}
+.armilar--engraving{background:var(--armilar-eng) no-repeat center / contain}
+
+/* anéis orbitais simples (legado — prefira .armilar) */
+.rings{position:absolute;pointer-events:none;border-radius:50%;border:1px solid var(--ring)}
+.rings::before,.rings::after{content:'';position:absolute;inset:12%;border-radius:50%;border:1px dashed var(--ring)}
+.rings::after{inset:26%;border-style:solid}
+
+/* grain de filme (overlay sutil em slides dark hero) */
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* (removido) .glow — halos radiais difusos são PROIBIDOS na v5; decore com .armilar */
+
+/* ── TIPOGRAFIA ───────────────────────────────────────────── */
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:11.5px;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);
+}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);opacity:.85}
+
+.h-serif{font-family:var(--serif);font-weight:500;letter-spacing:-.02em;line-height:1.04;color:var(--text-1)}
+.h-serif em{font-style:italic;font-weight:400;color:var(--gold)}
+.h-serif .dim{color:var(--text-3)}
+
+/* linha-eco fantasma (padrão rox.com: repete/completa o título em ghost) */
+.ghost{font-family:var(--serif);font-weight:500;letter-spacing:-.02em;line-height:1.02;color:var(--text-ghost)}
+
+.lede{font-size:21px;line-height:1.55;color:var(--text-2);font-weight:400}
+.body{font-size:17px;line-height:1.6;color:var(--text-2)}
+.small{font-size:14px;line-height:1.5;color:var(--text-3)}
+.mono-label{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+.num{font-family:var(--num);font-weight:600;letter-spacing:-.03em;color:var(--text-1)}
+
+/* ── COMPONENTES ──────────────────────────────────────────── */
+
+/* superfície suave (o anti-quadrado: radius + borda + sombra em camadas) */
+.surface{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow-md);
+}
+.surface--flat{box-shadow:var(--shadow-sm)}
+.surface--gold{border-color:var(--gold-border);box-shadow:var(--shadow-lg),0 0 0 4px var(--gold-dim)}
+
+/* chip/pill */
+.chip{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 14px;border-radius:var(--r-pill);
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:var(--surface-2);color:var(--text-2);border:1px solid var(--border);
+}
+.chip--gold{background:var(--gold-dim);color:var(--gold);border-color:var(--gold-border)}
+.chip--green{background:var(--green-dim);color:var(--green);border-color:transparent}
+.chip--red{background:var(--red-dim);color:var(--red);border-color:transparent}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+/* botão/CTA pill */
+.cta{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 30px;border-radius:var(--r-pill);
+  background:var(--gold);color:var(--on-gold);
+  font-family:var(--num);font-size:16px;font-weight:600;letter-spacing:.02em;
+  box-shadow:0 14px 34px -12px var(--gold-border);
+}
+
+/* logo helper */
+.logo{height:34px;width:auto;display:block}
+
+/* helpers */
+.gold{color:var(--gold)}
+.italic{font-style:italic}
+
+/* ── ID NEXT ──────────────────────────────────────────────── */
+/* forma orgânica do Next: arco arredondado em gradiente vinho.
+   Posicionar/rotacionar por slide (decoração de capas e divisórias). */
+.next-arch{position:absolute;pointer-events:none;background:var(--wine-grad);border-radius:180px}
+.next-arch--soft{opacity:.55}
+.wine{color:var(--wine-300)}
+.chip--wine{background:var(--wine-dim);color:var(--wine-300);border-color:var(--wine-border)}
+.surface--wine{background:var(--wine-grad);border-color:var(--wine-border);color:#F2E9E9}
+
+
+/* id-next: decoração orgânica vinho no lugar da esfera armilar.
+   Arco em camadas (estilo Next): aro vinho claro + miolo escuro inset,
+   um único cantão arredondado voltado para o conteúdo. */
+.armilar,.armilar--engraving{
+  background:linear-gradient(205deg,#8D4949,#5E2727) !important;
+  border-radius:190px 0 0 0;
+  overflow:hidden;
+}
+.armilar::before{content:'';position:absolute;inset:38px -120px -120px 38px;
+  background:linear-gradient(160deg,#571F1F,#2A0F0F);
+  border-radius:170px 0 0 0}
+.mode-dark .armilar{opacity:.92}

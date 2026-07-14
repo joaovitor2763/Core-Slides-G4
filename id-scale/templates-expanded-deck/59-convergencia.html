@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>59 · Convergência Founder × Mentor</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Convergência Founder × Mentor (dark): duas colunas de pills convergindo
+     para uma moldura central com gravura, travas verticais "Founder"/"Mentor"
+     e a palavra "Mentoria" abaixo. Bloco de contexto .lede no topo-esquerda.
+
+     Colunas (soma = 1408 = 1600−192):
+       esquerda  x96→560  (464) · vão 80 · moldura x640→960 (320)
+       · vão 80 · direita x1040→1504 (464)  → 464+80+320+80+464 = 1408 ✓
+
+     Contexto topo-esquerda: left 96 · width 524 (96+524 = 620 ✓) · top 96
+       barra 3px var(--border-2) — o gold do slide é só o grupo Mentor.
+
+     Moldura: left 640 · top 360 · 320×340 → bottom 700 < 804 ✓
+       travas 36px cada + miolo 248 → 36+248+36 = 320 ✓
+       "Mentoria" 26px em y716 (716+32 = 748 < 804 ✓)
+
+     Pills: h58 · tops 360/484/608/732 (gap 66) → última bottom 790 ✓
+       centro vertical cy = top+29 → 389 / 513 / 637 / 761
+       labels mono das colunas em y316 (44px acima da primeira pill)
+
+     Conectores cotovelo (M h v h · via x=600 esq · x=1000 dir):
+       alvos na borda da moldura y 420/490/570/640 (simétricos ao centro 530)
+       verticais em x600: [389–420][490–513][570–637][640–761] — sem colisão ✓ */
+
+  .context{position:absolute;left:var(--pad);top:96px;width:524px;
+    border-left:3px solid var(--border-2);padding-left:29px}
+  .context .lede{max-width:480px}
+  .context b{font-weight:600;color:var(--text-1)}
+
+  /* ── moldura central ── */
+  .frame{position:absolute;left:640px;top:360px;width:320px;height:340px;
+    display:flex;overflow:hidden}
+  .lock{width:36px;flex:0 0 36px;display:grid;place-items:center}
+  .lock span{writing-mode:vertical-rl;font-family:var(--mono);font-size:11px;
+    font-weight:500;letter-spacing:.26em;text-transform:uppercase}
+  .lock--founder{background:var(--surface-2)}
+  .lock--founder span{color:var(--text-3)}
+  .lock--mentor{background:var(--gold-dim);border-left:1px solid var(--gold-border)}
+  .lock--mentor span{color:var(--gold)}
+
+  .art{position:relative;flex:1;overflow:hidden}
+  /* o PNG da gravura tem a esfera no canto inferior-direito (feito p/ sangria
+     de canto); recorte proposital para encher o miolo com os anéis — segue
+     contido dentro da moldura */
+  .art .armilar{inset:0;opacity:.5;
+    background-size:auto 150%;background-position:88% 62%}
+
+  .word{position:absolute;left:640px;top:716px;width:320px;text-align:center;
+    font-family:var(--serif);font-style:italic;font-weight:500;font-size:26px;
+    letter-spacing:-.01em;color:var(--text-1)}
+
+  /* ── pills ── */
+  .pill{position:absolute;height:58px;padding:0 24px;border-radius:var(--r-md);
+    display:flex;align-items:center}
+  .pill .small{color:var(--text-2)}
+  .pill--founder{left:96px;width:464px}
+  .pill--mentor{left:1040px;width:464px;
+    background:var(--gold-dim);border:1px solid var(--gold-border)}
+
+  /* ── conectores ── */
+  .wires{position:absolute;inset:0;pointer-events:none}
+  .wires path{fill:none;stroke:var(--text-3);stroke-width:1.2;opacity:.55}
+  .wires .dot-pill{fill:var(--text-3);opacity:.7}
+  .wires .dot-frame{fill:var(--text-3)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <!-- contexto editorial -->
+    <div class="context">
+      <p class="lede">Lorem ipsum dolor sit amet consectetur adipiscing elit, <b>sed do eiusmod tempor incididunt ut labore</b></p>
+    </div>
+
+    <!-- conectores cotovelo: dot r3 na pill · dot r5 na borda da moldura -->
+    <svg class="wires" viewBox="0 0 1600 900" aria-hidden="true">
+      <!-- esquerda: pill (560,cy) → moldura (640,alvo) via x600 -->
+      <path d="M560,389 H600 V420 H640"/>   <!-- cy389 → 420 -->
+      <circle class="dot-pill"  cx="560" cy="389" r="3"/>
+      <circle class="dot-frame" cx="640" cy="420" r="5"/>
+
+      <path d="M560,513 H600 V490 H640"/>   <!-- cy513 → 490 -->
+      <circle class="dot-pill"  cx="560" cy="513" r="3"/>
+      <circle class="dot-frame" cx="640" cy="490" r="5"/>
+
+      <path d="M560,637 H600 V570 H640"/>   <!-- cy637 → 570 -->
+      <circle class="dot-pill"  cx="560" cy="637" r="3"/>
+      <circle class="dot-frame" cx="640" cy="570" r="5"/>
+
+      <path d="M560,761 H600 V640 H640"/>   <!-- cy761 → 640 -->
+      <circle class="dot-pill"  cx="560" cy="761" r="3"/>
+      <circle class="dot-frame" cx="640" cy="640" r="5"/>
+
+      <!-- direita: moldura (960,alvo) → pill (1040,cy) via x1000 -->
+      <path d="M960,420 H1000 V389 H1040"/> <!-- 420 → cy389 -->
+      <circle class="dot-frame" cx="960"  cy="420" r="5"/>
+      <circle class="dot-pill"  cx="1040" cy="389" r="3"/>
+
+      <path d="M960,490 H1000 V513 H1040"/> <!-- 490 → cy513 -->
+      <circle class="dot-frame" cx="960"  cy="490" r="5"/>
+      <circle class="dot-pill"  cx="1040" cy="513" r="3"/>
+
+      <path d="M960,570 H1000 V637 H1040"/> <!-- 570 → cy637 -->
+      <circle class="dot-frame" cx="960"  cy="570" r="5"/>
+      <circle class="dot-pill"  cx="1040" cy="637" r="3"/>
+
+      <path d="M960,640 H1000 V761 H1040"/> <!-- 640 → cy761 -->
+      <circle class="dot-frame" cx="960"  cy="640" r="5"/>
+      <circle class="dot-pill"  cx="1040" cy="761" r="3"/>
+    </svg>
+
+    <!-- moldura central: travas Founder/Mentor + gravura -->
+    <div class="frame surface">
+      <div class="lock lock--founder"><span>Laborum</span></div>
+      <!-- para usar imagem real: substitua o div.armilar abaixo por
+           <img src="assets/sua-imagem.jpg" alt="…" style="width:100%;height:100%;object-fit:cover"> -->
+      <div class="art">
+        <div class="armilar armilar--engraving" aria-hidden="true"></div>
+      </div>
+      <div class="lock lock--mentor"><span>Tempor</span></div>
+    </div>
+    <div class="word">Deserunt</div>
+
+    <!-- labels das colunas -->
+    <span class="mono-label" style="position:absolute;left:96px;top:316px">Lorem ipsum dolor sit</span>
+    <span class="mono-label" style="position:absolute;left:1040px;top:316px">Amet consectetur elit</span>
+
+    <!-- coluna founder: o que ele busca -->
+    <div class="pill surface surface--flat pill--founder" style="top:360px"><span class="small">lorem ipsum dolor sit amet consectetur</span></div>
+    <div class="pill surface surface--flat pill--founder" style="top:484px"><span class="small">consectetur adipiscing sed do eiusmod tempor</span></div>
+    <div class="pill surface surface--flat pill--founder" style="top:608px"><span class="small">labore et dolore magna aliqua enim</span></div>
+    <div class="pill surface surface--flat pill--founder" style="top:732px"><span class="small">ut enim ad minim veniam quis nostrud</span></div>
+
+    <!-- coluna mentor (protagonista gold-dim): o que ele entrega -->
+    <div class="pill pill--mentor" style="top:360px"><span class="small">ullamco laboris nisi aliquip</span></div>
+    <div class="pill pill--mentor" style="top:484px"><span class="small">commodo consequat duis aute irure</span></div>
+    <div class="pill pill--mentor" style="top:608px"><span class="small">voluptate velit cillum fugiat</span></div>
+    <div class="pill pill--mentor" style="top:732px"><span class="small">pariatur excepteur sint occaecat</span></div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

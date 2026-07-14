@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>57 · Módulo de aula</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Módulo de aula — split misto: <article> LIGHT + painel navy à direita.
+     Painel navy: x 1060→1600 (540px) · y 0→900 full-bleed (sangria intencional,
+     mesma mecânica do 27-split: div interno .mode-dark + background navy manual).
+     Esquerda útil: x 96→980 (884px) · respiro 980→1060 = 80px.
+     Soma horizontal: 96 + 884 + 80 + 540 = 1600 ✓
+     Vertical esquerda: chips módulos y96 · chip gold y184 · título y252 (1 linha
+     de 58px ≈ 66px) · lede y360 · card "você vai aprender" y520→800 (280px ≤ 804 ✓).
+     Painel: padding 64 → conteúdo x 1124→1536 (412px) · y 64→836
+     (rodapé dentro do painel full-bleed — exceção documentada). */
+
+  /* fileira de módulos — o ativo inverte: texto-1 vira fundo, bg vira texto
+     (override local proposital; não existe token de chip invertido) */
+  .mods{position:absolute;left:var(--pad);top:96px;display:flex;gap:10px}
+  .mods .chip--active{background:var(--text-1);color:var(--bg);border-color:var(--text-1)}
+
+  .badge{position:absolute;left:var(--pad);top:184px}
+
+  .title{position:absolute;left:var(--pad);top:252px;max-width:884px;
+    font-size:58px;font-style:italic}
+  .sub{position:absolute;left:var(--pad);top:360px;max-width:720px}
+
+  /* card do conteúdo do módulo: 96→980 = 884px · y 520→800 = 280px */
+  .learn{position:absolute;left:var(--pad);top:520px;width:884px;height:280px;
+    padding:34px 44px 38px;display:flex;flex-direction:column}
+  .learn .kicker{font-family:var(--mono);font-size:11.5px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+  .learn ul{list-style:none;margin-top:14px;flex:1;
+    display:flex;flex-direction:column;justify-content:space-around}
+  .learn li{display:flex;align-items:baseline;gap:16px}
+  .learn li::before{content:'+';font-family:var(--mono);font-weight:500;
+    font-size:15px;color:var(--text-3);flex:none}
+
+  /* painel navy — tokens re-escopam via .mode-dark */
+  .panel{position:absolute;left:1060px;top:0;width:540px;height:900px;
+    background:var(--navy-700);padding:64px;display:flex;flex-direction:column}
+  .panel h2{font-family:var(--serif);font-weight:500;font-size:34px;
+    line-height:1.25;letter-spacing:-.01em;color:var(--text-1)}
+
+  .mentors{flex:1;display:flex;flex-direction:column;justify-content:center;
+    margin-top:8px}
+  .mentor{display:flex;align-items:center;gap:20px;padding:34px 0}
+  .mentor + .mentor{border-top:1px solid var(--border)}
+
+  /* para usar foto real: substitua o span.avatar por
+     <img src="…" style="width:60px;height:60px;border-radius:50%;object-fit:cover"> */
+  .avatar{width:60px;height:60px;border-radius:50%;flex:none;
+    background:var(--surface-2);border:1px solid var(--border-2);
+    display:grid;place-items:center;
+    font-family:var(--serif);font-weight:500;font-size:19px;
+    letter-spacing:.02em;color:var(--text-1)}
+
+  .mentor .name{font-size:17px;line-height:1.3}
+  .mentor .name em{font-style:italic;font-weight:500}
+  .mentor .role{margin-top:4px;white-space:nowrap}
+
+  .footnote{margin-top:12px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <div class="mods">
+      <span class="chip">Laborum</span>
+      <span class="chip chip--active">Adipiscing</span>
+      <span class="chip">Occaecat</span>
+      <span class="chip">Veniam</span>
+      <span class="chip">Consectetur</span>
+    </div>
+
+    <span class="chip chip--gold badge"><span class="dot"></span>Lorem 3</span>
+
+    <h1 class="h-serif title">Lorem ipsum dolor sit:</h1>
+    <p class="lede sub">Consectetur, adipiscing sed tempor ut labore magna aliqua.</p>
+
+    <section class="learn surface">
+      <div class="kicker">lorem ipsum dolor sit</div>
+      <ul>
+        <li class="body">Lorem ipsum dolor sit amet consectetur adipiscing elit tempor.</li>
+        <li class="body">Consectetur adipiscing elit sed tempor incididunt labore.</li>
+        <li class="body">Ullamco laboris nisi ut aliquip ex commodo consequat duis.</li>
+        <li class="body">Excepteur sint occaecat cupidatat proident culpa.</li>
+      </ul>
+    </section>
+
+    <aside class="panel mode-dark">
+      <h2>Lorem ipsum dolor amet?</h2>
+
+      <div class="mentors">
+        <div class="mentor">
+          <span class="avatar" aria-hidden="true">LI</span>
+          <div>
+            <div class="num name">Lorem <em>Ipsum</em></div>
+            <div class="small role">Lorem ipsum dolor sit amet elit</div>
+          </div>
+        </div>
+        <div class="mentor">
+          <span class="avatar" aria-hidden="true">DS</span>
+          <div>
+            <div class="num name">Dolor <em>Sit</em></div>
+            <div class="small role">Dolor sit amet consectetur elit</div>
+          </div>
+        </div>
+        <div class="mentor">
+          <span class="avatar" aria-hidden="true">AE</span>
+          <div>
+            <div class="num name">Amet <em>Elit</em></div>
+            <div class="small role">Lorem ipsum · dolor sit amet elit</div>
+          </div>
+        </div>
+        <div class="mentor">
+          <span class="avatar" aria-hidden="true">ST</span>
+          <div>
+            <div class="num name">Sed <em>Tempor</em></div>
+            <div class="small role">Officia deserunt mollit anim lorem</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="small footnote">*Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+    </aside>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>75 · Resultados do case</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Resultados de case study: antes→depois em cada métrica.
+     Topo: eyebrow + título serif 48px à esquerda · mono-label de fonte no topo-direita.
+     Grid 3×2 de surfaces; card protagonista (margem bruta) em surface--gold.
+
+     geometria do grid: x 96 → 1504 (1408px) · y 280 → 800 (520px)
+       colunas: (1408 − 2×22) / 3 = 1364/3 ≈ 454,7px cada
+       linhas:  (520 − 22) / 2 = 249px cada · gap 22 nos dois eixos ✓ */
+
+  .head{position:absolute;left:var(--pad);top:112px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:48px;max-width:980px}
+
+  /* fonte dos dados: alinhada à direita, na altura do eyebrow
+     (top 121px: ink do mono-label 11px casa com o ink do eyebrow 11.5px em top 112px) */
+  .source{position:absolute;right:var(--pad);top:121px;text-align:right}
+
+  .grid{position:absolute;left:var(--pad);right:var(--pad);top:280px;height:520px;
+    display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:22px}
+
+  .metric{padding:30px 34px 28px;display:flex;flex-direction:column;align-items:flex-start}
+  .metric .label{margin-bottom:auto}
+  .metric .before{display:block;margin-bottom:8px}
+  .metric .figure{font-size:44px;line-height:1;letter-spacing:-.04em}
+  .metric .figure small{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-left:2px}
+  .metric .figure small.wd{margin-left:7px}  /* unidades-palavra (dias, h) respiram mais que o % */
+  .metric .delta{margin-top:16px}
+
+  .metric--hero .figure{color:var(--gold)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum dolor</div>
+      <h1 class="h-serif">Lorem ipsum e o dolor, <em class="dim">sit amet adipiscing.</em></h1>
+    </header>
+
+    <div class="mono-label source">lorem: ipsum dolor sit amet · set/2025</div>
+
+    <section class="grid">
+
+      <div class="metric surface surface--gold metric--hero">
+        <span class="mono-label label">Lorem ipsum</span>
+        <span class="small before">lorem: 22,4%</span>
+        <div class="num figure">26,5<small>%</small></div>
+        <span class="chip chip--green delta"><span class="dot"></span>+4,1 pts</span>
+      </div>
+
+      <div class="metric surface">
+        <span class="mono-label label">Lorem ipsum dolor</span>
+        <span class="small before">lorem: 9 dias</span>
+        <div class="num figure">3<small class="wd">dias</small></div>
+        <span class="chip chip--green delta"><span class="dot"></span>&minus;6 dias</span>
+      </div>
+
+      <div class="metric surface">
+        <span class="mono-label label">Lorem dolor amet</span>
+        <span class="small before">lorem: 8,1%</span>
+        <div class="num figure">3,2<small>%</small></div>
+        <span class="chip chip--green delta"><span class="dot"></span>&minus;4,9 pts</span>
+      </div>
+
+      <div class="metric surface">
+        <span class="mono-label label">Lorem dolor sit</span>
+        <span class="small before">lorem: 11%</span>
+        <div class="num figure">7,4<small>%</small></div>
+        <span class="chip chip--green delta"><span class="dot"></span>&minus;3,6 pts</span>
+      </div>
+
+      <div class="metric surface">
+        <span class="mono-label label">Sit</span>
+        <span class="small before">lorem: 31</span>
+        <div class="num figure">58</div>
+        <span class="chip chip--green delta"><span class="dot"></span>+27 pts</span>
+      </div>
+
+      <div class="metric surface">
+        <span class="mono-label label">Lorem de ipsum / dolor</span>
+        <span class="small before">lorem: 40 h</span>
+        <div class="num figure">6<small class="wd">h</small></div>
+        <span class="chip chip--green delta"><span class="dot"></span>&minus;34 h/sem</span>
+      </div>
+
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

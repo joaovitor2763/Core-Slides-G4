@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>79 · Resumo executivo</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Resumo executivo financeiro (light):
+     — header eyebrow + título serif 46px (y 100–~200);
+     — faixa de 4 KPIs em surface--flat: x 96→1504, y 240→420 (180px de altura);
+       4 colunas de (1408 − 3×22)/4 = 335,5px + 3 gaps de 22 = 1408 ✓;
+       KPI de margem EBITDA é o único surface--gold do slide;
+     — duas colunas de leitura y 470→780 (310px):
+       col A x 96→780 (684px) · respiro 40px · col B x 820→1504 (684px)
+       → 684 + 40 + 684 = 1408 ✓ · hairline divisória em x 800;
+       dots 22px no padrão do 32-checklist (círculo dim + sinal mono);
+     — rodapé mono-label em y 786 com line-height:1 (11px → termina ~797, dentro do limite 804). */
+
+  .head{position:absolute;left:var(--pad);top:100px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:46px}
+
+  /* faixa de KPIs */
+  .kpis{position:absolute;left:var(--pad);right:var(--pad);top:240px;height:180px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .kpi{padding:26px 28px 22px;display:flex;flex-direction:column;align-items:flex-start}
+  .kpi .val{font-size:38px;line-height:1;margin-top:14px}
+  .kpi .val small{font-size:20px;font-weight:600;letter-spacing:-.01em}
+  .kpi .chip{margin-top:auto}
+  .kpi--hero .val{color:var(--gold)}
+
+  /* colunas de leitura */
+  .col{position:absolute;top:470px;height:310px;width:684px;
+    display:flex;flex-direction:column}
+  .col--a{left:var(--pad)}
+  .col--b{left:820px}
+  .col .kicker{padding-bottom:16px;border-bottom:1px solid var(--border)}
+  .col .items{flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
+  .item{display:flex;align-items:center;gap:18px}
+  .item .mark{flex:none;width:22px;height:22px;border-radius:50%;
+    display:grid;place-items:center;
+    font-family:var(--mono);font-size:12px;font-weight:500;line-height:1}
+  .col--a .mark{background:var(--green-dim);color:var(--green)}
+  .col--b .mark{background:var(--red-dim);color:var(--red)}
+  .item .body{max-width:620px}
+
+  /* número-chave dentro do corpo: sempre Space Grotesk */
+  .fig{font-family:var(--num);font-weight:600;letter-spacing:-.01em;color:var(--text-1)}
+
+  .vline{position:absolute;left:800px;top:478px;height:294px;width:1px;
+    background:var(--border)}
+
+  .foot{position:absolute;left:var(--pad);top:786px;line-height:1}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum · março 2026</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit.</h1>
+    </header>
+
+    <section class="kpis">
+      <div class="kpi surface surface--flat">
+        <span class="mono-label">Dolor sit amet</span>
+        <div class="num val"><small>R$</small> 4,8<small>M</small></div>
+        <span class="chip chip--green"><span class="dot"></span>+11% vs lorem</span>
+      </div>
+
+      <div class="kpi kpi--hero surface surface--flat surface--gold">
+        <span class="mono-label">Sit amet elit</span>
+        <div class="num val">23,4<small>%</small></div>
+        <span class="chip chip--green"><span class="dot"></span>+1,8 pt</span>
+      </div>
+
+      <div class="kpi surface surface--flat">
+        <span class="mono-label">Lorem ipsum</span>
+        <div class="num val"><small>R$</small> 2,1<small>M</small></div>
+        <span class="chip"><span class="dot"></span>Laborum</span>
+      </div>
+
+      <div class="kpi surface surface--flat">
+        <span class="mono-label">Tempor</span>
+        <div class="num val">14 <small>meses</small></div>
+        <span class="chip chip--red"><span class="dot"></span>−2 meses</span>
+      </div>
+    </section>
+
+    <section class="col col--a">
+      <span class="mono-label kicker">Lorem ipsum dolor amet</span>
+      <div class="items">
+        <div class="item">
+          <span class="mark" aria-hidden="true">+</span>
+          <p class="body">Lorem ipsum dolor sit amet — consectetur adipiscing elit <span class="fig">62%</span> do tempor.</p>
+        </div>
+        <div class="item">
+          <span class="mark" aria-hidden="true">+</span>
+          <p class="body">Consectetur elit <span class="fig">1,1%</span>, lorem ipsum dolor sit amet consectetur.</p>
+        </div>
+        <div class="item">
+          <span class="mark" aria-hidden="true">+</span>
+          <p class="body">Lorem ipsum dolor amet <span class="fig">8%</span> sed do lorem ipsum dolor amet.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="vline" aria-hidden="true"></div>
+
+    <section class="col col--b">
+      <span class="mono-label kicker">Lorem ipsum dolor</span>
+      <div class="items">
+        <div class="item">
+          <span class="mark" aria-hidden="true">&mdash;</span>
+          <p class="body">Lorem ipsum dolor sit amet — consectetur adipiscing elit tempor abril.</p>
+        </div>
+        <div class="item">
+          <span class="mark" aria-hidden="true">&mdash;</span>
+          <p class="body">Lorem ipsum dolor amet <span class="fig">2,4%</span>, sed do lorem ipsum dolor sit amet.</p>
+        </div>
+        <div class="item">
+          <span class="mark" aria-hidden="true">&mdash;</span>
+          <p class="body">Lorem ipsum dolor <span class="fig">R$ 380k</span> sed lorem ipsum dolor sit amet.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="mono-label foot">lorem: ipsum dolor · sit amet elit 05/abr</div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

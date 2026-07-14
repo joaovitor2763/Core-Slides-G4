@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>65 · Canvas de exercício</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Canvas de preenchimento (worksheet projetável), light.
+     Topo: eyebrow + título serif 46px com chip mono de logística à direita.
+     Grade 3×2 de campos tracejados (campo 01 = gold, "comece aqui").
+     Horizontal: 3 colunas × 456 + 2 gaps × 20 = 1368 + 40 = 1408 = 1600−192 ✓
+     Vertical: header y 106..~206 · grid top 290 + 2 linhas × 240 + gap 20
+     = 500 → grid ocupa y 290..790 ✓ · rodapé y 814 (linha meta, fora da mancha). */
+
+  .head{position:absolute;left:var(--pad);top:106px;right:var(--pad)}
+  .head .eyebrow{margin-bottom:20px}
+  .head .titlebar{display:flex;align-items:center;gap:28px}
+  .head h1{font-size:46px}
+
+  .grid{position:absolute;left:var(--pad);top:290px;width:1408px;
+    display:grid;grid-template-columns:repeat(3,456px);
+    grid-template-rows:repeat(2,240px);gap:20px}
+
+  /* campo de preenchimento: tracejado, meio-transparente sobre o paper */
+  .field{position:relative;display:flex;flex-direction:column;
+    padding:26px 28px 22px;
+    border:1.5px dashed var(--border-2);border-radius:var(--r-lg);
+    background:rgba(255,255,255,.5)}
+  .field .k{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+  .field .k b{font-weight:600;color:var(--text-2)}
+  .field .q{margin-top:13px;max-width:396px;color:var(--text-1)}
+  .field .hint{margin-top:auto;font-style:italic}
+
+  /* campo 01 — único gold do slide */
+  .field--start{border-color:var(--gold-border)}
+  .field--start .chip{position:absolute;top:20px;right:20px}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Consectetur · lorem</div>
+      <div class="titlebar">
+        <h1 class="h-serif">Lorem ipsum dolor sit amet</h1>
+        <span class="chip">25 min · sit amet</span>
+      </div>
+    </header>
+
+    <section class="grid">
+
+      <div class="field field--start">
+        <div class="k"><b>01</b> · pariatur</div>
+        <span class="chip chip--gold"><span class="dot"></span>Lorem ipsum</span>
+        <p class="q body">Lorem ipsum dolor sit amet consectetur adipiscing elit?</p>
+        <p class="hint small">Lorem ipsum dolor, sit amet consectetur — adipiscing elit.</p>
+      </div>
+
+      <div class="field">
+        <div class="k"><b>02</b> · consectetur</div>
+        <p class="q body">Sed do eiusmod tempor incididunt — ut labore et dolore?</p>
+        <p class="hint small">Sed tempor incididunt labore; magna aliqua enim.</p>
+      </div>
+
+      <div class="field">
+        <div class="k"><b>03</b> · dolor</div>
+        <p class="q body">Ut enim ad minim veniam quis nostrud ullamco?</p>
+        <p class="hint small">Ut enim ad minim, veniam quis nostrud commodo.</p>
+      </div>
+
+      <div class="field">
+        <div class="k"><b>04</b> · magna</div>
+        <p class="q body">Excepteur sint occaecat cupidatat proident culpa amet?</p>
+        <p class="hint small">Dolor sit, amet consectetur — adipiscing elit sed.</p>
+      </div>
+
+      <div class="field">
+        <div class="k"><b>05</b> · tempor</div>
+        <p class="q body">Duis aute irure dolor voluptate, velit cillum fugiat nulla amet?</p>
+        <p class="hint small">Tempor, incididunt ut labore magna aliqua.</p>
+      </div>
+
+      <div class="field">
+        <div class="k"><b>06</b> · labore aliqua</div>
+        <p class="q body">Lorem ipsum dolor sit amet consectetur velit 7 dias?</p>
+        <p class="hint small">Lorem ipsum dolor sit amet consectetur, elit sed.</p>
+      </div>
+
+    </section>
+
+    <!-- rodapé-meta: y 814, abaixo da grade (790), acima da margem inferior -->
+    <footer class="small" style="position:absolute;left:var(--pad);top:814px">
+      Lorem ipsum dolor sit amet consectetur · 1 lorem ipsum dolor · adipiscing elit.
+    </footer>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

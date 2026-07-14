@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>28 · Framework Venn</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Venn de 3 círculos no centro-esquerda + leitura editorial à direita.
+     ── Posições dos círculos (380px de diâmetro, raio 190) ──
+     c1 Processo · left 120, top 190 → centro (310, 380)
+     c2 Dados    · left 340, top 190 → centro (530, 380)
+     c3 Pessoas  · left 230, top 380 → centro (420, 570)
+     Distância entre centros: c1↔c2 = 220px · c1↔c3 ≈ 220px < 380 → sobrepõem ✓
+     Interseção tripla ≈ (420, 445) — dot gold + label mono.
+     Limites: c3 bottom = 380+380 = 760 < 804 (900−96) ✓ · c1 left 120 > 96 ✓
+     Coluna direita: left 920 + 584 = 1504 = 1600−96 ✓ */
+
+  .circle{position:absolute;width:380px;height:380px;border-radius:50%;border:2px solid}
+  .c1{left:120px;top:190px;border-color:rgba(0,31,53,.28);background:rgba(0,31,53,.05)}
+  .c2{left:340px;top:190px;border-color:var(--gold-border);background:var(--gold-dim)}
+  .c3{left:230px;top:380px;border-color:rgba(0,31,53,.28);background:rgba(0,31,53,.09)}
+
+  /* labels dentro de cada círculo, na zona sem sobreposição */
+  .clabel{position:absolute;font-family:var(--num);font-size:22px;font-weight:600;
+    letter-spacing:-.01em;color:var(--text-1)}
+  .l1{left:172px;top:322px}                       /* Processo — lóbulo esquerdo de c1 */
+  .l2{left:552px;top:322px}                       /* Dados — lóbulo direito de c2 */
+  .l3{left:360px;top:648px}                       /* Pessoas — lóbulo inferior de c3 */
+
+  /* interseção tripla: dot gold + label mono */
+  .core{position:absolute;left:420px;top:445px;transform:translate(-50%,-50%);
+    display:flex;flex-direction:column;align-items:center;gap:10px;z-index:2}
+  .core .dot{width:12px;height:12px;border-radius:50%;background:var(--gold);
+    box-shadow:0 0 0 6px var(--gold-dim)}
+  .core .tag{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+
+  /* leitura editorial à direita */
+  .read{position:absolute;left:920px;width:584px;top:250px}
+  .read .eyebrow{margin-bottom:26px}
+  .read h1{font-size:40px}
+  .read .body{margin-top:26px;max-width:540px}
+  .read .chip{margin-top:34px}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Método G4">
+
+    <!-- venn -->
+    <div class="circle c1" aria-hidden="true"></div>
+    <div class="circle c2" aria-hidden="true"></div>
+    <div class="circle c3" aria-hidden="true"></div>
+    <span class="clabel l1">Processo</span>
+    <span class="clabel l2">Dados</span>
+    <span class="clabel l3">Pessoas</span>
+    <div class="core">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="tag">skill que roda</span>
+    </div>
+
+    <!-- leitura -->
+    <div class="read">
+      <div class="eyebrow">As três condições</div>
+      <h1 class="h-serif">IA só vira rotina onde os três círculos <em>se cruzam.</em></h1>
+      <p class="body">Processo sem dado vira burocracia automatizada. Dado sem gente treinada vira dashboard ignorado. E pessoas animadas sem processo viram 40 experimentos que morrem na sexta-feira. A skill que sobrevive nasce da interseção — e é ela que a gente constrói primeiro.</p>
+      <span class="chip chip--gold"><span class="dot"></span>1 interseção por squad</span>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

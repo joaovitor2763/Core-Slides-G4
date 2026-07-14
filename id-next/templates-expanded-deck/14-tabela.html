@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>14 · Tabela</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Decisão (light): tabela como surface única, coluna recomendada
+     destacada com fundo gold-dim de radius interno + chip. Divisórias
+     suaves em var(--border), sem hairline preta. */
+
+  .head{position:absolute;left:var(--pad);right:var(--pad);top:104px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:58px;max-width:780px}
+  .head .read{max-width:400px;padding-bottom:8px}
+
+  /* tabela: 300 + 504 = 804 = 900 − 96 ✓ · colunas 428+310+310+360 = 1408 ✓ */
+  .table{position:absolute;left:var(--pad);right:var(--pad);top:300px;bottom:96px;
+    overflow:hidden}
+
+  /* destaque da coluna recomendada (radius interno, inset 12px):
+     x = 428 + 310 + 310 + 6 = 1054 · largura 360 − 12 = 348 */
+  .hl{position:absolute;left:1054px;top:12px;width:340px;bottom:12px;
+    background:var(--gold-dim);border:1px solid var(--gold-border);
+    border-radius:var(--r-md);pointer-events:none}
+
+  .grid{position:relative;display:grid;height:100%;
+    grid-template-columns:428px 310px 310px 360px;
+    grid-template-rows:96px repeat(4,1fr)}
+  .cell{display:flex;align-items:center;justify-content:center;gap:10px;
+    border-top:1px solid var(--border)}
+  .grid > .cell:nth-child(-n+4){border-top:none}
+  .cell--crit{justify-content:flex-start;padding-left:44px}
+  .cell--head{flex-direction:column;gap:10px}
+
+  .crit{font-size:17px;font-weight:500;color:var(--text-2)}
+  .col-name{font-family:var(--mono);font-size:11.5px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+  .col-name--reco{color:var(--text-1)}
+
+  .mark{font-size:21px;line-height:1}
+  .mark--yes{color:var(--green);font-weight:600}
+  .mark--part{color:var(--text-3)}
+  .mark--no{color:var(--text-3);opacity:.55}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div>
+        <div class="eyebrow">Lorem ipsum · dolor sit amet</div>
+        <h1 class="h-serif">Lorem ipsum dolor sit amet. <em>Sed elit tempor.</em></h1>
+      </div>
+      <p class="body read">Lorem ipsum dolor sit amet; consectetur adipiscing elit sed tempor. Duis incididunt labore magna aliqua enim veniam quis nostrud ullamco.</p>
+    </header>
+
+    <section class="table surface">
+      <div class="hl" aria-hidden="true"></div>
+      <div class="grid">
+        <div class="cell cell--crit cell--head"></div>
+        <div class="cell cell--head"><span class="col-name">Lorem consectetur</span></div>
+        <div class="cell cell--head"><span class="col-name">Ipsum adipiscing</span></div>
+        <div class="cell cell--head">
+          <span class="col-name col-name--reco">Dolor sit amet</span>
+          <span class="chip chip--gold"><span class="dot"></span>Consectetur</span>
+        </div>
+
+        <div class="cell cell--crit"><span class="crit">Lorem ipsum dolor sit amet</span></div>
+        <div class="cell"><span class="mark mark--no">—</span></div>
+        <div class="cell"><span class="mark mark--part">○</span></div>
+        <div class="cell"><span class="mark mark--yes">✓</span></div>
+
+        <div class="cell cell--crit"><span class="crit">Consectetur adipiscing elit sed</span></div>
+        <div class="cell"><span class="mark mark--yes">✓</span></div>
+        <div class="cell"><span class="mark mark--no">—</span></div>
+        <div class="cell"><span class="mark mark--yes">✓</span></div>
+
+        <div class="cell cell--crit"><span class="crit">Tempor incididunt labore sed</span></div>
+        <div class="cell"><span class="mark mark--no">—</span></div>
+        <div class="cell"><span class="mark mark--part">○</span></div>
+        <div class="cell"><span class="mark mark--yes">✓</span></div>
+
+        <div class="cell cell--crit"><span class="crit">Magna aliqua enim veniam</span></div>
+        <div class="cell"><span class="mark mark--part">○</span></div>
+        <div class="cell"><span class="mark mark--yes">✓</span></div>
+        <div class="cell"><span class="mark mark--yes">✓</span></div>
+      </div>
+    </section>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

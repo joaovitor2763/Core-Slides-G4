@@ -12,6 +12,18 @@
 
 > **Decisão prática:** comece em `short-deck`. Use `expanded-deck` quando faltar um layout operacional específico; use `deck-frameworks` quando o centro do slide for um modelo ou ferramenta visual.
 
+## Identity variants
+
+The three official collections also have complete **visual identity variants**. Each `id-*` folder mirrors `templates-short-deck`, `templates-expanded-deck` and `deck-frameworks`: the slide structure and content model remain compatible, while typography, palette, logos, backgrounds and decorative assets follow the selected brand.
+
+| Identity | Folder | Visual direction | Start here |
+|---|---|---|---|
+| **G4 Next** | [`id-next/`](id-next/README.md) | Deep petroleum, wine accent and Next armillary assets | [`id-next/templates-short-deck/index.html`](id-next/templates-short-deck/index.html) |
+| **G4 Scale** | [`id-scale/`](id-scale/README.md) | Petroleum blue, punctual ruby and vertical fringe motifs | [`id-scale/templates-short-deck/index.html`](id-scale/templates-short-deck/index.html) |
+| **G4 Club** | [`id-club/`](id-club/README.md) | Near-black navy, brand gold and CLUB letterpress backgrounds | [`id-club/templates-short-deck/index.html`](id-club/templates-short-deck/index.html) |
+
+Use the root collections for the default **Órbita** identity. Use an `id-*` collection when the deck belongs to that business unit; copy templates only from within the same identity so its `style.css`, HTML overrides and `assets/` stay aligned. Do not treat these folders as extra layout libraries: they are branded clones of the same three canonical collections.
+
 ---
 
 ## Quick start
@@ -293,6 +305,9 @@ python3 build-deck-inlined.py --slides meu-deck/slides --assets meu-deck/assets 
 - **Catálogo do deck expandido (109)** + GUIA detalhada → [`templates-expanded-deck/`](templates-expanded-deck/) (especialmente [`templates-expanded-deck/GUIA.md`](templates-expanded-deck/GUIA.md))
 - **Como exportar PDF** → [`docs/EXPORT-PDF.md`](docs/EXPORT-PDF.md)
 - **Como customizar templates** → [`docs/CUSTOMIZE.md`](docs/CUSTOMIZE.md)
+- **Identidade G4 Next** → [`id-next/README.md`](id-next/README.md)
+- **Identidade G4 Scale** → [`id-scale/README.md`](id-scale/README.md)
+- **Identidade G4 Club** → [`id-club/README.md`](id-club/README.md)
 
 ---
 

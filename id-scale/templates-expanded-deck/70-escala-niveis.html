@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>70 · Escada de maturidade</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Escada de maturidade (light): 5 cards .surface lado a lado, topos
+     escalonados subindo da esquerda para a direita, bottom fixo na
+     baseline y=780. Nível 4 = surface--gold + chip flutuante. Seta fina
+     diagonal "próximos 12 meses" apontando além do nível 5.
+
+     Geometria X: 5×262 + 4×20 = 1390 ≤ 1408 ✓
+       lefts: 96 / 378 / 660 / 942 / 1224 · fim 1224+262 = 1486 ≤ 1504 ✓
+     Geometria Y: tops 620 / 555 / 490 / 425 / 360 (degrau −65) ·
+       bottom 780 → alturas 160 / 225 / 290 / 355 / 420 ✓
+     Baseline: 2px var(--border-2) em y=780, x 96→1504 (1408px).
+     Chip "sua turma": centrado sobre o card 4 (x 942–1204), top 379
+       → bottom ≈ 409, 16px acima do topo do card (425) ✓
+     Seta: (1000,348) → (1450,245) · slope −103/450 ≈ −0,23 = paralela
+       ao envelope da escada (−65/282 ≈ −0,23) · ângulo ≈ −12,9°.
+       Ponta livre a 63px acima do topo do nível 5 em x=1224 ✓ */
+
+  .head{position:absolute;left:var(--pad);top:96px;max-width:900px}
+  .head .eyebrow{margin-bottom:20px}
+  .head h1{font-size:50px;max-width:760px}
+  .head .lede{margin-top:18px;max-width:620px}
+
+  /* baseline contínua sob a escada — z-index 3 (acima dos cards, que
+     terminam exatamente em y=780) para o anel 4px do surface--gold
+     (y 780–784) não cobrir a linha sob o nível 4 */
+  .baseline{position:absolute;left:var(--pad);width:1408px;top:780px;height:0;
+    border-top:2px solid var(--border-2);z-index:3}
+
+  /* degraus */
+  .lvl{position:absolute;width:262px;z-index:2;
+    border-radius:22px 22px 0 0;               /* colado na baseline: radius só no topo */
+    padding:26px 26px 0;display:flex;flex-direction:column}
+  .lvl .idx{font-size:24px;line-height:1;color:var(--text-3)}
+  .lvl .name{font-size:16px;margin-top:12px}  /* nome forte em .num (Space Grotesk) */
+  .lvl .desc{margin-top:8px}
+  .lvl--here .idx{color:var(--gold)}
+
+  /* chip flutuando acima do nível 4 */
+  .here-chip{position:absolute;left:942px;width:262px;top:379px;z-index:4;
+    display:flex;justify-content:center}
+
+  /* seta diagonal + label rotacionado no mesmo ângulo (−12,9°) */
+  .next{position:absolute;inset:0;pointer-events:none;z-index:3}
+  .next-label{position:absolute;left:1105px;top:266px;width:240px;z-index:3;
+    text-align:center;transform:rotate(-12.9deg);color:var(--text-3)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit <em>amet?</em></h1>
+      <p class="lede">Lorem ipsum dolor sit amet consectetur adipiscing elit — sed do eiusmod tempor incididunt.</p>
+    </header>
+
+    <!-- nível 1 · left 96 · top 620 · h 160 -->
+    <div class="lvl surface" style="left:96px;top:620px;height:160px">
+      <span class="num idx">01</span>
+      <div class="num name">Lorem ipsum dolor</div>
+      <p class="small desc">Lorem ipsum dolor sit; amet consectetur.</p>
+    </div>
+
+    <!-- nível 2 · left 378 · top 555 · h 225 -->
+    <div class="lvl surface" style="left:378px;top:555px;height:225px">
+      <span class="num idx">02</span>
+      <div class="num name">Dolor sit amet</div>
+      <p class="small desc">Lorem ipsum dolor, sed amet consectetur adipiscing sit.</p>
+    </div>
+
+    <!-- nível 3 · left 660 · top 490 · h 290 -->
+    <div class="lvl surface" style="left:660px;top:490px;height:290px">
+      <span class="num idx">03</span>
+      <div class="num name">Dolor sit amet elit</div>
+      <p class="small desc">Lorem ipsum dolor sit amet; consectetur adipiscing elit, sed do eiusmod.</p>
+    </div>
+
+    <!-- nível 4 · left 942 · top 425 · h 355 · onde a turma está -->
+    <div class="lvl surface surface--gold lvl--here" style="left:942px;top:425px;height:355px">
+      <span class="num idx">04</span>
+      <div class="num name">Lorem ipsum sit</div>
+      <p class="small desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+    </div>
+
+    <!-- nível 5 · left 1224 · top 360 · h 420 -->
+    <div class="lvl surface" style="left:1224px;top:360px;height:420px">
+      <span class="num idx">05</span>
+      <div class="num name">Lorem ipsum dolore</div>
+      <p class="small desc">Lorem ipsum dolores: consectetur adipiscing elit, sed do eiusmod tempor labore.</p>
+    </div>
+
+    <div class="baseline" aria-hidden="true"></div>
+
+    <div class="here-chip">
+      <span class="chip chip--gold"><span class="dot"></span>lorem ipsum dolor sit</span>
+    </div>
+
+    <!-- seta fina subindo além do nível 5 · dots nas pontas
+         reta (1000,348)→(1450,245); braços da ponta a ±25° do eixo -->
+    <svg class="next" viewBox="0 0 1600 900" aria-hidden="true">
+      <g stroke="var(--text-3)" stroke-width="1.5" opacity=".65" fill="none" stroke-linecap="round">
+        <line x1="1000" y1="348" x2="1450" y2="245"/>
+        <polyline points="1437,242 1450,245 1440,253"/>
+      </g>
+      <g fill="var(--text-3)" opacity=".65">
+        <circle cx="1000" cy="348" r="3"/>
+        <circle cx="1450" cy="245" r="3"/>
+      </g>
+    </svg>
+    <div class="mono-label next-label">dolores 12 meses</div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

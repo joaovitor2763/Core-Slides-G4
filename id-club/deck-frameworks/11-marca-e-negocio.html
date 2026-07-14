@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>11 · Marca e negócio</title>
+<link rel="stylesheet" href="style.css?v=club1" />
+<style>
+  /* Framework 11 · organograma: a empresa no centro entre as duas estratégias,
+     quatro frentes de execução e um resultado único. */
+  .head{position:absolute;left:96px;top:72px;width:1408px;display:grid;grid-template-columns:820px 1fr;gap:90px;align-items:end}
+  .head .eyebrow{margin-bottom:18px}.head h1{font-size:46px}.head .lede{font-size:17px}
+  .lh{position:absolute;height:0;border-top:1.5px solid var(--border-2)}
+  .lv{position:absolute;width:0;border-left:1.5px solid var(--border-2)}
+  .ld{position:absolute;height:0;border-top:1.5px dashed var(--text-3);opacity:.5}
+  .anchor{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--text-3);opacity:.8}
+  .company{position:absolute;left:700px;top:296px;width:200px;height:62px;border-radius:999px;background:var(--gold);color:var(--on-gold);
+    display:grid;place-items:center;font:600 17px var(--num);letter-spacing:.01em;box-shadow:0 14px 34px -12px var(--gold-border);z-index:2}
+  .strat{position:absolute;top:305px;padding:13px 24px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border);
+    font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--text-2)}
+  .area{position:absolute;top:452px;width:310px;height:118px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);
+    box-shadow:var(--shadow-sm);padding:20px 24px;z-index:2}
+  .area strong{display:block;font:600 16.5px var(--num);letter-spacing:-.01em;color:var(--text-1);margin-bottom:6px}
+  .area p{font:13px/1.45 var(--sans);color:var(--text-3)}
+  .result{position:absolute;left:520px;top:664px;width:560px;height:62px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border-2);
+    display:grid;place-items:center;font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);z-index:2}
+</style>
+</head>
+<body>
+<div class="stage">
+  <article class="slide" data-section="Frameworks · marca">
+    <header class="head">
+      <div><div class="eyebrow">Framework · alinhamento</div><h1 class="h-serif">Marca e negócio, <em>uma estratégia só.</em></h1></div>
+      <p class="lede">Estratégia de negócio e estratégia de marca não competem: as duas atravessam a empresa e se encontram nas mesmas quatro frentes de execução.</p>
+    </header>
+
+    <div class="ld" style="left:420px;top:326px;width:270px" aria-hidden="true"></div><div class="anchor" style="left:413px;top:324px" aria-hidden="true"></div>
+    <div class="ld" style="left:910px;top:326px;width:270px" aria-hidden="true"></div><div class="anchor" style="left:1180px;top:324px" aria-hidden="true"></div>
+    <div class="lv" style="left:799px;top:358px;height:42px" aria-hidden="true"></div>
+    <div class="lh" style="left:251px;top:399px;width:1098px" aria-hidden="true"></div>
+    <div class="lv" style="left:250px;top:400px;height:52px" aria-hidden="true"></div>
+    <div class="lv" style="left:616px;top:400px;height:52px" aria-hidden="true"></div>
+    <div class="lv" style="left:982px;top:400px;height:52px" aria-hidden="true"></div>
+    <div class="lv" style="left:1348px;top:400px;height:52px" aria-hidden="true"></div>
+    <div class="lv" style="left:250px;top:570px;height:50px" aria-hidden="true"></div>
+    <div class="lv" style="left:616px;top:570px;height:50px" aria-hidden="true"></div>
+    <div class="lv" style="left:982px;top:570px;height:50px" aria-hidden="true"></div>
+    <div class="lv" style="left:1348px;top:570px;height:50px" aria-hidden="true"></div>
+    <div class="lh" style="left:251px;top:619px;width:1098px" aria-hidden="true"></div>
+    <div class="lv" style="left:799px;top:620px;height:44px" aria-hidden="true"></div>
+
+    <div class="company">Empresa</div>
+    <div class="strat" style="left:186px">Estratégia de negócio</div>
+    <div class="strat" style="left:1190px">Estratégia de marca</div>
+
+    <div class="area" style="left:96px"><strong>Execução comercial</strong><p>Decisões de pricing, canais e desenho da oferta.</p></div>
+    <div class="area" style="left:462px"><strong>Cultura &amp; pessoas</strong><p>Comportamentos que sustentam a promessa da marca.</p></div>
+    <div class="area" style="left:828px"><strong>Marketing &amp; campanhas</strong><p>Narrativa, mídia e geração de demanda.</p></div>
+    <div class="area" style="left:1194px"><strong>Design &amp; experiência</strong><p>Produto, ambientes e cada ponto de contato.</p></div>
+
+    <div class="result">Mais receita, valor de ativo e vendas</div>
+  </article>
+</div>
+<script>
+  const slide=document.querySelector('.slide');function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);slide.style.transform=`translate(-50%, -50%) scale(${s})`}addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>

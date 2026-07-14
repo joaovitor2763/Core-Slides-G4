@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>66 · Debate · dois lados</title>
+<link rel="stylesheet" href="style.css?v=scale2" />
+<style>
+  /* Debate estruturado (dark): a turma se divide em DOIS LADOS.
+     Pergunta no topo-esquerda; dois cards de argumentos lado a lado com
+     costura central + pill "VS" gold (protagonista único); rodapé com a
+     mecânica em chips e a regra do jogo.
+
+     Diferença deliberada dos vizinhos: 47 = perguntas da aula (lista);
+     30 = frase de efeito; este = argumentação em dois lados com dinâmica.
+
+     Contas de px:
+     · header: eyebrow y96 · pergunta serif 46px y136 (2 linhas ×52 → ~248)
+     · cards: y 300..660 (360 de altura) · esq x96..736 (640) · dir x864..1504 (640)
+       vão central 736..864 → costura em x=800 · pill VS Ø64 centro (800,480)
+       rodapé interno do card ("ganha quando") ancorado na base via margin-top:auto
+     · rodapé: chips y 716 (~31 de altura → base 747 < 804 ✓) + regra à direita */
+
+  .head{position:absolute;left:var(--pad);top:96px;max-width:1180px}
+  .head .eyebrow{margin-bottom:22px}
+  .head h1{font-size:46px}
+
+  .side{position:absolute;top:300px;width:640px;height:360px;
+    padding:36px 40px 30px;display:flex;flex-direction:column}
+  .side--a{left:96px}
+  .side--b{left:864px}
+  .side .k{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);
+    margin-bottom:26px}
+  .side ul{list-style:none;display:flex;flex-direction:column;gap:22px}
+  .side li{display:flex;gap:14px;font-size:16px;line-height:1.55;
+    color:var(--text-2)}
+  .side li::before{content:'+';font-family:var(--mono);font-weight:500;
+    color:var(--text-3);flex:none}
+  .side .win{margin-top:auto;border-top:1px solid var(--border);
+    padding-top:16px;font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+
+  /* costura central + pill VS (único gold do slide) */
+  .seam{position:absolute;left:799px;top:300px;height:360px;width:2px;
+    background:linear-gradient(180deg,transparent,var(--border-2) 20%,var(--border-2) 80%,transparent)}
+  .vs{position:absolute;left:768px;top:448px;width:64px;height:64px;
+    border-radius:50%;display:grid;place-items:center;
+    background:linear-gradient(165deg,var(--gold-300),var(--gold-700));
+    box-shadow:var(--shadow-md);
+    font-family:var(--num);font-weight:600;font-size:18px;
+    letter-spacing:.04em;color:var(--on-gold)}
+
+  .mech{position:absolute;left:var(--pad);top:716px;display:flex;gap:12px}
+  .rule{position:absolute;right:var(--pad);top:724px;width:440px;
+    text-align:right;font-style:italic}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide mode-dark" data-section="Lorem · ipsum">
+
+    <header class="head">
+      <div class="eyebrow">Lorem ipsum sit</div>
+      <h1 class="h-serif">Lorem ipsum dolor sit amet consectetur: adipiscing <span class="dim">lorem ipsum dolor?</span></h1>
+    </header>
+
+    <section class="side surface side--a">
+      <span class="k">Lorem A · lorem ipsum dolor</span>
+      <ul>
+        <li>Lorem ipsum dolor sit, amet consectetur — adipiscing elit sed.</li>
+        <li>Lorem ipsum dolor sit amet consectetur; adipiscing elit sed do.</li>
+        <li>Lorem ipsum dolor sit amet: consectetur adipiscing elit sed do eiusmod.</li>
+      </ul>
+      <span class="win">Lorem ipsum: dolor sit amet consectetur adipiscing elit sed tempor</span>
+    </section>
+
+    <section class="side surface side--b">
+      <span class="k">Lorem B · amet consectetur</span>
+      <ul>
+        <li>Lorem ipsum dolor sit amet consectetur adipiscing — elit sed do eiusmod tempor.</li>
+        <li>Lorem ipsum dolor sit amet consectetur "adipiscing elit".</li>
+        <li>Lorem ipsum: dolor sit amet consectetur adipiscing elit sed do.</li>
+      </ul>
+      <span class="win">Lorem ipsum: dolor sit amet consectetur adipiscing elit sed do eiusmod</span>
+    </section>
+
+    <div class="seam" aria-hidden="true"></div>
+    <div class="vs" aria-hidden="true">VS</div>
+
+    <div class="mech">
+      <span class="chip"><span class="dot"></span>lorem ipsum sit · 2 min</span>
+      <span class="chip"><span class="dot"></span>dolor sit amet elit · 5 min</span>
+      <span class="chip"><span class="dot"></span>laborum · 8 min</span>
+    </div>
+    <p class="small rule">Lorem ipsum dolor sit: amet consectetur adipiscing <b>sed</b> elit.</p>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

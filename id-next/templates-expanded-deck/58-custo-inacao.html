@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>58 · Custo da inação</title>
+<link rel="stylesheet" href="style.css?v=next1" />
+<style>
+  /* Split misto "custo da inação" — pergunta de palco + 3 painéis full-bleed.
+     Article LIGHT; faixa superior é div.mode-dark com navy-700 manual
+     (regra 11 — tokens re-escopam dentro dela). Pergunta CENTRALIZADA:
+     exceção intencional de momento de palco prevista na spec.
+     Geometria Y: faixa 0→380 (h 380) · painéis 380→900 (h 520) —
+     sangria full-bleed intencional até y=900 (sem --pad; momento de palco).
+     Geometria X painéis: 533 + 534 + 533 = 1600 ✓ (lefts 0 · 533 · 1067).
+     Conteúdo dos painéis: padding 0 72px → texto com 533−144 = 389px úteis.
+     Painel gold (meio) = único protagonista gold do slide. */
+
+  .band{position:absolute;left:0;top:0;width:1600px;height:380px;
+    background:var(--navy-700);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center}
+  .band .eyebrow{margin-bottom:30px}
+  /* traço gold espelhado à direita — simetria do kicker centralizado */
+  .band .eyebrow::after{content:'';width:24px;height:1px;background:var(--gold);opacity:.85}
+  .band h1{font-size:56px;max-width:1040px}
+
+  .panel{position:absolute;top:380px;height:520px;padding:0 72px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:32px;text-align:center}
+  .panel svg{width:32px;height:32px;flex:none}
+  .panel .lede{font-size:22px}
+  .panel .lede .num{font-size:22px}
+
+  /* painel 1 · paper — fundo herdado do article light */
+  .panel--paper{left:0;width:533px}
+  .panel--paper svg{color:var(--text-3)}
+
+  /* painel 2 · gold gradient — protagonista */
+  .panel--gold{left:533px;width:534px;
+    background:linear-gradient(165deg,var(--gold-300),var(--gold-700))}
+  .panel--gold svg{color:var(--on-gold)}
+  .panel--gold .lede,.panel--gold .lede .num{color:var(--on-gold)}
+
+  /* painel 3 · navy-600 — mode-dark interno re-escopa os tokens de texto */
+  .panel--navy{left:1067px;width:533px;background:var(--navy-600)}
+  .panel--navy svg{color:var(--text-3)}
+</style>
+</head>
+<body>
+<!-- copy = Lorem Ipsum calibrado ao layout · troque pelo seu conteúdo mantendo comprimentos -->
+<div class="stage">
+  <article class="slide" data-section="Lorem · ipsum">
+
+    <!-- faixa navy 0→380 · pergunta de palco centralizada -->
+    <div class="band mode-dark">
+      <div class="eyebrow">Lorem ipsum dolor</div>
+      <h1 class="h-serif"><em class="dim">Lorem ipsum</em> dolor sit<br>amet consectetur elit sed?</h1>
+    </div>
+
+    <!-- painel 1 · paper · contratação errada -->
+    <div class="panel panel--paper">
+      <!-- alvo com pessoa: anel + ticks de mira + figura no centro -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="8.6"/>
+        <path d="M12 1.2v2.2M12 20.6v2.2M1.2 12h2.2M20.6 12h2.2"/>
+        <circle cx="12" cy="9.6" r="2.4"/>
+        <path d="M7.8 17.2c.8-2.6 2.4-3.9 4.2-3.9s3.4 1.3 4.2 3.9"/>
+      </svg>
+      <p class="lede">Lorem ipsum dolor sit amet consectetur <b class="num">R$ 300 a R$ 500 mil</b>.</p>
+    </div>
+
+    <!-- painel 2 · gold · estratégia equivocada (protagonista) -->
+    <div class="panel panel--gold">
+      <!-- gráfico caindo -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3.5 4v16h17"/>
+        <path d="M5.5 7.5l4.3 4.5 3-3 6.2 6.5"/>
+        <path d="M19 11.2v4.3h-4.1"/>
+      </svg>
+      <p class="lede">Lorem ipsum dolor sit amet consectetur elit <b class="num">R$ 1 a R$ 3 milhões</b>.</p>
+    </div>
+
+    <!-- painel 3 · navy-600 · atraso de escala -->
+    <div class="panel panel--navy mode-dark">
+      <!-- bússola -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M15.8 8.2l-2 5.6-5.6 2 2-5.6 5.6-2z"/>
+      </svg>
+      <p class="lede">Lorem ipsum dolor sit amet elit<br>tempor incididunt <b class="num">12 a 24 meses</b>.</p>
+    </div>
+
+  </article>
+</div>
+<script>
+  const slide = document.querySelector('.slide');
+  function fit(){
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    slide.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

@@ -1,5 +1,14 @@
 # Changelog — Core Slides G4
 
+## Identity variants — 2026-07-14
+
+**Três skins completas sobre as coleções oficiais Órbita.** Cada pasta replica `templates-short-deck`, `templates-expanded-deck` e `deck-frameworks`, preservando os tipos de slide e adaptando o sistema visual à unidade de negócio.
+
+- **`id-next/` — G4 Next**: Libre Baskerville + Manrope, petróleo profundo, vinho como accent, logos e armilares Next, além de backgrounds orgânicos próprios.
+- **`id-scale/` — G4 Scale**: Libre Baskerville + Manrope, azul petróleo como accent protagonista, rubi pontual nos títulos claros, logos Scale e família de frisos verticais.
+- **`id-club/` — G4 Club**: Libre Baskerville + Manrope, navy quase-preto, gold da marca, logo Club e backgrounds letterpress "CLUB".
+- Cada identidade inclui README próprio, catálogos navegáveis, folhas de estilo e assets locais. Templates de identidades diferentes não devem compartilhar `style.css` ou `assets/`.
+
 ## v5.0 "Órbita" — 2026-07-02
 
 **Nova geração da biblioteca em `templates-v5/` (50 slides + index.html próprio).** A v4 permanece intacta em `templates/` como acervo.
