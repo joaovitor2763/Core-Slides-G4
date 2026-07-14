@@ -69,6 +69,48 @@
   .hud button:hover{border-color:var(--gold-border);color:var(--gold)}
   .hud .counter{cursor:default}
   .hud .counter b{color:var(--gold)}
+
+  /* Os dois modos convivem: apresentação simples e painel do apresentador. */
+  .present-actions{position:fixed;right:36px;bottom:36px;z-index:100;display:flex;gap:12px;align-items:center}
+  .present-actions .present-btn{position:static}
+  .presenter-btn{display:inline-flex;align-items:center;gap:10px;background:rgba(0,21,37,.94);color:var(--text-1);
+    border:1px solid var(--border-2);padding:15px 24px;border-radius:999px;font-family:var(--num);
+    font-size:15px;font-weight:600;letter-spacing:.02em;cursor:pointer;box-shadow:0 16px 40px -18px rgba(0,0,0,.9)}
+  .presenter-btn:hover{border-color:var(--gold-border);color:var(--gold)}
+
+  .presenter{position:fixed;inset:0;z-index:300;display:none;background:#05080b;color:var(--text-1);padding:24px}
+  body.presenter-mode{overflow:hidden}
+  body.presenter-mode .presenter{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,.8fr);
+    grid-template-rows:minmax(0,1fr) auto;gap:18px}
+  .presenter-main,.presenter-side,.presenter-controls{border:1px solid var(--border);background:rgba(0,21,37,.82);border-radius:18px}
+  .presenter-main{padding:18px;display:flex;flex-direction:column;min-height:0}
+  .presenter-side{padding:18px;display:grid;grid-template-rows:auto minmax(0,1fr);gap:18px;min-height:0}
+  .presenter-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
+  .presenter-current,.presenter-next{position:relative;overflow:hidden;background:#090d11;border:1px solid var(--border);border-radius:12px;aspect-ratio:16/9}
+  .presenter-current{flex:1;min-height:0}
+  .presenter-next iframe,.presenter-current iframe{position:absolute;left:0;top:0;width:1600px;height:900px;border:0;transform-origin:top left;pointer-events:none}
+  .presenter-next-wrap{min-height:0}
+  .presenter-note-wrap{display:flex;flex-direction:column;min-height:0}
+  .presenter-notes{width:100%;flex:1;min-height:150px;resize:none;border:1px solid var(--border);border-radius:12px;
+    padding:16px;background:rgba(255,255,255,.04);color:var(--text-1);font:16px/1.55 var(--sans);outline:none}
+  .presenter-notes:focus{border-color:var(--gold-border)}
+  .presenter-note-status{font:10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-top:8px}
+  .presenter-controls{grid-column:1/-1;display:flex;align-items:center;gap:10px;padding:12px 16px}
+  .presenter-controls button{background:rgba(255,255,255,.04);border:1px solid var(--border-2);color:var(--text-1);
+    padding:10px 16px;border-radius:999px;font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+  .presenter-controls button:hover{border-color:var(--gold-border);color:var(--gold)}
+  .presenter-controls .primary{background:var(--gold);border-color:var(--gold);color:#1A1300}
+  .presenter-controls .primary:hover{color:#1A1300;filter:brightness(1.08)}
+  .presenter-controls .spacer{flex:1}
+  .presenter-count{font:12px var(--mono);letter-spacing:.12em;color:var(--text-2)}
+  .presenter-count b{color:var(--gold)}
+  .presenter-timer{font:600 24px var(--num);font-variant-numeric:tabular-nums;min-width:82px;text-align:center}
+  .presenter-slide-name{font:500 15px var(--num);color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:320px}
+  @media(max-width:900px){
+    body.presenter-mode .presenter{grid-template-columns:1fr;grid-template-rows:minmax(260px,1fr) minmax(240px,.9fr) auto;padding:12px}
+    .presenter-side{grid-template-columns:220px 1fr;grid-template-rows:1fr}.presenter-controls{grid-column:1}.presenter-slide-name{display:none}
+    .present-actions{right:16px;bottom:16px;flex-direction:column;align-items:flex-end}
+  }
 </style>
 </head>
 <body>
@@ -84,16 +126,49 @@
   <div class="grid" id="grid"></div>
 </div>
 
-<button class="present-btn" id="presentBtn">Apresentar →</button>
+<div class="present-actions">
+  <button class="presenter-btn" id="presenterBtn" type="button">Modo apresentador</button>
+  <button class="present-btn" id="presentBtn" type="button">Apresentar →</button>
+</div>
 
 <div class="present" id="present"><iframe id="presentFrame" src=""></iframe></div>
 
 <nav class="hud" id="hud" aria-label="Controles">
   <button id="prevBtn" type="button">← Anterior</button>
-  <span class="counter" id="counter"><b>01</b> / 32</span>
+  <span class="counter" id="counter"><b>01</b> / 52</span>
   <button id="nextBtn" type="button">Próximo →</button>
   <button id="closeBtn" type="button">Fechar (Esc)</button>
 </nav>
+
+<section class="presenter" id="presenter" aria-label="Modo apresentador">
+  <div class="presenter-main">
+    <div class="presenter-label">Slide atual · tela do público</div>
+    <div class="presenter-current" id="presenterCurrent"><iframe id="presenterCurrentFrame" title="Slide atual"></iframe></div>
+  </div>
+  <aside class="presenter-side">
+    <div class="presenter-next-wrap">
+      <div class="presenter-label">Próximo slide</div>
+      <div class="presenter-next" id="presenterNext"><iframe id="presenterNextFrame" title="Próximo slide"></iframe></div>
+    </div>
+    <div class="presenter-note-wrap">
+      <label class="presenter-label" for="presenterNotes">Notas do apresentador</label>
+      <textarea class="presenter-notes" id="presenterNotes" placeholder="Escreva as notas deste slide…"></textarea>
+      <div class="presenter-note-status" id="presenterNoteStatus">Salvas neste navegador</div>
+    </div>
+  </aside>
+  <nav class="presenter-controls" aria-label="Controles do apresentador">
+    <button id="presenterPrev" type="button">← Anterior</button>
+    <button class="primary" id="presenterNextBtn" type="button">Próximo →</button>
+    <span class="presenter-count" id="presenterCount"><b>01</b> / 01</span>
+    <span class="presenter-slide-name" id="presenterSlideName"></span>
+    <span class="spacer"></span>
+    <span class="presenter-timer" id="presenterTimer">00:00</span>
+    <button id="presenterTimerToggle" type="button">Pausar</button>
+    <button id="presenterTimerReset" type="button">Zerar</button>
+    <button id="audienceBtn" type="button">Tela do público</button>
+    <button id="presenterClose" type="button">Fechar (Esc)</button>
+  </nav>
+</section>
 
 <script>
   const slides = [
@@ -210,6 +285,151 @@
     if (e.key === 'Home') load(0);
     if (e.key === 'End')  load(slides.length-1);
   });
+
+
+  // modo apresentador: esta janela vira o painel; uma segunda janela exibe apenas o slide.
+  const presenterCurrentFrame = document.getElementById('presenterCurrentFrame');
+  const presenterNextFrame = document.getElementById('presenterNextFrame');
+  const presenterNotes = document.getElementById('presenterNotes');
+  const presenterCount = document.getElementById('presenterCount');
+  const presenterSlideName = document.getElementById('presenterSlideName');
+  const presenterTimer = document.getElementById('presenterTimer');
+  const presenterTimerToggle = document.getElementById('presenterTimerToggle');
+  const countDigits = String(slides.length).length;
+  let audienceWindow = null;
+  let audienceFrame = null;
+  let timerStartedAt = 0;
+  let timerElapsed = 0;
+  let timerRunning = false;
+  let timerInterval = null;
+
+  function slideUrl(i){ return new URL(slides[i].file, location.href).href; }
+  function fitPreview(box, ifr){
+    const scale = Math.min(box.clientWidth / 1600, box.clientHeight / 900);
+    ifr.style.transform = `scale(${scale})`;
+  }
+  function fitPresenter(){
+    fitPreview(document.getElementById('presenterCurrent'), presenterCurrentFrame);
+    fitPreview(document.getElementById('presenterNext'), presenterNextFrame);
+  }
+  function noteKey(){ return `g4-presenter-notes:${location.pathname}:${slides[idx].file}`; }
+  function loadNotes(){
+    let saved = '';
+    try { saved = localStorage.getItem(noteKey()) || ''; } catch (_) {}
+    presenterNotes.value = saved || slides[idx].notes || '';
+  }
+  presenterNotes.addEventListener('input', () => {
+    try { localStorage.setItem(noteKey(), presenterNotes.value); } catch (_) {}
+  });
+
+  function audienceDocument(){
+    return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Tela do público · Core Slides G4</title><style>
+      *{box-sizing:border-box;margin:0;padding:0}html,body{width:100%;height:100%;overflow:hidden;background:#05080b}
+      #audienceStage{position:fixed;inset:0}#audienceFrame{position:absolute;left:50%;top:50%;width:1600px;height:900px;border:0;transform-origin:center}
+      #fullscreen{position:fixed;right:20px;bottom:20px;z-index:2;padding:11px 17px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(0,21,37,.88);color:#F2F6F9;font:11px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;opacity:.18;transition:opacity .2s}
+      #fullscreen:hover{opacity:1}
+    </style></head><body><div id="audienceStage"><iframe id="audienceFrame" title="Apresentação"></iframe></div><button id="fullscreen" type="button">Tela cheia</button></body></html>`;
+  }
+  function fitAudience(){
+    if (!audienceWindow || audienceWindow.closed || !audienceFrame) return;
+    const scale = Math.min(audienceWindow.innerWidth / 1600, audienceWindow.innerHeight / 900);
+    audienceFrame.style.transform = `translate(-50%,-50%) scale(${scale})`;
+  }
+  function openAudienceWindow(){
+    if (audienceWindow && !audienceWindow.closed) { audienceWindow.focus(); syncAudience(); return true; }
+    audienceWindow = window.open('', 'g4-slides-audience', 'popup=yes,width=1280,height=720');
+    if (!audienceWindow) {
+      alert('O navegador bloqueou a tela do público. Libere pop-ups para este arquivo/site e tente novamente.');
+      return false;
+    }
+    audienceWindow.document.open();
+    audienceWindow.document.write(audienceDocument());
+    audienceWindow.document.close();
+    audienceFrame = audienceWindow.document.getElementById('audienceFrame');
+    audienceWindow.document.getElementById('fullscreen').addEventListener('click', () => {
+      audienceWindow.document.documentElement.requestFullscreen?.();
+    });
+    audienceWindow.addEventListener('resize', fitAudience);
+    audienceWindow.addEventListener('keydown', (e) => handlePresenterKey(e));
+    audienceWindow.document.getElementById('audienceStage').addEventListener('click', () => presenterLoad(idx + 1));
+    syncAudience();
+    audienceWindow.focus();
+    return true;
+  }
+  function syncAudience(){
+    if (!audienceWindow || audienceWindow.closed || !audienceFrame) return;
+    audienceFrame.src = slideUrl(idx);
+    fitAudience();
+  }
+  function presenterLoad(i){
+    idx = Math.max(0, Math.min(i, slides.length - 1));
+    const next = Math.min(idx + 1, slides.length - 1);
+    presenterCurrentFrame.src = slides[idx].file;
+    presenterNextFrame.src = slides[next].file;
+    presenterCount.innerHTML = `<b>${String(idx + 1).padStart(countDigits,'0')}</b> / ${slides.length}`;
+    presenterSlideName.textContent = slides[idx].name;
+    loadNotes();
+    syncAudience();
+    requestAnimationFrame(fitPresenter);
+  }
+  function openPresenter(i = 0){
+    closePresent();
+    if (!openAudienceWindow()) return;
+    document.body.classList.add('presenter-mode');
+    presenterLoad(i);
+    startTimer(true);
+    fitPresenter();
+  }
+  function closePresenter(){
+    document.body.classList.remove('presenter-mode');
+    presenterCurrentFrame.src = '';
+    presenterNextFrame.src = '';
+    if (audienceWindow && !audienceWindow.closed) audienceWindow.close();
+    audienceWindow = null; audienceFrame = null;
+    stopTimer();
+  }
+  function formatTimer(ms){
+    const total = Math.floor(ms / 1000);
+    return `${String(Math.floor(total / 60)).padStart(2,'0')}:${String(total % 60).padStart(2,'0')}`;
+  }
+  function updateTimer(){
+    const elapsed = timerElapsed + (timerRunning ? Date.now() - timerStartedAt : 0);
+    presenterTimer.textContent = formatTimer(elapsed);
+  }
+  function startTimer(reset = false){
+    if (reset) timerElapsed = 0;
+    if (!timerRunning) { timerStartedAt = Date.now(); timerRunning = true; }
+    clearInterval(timerInterval); timerInterval = setInterval(updateTimer, 500);
+    presenterTimerToggle.textContent = 'Pausar'; updateTimer();
+  }
+  function pauseTimer(){
+    if (!timerRunning) return;
+    timerElapsed += Date.now() - timerStartedAt; timerRunning = false;
+    presenterTimerToggle.textContent = 'Continuar'; updateTimer();
+  }
+  function stopTimer(){ clearInterval(timerInterval); timerInterval = null; timerRunning = false; }
+  function handlePresenterKey(e){
+    if (!document.body.classList.contains('presenter-mode')) return;
+    const tag = e.target?.tagName?.toLowerCase();
+    if (tag === 'textarea' || tag === 'input' || tag === 'select' || e.target?.isContentEditable) return;
+    if (['ArrowRight',' ','PageDown','Enter'].includes(e.key)) { e.preventDefault(); presenterLoad(idx + 1); }
+    if (['ArrowLeft','PageUp','Backspace'].includes(e.key)) { e.preventDefault(); presenterLoad(idx - 1); }
+    if (e.key === 'Home') { e.preventDefault(); presenterLoad(0); }
+    if (e.key === 'End') { e.preventDefault(); presenterLoad(slides.length - 1); }
+    if (e.key === 'Escape') { e.preventDefault(); closePresenter(); }
+  }
+
+  document.getElementById('presenterBtn').addEventListener('click', () => openPresenter(0));
+  document.getElementById('presenterPrev').addEventListener('click', () => presenterLoad(idx - 1));
+  document.getElementById('presenterNextBtn').addEventListener('click', () => presenterLoad(idx + 1));
+  document.getElementById('presenterClose').addEventListener('click', closePresenter);
+  document.getElementById('audienceBtn').addEventListener('click', openAudienceWindow);
+  document.getElementById('presenterTimerReset').addEventListener('click', () => startTimer(true));
+  presenterTimerToggle.addEventListener('click', () => timerRunning ? pauseTimer() : startTimer());
+  presenterCurrentFrame.addEventListener('load', fitPresenter);
+  presenterNextFrame.addEventListener('load', fitPresenter);
+  addEventListener('resize', fitPresenter);
+  document.addEventListener('keydown', handlePresenterKey);
 </script>
 </body>
 </html>
