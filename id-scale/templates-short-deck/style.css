@@ -124,7 +124,7 @@
 
 .eyebrow{
   display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--mono);font-size:11.5px;font-weight:500;
+  font-family:var(--mono);font-size:19px;font-weight:500;
   letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);
 }
 .eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);opacity:.85}
@@ -136,10 +136,10 @@
 /* linha-eco fantasma (padrão rox.com: repete/completa o título em ghost) */
 .ghost{font-family:var(--serif);font-weight:500;letter-spacing:-.02em;line-height:1.02;color:var(--text-ghost)}
 
-.lede{font-size:21px;line-height:1.55;color:var(--text-2);font-weight:400}
-.body{font-size:17px;line-height:1.6;color:var(--text-2)}
-.small{font-size:14px;line-height:1.5;color:var(--text-3)}
-.mono-label{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+.lede{font-size:23.5px;line-height:1.55;color:var(--text-2);font-weight:400}
+.body{font-size:22px;line-height:1.6;color:var(--text-2)}
+.small{font-size:20.5px;line-height:1.5;color:var(--text-3)}
+.mono-label{font-family:var(--mono);font-size:19px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
 .num{font-family:var(--num);font-weight:600;letter-spacing:-.03em;color:var(--text-1)}
 
 /* ── COMPONENTES ──────────────────────────────────────────── */
@@ -158,7 +158,7 @@
 .chip{
   display:inline-flex;align-items:center;gap:8px;
   padding:7px 14px;border-radius:var(--r-pill);
-  font-family:var(--mono);font-size:11px;font-weight:500;
+  font-family:var(--mono);font-size:19px;font-weight:500;
   letter-spacing:.1em;text-transform:uppercase;
   background:var(--surface-2);color:var(--text-2);border:1px solid var(--border);
 }
@@ -172,7 +172,7 @@
   display:inline-flex;align-items:center;gap:10px;
   padding:16px 30px;border-radius:var(--r-pill);
   background:var(--gold);color:var(--on-gold);
-  font-family:var(--num);font-size:16px;font-weight:600;letter-spacing:.02em;
+  font-family:var(--num);font-size:21.5px;font-weight:600;letter-spacing:.02em;
   box-shadow:0 14px 34px -12px var(--gold-border);
 }
 

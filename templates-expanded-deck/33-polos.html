@@ -35,10 +35,10 @@
     display:grid;place-items:center;text-align:center}
   .pole .name{font-family:var(--num);font-weight:600;font-size:26px;letter-spacing:-.01em}
 
-  .pole--off{left:280px;top:405px;background:var(--surface);border:1px solid var(--border-2)}
+  .pole--off{left:340px;top:405px;background:var(--surface);border:1px solid var(--border-2)}
   .pole--off .name{color:var(--text-2)}
 
-  .pole--on{left:1020px;top:405px;
+  .pole--on{left:960px;top:405px;
     background:linear-gradient(165deg,var(--gold-300),var(--gold-700));
     box-shadow:var(--shadow-lg),0 0 0 6px var(--gold-dim)}
   .pole--on .name{color:var(--on-gold)}
@@ -52,12 +52,12 @@
   .wires .flow-head{fill:var(--text-3);opacity:.7}
 
   .spoke-label{position:absolute;transform:translateY(-50%);
-    font-family:var(--mono);font-size:12px;letter-spacing:.08em;
+    font-family:var(--mono);font-size:19.5px;letter-spacing:.08em;
     text-transform:uppercase;color:var(--text-3);white-space:nowrap}
   .spoke-label--l{text-align:right}
 
   .flow-label{position:absolute;left:800px;top:523px;transform:translate(-50%,-50%);
-    font-family:var(--mono);font-size:12px;letter-spacing:.14em;
+    font-family:var(--mono);font-size:19.5px;letter-spacing:.14em;
     text-transform:uppercase;color:var(--text-3);white-space:nowrap}
 </style>
 </head>
@@ -73,58 +73,58 @@
 
     <!-- spokes: dot r5 ancora na borda do círculo · dot r3 junto ao texto -->
     <svg class="wires" viewBox="0 0 1600 900" aria-hidden="true">
-      <!-- polo esquerdo · centro (430,555) r150 -->
-      <line class="spoke" x1="334" y1="440" x2="285" y2="383"/>
-      <circle class="dot-ring" cx="334" cy="440" r="5"/>
-      <circle class="dot-tip"  cx="285" cy="383" r="3"/>
+      <!-- polo esquerdo · centro (490,555) r150 -->
+      <line class="spoke" x1="394" y1="440" x2="345" y2="383"/>
+      <circle class="dot-ring" cx="394" cy="440" r="5"/>
+      <circle class="dot-tip"  cx="345" cy="383" r="3"/>
 
-      <line class="spoke" x1="285" y1="516" x2="227" y2="501"/>
-      <circle class="dot-ring" cx="285" cy="516" r="5"/>
-      <circle class="dot-tip"  cx="227" cy="501" r="3"/>
+      <line class="spoke" x1="345" y1="516" x2="287" y2="501"/>
+      <circle class="dot-ring" cx="345" cy="516" r="5"/>
+      <circle class="dot-tip"  cx="287" cy="501" r="3"/>
 
-      <line class="spoke" x1="285" y1="594" x2="227" y2="609"/>
-      <circle class="dot-ring" cx="285" cy="594" r="5"/>
-      <circle class="dot-tip"  cx="227" cy="609" r="3"/>
+      <line class="spoke" x1="345" y1="594" x2="287" y2="609"/>
+      <circle class="dot-ring" cx="345" cy="594" r="5"/>
+      <circle class="dot-tip"  cx="287" cy="609" r="3"/>
 
-      <line class="spoke" x1="334" y1="670" x2="285" y2="727"/>
-      <circle class="dot-ring" cx="334" cy="670" r="5"/>
-      <circle class="dot-tip"  cx="285" cy="727" r="3"/>
+      <line class="spoke" x1="394" y1="670" x2="345" y2="727"/>
+      <circle class="dot-ring" cx="394" cy="670" r="5"/>
+      <circle class="dot-tip"  cx="345" cy="727" r="3"/>
 
-      <!-- polo direito · centro (1170,555) r150 -->
-      <line class="spoke" x1="1266" y1="440" x2="1315" y2="383"/>
-      <circle class="dot-ring" cx="1266" cy="440" r="5"/>
-      <circle class="dot-tip"  cx="1315" cy="383" r="3"/>
+      <!-- polo direito · centro (1110,555) r150 -->
+      <line class="spoke" x1="1206" y1="440" x2="1255" y2="383"/>
+      <circle class="dot-ring" cx="1206" cy="440" r="5"/>
+      <circle class="dot-tip"  cx="1255" cy="383" r="3"/>
 
-      <line class="spoke" x1="1315" y1="516" x2="1373" y2="501"/>
-      <circle class="dot-ring" cx="1315" cy="516" r="5"/>
-      <circle class="dot-tip"  cx="1373" cy="501" r="3"/>
+      <line class="spoke" x1="1255" y1="516" x2="1313" y2="501"/>
+      <circle class="dot-ring" cx="1255" cy="516" r="5"/>
+      <circle class="dot-tip"  cx="1313" cy="501" r="3"/>
 
-      <line class="spoke" x1="1315" y1="594" x2="1373" y2="609"/>
-      <circle class="dot-ring" cx="1315" cy="594" r="5"/>
-      <circle class="dot-tip"  cx="1373" cy="609" r="3"/>
+      <line class="spoke" x1="1255" y1="594" x2="1313" y2="609"/>
+      <circle class="dot-ring" cx="1255" cy="594" r="5"/>
+      <circle class="dot-tip"  cx="1313" cy="609" r="3"/>
 
-      <line class="spoke" x1="1266" y1="670" x2="1315" y2="727"/>
-      <circle class="dot-ring" cx="1266" cy="670" r="5"/>
-      <circle class="dot-tip"  cx="1315" cy="727" r="3"/>
+      <line class="spoke" x1="1206" y1="670" x2="1255" y2="727"/>
+      <circle class="dot-ring" cx="1206" cy="670" r="5"/>
+      <circle class="dot-tip"  cx="1255" cy="727" r="3"/>
 
-      <!-- seta tracejada entre os polos · y 555 · x 612 → 968 -->
-      <line class="flow" x1="612" y1="555" x2="952" y2="555"/>
-      <polygon class="flow-head" points="950,546 968,555 950,564"/>
+      <!-- seta tracejada entre os polos · y 555 · x 698 → 900 -->
+      <line class="flow" x1="698" y1="555" x2="884" y2="555"/>
+      <polygon class="flow-head" points="882,546 900,555 882,564"/>
     </svg>
 
     <span class="flow-label">lorem ipsum dolor</span>
 
     <!-- labels dos spokes esquerdos (right = 1600 − x_dot + 12) -->
-    <span class="spoke-label spoke-label--l" style="right:1327px;top:383px">veniam</span>
-    <span class="spoke-label spoke-label--l" style="right:1385px;top:501px">lorem ipsum amet</span>
-    <span class="spoke-label spoke-label--l" style="right:1385px;top:609px">adipiscing</span>
-    <span class="spoke-label spoke-label--l" style="right:1327px;top:727px">lorem ipsum dolor</span>
+    <span class="spoke-label spoke-label--l" style="right:1267px;top:383px">veniam</span>
+    <span class="spoke-label spoke-label--l" style="right:1325px;top:501px">lorem ipsum amet</span>
+    <span class="spoke-label spoke-label--l" style="right:1325px;top:609px">adipiscing</span>
+    <span class="spoke-label spoke-label--l" style="right:1267px;top:727px">lorem ipsum dolor</span>
 
     <!-- labels dos spokes direitos (left = x_dot + 12) -->
-    <span class="spoke-label" style="left:1327px;top:383px">amet</span>
-    <span class="spoke-label" style="left:1385px;top:501px">lorem ipsum sit</span>
-    <span class="spoke-label" style="left:1385px;top:609px">aliqua enim</span>
-    <span class="spoke-label" style="left:1327px;top:727px">lorem ipsum dolore</span>
+    <span class="spoke-label" style="left:1267px;top:383px">amet</span>
+    <span class="spoke-label" style="left:1325px;top:501px">lorem ipsum sit</span>
+    <span class="spoke-label" style="left:1325px;top:609px">aliqua enim</span>
+    <span class="spoke-label" style="left:1267px;top:727px">lorem ipsum dolore</span>
 
     <div class="pole pole--off"><span class="name">Lorem sit</span></div>
     <div class="pole pole--on"><span class="name">Dolor sit</span></div>

@@ -25,7 +25,7 @@
 
   /* guia da meta: caption mono centrada no traço (canvas x=1022) */
   .metacap{position:absolute;left:1022px;top:236px;transform:translateX(-50%);
-    font-family:var(--mono);font-size:11px;font-weight:500;
+    font-family:var(--mono);font-size:19px;font-weight:500;
     letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
 
   .rows{position:absolute;left:var(--pad);width:1408px;top:280px;height:480px}
@@ -37,12 +37,12 @@
 
   /* 210 + 860 + 118 + 172 + 3×16 = 1408 ✓ · 5 × 96 = 480 ✓ */
   .row{box-sizing:border-box;height:96px;position:relative;
-    display:grid;grid-template-columns:210px 860px 118px 172px;column-gap:16px;
+    display:grid;grid-template-columns:210px 860px 118px 184px;column-gap:12px;
     align-items:center}
   .row + .row{border-top:1px solid var(--border)}
 
   .lab .mono-label{display:block;color:var(--text-2)}
-  .lab .small{display:block;font-size:12px;line-height:1.3;margin-top:6px}
+  .lab .small{display:block;font-size:19.5px;line-height:1.3;margin-top:6px}
 
   .track{position:relative;width:860px;height:14px;
     border-radius:var(--r-pill);background:var(--surface-2)}
@@ -58,14 +58,15 @@
   .w112{width:784px} .w118{width:826px} .w96{width:672px}
   .w104{width:728px} .w108{width:756px}
 
-  .val{font-size:20px;text-align:right;color:var(--text-1)}
+  .val{font-size:23px;text-align:right;color:var(--text-1)}
   .row--lead .val{color:var(--gold)}
-  .row .chip{justify-self:end}
+  .row .chip{justify-self:end;white-space:nowrap;font-size:18px;
+    letter-spacing:.03em;padding:6px 10px;gap:6px}
 
   /* rodapé: 778 + ~16 = 794 < 804 ✓ */
   .legend{position:absolute;left:var(--pad);top:778px;
     display:inline-flex;align-items:center;gap:10px;
-    font-family:var(--mono);font-size:11px;font-weight:500;
+    font-family:var(--mono);font-size:19px;font-weight:500;
     letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
   .legend .sw-bar{width:26px;height:8px;border-radius:4px;background:rgba(0,31,53,.35)}
   .legend .sw-tick{width:2px;height:14px;border-radius:1px;background:var(--text-1)}

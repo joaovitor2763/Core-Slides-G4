@@ -36,14 +36,15 @@
   .lvl{position:absolute;width:262px;z-index:2;
     border-radius:22px 22px 0 0;               /* colado na baseline: radius só no topo */
     padding:26px 26px 0;display:flex;flex-direction:column}
-  .lvl .idx{font-size:24px;line-height:1;color:var(--text-3)}
-  .lvl .name{font-size:16px;margin-top:12px}  /* nome forte em .num (Space Grotesk) */
+  .lvl .idx{font-size:25px;line-height:1;color:var(--text-3)}
+  .lvl .name{font-size:21.5px;margin-top:12px}  /* nome forte em .num (Space Grotesk) */
   .lvl .desc{margin-top:8px}
   .lvl--here .idx{color:var(--gold)}
 
   /* chip flutuando acima do nível 4 */
   .here-chip{position:absolute;left:942px;width:262px;top:379px;z-index:4;
     display:flex;justify-content:center}
+  .here-chip .chip{font-size:15px;letter-spacing:.05em}
 
   /* seta diagonal + label rotacionado no mesmo ângulo (−12,9°) */
   .next{position:absolute;inset:0;pointer-events:none;z-index:3}

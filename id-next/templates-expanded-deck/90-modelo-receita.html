@@ -26,13 +26,13 @@
        top 600 + h 200 = 800 ≤ 804 ✓ */
 
   .head{position:absolute;left:var(--pad);right:var(--pad);top:96px;
-    display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+    display:flex;align-items:flex-start;justify-content:space-between;gap:60px}
   .head .eyebrow{margin-bottom:18px}
   .head h1{font-size:44px;max-width:760px}
-  .head .read{max-width:370px;padding-bottom:4px}
+  .head .read{max-width:540px;line-height:1.5;padding-top:4px}
 
   /* legendas mono das 3 colunas do fluxo, y 238 (acima da banda 270) */
-  .col-cap{position:absolute;top:238px;font-family:var(--mono);font-size:10.5px;
+  .col-cap{position:absolute;top:238px;font-family:var(--mono);font-size:18.5px;
     font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
 
   .wires{position:absolute;inset:0;z-index:1;pointer-events:none}
@@ -41,9 +41,9 @@
 
   .pill{position:absolute;z-index:2;border-radius:var(--r-pill);
     display:flex;flex-direction:column;justify-content:center;padding:0 28px}
-  .pill .name{font-family:var(--num);font-weight:600;font-size:16px;
+  .pill .name{font-family:var(--num);font-weight:600;font-size:21.5px;
     letter-spacing:-.01em;color:var(--text-1)}
-  .pill .tag{font-family:var(--mono);font-size:10px;font-weight:500;
+  .pill .tag{font-family:var(--mono);font-size:18.5px;font-weight:500;
     letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-top:5px}
 
   .origem{left:96px;top:358px;width:240px;height:94px}
@@ -55,10 +55,10 @@
   .mix{position:absolute;z-index:2;left:960px;width:340px;height:78px;
     display:flex;align-items:center;padding:0 26px}
   .mix .pct{display:flex;flex-direction:column;gap:3px}
-  .mix .pct .num{font-size:24px;line-height:1}
-  .mix .pct .of{font-family:var(--mono);font-size:9.5px;font-weight:500;
+  .mix .pct .num{font-size:25px;line-height:1}
+  .mix .pct .of{font-family:var(--mono);font-size:18px;font-weight:500;
     letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
-  .mix .ticket{margin-left:auto}
+  .mix .ticket{margin-left:auto;font-size:16px;letter-spacing:.08em;white-space:nowrap}
   .mix--gold .num{color:var(--gold)}
 
   /* faixa de unit economics */
@@ -69,9 +69,9 @@
     padding:26px 30px 24px;display:flex;flex-direction:column}
   /* números dos 4 cards na MESMA altura: label (12) + 26px fixos */
   .u-card .u-num{font-size:28px;line-height:1;margin-top:26px}
-  .u-card .u-num small{font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .u-card .u-num small{font-size:22px;font-weight:600;letter-spacing:-.01em}
   .u-card .chiprow{margin-top:14px}
-  .u-card .ctx{font-size:13px;line-height:1.5;color:var(--text-3);margin-top:auto}
+  .u-card .ctx{font-size:20px;line-height:1.5;color:var(--text-3);margin-top:auto}
 </style>
 </head>
 <body>

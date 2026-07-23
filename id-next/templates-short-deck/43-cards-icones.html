@@ -17,25 +17,25 @@
 
   /* geometria: 3 × 448px + 2 × 32px gap = 1408 = 1600 − 2×96 ✓
      left: 96 · 576 · 1056 — top 330, bottom 88 → altura 482 */
-  .card{position:absolute;top:330px;height:482px;width:448px;
-    padding:40px 40px 36px;display:flex;flex-direction:column}
+  .card{position:absolute;top:322px;height:508px;width:448px;
+    padding:40px 40px 34px;display:flex;flex-direction:column}
   .card--1{left:96px}
   .card--2{left:576px}
   .card--3{left:1056px}
 
   .disc{width:48px;height:48px;border-radius:50%;background:var(--surface-2);
     border:1px solid var(--border);display:grid;place-items:center;
-    color:var(--text-2);margin-bottom:26px}
+    color:var(--text-2);margin-bottom:24px}
   .disc svg{width:24px;height:24px}
   .card--2 .disc{background:var(--gold-dim);border-color:var(--gold-border);color:var(--gold)}
 
-  .card h2{font-family:var(--num);font-weight:600;font-size:24px;
+  .card h2{font-family:var(--num);font-weight:600;font-size:25px;
     letter-spacing:-.01em;color:var(--text-1);margin-bottom:14px}
   .card .body{flex:1}
 
-  .card .hair{height:1px;background:var(--border);margin:24px 0 18px}
-  .card .foot{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
-    color:var(--text-3);line-height:1.6}
+  .card .hair{height:1px;background:var(--border);margin:22px 0 16px}
+  .card .foot{font-family:var(--mono);font-size:16px;letter-spacing:.05em;
+    color:var(--text-3);line-height:1.55}
   .card .foot b{color:var(--gold);font-weight:500}
 </style>
 </head>

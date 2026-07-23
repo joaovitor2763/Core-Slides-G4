@@ -14,7 +14,7 @@
     display:flex;align-items:flex-end;gap:28px}
   .head .eyebrow{margin-bottom:20px}
   .head h1{font-size:58px}
-  .head .chip{margin-bottom:10px}
+  .head .chip{margin-bottom:10px;white-space:nowrap;flex:0 0 auto}
 
   /* grade: left 96 + 448 + 32 + 448 + 32 + 448 = 1504 → +96 pad = 1600 ✓
      base dos cards: bottom 96 → y 804
@@ -27,12 +27,12 @@
   .plan{height:470px;padding:38px 38px 34px;position:relative;
     display:flex;flex-direction:column}
   .plan--gold{height:496px;transform:translateY(-10px)}
-  .plan--gold .flag{position:absolute;top:-17px;left:50%;transform:translateX(-50%)}
+  .plan--gold .flag{position:absolute;top:-17px;left:50%;transform:translateX(-50%);white-space:nowrap}
 
-  .plan .name{font-family:var(--mono);font-size:12px;font-weight:500;
+  .plan .name{font-family:var(--mono);font-size:19.5px;font-weight:500;
     letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
   .plan .price{margin-top:16px;font-size:56px;line-height:1}
-  .plan .price .per{font-family:var(--mono);font-size:13px;font-weight:500;
+  .plan .price .per{font-family:var(--mono);font-size:20px;font-weight:500;
     letter-spacing:.08em;color:var(--text-3);margin-left:6px}
   .plan--gold .price{color:var(--gold)}
   .plan .pitch{margin-top:12px}
@@ -41,8 +41,8 @@
 
   .plan ul{list-style:none;display:flex;flex-direction:column;gap:13px}
   .plan li{display:flex;gap:12px;align-items:baseline;
-    font-size:14.5px;line-height:1.45;color:var(--text-2)}
-  .plan li::before{content:'+';font-family:var(--mono);font-size:13px;
+    font-size:20.5px;line-height:1.45;color:var(--text-2)}
+  .plan li::before{content:'+';font-family:var(--mono);font-size:20px;
     font-weight:500;color:var(--gold);flex:0 0 auto}
 
   .plan .act{margin-top:auto}
@@ -50,7 +50,7 @@
   .btn-ghost{display:inline-flex;align-items:center;justify-content:center;
     width:100%;padding:15px 30px;border-radius:var(--r-pill);
     border:1px solid var(--border-2);color:var(--text-2);
-    font-family:var(--num);font-size:16px;font-weight:600;letter-spacing:.02em}
+    font-family:var(--num);font-size:21.5px;font-weight:600;letter-spacing:.02em}
 </style>
 </head>
 <body>

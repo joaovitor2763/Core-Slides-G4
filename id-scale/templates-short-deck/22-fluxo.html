@@ -29,10 +29,10 @@
 
   .pill{position:absolute;z-index:2;height:92px;padding:18px 26px;
     border-radius:var(--r-pill);display:flex;flex-direction:column;justify-content:center}
-  .pill .name{font-family:var(--num);font-weight:600;font-size:19px;
+  .pill .name{font-family:var(--num);font-weight:600;font-size:22.5px;
     letter-spacing:-.01em;color:var(--text-1)}
-  .pill .tag{font-family:var(--mono);font-size:10.5px;font-weight:500;
-    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-top:5px}
+  .pill .tag{font-family:var(--mono);font-size:15px;font-weight:500;
+    letter-spacing:.04em;text-transform:uppercase;color:var(--text-3);margin-top:5px;white-space:nowrap}
   .pill--root .name{color:var(--gold)}
 </style>
 </head>
@@ -56,10 +56,10 @@
       <path d="M346,550 C440,550 525,550 620,550"/>
       <!-- raiz (346,550) → meio-3 (620,740) -->
       <path d="M346,550 C460,550 505,740 620,740"/>
-      <!-- meio-2 (880,550) → dir-1 (1150,460) -->
-      <path d="M880,550 C990,550 1040,460 1150,460"/>
-      <!-- meio-2 (880,550) → dir-2 (1150,650) -->
-      <path d="M880,550 C990,550 1040,650 1150,650"/>
+      <!-- meio-2 (920,550) → dir-1 (1150,460) -->
+      <path d="M920,550 C1010,550 1060,460 1150,460"/>
+      <!-- meio-2 (920,550) → dir-2 (1150,650) -->
+      <path d="M920,550 C1010,550 1060,650 1150,650"/>
     </svg>
 
     <!-- nó raiz -->
@@ -69,15 +69,15 @@
     </div>
 
     <!-- ramos do meio -->
-    <div class="pill surface" style="left:620px;top:314px;width:260px">
+    <div class="pill surface" style="left:620px;top:314px;width:300px">
       <span class="name">Coleta CRM</span>
       <span class="tag">Skill · dados da conta</span>
     </div>
-    <div class="pill surface" style="left:620px;top:504px;width:260px">
+    <div class="pill surface" style="left:620px;top:504px;width:300px">
       <span class="name">Redação</span>
       <span class="tag">Skill · texto no tom G4</span>
     </div>
-    <div class="pill surface" style="left:620px;top:694px;width:260px">
+    <div class="pill surface" style="left:620px;top:694px;width:300px">
       <span class="name">Pricing</span>
       <span class="tag">Skill · cálculo de margem</span>
     </div>

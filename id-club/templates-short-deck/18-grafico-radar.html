@@ -13,13 +13,13 @@
   .armilar--soft{width:980px;height:551px;left:-340px;bottom:-260px;opacity:.14;transform:scaleX(-1)}
 
   /* radar: left 96 + 560 = 656 · top 168 + 520 = 688 · legenda abaixo */
-  .radar{position:absolute;left:var(--pad);top:168px;width:560px;height:520px}
+  .radar{position:absolute;left:var(--pad);top:168px;width:656px;height:520px}
   /* legenda logo abaixo do desenho (labels inferiores terminam ~y 610) */
   .radar-legend{position:absolute;left:var(--pad);top:668px;display:flex;gap:12px;
-    justify-content:center;width:560px}
+    justify-content:center;width:656px}
 
-  .axis-label{font-family:var(--mono);font-size:11px;font-weight:500;
-    letter-spacing:.14em;text-transform:uppercase;fill:var(--text-3)}
+  .axis-label{font-family:var(--mono);font-size:19px;font-weight:500;
+    letter-spacing:.09em;text-transform:uppercase;fill:var(--text-3)}
 
   /* leitura: left 760 · 760 + 744 = 1504 = 1600 − 96 ✓ */
   .read{position:absolute;left:760px;right:var(--pad);top:250px}
@@ -39,7 +39,7 @@
          vetores unitários: A0(0,-1) A1(.951,-.309) A2(.588,.809)
                             A3(-.588,.809) A4(-.951,-.309)
          níveis da grade: R=180 / 120 / 60 · labels em R≈207 -->
-    <svg class="radar" viewBox="0 0 560 520" role="img"
+    <svg class="radar" viewBox="-48 0 656 520" role="img"
          aria-label="Radar de 5 competências comerciais: hoje versus meta em 12 meses">
 
       <!-- spokes (centro → ponta, R=180) -->

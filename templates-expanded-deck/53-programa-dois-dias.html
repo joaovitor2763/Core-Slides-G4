@@ -44,7 +44,7 @@
   .pillars{position:absolute;left:var(--pad);top:292px;display:flex;gap:12px}
 
   /* colunas laterais de agenda */
-  .col-label{position:absolute;top:352px;font-family:var(--mono);font-size:11px;
+  .col-label{position:absolute;top:352px;font-family:var(--mono);font-size:19px;
     font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
   .col{position:absolute;top:380px;width:374px;height:410px;
     display:flex;flex-direction:column;gap:20px}
@@ -53,7 +53,7 @@
   /* 3 mini-cards · (410 − 2×20) / 3 = 123.3px cada (flex:1) */
   .mini{flex:1;padding:18px 20px;border-radius:var(--r-md);
     display:flex;flex-direction:column;justify-content:center}
-  .mini .kick{font-family:var(--mono);font-size:10.5px;font-weight:500;
+  .mini .kick{font-family:var(--mono);font-size:18.5px;font-weight:500;
     letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
   .mini p{margin-top:8px;color:var(--text-2)}
 
@@ -63,9 +63,9 @@
   /* círculos dos dias */
   .disc{position:absolute;width:220px;height:220px;border-radius:50%;z-index:2;
     display:grid;place-items:center;text-align:center}
-  .disc .lbl .name{font-family:var(--num);font-weight:600;font-size:20px;
+  .disc .lbl .name{font-family:var(--num);font-weight:600;font-size:23px;
     letter-spacing:-.01em;display:block}
-  .disc .lbl .sub{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  .disc .lbl .sub{font-family:var(--mono);font-size:19px;letter-spacing:.12em;
     text-transform:uppercase;display:block;margin-top:7px}
   .disc--gold{left:560px;top:475px;
     background:linear-gradient(165deg,var(--gold-300),var(--gold-700));
@@ -86,7 +86,7 @@
 
   /* labels-satélite (centrados no x do tip) */
   .sat{position:absolute;transform:translateX(-50%);z-index:2;text-align:center;
-    font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    font-family:var(--mono);font-size:16px;letter-spacing:.05em;
     text-transform:uppercase;color:var(--text-3);white-space:nowrap;line-height:1.3}
 </style>
 </head>

@@ -37,7 +37,7 @@
 
   /* separate (não collapse) para o radius funcionar nas pontas da linha EBITDA */
   table{width:100%;border-collapse:separate;border-spacing:0}
-  th{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;
+  th{font-family:var(--mono);font-size:19px;font-weight:500;letter-spacing:.14em;
     text-transform:uppercase;color:var(--text-3);text-align:right;height:44px;
     vertical-align:middle;border-bottom:1px solid var(--border-2)}
   th:first-child{text-align:left;padding-left:18px}
@@ -50,19 +50,19 @@
   tbody tr:nth-child(even) td{background:rgba(0,31,53,.025)}
   tbody tr:last-child td{border-bottom:none}
 
-  .lbl{font-size:16.5px;font-weight:500;color:var(--text-2)}
-  td .num{font-size:19px;font-weight:400;color:var(--text-2)}
+  .lbl{font-size:21.5px;font-weight:500;color:var(--text-2)}
+  td .num{font-size:22.5px;font-weight:400;color:var(--text-2)}
   .col-plan .num{color:var(--text-3);font-weight:400}
 
   /* linhas de custo: tudo em text-3, sem hairline antes de subtotal/EBITDA */
   .r-cost td{height:54px;border-bottom:none}
-  .r-cost .lbl{font-weight:400;color:var(--text-3);font-size:15.5px}
-  .r-cost .num{color:var(--text-3);font-size:18px}
+  .r-cost .lbl{font-weight:400;color:var(--text-3);font-size:21px}
+  .r-cost .num{color:var(--text-3);font-size:22px}
 
   /* subtotais: régua 1.5px em cima + números 500 */
   .r-sub td{border-top:1.5px solid var(--border-2)}
   .r-sub .lbl{font-weight:600;color:var(--text-1)}
-  .r-sub .num{font-weight:500;color:var(--text-1);font-size:20px}
+  .r-sub .num{font-weight:500;color:var(--text-1);font-size:23px}
   .r-sub .col-plan .num{color:var(--text-3)}
 
   /* EBITDA — única protagonista gold: faixa gold-dim com contorno
@@ -76,21 +76,21 @@
     border-left:1px solid var(--gold-border)}
   .r-ebitda td:last-child{border-radius:0 var(--r-md) var(--r-md) 0;padding-right:17px;
     border-right:1px solid var(--gold-border)}
-  .r-ebitda .lbl{font-family:var(--num);font-weight:600;font-size:17px;
+  .r-ebitda .lbl{font-family:var(--num);font-weight:600;font-size:22px;
     letter-spacing:.02em;color:var(--text-1)}
-  .r-ebitda .num{font-size:22px;font-weight:600;color:var(--text-1)}
+  .r-ebitda .num{font-size:24px;font-weight:600;color:var(--text-1)}
   .r-ebitda .col-plan .num{font-weight:400;color:var(--text-3)}
 
   /* linha de margem (razão, não soma): mais leve */
   .r-margin td{height:50px}
-  .r-margin .lbl{font-family:var(--mono);font-size:11px;font-weight:500;
+  .r-margin .lbl{font-family:var(--mono);font-size:19px;font-weight:500;
     letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
-  .r-margin .num{font-size:17px;color:var(--text-2)}
+  .r-margin .num{font-size:22px;color:var(--text-2)}
 
   /* Δ: chips só onde há leitura (verde = resultado acima do plano;
      vermelho = custo estourou); demais deltas em mono muted */
-  .chip--mini{padding:4px 11px;font-size:10px;letter-spacing:.08em}
-  .dmut{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--text-3)}
+  .chip--mini{padding:4px 11px;font-size:18.5px;letter-spacing:.08em}
+  .dmut{font-family:var(--mono);font-size:19.5px;letter-spacing:.06em;color:var(--text-3)}
 
   .foot{position:absolute;left:var(--pad);top:786px;line-height:1.15;color:var(--text-3)}
 </style>

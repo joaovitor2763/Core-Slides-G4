@@ -51,9 +51,9 @@
     background:repeating-linear-gradient(180deg,var(--border) 0 6px,transparent 6px 13px)}
 
   /* micro-bullets no topo de cada coluna: left = fronteira+16 · width = 172−32 = 140 */
-  .col{position:absolute;top:236px;width:140px;z-index:1;
+  .col{position:absolute;top:226px;width:165px;z-index:1;
     display:flex;flex-direction:column;gap:6px}
-  .col .small{font-size:13px;line-height:1.4;display:flex;gap:8px}
+  .col .small{font-size:18px;line-height:1.4;display:flex;gap:6px;white-space:nowrap}
   .col .small::before{content:'·';flex:none;color:var(--text-3)}
 
   /* ── eixo + pills de estágio ───────────────────────────────── */
@@ -64,7 +64,7 @@
 
   /* pill de estágio: centrada no centro da coluna, sobre o eixo y560 */
   .stage-pill{position:absolute;top:560px;transform:translate(-50%,-50%);z-index:2;
-    font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;
+    font-family:var(--mono);font-size:19px;font-weight:500;letter-spacing:.14em;
     text-transform:uppercase;color:var(--text-2);white-space:nowrap;
     padding:8px 15px;border:1px solid var(--border-2);border-radius:var(--r-pill);
     background:var(--bg)}
@@ -78,7 +78,7 @@
   .prog{position:absolute;height:40px;border-radius:var(--r-pill);z-index:1;
     background:rgba(255,255,255,.07);border:1px solid var(--border-2);
     display:flex;align-items:center;padding:0 22px}
-  .prog .num{font-size:13px}
+  .prog .num{font-size:20px}
   .prog--gold{background:linear-gradient(180deg,var(--gold-300),var(--gold-500));
     border:1px solid var(--gold-border)}
   .prog--gold .num{color:var(--on-gold)}
@@ -145,7 +145,7 @@
     </div>
     <div class="col" style="left:1175px">             <!-- estágio 5 -->
       <span class="small">Nisi ut aliquip</span>
-      <span class="small">Commodo consequat</span>
+      <span class="small">Commodo dolor</span>
     </div>
     <div class="col" style="left:1348px">             <!-- estágio 6 -->
       <span class="small">Duis aute irure</span>

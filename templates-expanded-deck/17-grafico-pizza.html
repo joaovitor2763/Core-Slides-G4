@@ -29,13 +29,13 @@
       rgba(0,31,53,.16)   46% 73%,
       rgba(0,31,53,.11)   73% 90%,
       rgba(0,31,53,.07)   90% 100%)}
-  /* furo pequeno: 440 − 2·160 = 120px de diâmetro */
-  .pie::after{content:'';position:absolute;inset:160px;border-radius:50%;
+  /* furo: 440 − 2·136 = 168px de diâmetro (folga p/ o rótulo central) */
+  .pie::after{content:'';position:absolute;inset:136px;border-radius:50%;
     background:var(--surface);box-shadow:inset 0 2px 8px rgba(0,31,53,.06)}
   .pie .center{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;
     align-items:center;justify-content:center;gap:4px}
-  .pie .center .num{font-size:24px}
-  .pie .center .mono-label{font-size:9px;letter-spacing:.12em}
+  .pie .center .num{font-size:25px}
+  .pie .center .mono-label{font-size:14px;letter-spacing:.06em;white-space:nowrap}
 
   /* legenda: 716 + 56 = 772 · 772 + 732 + 96 = 1600 ✓ · mesma altura do card */
   .legend{position:absolute;left:772px;right:var(--pad);top:288px;height:516px;
@@ -43,7 +43,7 @@
   .row{flex:1;display:flex;align-items:center;gap:18px;border-top:1px solid var(--border)}
   .row:first-child{border-top:none}
   .row .dot{width:13px;height:13px;border-radius:50%;flex:none}
-  .row .name{font-size:19px;font-weight:500;color:var(--text-1)}
+  .row .name{font-size:22.5px;font-weight:500;color:var(--text-1)}
   .row .hint{display:block;margin-top:5px}
   .row .end{margin-left:auto;display:flex;align-items:baseline;gap:18px}
   .row .val{font-size:28px}
